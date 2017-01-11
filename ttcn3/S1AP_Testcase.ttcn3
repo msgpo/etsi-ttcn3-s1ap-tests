@@ -1,5 +1,5 @@
 /**
- * @desc Types import from ASN.1 definitions of ETSI TS136 413 V.13.4.0
+ * @desc Testcases for ETSI TS136 413 V.13.4.0
  */
 module S1AP_Testcase {
 
@@ -13,8 +13,28 @@ module S1AP_Testcase {
 	import from S1AP_Templates all;
 	import from S1AP_Types all;
    
-    testcase TP_S1AP_ENB_RAB_01 () runs on MME {
-    	eBport.send(m_initiatingMessage);
-    	eBport.receive(S1AP_PDU:mw_successfulOutcome)
-    	}
+    /**
+	 * @desc
+	 * @verdict
+	 */
+	testcase TP_S1AP_ENB_RAB_01() runs on MME {
+		eBport
+		.send(m_initiatingMessage(id_E_RABSetup,
+								  {
+									  RecordOf_E_RABSetupRequestIEs := {
+										  m_E_RABSetupRequestIEs_MME,
+										  m_E_RABSetupRequestIEs_ENB,
+										  m_E_RABSetupRequestIEs_ERAB
+									  }
+								  }));
+		eBport
+		.receive(mw_successfulOutcome(-,
+									  {
+										  RecordOf_E_RABSetupResponseIEs := {
+											  mw_E_RABSetupResponseIEs_MME,
+											  mw_E_RABSetupResponseIEs_ENB,
+											  mw_E_RABSetupResponseIEs_ERAB
+										  }
+									  }));
+	}
 }

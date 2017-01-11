@@ -1,5 +1,5 @@
 /**
- * @desc Types import from ASN.1 definitions of ETSI TS136 413 V.13.4.0
+ * @desc Templates
  */
 module S1AP_Templates {
 
@@ -13,45 +13,43 @@ module S1AP_Templates {
 	import from S1AP_Types all;
 
     	
-	template S1AP_PDU m_initiatingMessage := {
+	template S1AP_PDU m_initiatingMessage (ProcedureCode p_procedureCode, anytype p_value):= {
 		initiatingMessage := {
-			procedureCode := 0,
+			procedureCode := p_procedureCode,
 			criticality := reject,
-			value_ := {RecordOf_E_RABSetupRequestIEs:=m_E_RABSetupRequestIEs1}
+			value_ := p_value
 		}
 	}
 
-	template S1AP_PDU mw_successfulOutcome := {
+	template S1AP_PDU mw_successfulOutcome(template ProcedureCode
+											   p_procedureCode := ?,
+										   template anytype p_value) := {
 		successfulOutcome := {
-			procedureCode := ?,
+			procedureCode := p_procedureCode,
 			criticality := reject,
 			value_ := {
 				RecordOf_E_RABSetupResponseIEs := {
-					mw_E_RABSetupResponseIEs_MME,mw_E_RABSetupResponseIEs_ENB,mw_E_RABSetupResponseIEs_ERAB
+					mw_E_RABSetupResponseIEs_MME,
+					mw_E_RABSetupResponseIEs_ENB,
+					mw_E_RABSetupResponseIEs_ERAB
 				}
 			}
 		}
 	}
 
 group g_E_RAB_SetupRequest {
-	
-	template RecordOf_E_RABSetupRequestIEs m_E_RABSetupRequestIEs1 := {
-		m_E_RABSetupRequestIEs_MME,
-		m_E_RABSetupRequestIEs_ENB,
-		m_E_RABSetupRequestIEs_ERAB
-	}
 
-	template E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_MME := {
+	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_MME := {
 		id := S1AP_Constants.id_MME_UE_S1AP_ID,
 		criticality := S1AP_CommonDataTypes.reject,
 		value_ := { MME_UE_S1AP_ID := 1 }
 	}
-	template E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ENB := {
+	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ENB := {
 		id := S1AP_Constants.id_eNB_UE_S1AP_ID,
 		criticality := S1AP_CommonDataTypes.reject,
 		value_ := { ENB_UE_S1AP_ID := 1 }
 	}		
-	template E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ERAB := {
+	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ERAB := {
 		id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
 		criticality := S1AP_CommonDataTypes.reject,
 		value_ := { E_RABToBeSetupListBearerSUReq := m_e_rABToBeSetupListBearerSUReq }

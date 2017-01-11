@@ -1,5 +1,5 @@
 /**
- * @desc Types import from ASN.1 definitions of ETSI TS136 413 V.13.4.0
+ * @desc Types 
  */
 module S1AP_Types {
 
