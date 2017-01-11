@@ -1,0 +1,117 @@
+/**
+ * @desc Types import from ASN.1 definitions of ETSI TS136 413 V.13.4.0
+ */
+module S1AP_Templates {
+
+    import from S1AP_Constants language "ASN.1:1997" all;
+	import from S1AP_CommonDataTypes language "ASN.1:1997" all;
+//    import from S1AP_Containers language "ASN.1:1997" all;
+    import from S1AP_IEs language "ASN.1:1997" all;
+    import from S1AP_PDU_Contents language "ASN.1:1997" all;
+    import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
+
+	import from S1AP_Types all;
+
+    	
+	template S1AP_PDU m_initiatingMessage := {
+		initiatingMessage := {
+			procedureCode := 0,
+			criticality := reject,
+			value_ := {RecordOf_E_RABSetupRequestIEs:=m_E_RABSetupRequestIEs1}
+		}
+	}
+
+	template S1AP_PDU mw_successfulOutcome := {
+		successfulOutcome := {
+			procedureCode := ?,
+			criticality := reject,
+			value_ := {
+				RecordOf_E_RABSetupResponseIEs := {
+					mw_E_RABSetupResponseIEs_MME,mw_E_RABSetupResponseIEs_ENB,mw_E_RABSetupResponseIEs_ERAB
+				}
+			}
+		}
+	}
+
+group g_E_RAB_SetupRequest {
+	
+	template RecordOf_E_RABSetupRequestIEs m_E_RABSetupRequestIEs1 := {
+		m_E_RABSetupRequestIEs_MME,
+		m_E_RABSetupRequestIEs_ENB,
+		m_E_RABSetupRequestIEs_ERAB
+	}
+
+	template E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_MME := {
+		id := S1AP_Constants.id_MME_UE_S1AP_ID,
+		criticality := S1AP_CommonDataTypes.reject,
+		value_ := { MME_UE_S1AP_ID := 1 }
+	}
+	template E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ENB := {
+		id := S1AP_Constants.id_eNB_UE_S1AP_ID,
+		criticality := S1AP_CommonDataTypes.reject,
+		value_ := { ENB_UE_S1AP_ID := 1 }
+	}		
+	template E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ERAB := {
+		id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
+		criticality := S1AP_CommonDataTypes.reject,
+		value_ := { E_RABToBeSetupListBearerSUReq := m_e_rABToBeSetupListBearerSUReq }
+	}
+
+	template(value) E_RABToBeSetupListBearerSUReq m_e_rABToBeSetupListBearerSUReq := {
+		{
+			id := id_E_RABToBeSetupItemBearerSUReq, 
+			criticality := reject,
+			value_ := { E_RABToBeSetupItemBearerSUReq := m_E_RABToBeSetupItemBearerSUReq }
+		}
+	}
+
+	template(value) E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq:=  {
+			e_RAB_ID                        := 0,
+			e_RABlevelQoSParameters         := {
+				qCI := 0,
+				allocationRetentionPriority := {
+					priorityLevel               := 0,
+					pre_emptionCapability       := shall_not_trigger_pre_emption,
+					pre_emptionVulnerability    := pre_emptable,
+					iE_Extensions               :=omit
+				},
+				gbrQosInformation := omit,
+				iE_Extensions := omit
+			},
+			transportLayerAddress           := '0'B,
+			gTP_TEID                        := '00000000'O,
+			nAS_PDU                         := '0000'O,
+			iE_Extensions                   := omit
+		}			
+} // end of group g_E_RAB_SetupRequest
+
+group g_E_RAB_SetupResponse {
+	
+	template E_RABSetupResponse.protocolIEs[-] mw_E_RABSetupResponseIEs_MME := {
+		id := S1AP_Constants.id_MME_UE_S1AP_ID,
+		criticality := S1AP_CommonDataTypes.ignore,
+		value_ := { MME_UE_S1AP_ID := ? }
+	}
+
+	template E_RABSetupResponse.protocolIEs[-] mw_E_RABSetupResponseIEs_ENB := {
+		id := S1AP_Constants.id_eNB_UE_S1AP_ID,
+		criticality := S1AP_CommonDataTypes.ignore,
+		value_ := { ENB_UE_S1AP_ID := ? }
+	}
+
+	template E_RABSetupResponse.protocolIEs[-] mw_E_RABSetupResponseIEs_ERAB := {
+		id := S1AP_Constants.id_E_RABSetupListBearerSURes,
+		criticality := S1AP_CommonDataTypes.ignore,
+		value_ := { E_RABSetupItemBearerSURes := mw_E_RABSetupItemBearerSURes }
+	}
+	
+	template(present) E_RABSetupItemBearerSURes mw_E_RABSetupItemBearerSURes:=  {
+		e_RAB_ID                        := ?,
+		transportLayerAddress           := '?'B,
+		gTP_TEID                        := ?,
+		iE_Extensions                   := *
+	}
+	
+} // end of group g_E_RAB_SetupResponse
+
+}

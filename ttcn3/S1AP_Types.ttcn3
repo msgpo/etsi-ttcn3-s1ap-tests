@@ -1,0 +1,20 @@
+/**
+ * @desc Types import from ASN.1 definitions of ETSI TS136 413 V.13.4.0
+ */
+module S1AP_Types {
+
+    import from S1AP_Constants language "ASN.1:1997" all;
+	import from S1AP_CommonDataTypes language "ASN.1:1997" all;
+//    import from S1AP_Containers language "ASN.1:1997" all;
+    import from S1AP_IEs language "ASN.1:1997" all;
+    import from S1AP_PDU_Contents language "ASN.1:1997" all;
+    import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
+
+	    
+    type port S1AP_PortType message {inout S1AP_PDU};
+    type component MME {port S1AP_PortType eBport}
+
+	type record of E_RABSetupRequest.protocolIEs[-] RecordOf_E_RABSetupRequestIEs;
+	type record of E_RABSetupResponse.protocolIEs[-] RecordOf_E_RABSetupResponseIEs;
+
+}
