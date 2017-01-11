@@ -19,22 +19,17 @@ module S1AP_Testcase {
 	 */
 	testcase TP_S1AP_ENB_RAB_01() runs on MME {
 		eBport
-		.send(m_initiatingMessage(id_E_RABSetup,
-								  {
-									  RecordOf_E_RABSetupRequestIEs := {
-										  m_E_RABSetupRequestIEs_MME,
-										  m_E_RABSetupRequestIEs_ENB,
-										  m_E_RABSetupRequestIEs_ERAB
-									  }
-								  }));
+		.send(m_initiatingMessage_E_RABSetup({
+												 m_E_RABSetupRequestIEs_MME,
+												 m_E_RABSetupRequestIEs_ENB,
+												 m_E_RABSetupRequestIEs_ERAB
+											 }));
 		eBport
-		.receive(mw_successfulOutcome(-,
-									  {
-										  RecordOf_E_RABSetupResponseIEs := {
-											  mw_E_RABSetupResponseIEs_MME,
-											  mw_E_RABSetupResponseIEs_ENB,
-											  mw_E_RABSetupResponseIEs_ERAB
-										  }
-									  }));
+		.receive(mw_successfulOutcome_E_RABSetupResponse(-,
+														 {
+															 mw_E_RABSetupResponseIEs_MME,
+															 mw_E_RABSetupResponseIEs_ENB,
+															 mw_E_RABSetupResponseIEs_ERAB
+														 }));
 	}
 }

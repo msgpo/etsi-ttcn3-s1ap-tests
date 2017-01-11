@@ -12,7 +12,8 @@ module S1AP_Templates {
 
 	import from S1AP_Types all;
 
-    	
+	group g_initiatingMessage {    	
+		
 	template S1AP_PDU m_initiatingMessage (ProcedureCode p_procedureCode, anytype p_value):= {
 		initiatingMessage := {
 			procedureCode := p_procedureCode,
@@ -21,22 +22,48 @@ module S1AP_Templates {
 		}
 	}
 
-	template S1AP_PDU mw_successfulOutcome(template ProcedureCode
-											   p_procedureCode := ?,
-										   template anytype p_value) := {
-		successfulOutcome := {
-			procedureCode := p_procedureCode,
+	template S1AP_PDU m_initiatingMessage_E_RABSetup(RecordOf_E_RABSetupRequestIEs p_value) := {
+		initiatingMessage := {
+			procedureCode := id_E_RABSetup,
 			criticality := reject,
-			value_ := {
-				RecordOf_E_RABSetupResponseIEs := {
-					mw_E_RABSetupResponseIEs_MME,
-					mw_E_RABSetupResponseIEs_ENB,
-					mw_E_RABSetupResponseIEs_ERAB
+			value_ := {RecordOf_E_RABSetupRequestIEs := p_value}
+		}
+	}
+	
+    } // end of group g_initiatingMessage
+
+	group g_outcomeMessage {
+
+		template S1AP_PDU mw_successfulOutcome(template ProcedureCode
+												   p_procedureCode := ?,
+											   template anytype p_value) := {
+			successfulOutcome := {
+				procedureCode := p_procedureCode,
+				criticality := reject,
+				value_ := {
+					RecordOf_E_RABSetupResponseIEs := {
+						mw_E_RABSetupResponseIEs_MME,
+						mw_E_RABSetupResponseIEs_ENB,
+						mw_E_RABSetupResponseIEs_ERAB
+					}
 				}
 			}
 		}
-	}
 
+		template S1AP_PDU mw_successfulOutcome_E_RABSetupResponse
+		(template ProcedureCode p_procedureCode := ?,
+											   template RecordOf_E_RABSetupResponseIEs p_value) := {
+			successfulOutcome := {
+				procedureCode := p_procedureCode,
+				criticality := reject,
+				value_ := {
+					RecordOf_E_RABSetupResponseIEs := p_value
+				}
+			}
+		}
+
+	} // end of group g_outcomeMessage
+	
 group g_E_RAB_SetupRequest {
 
 	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_MME := {
