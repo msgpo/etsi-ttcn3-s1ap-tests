@@ -89,26 +89,7 @@ group g_E_RAB_SetupRequest {
 			value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
 		}
 	}
-
-	template(value) E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq:=  {
-			e_RAB_ID                        := 0,
-			e_RABlevelQoSParameters         := {
-				qCI := 0,
-				allocationRetentionPriority := {
-					priorityLevel               := 0,
-					pre_emptionCapability       := shall_not_trigger_pre_emption,
-					pre_emptionVulnerability    := pre_emptable,
-					iE_Extensions               :=omit
-				},
-				gbrQosInformation := omit,
-				iE_Extensions := omit
-			},
-			transportLayerAddress           := '0'B,
-			gTP_TEID                        := '00000000'O,
-			nAS_PDU                         := '0000'O,
-			iE_Extensions                   := omit
-		}			
-} // end of group g_E_RAB_SetupRequest
+  } // end of group g_E_RAB_SetupRequest
 
 group g_E_RAB_SetupResponse {
 	
@@ -139,4 +120,30 @@ group g_E_RAB_SetupResponse {
 	
 } // end of group g_E_RAB_SetupResponse
 
-}
+group g_IEParameters {
+	template(value)
+	E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq
+	(E_RAB_ID p_e_RAB_ID := 0,
+	 E_RABLevelQoSParameters p_e_RABlevelQoSParameters:=m_e_RABlevelQoSParameters) := {
+		e_RAB_ID := p_e_RAB_ID,
+		e_RABlevelQoSParameters := p_e_RABlevelQoSParameters,
+		transportLayerAddress := '0'B,
+		gTP_TEID := '00000000'O,
+		nAS_PDU := '0000'O,
+		iE_Extensions := omit
+	}
+    
+	template(value) E_RABLevelQoSParameters m_e_RABlevelQoSParameters (QCI p_qCI := 0):= {
+		qCI := p_qCI,
+		allocationRetentionPriority := {
+			priorityLevel := 0,
+			pre_emptionCapability := shall_not_trigger_pre_emption,
+			pre_emptionVulnerability := pre_emptable,
+			iE_Extensions := omit
+		},
+		gbrQosInformation := omit,
+		iE_Extensions := omit
+	}        
+} // end of group g_IEParameters
+
+} // end of module S1AP_Templates

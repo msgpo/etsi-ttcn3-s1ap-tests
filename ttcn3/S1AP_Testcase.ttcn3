@@ -26,6 +26,8 @@ module S1AP_Testcase {
 												 (m_e_rABToBeSetupListBearerSUReq
 												  ({
 													   m_E_RABToBeSetupItemBearerSUReq
+													   (-,
+														m_e_RABlevelQoSParameters(5))
 												   }))
 											 }));
 		eBport
@@ -50,6 +52,9 @@ module S1AP_Testcase {
 												  ({
 													   m_E_RABToBeSetupItemBearerSUReq,
 													   m_E_RABToBeSetupItemBearerSUReq
+													   (-,
+														m_e_RABlevelQoSParameters
+														(255))
 												   }))
 											 }));
 		eBport
