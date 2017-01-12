@@ -51,9 +51,10 @@ module S1AP_Testcase {
 												 m_E_RABSetupRequestIEs_MME(1),
 												 m_E_RABSetupRequestIEs_ENB(1),
 												 m_E_RABSetupRequestIEs_ERAB({
-																				 m_E_RABToBeSetupItemBearerSUReq,
 																				 m_E_RABToBeSetupItemBearerSUReq
-																				 (-
+																				 (1),
+																				 m_E_RABToBeSetupItemBearerSUReq
+																				 (2
 																				  ,
 																				  m_e_RABlevelQoSParameters
 																				  (255))
@@ -62,16 +63,16 @@ module S1AP_Testcase {
 		eBport
 		.receive(mw_successfulOutcome_E_RABSetupResponse(-,
 														 {
-															 mw_E_RABSetupResponseIEs_MME,
-															 mw_E_RABSetupResponseIEs_ENB,
+															 mw_E_RABSetupResponseIEs_MME(1),
+															 mw_E_RABSetupResponseIEs_ENB(1),
 															 mw_E_RABSetupResponseIEs_ERAB
 															 ({
-																  mw_E_RABSetupItemBearerSURes
+																  mw_E_RABSetupItemBearerSURes(1)
 															  }),
 															 mw_E_RABSetupResponseIEs_fSUL
 															 ({
 																  mw_E_RABItem
-																  ({
+																  (2,{
 																	   radioNetwork
 																		   :=
 																		   not_supported_QCI_value
