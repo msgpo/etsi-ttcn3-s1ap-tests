@@ -22,13 +22,13 @@ module S1AP_Testcase {
 		.send(m_initiatingMessage_E_RABSetup({
 												 m_E_RABSetupRequestIEs_MME(1),
 												 m_E_RABSetupRequestIEs_ENB(1),
-												 m_E_RABSetupRequestIEs_ERAB
-												 (m_e_rABToBeSetupListBearerSUReq
-												  ({
-													   m_E_RABToBeSetupItemBearerSUReq
-													   (-,
-														m_e_RABlevelQoSParameters(5))
-												   }))
+												 m_E_RABSetupRequestIEs_ERAB({
+																				 m_E_RABToBeSetupItemBearerSUReq
+																				 (-
+																				  ,
+																				  m_e_RABlevelQoSParameters
+																				  (5))
+																			 })
 											 }));
 		eBport
 		.receive(mw_successfulOutcome_E_RABSetupResponse(-,
@@ -36,6 +36,9 @@ module S1AP_Testcase {
 															 mw_E_RABSetupResponseIEs_MME,
 															 mw_E_RABSetupResponseIEs_ENB,
 															 mw_E_RABSetupResponseIEs_ERAB
+															 ({
+																  mw_E_RABSetupItemBearerSURes
+															  })
 														 }));
 	}
 	/**
@@ -47,15 +50,14 @@ module S1AP_Testcase {
 		.send(m_initiatingMessage_E_RABSetup({
 												 m_E_RABSetupRequestIEs_MME(1),
 												 m_E_RABSetupRequestIEs_ENB(1),
-												 m_E_RABSetupRequestIEs_ERAB
-												 (m_e_rABToBeSetupListBearerSUReq
-												  ({
-													   m_E_RABToBeSetupItemBearerSUReq,
-													   m_E_RABToBeSetupItemBearerSUReq
-													   (-,
-														m_e_RABlevelQoSParameters
-														(255))
-												   }))
+												 m_E_RABSetupRequestIEs_ERAB({
+																				 m_E_RABToBeSetupItemBearerSUReq,
+																				 m_E_RABToBeSetupItemBearerSUReq
+																				 (-
+																				  ,
+																				  m_e_RABlevelQoSParameters
+																				  (255))
+																			 })
 											 }));
 		eBport
 		.receive(mw_successfulOutcome_E_RABSetupResponse(-,
@@ -63,6 +65,18 @@ module S1AP_Testcase {
 															 mw_E_RABSetupResponseIEs_MME,
 															 mw_E_RABSetupResponseIEs_ENB,
 															 mw_E_RABSetupResponseIEs_ERAB
+															 ({
+																  mw_E_RABSetupItemBearerSURes
+															  }),
+															 mw_E_RABSetupResponseIEs_fSUL
+															 ({
+																  mw_E_RABItem
+																  ({
+																	   radioNetwork
+																		   :=
+																		   not_supported_QCI_value
+																   })
+															  })
 														 }));
 	}
 }

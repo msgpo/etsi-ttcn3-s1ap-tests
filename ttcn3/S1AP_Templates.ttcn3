@@ -76,19 +76,19 @@ group g_E_RAB_SetupRequest {
 		criticality := S1AP_CommonDataTypes.reject,
 		value_ := { ENB_UE_S1AP_ID := p_value }
 	}		
-	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ERAB (E_RABToBeSetupListBearerSUReq p_value := m_e_rABToBeSetupListBearerSUReq({m_E_RABToBeSetupItemBearerSUReq})):= {
+	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ERAB (RecordOf_E_RABToBeSetupItemBearerSUReq p_value := {m_E_RABToBeSetupItemBearerSUReq}):= {
 		id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
 		criticality := S1AP_CommonDataTypes.reject,
-		value_ := { E_RABToBeSetupListBearerSUReq := p_value }
+		value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := p_value }
 	}
 
-	template(value) E_RABToBeSetupListBearerSUReq m_e_rABToBeSetupListBearerSUReq (template RecordOf_E_RABToBeSetupItemBearerSUReq p_value := {m_E_RABToBeSetupItemBearerSUReq}):= {
-		{
-			id := id_E_RABToBeSetupItemBearerSUReq, 
-			criticality := reject,
-			value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
-		}
-	}
+//	template(value) E_RABToBeSetupListBearerSUReq m_e_rABToBeSetupListBearerSUReq (template RecordOf_E_RABToBeSetupItemBearerSUReq p_value := {m_E_RABToBeSetupItemBearerSUReq}):= {
+//		{
+//			id := id_E_RABToBeSetupItemBearerSUReq, 
+//			criticality := reject,
+//			value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
+//		}
+//	}
   } // end of group g_E_RAB_SetupRequest
 
 group g_E_RAB_SetupResponse {
@@ -105,17 +105,18 @@ group g_E_RAB_SetupResponse {
 		value_ := { ENB_UE_S1AP_ID := ? }
 	}
 
-	template E_RABSetupResponse.protocolIEs[-] mw_E_RABSetupResponseIEs_ERAB := {
+	template E_RABSetupResponse.protocolIEs[-] mw_E_RABSetupResponseIEs_ERAB 
+	  (template(present) RecordOf_E_RABSetupItemBearerSURes p_value := {mw_E_RABSetupItemBearerSURes}):= {
 		id := S1AP_Constants.id_E_RABSetupListBearerSURes,
 		criticality := S1AP_CommonDataTypes.ignore,
-		value_ := { E_RABSetupItemBearerSURes := mw_E_RABSetupItemBearerSURes }
+		value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
 	}
 	
-	template(present) E_RABSetupItemBearerSURes mw_E_RABSetupItemBearerSURes:=  {
-		e_RAB_ID                        := ?,
-		transportLayerAddress           := '?'B,
-		gTP_TEID                        := ?,
-		iE_Extensions                   := *
+	template E_RABSetupResponse.protocolIEs[-] mw_E_RABSetupResponseIEs_fSUL 
+	  (template(present) RecordOf_E_RABItem p_value := {?}):= {
+		id := S1AP_Constants.id_E_RABFailedToSetupListBearerSURes,
+		criticality := S1AP_CommonDataTypes.ignore,
+		value_ := { RecordOf_E_RABItem := p_value }
 	}
 	
 } // end of group g_E_RAB_SetupResponse
@@ -143,7 +144,21 @@ group g_IEParameters {
 		},
 		gbrQosInformation := omit,
 		iE_Extensions := omit
-	}        
+	}
+	
+	template(present) E_RABSetupItemBearerSURes mw_E_RABSetupItemBearerSURes:=  {
+		 e_RAB_ID                        := ?,
+		 transportLayerAddress           := '?'B,
+		 gTP_TEID                        := ?,
+		 iE_Extensions                   := *
+	 }
+	 
+	template(present) E_RABItem mw_E_RABItem (template Cause p_cause:=?):=  {
+		 e_RAB_ID                        := ?,
+		 cause                           := p_cause,
+		 iE_Extensions                   := *
+	 }
+	        
 } // end of group g_IEParameters
 
 } // end of module S1AP_Templates
