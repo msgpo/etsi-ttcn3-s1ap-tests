@@ -19,5 +19,12 @@ module S1AP_Types {
     type record of E_RABToBeSetupItemBearerSUReq RecordOf_E_RABToBeSetupItemBearerSUReq;
     type record of E_RABSetupItemBearerSURes RecordOf_E_RABSetupItemBearerSURes;
     type record of E_RABItem RecordOf_E_RABItem;
+    type record ProtocolIEs {
+		integer id (0 .. 65535),
+		enumerated {
+			reject, ignore, notify
+		} criticality,
+		anytype value_
+	}
 
 }
