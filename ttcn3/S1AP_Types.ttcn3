@@ -16,5 +16,6 @@ module S1AP_Types {
 
 	type record of E_RABSetupRequest.protocolIEs[-] RecordOf_E_RABSetupRequestIEs;
 	type record of E_RABSetupResponse.protocolIEs[-] RecordOf_E_RABSetupResponseIEs;
+    type record of E_RABToBeSetupItemBearerSUReq RecordOf_E_RABToBeSetupItemBearerSUReq;
 
 }

@@ -66,27 +66,27 @@ module S1AP_Templates {
 	
 group g_E_RAB_SetupRequest {
 
-	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_MME := {
+	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_MME (MME_UE_S1AP_ID p_value:= 1):= {
 		id := S1AP_Constants.id_MME_UE_S1AP_ID,
 		criticality := S1AP_CommonDataTypes.reject,
-		value_ := { MME_UE_S1AP_ID := 1 }
+		value_ := { MME_UE_S1AP_ID := p_value }
 	}
-	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ENB := {
+	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ENB (ENB_UE_S1AP_ID p_value:= 1):= {
 		id := S1AP_Constants.id_eNB_UE_S1AP_ID,
 		criticality := S1AP_CommonDataTypes.reject,
-		value_ := { ENB_UE_S1AP_ID := 1 }
+		value_ := { ENB_UE_S1AP_ID := p_value }
 	}		
-	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ERAB := {
+	template(value) E_RABSetupRequest.protocolIEs[-] m_E_RABSetupRequestIEs_ERAB (E_RABToBeSetupListBearerSUReq p_value := m_e_rABToBeSetupListBearerSUReq({m_E_RABToBeSetupItemBearerSUReq})):= {
 		id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
 		criticality := S1AP_CommonDataTypes.reject,
-		value_ := { E_RABToBeSetupListBearerSUReq := m_e_rABToBeSetupListBearerSUReq }
+		value_ := { E_RABToBeSetupListBearerSUReq := p_value }
 	}
 
-	template(value) E_RABToBeSetupListBearerSUReq m_e_rABToBeSetupListBearerSUReq := {
+	template(value) E_RABToBeSetupListBearerSUReq m_e_rABToBeSetupListBearerSUReq (template RecordOf_E_RABToBeSetupItemBearerSUReq p_value := {m_E_RABToBeSetupItemBearerSUReq}):= {
 		{
 			id := id_E_RABToBeSetupItemBearerSUReq, 
 			criticality := reject,
-			value_ := { E_RABToBeSetupItemBearerSUReq := m_E_RABToBeSetupItemBearerSUReq }
+			value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
 		}
 	}
 
