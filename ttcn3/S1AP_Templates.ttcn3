@@ -22,11 +22,11 @@ module S1AP_Templates {
 		}
 	}
 
-	template S1AP_PDU m_initiatingMessage_E_RABSetup(template E_RABSetupRequest.protocolIEs p_value) := {
+	template S1AP_PDU m_initiatingMessage_E_RABSetup(template RecordOf_ProtocolIE p_value) := {
 		initiatingMessage := {
 			procedureCode := id_E_RABSetup,
 			criticality := reject,
-			value_ := {E_RABSetupRequest.protocolIEs := valueof(p_value)}
+			value_ := {RecordOf_ProtocolIE := valueof(p_value)}
 		}
 	}
 	
@@ -41,14 +41,13 @@ module S1AP_Templates {
 																  := ?,
 																  template
 																  (present)
-																  E_RABSetupResponse
-																  .protocolIEs
+																  RecordOf_ProtocolIE
 																	  p_value)
 			:= {
 			successfulOutcome := {
 				procedureCode := p_procedureCode,
 				criticality := reject,
-				value_ := {E_RABSetupResponse.protocolIEs := p_value}
+				value_ := {RecordOf_ProtocolIE := p_value}
 			}
 		}
 
@@ -56,10 +55,10 @@ module S1AP_Templates {
 	
 group g_E_RAB_IEsend {
 
-	template(value) ProtocolIE m_E_RAB_IE_MME (MME_UE_S1AP_ID p_value:= 1):= {
+	template(value) ProtocolIE m_E_RAB_IE_MME (template(value)MME_UE_S1AP_ID p_value:= 1):= {
 		id := S1AP_Constants.id_MME_UE_S1AP_ID,
 		criticality := reject,
-		value_ := { MME_UE_S1AP_ID := p_value }
+		value_ := { MME_UE_S1AP_ID := valueof(p_value) }
 	}
 
 	template(value) ProtocolIE m_E_RAB_IE_ENB (ENB_UE_S1AP_ID p_value:= 1):= {
