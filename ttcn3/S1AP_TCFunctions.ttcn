@@ -1,0 +1,155 @@
+/**
+ *  @author     STF 519
+ *  @version    $Id: $
+ *  @desc       This module provides RfRo test functions used by the test cases
+ *              for S1AP tests.
+ */
+module S1AP_TCFunctions {
+    // LibCommon
+    import from LibCommon_Sync all;
+    import from LibCommon_VerdictControl all ;
+
+    // LibS1AP
+    import from LibS1AP_PIXITS all;
+    //import from LibS1AP_TypesAndValues all;
+    import from LibS1AP_Templates all;
+    import from LibS1AP_Interface all;
+    import from LibS1AP_Steps all;
+
+    // Ats
+    import from S1AP_Templates all;
+    import from S1AP_Steps all;
+    import from S1AP_PIXITS all;
+    import from S1AP_TestSystem all;
+    
+	group eNB_Role{
+        
+		group ERAB_management_group{
+
+			function f_TP_S1AP_ENB_RAB_01() runs on S1APComponent { 
+    			// Local variables
+    
+    			// Preamble
+    			f_S1AP_enb_init();
+    			f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+    			log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+    
+				f_send_S1AP_initiatingMessage(
+					m_initiatingMessage_E_RABSetup({
+            			m_E_RAB_IE_MME(1),
+            			m_E_RAB_IE_ENB(1),
+            			m_E_RAB_IE_ERAB({
+									m_E_RABToBeSetupItemBearerSUReq
+									(-,
+									 m_e_RABlevelQoSParameters
+									 (5))
+						})
+					})
+				
+				);
+    
+				f_recv_S1AP_successfulOutcome(
+					mw_successfulOutcome_E_RABSetupResponse(-,
+					 {
+						 mw_E_RAB_IE_MME(1),
+						 mw_E_RAB_IE_ENB(1),
+						 mw_E_RAB_IE_ERAB({
+											  mw_E_RABSetupItemBearerSURes
+										  })
+					 })
+				);
+    
+    			f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+    
+    			f_postamble_S1AP_eNB();
+    			f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+    			log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TP_S1AP_ENB_RAB_01             
+
+			function f_TP_S1AP_ENB_RAB_02() runs on S1APComponent { 
+				// Local variables
+
+				// Preamble
+				f_S1AP_enb_init();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+
+				f_send_S1AP_initiatingMessage(
+					m_initiatingMessage_E_RABSetup({
+						 m_E_RAB_IE_MME(1),
+						 m_E_RAB_IE_ENB(1),
+						 m_E_RAB_IE_ERAB({
+											 m_E_RABToBeSetupItemBearerSUReq
+											 (1),
+											 m_E_RABToBeSetupItemBearerSUReq
+											 (2,
+											  m_e_RABlevelQoSParameters
+											  (255))
+										 })
+					 })	
+	
+				);
+
+				f_recv_S1AP_successfulOutcome(
+					mw_successfulOutcome_E_RABSetupResponse(-,
+						 {
+							 mw_E_RAB_IE_MME(1),
+							 mw_E_RAB_IE_ENB(1),
+							 mw_E_RAB_IE_ERAB
+							 ({
+								  mw_E_RABSetupItemBearerSURes
+								  (1)
+							  }),
+							 mw_E_RAB_IE_fSUL({
+												  mw_E_RABItem
+												  (2
+												   ,
+												   {
+													   radioNetwork
+														   :=
+														   not_supported_QCI_value
+												   })
+											  })
+						 })
+				);
+
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TP_S1AP_ENB_RAB_02             		
+
+             
+        }
+    } //end  group eNB_Role
+	group MME_Role{
+
+		group ERAB_management_group{ 
+            
+			function f_TP_S1AP_MME_RAB_01() runs on S1APComponent { 
+    			// Local variables
+    
+    			// Preamble
+    			f_S1AP_mme_init();
+    			f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+    			log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+    
+    			//f_send_(                    );
+    
+    			//f_recv_(                    );
+    
+    			f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+    
+    			f_postamble_S1AP_MME();
+    			f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+    			log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TP_S1AP_MME_RAB_01				
+				
+		}
+	}//end  group MME_Role
+    
+} // End of module S1AP_TCFunctions

@@ -1,0 +1,39 @@
+/**
+ *  @author     STF 519
+ *  @version    $Id: $
+ *  @desc       This module provides the types and ports used by the test component for S1AP tests.
+ */
+
+module S1AP_TestSystem {
+
+    // LibCommon
+    import from LibCommon_Sync all;
+    
+    //LibDiameter
+    import from LibS1AP_Interface all;
+
+    group SystemConfiguration {
+        
+      group TestComponents {
+          
+        group TestSystemInterfaces {
+            
+            /**
+            ** @desc  The test system interface
+            */
+            type component TestAdapter {
+            	
+            	port S1APPort S1AP_MME,
+            	              S1AP_eNB_1, S1AP_eNb_2
+            }
+        } // End of group TestSystemInterfaces
+        
+        type component S1AP extends ServerSyncComp, S1APComponent { 
+        	
+        } // End of component S1AP
+        
+      } // End of group TestComponents
+      
+    } // End of group SystemConfiguration
+    
+} // End of module S1AP_TestSystem

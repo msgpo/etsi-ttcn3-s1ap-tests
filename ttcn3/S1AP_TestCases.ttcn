@@ -1,0 +1,111 @@
+/**
+ *  @author     STF 519
+ *  @version    $Id: $
+ *  @desc       This module provides test cases for S1AP tests.
+ */
+
+module S1AP_TestCases
+{
+    //LibCommon
+    import from LibCommon_Sync all ;
+    import from LibCommon_VerdictControl all;
+    
+    //LibS1AP
+    //import from LibS1AP_TypesAndValues all;
+    import from LibS1AP_Interface all;
+	import from LibS1AP_Steps {function f_wait;};
+
+    //Ats
+    import from S1AP_TestConfiguration all;
+    import from S1AP_TestSystem all;
+    import from S1AP_TCFunctions all;
+    import from S1AP_PICS all;
+    import from S1AP_PIXITS all;
+    import from S1AP_Steps all;
+    import from S1AP_TestSystem all;
+    
+    
+	group eNB_Role{
+        
+		group ERAB_management_group{
+			 
+            testcase TP_S1AP_ENB_RAB_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+				v_s1ap_enb.start(f_TP_S1AP_ENB_RAB_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+            } // End of testcase TP_S1AP_ENB_RAB_01
+            
+			testcase TP_S1AP_ENB_RAB_02() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+    
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+    
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+    
+				// Start
+				v_s1ap_enb.start(f_TP_S1AP_ENB_RAB_02()); 
+    
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+    
+				f_cf_Down();
+    
+			} // End of testcase TP_S1AP_ENB_RAB_02            
+             
+		}//end group E-RAB_management_group
+	} //end  group eNB_Role
+	
+	group MME_Role{
+
+		group ERAB_management_group{ 
+        
+            testcase TP_S1AP_MME_RAB_01() runs on S1AP system TestAdapter { 
+               // Local variables
+    		   var S1AP v_s1ap_mme; 
+    
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+    
+               // Test component configuration
+    		   f_cf_S1AP_MME_Up(v_s1ap_mme);
+    
+               // Start
+    		   v_s1ap_mme.start(f_TP_S1AP_MME_RAB_01());
+    
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+    
+    		   f_cf_Down();
+    
+            } // End of testcase TP_S1AP_MME_RAB_01
+		}
+	}//end  group MME_Role            
+            
+    
+} // End of module S1AP_TestCases

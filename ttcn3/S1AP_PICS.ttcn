@@ -1,0 +1,31 @@
+/**
+ *  @author     STF 519
+ *  @version    $Id: $
+ *  @desc       This module provides the PICS used for the S1AP tests.
+ *              See ETSI DTS_INT-00135-1
+*/
+
+module S1AP_PICS {
+    
+    group PICS_A2{
+        /**
+         * @desc Does eNB act as the IUT? 
+         * @see  ETSI DTS_INT-00135-1 A.2/1 
+         */
+        modulepar boolean PICS_S1AP_eNB_IUT := false;
+        
+        /**
+         * @desc Does MME act as the IUT? 
+         * @see  ETSI DTS_INT-00135-1 A.2/2 
+         */
+        modulepar boolean PICS_S1AP_MME_IUT := false;
+        
+    } // End of group PICS_A2
+    
+    group PICS_A3 {
+    } // End of group PICS_A3
+    
+    group PICS_A4 { 
+    } // End of group PICS_A4
+    
+} // End of module S1AP_PICS 

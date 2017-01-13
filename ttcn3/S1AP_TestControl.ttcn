@@ -1,0 +1,25 @@
+/**
+ *  @author     STF 519
+ *  @version    $Id: $
+ *  @desc       This module provides execution part for S1AP test cases.
+ */
+
+module S1AP_TestControl {
+    
+    // S1AP
+    import from S1AP_PICS all;
+    import from S1AP_TestCases all;
+    
+    control {
+        
+        if (PICS_S1AP_eNB_IUT) {
+			//TODO:execute(TC_...); 
+        }
+        if (PICS_S1AP_MME_IUT) {
+            //TODO:execute(TC_...);
+        }
+        
+        
+    } // End of 'Control' statement
+
+} // End of module S1AP_TestControl 

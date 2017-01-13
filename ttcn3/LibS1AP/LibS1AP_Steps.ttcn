@@ -1,0 +1,370 @@
+/**
+ *    @author     STF 519
+ *  @version    $Id: $
+ *    @desc        This module provides functions used in S1AP
+ */
+
+module LibS1AP_Steps
+{
+    //LibCommon
+    import from LibCommon_Sync all;
+    import from LibCommon_VerdictControl {type FncRetCode;
+                                          function f_setVerdict;};
+    import from LibCommon_BasicTypesAndValues {type UInt32;};
+    
+    //LibS1AP
+    //import from LibS1AP_TypesAndValues all;
+    import from LibS1AP_Interface all;
+    import from LibS1AP_PIXITS all;
+	import from LibS1AP_Templates all;
+	
+//    import from S1AP_Constants language "ASN.1:1997" all;
+//    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
+//    import from S1AP_Containers language "ASN.1:1997" all;
+//    import from S1AP_IEs language "ASN.1:1997" all;
+//    import from S1AP_PDU_Contents language "ASN.1:1997" all;
+    import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
+
+    group CommonFunctions{
+    
+        /**
+        *
+        * @desc  f_gtZero, return true if value of p_int greater than 0
+        * @param p_int - integer value
+        */
+        function f_gtZero(integer p_int)
+        return boolean
+        {
+            if (p_int > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    
+        /**
+        *
+        * @desc  f_Inc, return incremented value of p_int 0
+        * @param p_int - integer value
+        */
+        function f_inc( inout UInt32 p_int)
+        return UInt32
+        {
+            p_int:=p_int+1;
+            return p_int;
+        }
+    
+    }//end group CommonFunctions
+
+    group ReceivePDU {
+
+		/**
+		 *  @desc    This is a test step that assign common S1AP
+		 *  @param
+		 */
+		 function f_S1APPDU_Get( inout S1AP_PDU p_PDU)
+		 runs on S1APComponent {
+
+			 vc_recvS1AP_PDU := p_PDU;
+			 
+			 if (ischosen(p_PDU.initiatingMessage)){
+				 //TODO...
+			 }
+			 if (ischosen(p_PDU.successfulOutcome)){
+				 //TODO...
+			 }
+			 if (ischosen(p_PDU.unsuccessfulOutcome)){
+				  //TODO...
+			 }
+		 } // end function f_S1APPDU_Get    	
+    	
+    
+        /**
+        *
+        * @desc receive S1AP PDU
+        * @param p_PDU template of the message to be received
+        */
+        function f_recv_S1AP_PDU(in template S1AP_PDU p_PDU) 
+        runs on S1APComponent
+        {
+            var S1AP_PDU v_PDU;
+            tc_wait.start;
+            alt
+            {
+                []S1_MMEeNB_P.receive(p_PDU) -> value v_PDU
+                  {
+                    tc_wait.stop;
+					f_S1APPDU_Get(v_PDU)
+                  }
+                [] tc_wait.timeout {
+                    setverdict(inconc,"*** " & __SCOPE__ & ": INCONC: Message was not received in due time. ***");
+                    //Stop the component in case of timeout            
+                    all timer.stop;
+                    f_componentStop();
+                }
+            }    
+        } // end f_recv_S1AP_PDU
+        
+        function f_recv_S1AP_initiatingMessage(template (present)InitiatingMessage p_initiatingMessage)
+        runs on S1APComponent
+        {
+            f_recv_S1AP_PDU( {initiatingMessage := p_initiatingMessage})
+        }//end f_recv_S1AP_initiatingMessage
+
+        function f_recv_S1AP_successfulOutcome(template (present)SuccessfulOutcome p_successfulOutcome)
+        runs on S1APComponent
+        {
+            f_recv_S1AP_PDU( {successfulOutcome := p_successfulOutcome})
+        }//end f_recv_S1AP_successfulOutcome
+
+        function f_recv_S1AP_unsuccessfulOutcome(template (present)UnsuccessfulOutcome p_unsuccessfulOutcome)
+        runs on S1APComponent
+        {
+            f_recv_S1AP_PDU( {unsuccessfulOutcome := p_unsuccessfulOutcome})
+        }//end f_recv_S1AP_unsuccessfulOutcome
+        
+    } // end ReceivePDU
+
+    group SendPDU {
+    
+        /**
+        *  @desc    This is a test step that assign common S1AP
+        *  @param
+        */
+        function f_S1APPDU_Set( inout template (value) S1AP_PDU p_PDU)
+        runs on S1APComponent {
+
+            if (ischosen(p_PDU.initiatingMessage)){
+                //TODO...
+                vc_sendS1AP_PDU:=valueof(p_PDU);
+            }
+            if (ischosen(p_PDU.successfulOutcome)){
+                //TODO...
+                vc_sendS1AP_PDU:=valueof(p_PDU);
+            }
+            if (ischosen(p_PDU.unsuccessfulOutcome)){
+                 //TODO...
+                 vc_sendS1AP_PDU:=valueof(p_PDU);
+            }
+        } // end function f_S1APPDU_Set
+    
+        /**
+        *
+        * @desc  send S1AP PDU
+        * @param p_PDU template of the message to be sent
+        */
+        function f_send_S1AP_PDU(template (value) S1AP_PDU p_PDU)
+        runs on S1APComponent
+        {
+            f_S1APPDU_Set(p_PDU);
+            S1_MMEeNB_P.send(p_PDU);
+        }//end f_send_S1APPDU
+    
+        function f_send_S1AP_initiatingMessage(template (value)InitiatingMessage p_initiatingMessage)
+        runs on S1APComponent
+        {
+            f_send_S1AP_PDU( {initiatingMessage := p_initiatingMessage})
+        }//end f_send_S1AP_initiatingMessage
+        
+        function f_send_S1AP_successfulOutcome(template (value)SuccessfulOutcome p_successfulOutcome)
+        runs on S1APComponent
+        {
+            f_send_S1AP_PDU( {successfulOutcome := p_successfulOutcome})
+        }//end f_send_S1AP_successfulOutcome
+        
+        function f_send_S1AP_unsuccessfulOutcome(template (value)UnsuccessfulOutcome p_unsuccessfulOutcome)
+        runs on S1APComponent
+        {
+            f_send_S1AP_PDU( {unsuccessfulOutcome := p_unsuccessfulOutcome})
+        }//end f_send_S1AP_unsuccessfulOutcome 
+    
+    } // end SendPDU
+
+    group GlobalSteps{
+        
+        /**
+        *  @desc    This is a test step that init S1AP component
+        *  @param
+        */
+        function f_S1AP_Init_Component()
+        runs on S1APComponent {
+    
+        } // end function f_S1AP_Init_Component
+        
+        /**
+        *
+        * @desc component termination
+        */
+        function f_S1AP_terminate_component()
+        runs on S1APComponent {
+            
+            log("component terminated - forced!");
+            deactivate;
+            stop;
+        }
+    
+        /**
+        * @desc component termination
+        */
+        function f_componentStop()
+        runs on S1APComponent {
+            
+            syncPort.send(m_syncClientStop);
+            S1_MMEeNB_P.clear;
+            stop;
+        }
+    
+        /**
+        *
+        * @desc original copied from older LibCommon_VerdictControl
+        */
+        function f_getVerdict()
+        return FncRetCode {
+            
+            var FncRetCode v_ret := e_error;
+               if (getverdict == pass or getverdict == none) {
+                    v_ret := e_success;
+                }
+                return v_ret;
+            }    
+    
+        /**
+        * 
+        * @desc function waits for particular time before next expected message
+        */    
+        function f_wait(float p_time)
+        runs on S1APComponent {
+            
+            tc_wait.start(p_time);
+            alt {
+                [] tc_wait.timeout{}        
+            }
+        }
+    
+    }// end group GlobalSteps
+
+
+    group Preambles {
+
+        group preamble_S1AP{
+    
+            function f_preambleS1AP_MME()
+            runs on S1APComponent {
+                //TODO:...        
+            }
+            
+            function f_preambleS1AP_eNB()
+            runs on S1APComponent {
+                //TODO:...        
+            }
+    
+        }//end group preamble_S1AP
+
+    }// end group Preambles
+
+    group Postambles {
+
+        group postamble_S1AP{
+    
+            function f_postambleS1AP_MME()
+            runs on S1APComponent {
+                //TODO:...
+            }
+            function f_postambleS1AP_eNB()
+            runs on S1APComponent {
+                //TODO:...
+            }
+    
+        }//end group postamble_S1AP
+
+    } //end group Postambles
+
+    group DefaultsTestStep
+    {
+    
+        altstep a_defaultS1AP()
+        runs on S1APComponent
+        {
+            [] any timer.timeout
+             {
+                  all timer.stop;
+                  if (vc_serverStop==false) {
+                      f_selfOrClientSyncAndVerdict("error", e_timeout);
+                  }
+                  else {
+                      stop;
+                  }
+             }
+            [] S1_MMEeNB_P.receive (S1AP_PDU:{initiatingMessage := ?}) -> value vc_recvS1AP_PDUDefault
+             {
+                   repeat;
+             }
+            [] S1_MMEeNB_P.receive (S1AP_PDU:{successfulOutcome := ?}) -> value vc_recvS1AP_PDUDefault
+             {
+                  repeat;
+             }
+            [] S1_MMEeNB_P.receive (S1AP_PDU:{unsuccessfulOutcome := ?}) -> value vc_recvS1AP_PDUDefault
+             {
+                  repeat;
+             }
+            [] S1_MMEeNB_P.receive (S1AP_PDU:?) -> value vc_recvS1AP_PDUDefault
+             {
+                  if (vc_serverStop==false) {
+                      f_selfOrClientSyncAndVerdict("error", e_error);
+                  }
+                  else {
+                      stop;
+                  }
+             }
+            [] S1_MMEeNB_P.receive
+             {
+                  if (vc_serverStop==false) {
+                      f_selfOrClientSyncAndVerdict("error", e_error);
+                  }
+                  else {
+                      stop;
+                  }
+             }
+            [] a_shutdown() {
+                // Process temination on error
+                log("*** a_defaultS1AP() : Process temination on error ***");
+                // Terminate component execution
+                stop;
+            }
+        }//end a_defaultS1AP
+        
+        altstep a_defaultS1AP_MME()
+        runs on S1APComponent
+        {
+            [] any timer.timeout
+             {
+                  all timer.stop;
+                  if (vc_serverStop==false) {
+                      f_selfOrClientSyncAndVerdict("error", e_timeout);
+                  }
+                  else {
+                      stop;
+                  }
+             }
+             //TODO:...
+        }//end a_defaultS1AP_MME
+        
+        altstep a_defaultS1AP_eNB()
+        runs on S1APComponent
+        {
+            [] any timer.timeout
+             {
+                  all timer.stop;
+                  if (vc_serverStop==false) {
+                      f_selfOrClientSyncAndVerdict("error", e_timeout);
+                  }
+                  else {
+                      stop;
+                  }
+             }
+             //TODO:...
+        }//end a_defaultS1AP_eNB
+    
+    } // end of group DefaultsTestStep
+} // end module LibS1AP_Steps

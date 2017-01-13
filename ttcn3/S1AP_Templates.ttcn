@@ -1,0 +1,79 @@
+/**
+ *  @author   STF 519
+ *  @version  $Id: $
+ *  @desc     This module defines S1AP Templates for message, header, and
+ *            structured types. <br>
+ *            Note that any changes made to the definitions in this module
+ *            may be overwritten by future releases of this library
+ *            End users are encouraged to contact the distributers of this
+ *            module regarding their modifications or additions. 
+ *  @remark   Any additions to the templates shall follow the design rules
+ *            and always modify base templates only;
+ */
+
+module S1AP_Templates {
+    
+    // LibCommon
+    import from LibCommon_BasicTypesAndValues all;
+    import from LibCommon_DataStrings all;
+    
+    // LibS1AP
+    import from LibS1AP_Templates all;
+    
+    
+    group S1AP_PDU{
+    	
+    	group Class1{
+        	group Send{
+        	
+        		group HandoverPreparation{
+
+					group initiatingMessage{
+					}//End group initiatingMessage
+
+					group successfulOutcome{
+					}//End group successfulOutcome
+
+					group unsuccessfulOutcome{
+					}//End group unsuccessfulOutcome
+
+    			}//End group HandoverPreparation
+    			
+				group HandoverResourceAllocation{
+        		
+    			}//End group HandoverResourceAllocation
+    			
+    			//TODO: Other....
+            }
+        
+        	group Receive{
+        		
+				group HandoverPreparation{
+        		
+				}//End group HandoverPreparation
+
+				group HandoverResourceAllocation{
+
+				}//End group HandoverResourceAllocation
+
+				//TODO: Other....
+        		
+        	}
+    	}//End of group Class1
+    	
+		group Class2{
+		
+		}//End of group Class2
+		
+    }// End of group S1AP_PDU
+    
+    group S1AP_Protocol_IEs{
+    }// End of group S1AP_Protocol_IEs
+
+    /** 
+     * @desc Type functions 
+     */
+    group functionsForTemplates {
+    } // End of group functionsForTemplates
+    
+} // End of module S1AP_Templates

@@ -1,0 +1,159 @@
+/**
+ *  @author     STF 519
+ *  @version    $Id: $
+ *  @desc       This module provides ATS specific steps used by the test cases for S1AP tests.
+ */
+ module S1AP_Steps {
+
+    //LibCommon
+    import from LibCommon_DataStrings {type Bit1, Bit4, Bit5, Bit8;}//all;
+    import from LibCommon_BasicTypesAndValues {type UInt8;type UInt32;};//LibCommon
+    import from LibCommon_Sync all ;
+    import from LibCommon_VerdictControl all ;
+
+    //LibS1AP
+    //import from LibS1AP_TypesAndValues all;
+    import from LibS1AP_Templates all;
+    import from LibS1AP_Steps  all;
+    import from LibS1AP_PIXITS all;
+    import from LibS1AP_Interface all;
+    
+    //Ats
+    import from S1AP_PIXITS all;
+    import from S1AP_Templates all;
+    import from S1AP_TestConfiguration all;
+    import from S1AP_TestSystem all;
+
+    group GlobalSteps {
+
+        /*
+        *  @desc    This is a test step that init global variables
+        *  @param   
+        */
+        function f_S1AP_mme_init()
+        runs on S1APComponent {
+
+            //Defaults
+			vc_default_s1ap := activate (a_defaultS1AP());
+            
+            //Base LibDiameter init function if there will be any base initialisation
+            f_S1AP_Init_Component();
+            
+            vc_ETS_address := PX_S1AP_MME_ETS_IPADDR;
+            vc_ETS_port    := PX_S1AP_MME_ETS_PORT;
+            vc_SUT_address := PX_S1AP_MME_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_MME_SUT_PORT;
+            
+            
+        } // End of function f_S1AP_init
+
+        /*
+        *  @desc    This is a test step that init global variables
+        *  @param   
+        */
+        function f_S1AP_enb_init()
+        runs on S1APComponent {
+            
+            //Defaults
+			vc_default_s1ap := activate (a_defaultS1AP());
+            
+            //Base LibDiameter init function if there will be any base initialisation
+			f_S1AP_Init_Component();
+            
+            vc_ETS_address := PX_S1AP_ENB_ETS_IPADDR;
+            vc_ETS_port    := PX_S1AP_ENB_ETS_PORT;
+            vc_SUT_address := PX_S1AP_ENB_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_ENB_SUT_PORT;
+            
+        } // End of function f_S1AP_enb_init
+        
+        /*
+        *  @desc    This is a test step that init global variables
+        *  @param   
+        */
+        function f_S1AP_enb_init2()
+        runs on S1APComponent {
+            
+            //Defaults
+			vc_default_s1ap := activate (a_defaultS1AP());
+            
+            //Base LibDiameter init function if there will be any base initialisation
+			f_S1AP_Init_Component();
+            
+            vc_ETS_address := PX_S1AP_ENB_ETS_IPADDR2;
+            vc_ETS_port    := PX_S1AP_ENB_ETS_PORT2;
+            vc_SUT_address := PX_S1AP_ENB_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_ENB_SUT_PORT;
+            
+        } // End of function f_DiameterRo_init
+        
+    } // Endgroup GlobalSteps
+
+    group Preambles{
+        
+        function f_preamble_S1AP_MME() runs on S1APComponent
+        {
+			var default     v_def_s1ap_;
+            
+            f_S1AP_mme_init();
+            //f_preambleS1APClient();
+        }
+        
+        function f_preamble_S1AP_eNB() runs on S1APComponent
+        {
+			var default     v_def_s1ap_;
+           
+			f_S1AP_enb_init();
+			//f_preambleS1APServer();
+        }
+        
+		function f_preamble_S1AP_eNB2() runs on S1APComponent
+	    {
+		    var default     v_def_s1ap_;
+   
+		    f_S1AP_enb_init2();
+			//f_preambleS1APServer();
+	    }
+        
+    } // End of group Preambles
+
+    group Postambles {
+        
+        function f_postamble_S1AP_MME() runs on S1APComponent
+        {
+			f_postambleS1AP_MME();
+       
+            // Deactivate defaults
+            deactivate;
+        }
+        
+        function f_postamble_S1AP_eNB() runs on S1APComponent
+        {
+			f_postambleS1AP_eNB();
+			
+			//Deactivate defaults
+			deactivate;
+        }
+        
+        function f_postamble_S1AP_eNB2() runs on S1APComponent
+        {
+			f_postambleS1AP_eNB();
+   
+            // Deactivate defaults
+            deactivate;
+        }
+        
+    } // End of group Postambles
+
+    group CheckFunctions {
+        
+    } // End of group CheckFunctions
+
+    group SendMessage {
+    } // End of group SendMessage 
+    
+    group DefaultTestStep{
+
+    }//end group DefaultTestStep
+    
+} // End of module S1AP_Steps

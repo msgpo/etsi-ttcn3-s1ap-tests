@@ -1,0 +1,35 @@
+/**
+ *	@author 	STF 519
+ *  @version    $Id: $
+ *	@desc		This module provides PIXITS used by the test component for S1AP tests.
+ */
+
+module LibS1AP_PIXITS
+{
+	type enumerated TransportProtocol{
+	    UDP_E,
+	    TCP_E,
+	    SCTP_E
+	}
+	
+    group S1AP_PIXIT_Parameters{
+
+      /** @desc	boolean (This is an operator option, not a protocol option),
+                  True, if IPv6 addresses are used
+      */
+      modulepar boolean PX_IPv6 	:= true;
+	  
+	  /** @desc enumerated (This is an operator option, not a protocol option),
+      */
+      modulepar TransportProtocol PX_S1AP_TRANSPORT_PROTOCOL := SCTP_E;
+
+	}//group S1AP_PIXIT_Parameters
+
+    group S1AP_Timers{
+
+        /** @desc	float for TWait default value for waiting an operator action
+        */
+        modulepar float    PX_S1AP_TWAIT:= 30.0;
+    }//group S1AP_Timers
+
+} // end module LibS1AP_PIXITS

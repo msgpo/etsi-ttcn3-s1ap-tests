@@ -1,0 +1,60 @@
+/**
+ *	@author 	STF 519
+ *  @version    $Id: $
+ *	@desc		This module provides the types used by the test component for S1AP tests.
+ */
+
+module LibS1AP_Interface
+{
+    //LibCommon
+    import from LibCommon_Sync {type SelfSyncComp; 
+                                modulepar PX_TSYNC_TIME_LIMIT;};
+    import from LibCommon_BasicTypesAndValues {type UInt32;};
+
+    //LibS1AP
+	import from S1AP_Constants language "ASN.1:1997" all;
+	import from S1AP_CommonDataTypes language "ASN.1:1997" all;
+	import from S1AP_Containers language "ASN.1:1997" all;
+	import from S1AP_IEs language "ASN.1:1997" all;
+	import from S1AP_PDU_Contents language "ASN.1:1997" all;
+	import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
+	
+	//import from LibS1AP_TypesAndValues all;
+	
+	import from LibS1AP_PIXITS all;
+	
+    type port S1APPort message {inout S1AP_PDU}; 
+
+    type component S1APComponent extends SelfSyncComp
+    {
+      //port
+      port S1APPort S1_MMEeNB_P;
+	
+	  //global variables
+	  var charstring vc_ETS_address := ""; 		//defined in init
+	  var charstring vc_ETS_address2 := ""; 	//defined in init
+	  var integer vc_ETS_port		:= 3868;  	//defined in init
+      var integer vc_ETS_port2		:= 3869;  	//defined in init
+      var charstring vc_SUT_address := ""; 		//defined in init
+      var integer vc_SUT_port 		:= 3868;  	//defined in init
+            
+      var S1AP_PDU vc_sendS1AP_PDU ;
+      var S1AP_PDU vc_recvS1AP_PDU ;
+      var S1AP_PDU vc_recvS1AP_PDUDefault ; //global variable defined to save Dimeter message received within default altstep
+
+      //init of values at component started
+      //TODO:
+
+      //general timers
+      timer tc_wait  := PX_S1AP_TWAIT;
+      timer tc_delay := 0.3;  // delay next Request
+
+      // variables for storing default references
+	  var default 	vc_default_s1ap;
+	  var default 	vc_def_catchSyncStop_s1ap;
+
+      //var boolean vc_isAF := false;
+      var boolean vc_serverStop:=false;
+  } // end S1APComponent
+
+} // end module LibS1AP_Interface
