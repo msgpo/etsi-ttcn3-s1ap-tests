@@ -22,11 +22,11 @@ module S1AP_Templates {
 		}
 	}
 
-	template S1AP_PDU m_initiatingMessage_E_RABSetup(E_RABSetupRequest.protocolIEs p_value) := {
+	template S1AP_PDU m_initiatingMessage_E_RABSetup(template E_RABSetupRequest.protocolIEs p_value) := {
 		initiatingMessage := {
 			procedureCode := id_E_RABSetup,
 			criticality := reject,
-			value_ := {E_RABSetupRequest.protocolIEs := p_value}
+			value_ := {E_RABSetupRequest.protocolIEs := valueof(p_value)}
 		}
 	}
 	
@@ -58,19 +58,19 @@ group g_E_RAB_IEsend {
 
 	template(value) ProtocolIE m_E_RAB_IE_MME (MME_UE_S1AP_ID p_value:= 1):= {
 		id := S1AP_Constants.id_MME_UE_S1AP_ID,
-		criticality := S1AP_CommonDataTypes.reject,
+		criticality := reject,
 		value_ := { MME_UE_S1AP_ID := p_value }
 	}
 
 	template(value) ProtocolIE m_E_RAB_IE_ENB (ENB_UE_S1AP_ID p_value:= 1):= {
 		id := S1AP_Constants.id_eNB_UE_S1AP_ID,
-		criticality := S1AP_CommonDataTypes.reject,
+		criticality := reject,
 		value_ := { ENB_UE_S1AP_ID := p_value }
 	}		
-	template(value) ProtocolIE m_E_RAB_IE_ERAB (RecordOf_E_RABToBeSetupItemBearerSUReq p_value := {m_E_RABToBeSetupItemBearerSUReq}):= {
+	template(value) ProtocolIE m_E_RAB_IE_ERAB (template(value)RecordOf_E_RABToBeSetupItemBearerSUReq p_value := {m_E_RABToBeSetupItemBearerSUReq}):= {
 		id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
-		criticality := S1AP_CommonDataTypes.reject,
-		value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := p_value }
+		criticality := reject,
+		value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
 	}
 
   } // end of group g_E_RAB_IEsend
@@ -80,28 +80,28 @@ group g_E_RAB_IEreceive {
 	template ProtocolIE mw_E_RAB_IE_MME(template(present) MME_UE_S1AP_ID p_parm
 										 := ?) := {
 		id := S1AP_Constants.id_MME_UE_S1AP_ID,
-		criticality := S1AP_CommonDataTypes.ignore,
+		criticality := ignore,
 		value_ := {MME_UE_S1AP_ID := p_parm}
 	}
 
 	template ProtocolIE mw_E_RAB_IE_ENB(template(present) ENB_UE_S1AP_ID p_parm
 										 := ?) := {
 		id := S1AP_Constants.id_eNB_UE_S1AP_ID,
-		criticality := S1AP_CommonDataTypes.ignore,
+		criticality := ignore,
 		value_ := {ENB_UE_S1AP_ID := p_parm}
 	}
 
 	template ProtocolIE mw_E_RAB_IE_ERAB 
 	  (template(present) RecordOf_E_RABSetupItemBearerSURes p_value := {mw_E_RABSetupItemBearerSURes}):= {
 		id := S1AP_Constants.id_E_RABSetupListBearerSURes,
-		criticality := S1AP_CommonDataTypes.ignore,
+		criticality := ignore,
 		value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
 	}
 	
 	template ProtocolIE mw_E_RAB_IE_fSUL 
 	  (template(present) RecordOf_E_RABItem p_value := {?}):= {
 		id := S1AP_Constants.id_E_RABFailedToSetupListBearerSURes,
-		criticality := S1AP_CommonDataTypes.ignore,
+		criticality := ignore,
 		value_ := { RecordOf_E_RABItem := p_value }
 	}
 	
@@ -111,9 +111,9 @@ group g_IEParameters {
 	template(value)
 	E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq
 	(E_RAB_ID p_e_RAB_ID := 0,
-	 E_RABLevelQoSParameters p_e_RABlevelQoSParameters:=m_e_RABlevelQoSParameters) := {
+	 template(value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters:=m_e_RABlevelQoSParameters) := {
 		e_RAB_ID := p_e_RAB_ID,
-		e_RABlevelQoSParameters := p_e_RABlevelQoSParameters,
+		e_RABlevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
 		transportLayerAddress := '0'B,
 		gTP_TEID := '00000000'O,
 		nAS_PDU := '0000'O,
