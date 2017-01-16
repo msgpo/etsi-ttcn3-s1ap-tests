@@ -22,7 +22,7 @@ module LibS1AP_Interface {
     import from S1AP_IEs language "ASN.1:1997" all;
     import from S1AP_PDU_Contents language "ASN.1:1997" all;
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
-    import from LibS1AP_PIXITS all;
+    import from LibS1AP_Pixits all;
     
     group portDefinitions {
         
