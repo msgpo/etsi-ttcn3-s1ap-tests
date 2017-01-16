@@ -1,210 +1,278 @@
 /**
- *	@author 	STF 519
- *  @version    $Id: $
- *	@desc		This module provides Lib S1AP Templates used by the test component for S1AP tests.
+ *    @author   ETSI / STF519
+ *    @version  $URL:$
+ *              $Id:$
+ *    @desc     This module provides Lib S1AP Templates used by the test component for S1AP tests.
+ *    @copyright   ETSI Copyright Notification
+ *                 No part may be reproduced except as authorized by written permission.
+ *                 The copyright and the foregoing restriction extend to reproduction in all media.
+ *                 All rights reserved.
+ *    @see      ETSI TS 136 413 / 3GPP TS 36.413 version 13.4.0 Release 13
  */
-
-module LibS1AP_Templates
-{
-	import from S1AP_Constants language "ASN.1:1997" all;
-	import from S1AP_CommonDataTypes language "ASN.1:1997" all;
-	// import from S1AP_Containers language "ASN.1:1997" all;
-	import from S1AP_IEs language "ASN.1:1997" all;
-	import from S1AP_PDU_Contents language "ASN.1:1997" all;
-	import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
-	
-	import from LibS1AP_Types all;
-
-	group g_S1AP{
-		
-		group  g_S1AP_PDU{
-		
-			template S1AP_PDU m_initiatingMessage (ProcedureCode p_procedureCode, anytype p_value):= {
-				initiatingMessage := {
-					procedureCode := p_procedureCode,
-					criticality := reject,
-					value_ := p_value
-				}
-			}
-		}//end group g_S1AP_PDU
-    	
-		group Class1{
-			group Send{
-    	
-				group HandoverPreparation{
-
-					group initiatingMessage{
-					}//End group initiatingMessage
-
-					group successfulOutcome{
-					}//End group successfulOutcome
-
-					group unsuccessfulOutcome{
-					}//End group unsuccessfulOutcome
-
-				}//End group HandoverPreparation
-			
-				group HandoverResourceAllocation{
-    		
-				}//End group HandoverResourceAllocation
-				
-				group ERABSetup{
-
-					//template S1AP_PDU m_initiatingMessage_E_RABSetup(template RecordOf_ProtocolIE p_value) := {
-					template InitiatingMessage m_initiatingMessage_E_RABSetup(template RecordOf_ProtocolIE p_value) := {	
-						//initiatingMessage := {
-							procedureCode := id_E_RABSetup,
-							criticality := reject,
-							value_ := {RecordOf_ProtocolIE := valueof(p_value)}
-						//}
-					}
-						
-				}//End group ERABSetup
-				
-				//TODO: Other....
-			}
+module LibS1AP_Templates {
     
-			group Receive{
-    		
-				group HandoverPreparation{
-    		
-				}//End group HandoverPreparation
-
-				group HandoverResourceAllocation{
-
-				}//End group HandoverResourceAllocation
-				
-				group ERABSetup{
-					
-					//template S1AP_PDU mw_successfulOutcome_E_RABSetupResponse(template (present) ProcedureCode p_procedureCode := ?,
-					//														  template (present) RecordOf_ProtocolIE p_value)
-					//	:= {
-					template SuccessfulOutcome mw_successfulOutcome_E_RABSetupResponse(template (present) ProcedureCode p_procedureCode := ?,
-																								  template (present) RecordOf_ProtocolIE p_value)
-											:= {
-						//successfulOutcome := {
-							procedureCode := p_procedureCode,
-							criticality := reject,
-							value_ := {RecordOf_ProtocolIE := p_value}
-						//}
-					}
-				}//End group ERABSetup
-
-				//TODO: Other....
-    		
-			}
-		}//End of group Class1
-	
-		group Class2{
-	
-		}//End of group Class2
-	
-	}// End of group g_S1AP
+    // LibS1AP
+    import from S1AP_Constants language "ASN.1:1997" all;
+    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
+    // import from S1AP_Containers language "ASN.1:1997" all;
+    import from S1AP_IEs language "ASN.1:1997" all;
+    import from S1AP_PDU_Contents language "ASN.1:1997" all;
+    import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     
-	group S1AP_Protocol_IEs{
-		group Send_IEs{
+    import from LibS1AP_TypesAndValues all;
+    
+    group g_S1AP {
+        
+        group  g_S1AP_PDU {
+            
+            /**
+             * 
+             * @desc 
+             */
+            template (value) S1AP_PDU m_initiatingMessage(
+                                                          in ProcedureCode p_procedureCode, 
+                                                          in anytype p_value
+            ):= {
+                initiatingMessage := {
+                    procedureCode := p_procedureCode,
+                    criticality := reject,
+                    value_ := p_value
+                }
+            } // End of template m_initiatingMessage
+            
+        } // End of group g_S1AP_PDU
+        
+        group Class1 {
+            
+            group Send {
+                
+                group HandoverPreparation {
+                    
+                    group initiatingMessage {
+                    } // End of group initiatingMessage
+                    
+                    group successfulOutcome {
+                    } // End of group successfulOutcome
+                    
+                    group unsuccessfulOutcome {
+                    } // End of group unsuccessfulOutcome
+                    
+                } // End of group HandoverPreparation
+                
+                group HandoverResourceAllocation {
+                    
+                }// End of group HandoverResourceAllocation
+                
+                group ERABSetup{
+                    
+                    template (value) InitiatingMessage m_initiatingMessage_E_RABSetup(
+                                                                                      in template (value) RecordOf_ProtocolIE p_value) := {    
+                        procedureCode := id_E_RABSetup,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                    } // End of template m_initiatingMessage_E_RABSetup
+                    
+                }// End of group ERABSetup
+                
+                //TODO: Other....
+            } // End of group Send 
+            
+            group Receive {
+            
+                group HandoverPreparation{
+            
+                }// End of group HandoverPreparation
 
-		  group E_RAB_IEsend {
+                group HandoverResourceAllocation{
 
-			template(value) ProtocolIE m_E_RAB_IE_MME (template(value)MME_UE_S1AP_ID p_value:= 1):= {
-				id := S1AP_Constants.id_MME_UE_S1AP_ID,
-				criticality := reject,
-				value_ := { MME_UE_S1AP_ID := valueof(p_value) }
-			}
-
-			template(value) ProtocolIE m_E_RAB_IE_ENB (ENB_UE_S1AP_ID p_value:= 1):= {
-				id := S1AP_Constants.id_eNB_UE_S1AP_ID,
-				criticality := reject,
-				value_ := { ENB_UE_S1AP_ID := p_value }
-			}		
-			template(value) ProtocolIE m_E_RAB_IE_ERAB (template(value)RecordOf_E_RABToBeSetupItemBearerSUReq p_value := {m_E_RABToBeSetupItemBearerSUReq}):= {
-				id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
-				criticality := reject,
-				value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
-			}
-		  }//end group E_RAB_IEsend
-
-		} // end group Send_IEs
-		
-		group Receive_IEs{
-	
-			template ProtocolIE mw_E_RAB_IE_MME(template(present) MME_UE_S1AP_ID p_parm
-												 := ?) := {
-				id := S1AP_Constants.id_MME_UE_S1AP_ID,
-				criticality := ignore,
-				value_ := {MME_UE_S1AP_ID := p_parm}
-			}
-
-			template ProtocolIE mw_E_RAB_IE_ENB(template(present) ENB_UE_S1AP_ID p_parm
-												 := ?) := {
-				id := S1AP_Constants.id_eNB_UE_S1AP_ID,
-				criticality := ignore,
-				value_ := {ENB_UE_S1AP_ID := p_parm}
-			}
-
-			template ProtocolIE mw_E_RAB_IE_ERAB 
-			  (template(present) RecordOf_E_RABSetupItemBearerSURes p_value := {mw_E_RABSetupItemBearerSURes}):= {
-				id := S1AP_Constants.id_E_RABSetupListBearerSURes,
-				criticality := ignore,
-				value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
-			}
-	
-			template ProtocolIE mw_E_RAB_IE_fSUL 
-			  (template(present) RecordOf_E_RABItem p_value := {?}):= {
-				id := S1AP_Constants.id_E_RABFailedToSetupListBearerSURes,
-				criticality := ignore,
-				value_ := { RecordOf_E_RABItem := p_value }
-			}
-
-		} // end group Receive_IEs
-
+                }// End of group HandoverResourceAllocation
+                
+                group ERABSetup{
+                    
+                    /**
+                     * @desc 
+                     */
+                    template (present) SuccessfulOutcome mw_successfulOutcome_E_RABSetupResponse(
+                                                                                                 template (present) ProcedureCode p_procedureCode := ?,
+                                                                                                 template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := p_procedureCode,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_successfulOutcome_E_RABSetupResponse
+                    
+                } // End of group ERABSetup
+                
+                //TODO: Other....
+            
+            } // End of group Receive
+            
+        } // End of group Class1
+        
+        group Class2{
+            
+        } //End of group Class2
+        
+    } // End of group g_S1AP
+    
+    group S1AP_Protocol_IEs {
+        
+        group Send_IEs {
+            
+            group E_RAB_IEsend {
+                
+                /**
+                 * @desc 
+                 */
+                template (value) ProtocolIE m_E_RAB_IE_MME(
+                                                           in template (value) MME_UE_S1AP_ID p_value := 1
+                ):= {
+                    id := S1AP_Constants.id_MME_UE_S1AP_ID,
+                    criticality := reject,
+                    value_ := { MME_UE_S1AP_ID := valueof(p_value) }
+                } // End of template m_E_RAB_IE_MME
+                
+                /**
+                 * @desc 
+                 */
+                template (value) ProtocolIE m_E_RAB_IE_ENB(
+                                                           in ENB_UE_S1AP_ID p_value := 1
+                ):= {
+                    id := S1AP_Constants.id_eNB_UE_S1AP_ID,
+                    criticality := reject,
+                    value_ := { ENB_UE_S1AP_ID := p_value }
+                } // End of template m_E_RAB_IE_ENB
+                
+                /**
+                 * @desc 
+                 */
+                template (value) ProtocolIE m_E_RAB_IE_ERAB(
+                                                            in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_value := { m_E_RABToBeSetupItemBearerSUReq }
+                ):= {
+                    id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
+                    criticality := reject,
+                    value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
+                } // End of template m_E_RAB_IE_ERAB
+                
+            } // End of group E_RAB_IEsend
+            
+        } // End of group Send_IEs
+        
+        group Receive_IEs{
+            
+            /**
+             * @desc 
+             * @param p_parm
+             */
+            template (present) ProtocolIE mw_E_RAB_IE_MME(
+                                                          template (present) MME_UE_S1AP_ID p_parm := ?
+            ) := {
+                id := S1AP_Constants.id_MME_UE_S1AP_ID,
+                criticality := ignore,
+                value_ := {MME_UE_S1AP_ID := p_parm}
+            } // End of template mw_E_RAB_IE_MME
+            
+            /**
+             * @desc 
+             * @param p_parm
+             */
+            template (present) ProtocolIE mw_E_RAB_IE_ENB(
+                                                          template(present) ENB_UE_S1AP_ID p_parm := ?
+            ) := {
+                id := S1AP_Constants.id_eNB_UE_S1AP_ID,
+                criticality := ignore,
+                value_ := {ENB_UE_S1AP_ID := p_parm}
+            } // End of template mw_E_RAB_IE_ENB
+            
+            /**
+             * @desc 
+             */
+            template (present) ProtocolIE mw_E_RAB_IE_ERAB(
+                                                           template (present) RecordOf_E_RABSetupItemBearerSURes p_value := { mw_E_RABSetupItemBearerSURes }
+            ):= {
+                id := S1AP_Constants.id_E_RABSetupListBearerSURes,
+                criticality := ignore,
+                value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
+            } // End of template 
+            
+            template (present) ProtocolIE mw_E_RAB_IE_fSUL(
+                                                           template(present) RecordOf_E_RABItem p_value := { ? }
+            ):= {
+                id := S1AP_Constants.id_E_RABFailedToSetupListBearerSURes,
+                criticality := ignore,
+                value_ := { RecordOf_E_RABItem := p_value }
+            } // End of template mw_E_RAB_IE_fSUL
+            
+        } // End of group Receive_IEs
+        
         group g_IEParameters {
-			template(value)
-			E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq
-			(E_RAB_ID p_e_RAB_ID := 0,
-			 template(value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters:=m_e_RABlevelQoSParameters) := {
-				e_RAB_ID := p_e_RAB_ID,
-				e_RABlevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
-				transportLayerAddress := '0'B,
-				gTP_TEID := '00000000'O,
-				nAS_PDU := '0000'O,
-				iE_Extensions := omit
-			}
+            
+            /**
+             * @desc 
+             */
+            template(value) E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq(
+                                                                                          in E_RAB_ID p_e_RAB_ID := 0,
+                                                                                          in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters
+            ) := {
+                e_RAB_ID := p_e_RAB_ID,
+                e_RABlevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
+                transportLayerAddress := '0'B,
+                gTP_TEID := '00000000'O,
+                nAS_PDU := '0000'O,
+                iE_Extensions := omit
+            } // End of template m_E_RABToBeSetupItemBearerSUReq
+            
+            /**
+             * @desc 
+             * @param p_qCI
+             */
+            template (value) E_RABLevelQoSParameters m_e_RABlevelQoSParameters(
+                                                                               in QCI p_qCI := 0
+            ):= {
+                qCI := p_qCI,
+                allocationRetentionPriority := {
+                    priorityLevel := 0,
+                    pre_emptionCapability := shall_not_trigger_pre_emption,
+                    pre_emptionVulnerability := pre_emptable,
+                    iE_Extensions := omit
+                },
+                gbrQosInformation := omit,
+                iE_Extensions := omit
+            } // End of template m_e_RABlevelQoSParameters
+            
+            /**
+             * @desc 
+             * @param p_e_RAB_ID
+             * @param p_cause
+             */
+            template (present) E_RABSetupItemBearerSURes mw_E_RABSetupItemBearerSURes(
+                                                                                      template(present) E_RAB_ID p_e_RAB_ID := ?
+            ):=  {
+                 e_RAB_ID                        := p_e_RAB_ID,
+                 transportLayerAddress           := '?'B,
+                 gTP_TEID                        := ?,
+                 iE_Extensions                   := *
+            } // End of template mw_E_RABSetupItemBearerSURes
+            
+            /**
+             * @desc 
+             */
+            template (present) E_RABItem mw_E_RABItem(
+                                                      template (present) E_RAB_ID p_e_RAB_ID := ?,
+                                                      template (present) Cause p_cause := ?
+            ) := {
+                e_RAB_ID := p_e_RAB_ID,cause := p_cause,iE_Extensions := *
+            } // End of template mw_E_RABItem
+            
+        } // End of group g_IEParameters
+        
+    } // End of group S1AP_Protocol_IEs
     
-			template(value) E_RABLevelQoSParameters m_e_RABlevelQoSParameters (QCI p_qCI := 0):= {
-				qCI := p_qCI,
-				allocationRetentionPriority := {
-					priorityLevel := 0,
-					pre_emptionCapability := shall_not_trigger_pre_emption,
-					pre_emptionVulnerability := pre_emptable,
-					iE_Extensions := omit
-				},
-				gbrQosInformation := omit,
-				iE_Extensions := omit
-			}
-	
-			template(present) E_RABSetupItemBearerSURes mw_E_RABSetupItemBearerSURes (template(present) E_RAB_ID p_e_RAB_ID := ?):=  {
-				 e_RAB_ID                        := p_e_RAB_ID,
-				 transportLayerAddress           := '?'B,
-				 gTP_TEID                        := ?,
-				 iE_Extensions                   := *
-			 }
-	 
-			template(present) E_RABItem mw_E_RABItem(template(present) E_RAB_ID
-														 p_e_RAB_ID := ?,
-													 template(present) Cause p_cause :=
-													 ?) := {
-				e_RAB_ID := p_e_RAB_ID,cause := p_cause,iE_Extensions := *
-			}
-        	        
-        } // end of group g_IEParameters
-		
-	}// End of group S1AP_Protocol_IEs
-
-		/** 
-	 * @desc Type functions 
-	 */
-	group functionsForTemplates {
-	} // End of group functionsForTemplates
-
-} // end module LibS1AP_Templates
+    /** 
+     * @desc Type functions 
+     */
+    group functionsForTemplates {
+        
+    } // End of group functionsForTemplates
+    
+} // End of module LibS1AP_Templates

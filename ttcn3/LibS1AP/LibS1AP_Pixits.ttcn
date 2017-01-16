@@ -1,0 +1,43 @@
+/**
+ *    @author   ETSI / STF519
+ *    @version  $URL:$
+ *              $Id:$
+ *    @desc     This module provides PixitS used by the test component for S1AP tests.
+ *    @copyright   ETSI Copyright Notification
+ *                 No part may be reproduced except as authorized by written permission.
+ *                 The copyright and the foregoing restriction extend to reproduction in all media.
+ *                 All rights reserved.
+ *    @see      ETSI TS 136 413 / 3GPP TS 36.413 version 13.4.0 Release 13
+ */
+module LibS1AP_Pixits {
+    
+    type enumerated TransportProtocol {
+        UDP_E,
+        TCP_E,
+        SCTP_E
+    }
+    
+    group S1AP_Pixit_Parameters {
+        
+        /** 
+         * @desc    boolean (This is an operator option, not a protocol option), True, if IPv6 addresses are used
+         */
+        modulepar boolean PX_IPv6     := true;
+        
+        /** 
+         * @desc enumerated (This is an operator option, not a protocol option)
+         */
+        modulepar TransportProtocol PX_S1AP_TRANSPORT_PROTOCOL := SCTP_E;
+        
+    } // End of group S1AP_Pixit_Parameters
+    
+    group S1AP_Timers {
+        
+        /** @desc float for TWait default value for waiting an operator action
+         */
+        modulepar float    PX_S1AP_TWAIT:= 30.0;
+        
+    }  // End of group S1AP_Timers
+    
+} // End of module LibS1AP_Pixits
+
