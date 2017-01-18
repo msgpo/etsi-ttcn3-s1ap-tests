@@ -11,12 +11,18 @@
  */
 module LibS1AP_Pixits {
     
+    /**
+     * @desc Define the network transportation layer
+     */
     type enumerated TransportProtocol {
         UDP_E,
         TCP_E,
         SCTP_E
     }
     
+    /**
+     * @desc Network transportation layer setting
+     */
     group S1AP_Pixit_Parameters {
         
         /** 
@@ -31,6 +37,9 @@ module LibS1AP_Pixits {
         
     } // End of group S1AP_Pixit_Parameters
     
+    /**
+     * @desc Network transportation layer timers
+     */
     group S1AP_Timers {
         
         /** @desc float for TWait default value for waiting an operator action

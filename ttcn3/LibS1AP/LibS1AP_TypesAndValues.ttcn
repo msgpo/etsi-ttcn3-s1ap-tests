@@ -19,25 +19,26 @@ module LibS1AP_TypesAndValues {
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     
     /**
-     * @desc 
-     * @member id
-     * @member criticality
-     * @member value_
+     * @desc List of E-RABSetupItemBearerSURes IEs
      */
     type record of E_RABToBeSetupItemBearerSUReq RecordOf_E_RABToBeSetupItemBearerSUReq;
     
     /**
-     * 
+     * @desc List of E-RABSetupItemBearerSURes IEs
      */
     type record of E_RABSetupItemBearerSURes RecordOf_E_RABSetupItemBearerSURes;
     
     /**
-     * 
+     * @desc List of E-RAB IEs
      */
     type record of E_RABItem RecordOf_E_RABItem;
     
     /**
-     * 
+     * @desc This data structure redefines ASN.1 ProtocolIE-Field data structure die to parameterization limitation of TTCN-3 tools
+     * @member id           Protocol Information Element identifier
+     * @member criticality  Criticality value attached to this IE
+     * @member value_       Value of this IE
+     * @see ETSI TS 136 413 Clause 9.1 Message Functional Definition and Content
      */
     type record ProtocolIE {
         integer id (0 .. 65535),

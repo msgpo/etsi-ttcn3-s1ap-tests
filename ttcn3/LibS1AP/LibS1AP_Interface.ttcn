@@ -26,14 +26,35 @@ module LibS1AP_Interface {
     
     group portDefinitions {
         
+        /**
+         * @desc S1AP protocol port
+         */
         type port S1APPort message {
             inout S1AP_PDU
-        } 
+        } // End of type S1APPort
         
     } // End of group portDefinitions 
     
     group interfacePorts {
         
+        /**
+         * @desc Description of TTCN-3 S1AP component
+         * @member S1_MMEeNB_P
+         * @member vc_ETS_address
+         * @member vc_ETS_address2
+         * @member vc_ETS_port
+         * @member vc_ETS_port2
+         * @member vc_SUT_address
+         * @member vc_SUT_port
+         * @member vc_sendS1AP_PDU
+         * @member vc_recvS1AP_PDU
+         * @member vc_recvS1AP_PDUDefault
+         * @member tc_wait
+         * @member tc_delay
+         * @member vc_default_s1ap
+         * @member vc_def_catchSyncStop_s1ap
+         * @member vc_serverStop
+         */
         type component S1APComponent extends SelfSyncComp {
             // Port
             port S1APPort S1_MMEeNB_P;
@@ -69,3 +90,4 @@ module LibS1AP_Interface {
     } // End of group interfacePorts 
     
 } // End of module LibS1AP_Interface
+

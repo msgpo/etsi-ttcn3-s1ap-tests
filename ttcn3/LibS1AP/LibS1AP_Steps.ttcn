@@ -11,7 +11,7 @@
  */
 module LibS1AP_Steps {
     
-    //LibCommon
+    // LibCommon
     import from LibCommon_Sync all;
     import from LibCommon_VerdictControl all;
     import from LibCommon_BasicTypesAndValues all;
@@ -22,14 +22,17 @@ module LibS1AP_Steps {
     import from LibS1AP_Pixits all;
     import from LibS1AP_Templates all;
     
-    group CommonFunctions{
+    /**
+     * @desc Common functions description
+     */
+    group commonFunctions {
     
         /**
-        *
-        * @desc  f_gtZero, return true if value of p_int greater than 0
-        * @param p_int - integer value
-        */
-        function f_gtZero(
+         * @desc  Indicate if the provided value is greather or equal to 0
+         * @return true if value of p_int greater than 0
+         * @param p_int - integer value
+         */
+        function f_gtZero( // FIXME Do we really need a function for <= mathematical operation???
                           in integer p_int
         ) return boolean {
             if (p_int > 0){
@@ -41,23 +44,27 @@ module LibS1AP_Steps {
         } // End of function f_gtZero
         
         /**
-         * @desc  f_Inc, return incremented value of p_int 0
+         * @desc  Increment the provided value by one
+         * @return incremented value of p_int 0
          * @param p_int - integer value
          */
         function f_inc(
                        inout UInt32 p_int
         ) return UInt32 {
-            p_int:=p_int + 1;
+            p_int := p_int + 1;
             return p_int;
         } // End of function f_inc
         
-    } // End of group CommonFunctions
+    } // End of group commonFunctions
     
-    group ReceivePDU {
+    /**
+     * @desc Receive functions description
+     */
+    group receivePDU {
         
         /**
          *  @desc    This is a test step that assign common S1AP
-         *  @param
+         *  @param   p_PDU Extract the message payload from the S1AP PDU
          */
         function f_S1APPDU_Get(
                                inout S1AP_PDU p_PDU
@@ -77,8 +84,7 @@ module LibS1AP_Steps {
         } // End of function f_S1APPDU_Get
         
         /**
-         *
-         * @desc receive S1AP PDU
+         * @desc Receive S1AP PDU from protocol port
          * @param p_PDU template of the message to be received
          */
         function f_recv_S1AP_PDU(
@@ -103,43 +109,45 @@ module LibS1AP_Steps {
         } // End of function f_recv_S1AP_PDU
         
         /**
-         * @desc 
-         * @param p_initiatingMessage
-         * @verdict 
+         * @desc Receive S1AP PDU with InitiatingMessage payload from protocol port
+         * @param p_initiatingMessage Receive template for InitiatingMessage message
          */
         function f_recv_S1AP_initiatingMessage(
-                                               template (present)InitiatingMessage p_initiatingMessage
+                                               template (present) InitiatingMessage p_initiatingMessage := ?
         ) runs on S1APComponent {
-            f_recv_S1AP_PDU( {initiatingMessage := p_initiatingMessage})
+            f_recv_S1AP_PDU( { initiatingMessage := p_initiatingMessage })
         } // End of function f_recv_S1AP_initiatingMessage
         
         /**
-         * @desc 
-         * @param p_successfulOutcome
-         * @verdict 
+         * @desc Receive S1AP PDU with SuccessfulOutcome payload from protocol port
+         * @param p_successfulOutcome Receive template for SuccessfulOutcome message
          */
         function f_recv_S1AP_successfulOutcome(
-                                               template (present)SuccessfulOutcome p_successfulOutcome
+                                               template (present) SuccessfulOutcome p_successfulOutcome := ?
         ) runs on S1APComponent {
             f_recv_S1AP_PDU( {successfulOutcome := p_successfulOutcome})
         } // End of f_recv_S1AP_successfulOutcome
         
         /**
-         * @desc 
+         * @desc Receive S1AP PDU with UnsuccessfulOutcome payload from protocol port
+         * @param p_unsuccessfulOutcome Receive template for UnsuccessfulOutcome message
          */
         function f_recv_S1AP_unsuccessfulOutcome(
-                                                 template (present) UnsuccessfulOutcome p_unsuccessfulOutcome
+                                                 template (present) UnsuccessfulOutcome p_unsuccessfulOutcome := ?
         ) runs on S1APComponent {
             f_recv_S1AP_PDU( {unsuccessfulOutcome := p_unsuccessfulOutcome})
         } // End of function f_recv_S1AP_unsuccessfulOutcome
         
-    } // End of group ReceivePDU
+    } // End of group receivePDU
     
-    group SendPDU {
+    /**
+     * @desc Send functions description
+     */
+    group sendPDU {
         
         /**
          *  @desc    This is a test step that assign common S1AP
-         *  @param
+         *  @param p_PDU The S1AP protocol message to set up
          */
         function f_S1APPDU_Set(
                                inout template (value) S1AP_PDU p_PDU
@@ -159,12 +167,11 @@ module LibS1AP_Steps {
             }
             
         } // End of function f_S1APPDU_Set
-    
+        
         /**
-        *
-        * @desc  send S1AP PDU
-        * @param p_PDU template of the message to be sent
-        */
+         * @desc Send S1AP PDU to protocol port
+         * @param p_PDU template value message to be send
+         */
         function f_send_S1AP_PDU(
                                  in template (value) S1AP_PDU p_PDU
         ) runs on S1APComponent {
@@ -173,7 +180,8 @@ module LibS1AP_Steps {
         } // End of function f_send_S1APPDU
         
         /**
-         * @desc 
+         * @desc Send S1AP PDU with InitiatingMessage payload from protocol port
+         * @param p_initiatingMessage Send value template for InitiatingMessage message
          */
         function f_send_S1AP_initiatingMessage(
                                                in template (value) InitiatingMessage p_initiatingMessage
@@ -182,90 +190,29 @@ module LibS1AP_Steps {
         } // End of function f_send_S1AP_initiatingMessage
         
         /**
-         * @desc 
+         * @desc Send S1AP PDU with SuccessfulOutcome payload from protocol port
+         * @param p_successfulOutcome Send value template for SuccessfulOutcome message
          */
         function f_send_S1AP_successfulOutcome(
                                                in template (value) SuccessfulOutcome p_successfulOutcome
-		) runs on S1APComponent {
+        ) runs on S1APComponent {
             f_send_S1AP_PDU( {successfulOutcome := p_successfulOutcome})
         } // End of function f_send_S1AP_successfulOutcome
         
         /**
-         * @desc 
+         * @desc Send S1AP PDU with UnsuccessfulOutcome payload from protocol port
+         * @param p_unsuccessfulOutcome Send value template for UnsuccessfulOutcome message
          */
         function f_send_S1AP_unsuccessfulOutcome(
-                                                 in template (value)UnsuccessfulOutcome p_unsuccessfulOutcome
-		) runs on S1APComponent {
+                                                 in template (value) UnsuccessfulOutcome p_unsuccessfulOutcome
+        ) runs on S1APComponent {
             f_send_S1AP_PDU( {unsuccessfulOutcome := p_unsuccessfulOutcome})
         } // End of function f_send_S1AP_unsuccessfulOutcome 
-    
-    } // End of group SendPDU
-
-    group GlobalSteps{
         
-        /**
-        *  @desc    This is a test step that init S1AP component
-        *  @param
-        */
-        function f_S1AP_Init_Component()
-        runs on S1APComponent {
-            
-        } // End of function  f_S1AP_Init_Component
+    } // End of group sendPDU
+    
+    group preambles {
         
-        /**
-        *
-        * @desc component termination
-        */
-        function f_S1AP_terminate_component()
-        runs on S1APComponent {
-            
-            log("component terminated - forced!");
-            deactivate;
-            stop;
-        } // End of function f_S1AP_terminate_component
-    
-        /**
-        * @desc component termination
-        */
-        function f_componentStop()
-        runs on S1APComponent {
-            
-            syncPort.send(m_syncClientStop);
-            S1_MMEeNB_P.clear;
-            stop;
-        } // End of function f_componentStop
-    
-        /**
-        *
-        * @desc original copied from older LibCommon_VerdictControl
-        */
-        function f_getVerdict()
-        return FncRetCode {
-            
-            var FncRetCode v_ret := e_error;
-            if (getverdict == pass or getverdict == none) {
-                v_ret := e_success;
-            }
-            return v_ret;
-        } // End of function 
-    
-        /**
-        * 
-        * @desc function waits for particular time before next expected message
-        */    
-        function f_wait(float p_time) // TODO Replace by LibCommon.f_sleep
-        runs on S1APComponent {
-            
-            tc_wait.start(p_time);
-            alt {
-                [] tc_wait.timeout{ }
-            }
-        } // End of function f_wait
-    
-    } // End of group GlobalSteps
-    
-    group Preambles {
-    	
         group preamble_S1AP{
             
             /**
@@ -288,9 +235,9 @@ module LibS1AP_Steps {
             
         } // End of group preamble_S1AP
         
-    } // End of group Preambles
+    } // End of group preambles
     
-    group Postambles {
+    group postambles {
         
         group postamble_S1AP{
             
@@ -314,9 +261,75 @@ module LibS1AP_Steps {
             
         } // End of group postamble_S1AP
         
-    } // End of group Postambles
+    } // End of group postambles
     
-    group DefaultsTestStep {
+    /**
+     * @desc Global 'altstep' statements description
+     */
+    group globalSteps {
+        
+        /**
+         *  @desc    This is a test step that init S1AP component
+         */
+        function f_S1AP_Init_Component()
+        runs on S1APComponent {
+            
+        } // End of function  f_S1AP_Init_Component
+        
+        /**
+         * @desc Component termination
+         */
+        function f_S1AP_terminate_component()
+        runs on S1APComponent {
+            
+            log("component terminated - forced!");
+            deactivate;
+            stop;
+        } // End of function f_S1AP_terminate_component
+        
+        /**
+         * @desc Component termination
+         */
+        function f_componentStop()
+        runs on S1APComponent {
+            
+            syncPort.send(m_syncClientStop);
+            S1_MMEeNB_P.clear;
+            stop;
+        } // End of function f_componentStop
+        
+        /**
+         * @desc Original copied from older LibCommon_VerdictControl
+         */
+        function f_getVerdict() // FIXME Are you sure we really need it???
+        return FncRetCode {
+            
+            var FncRetCode v_ret := e_error;
+            if (getverdict == pass or getverdict == none) {
+                v_ret := e_success;
+            }
+            return v_ret;
+        } // End of function 
+        
+        /**
+         * 
+         * @desc Wait for particular time before next expected message
+         */
+        function f_wait(float p_time) // FIXME To be replace by LibCommon.f_sleep!!!
+        runs on S1APComponent {
+            
+            tc_wait.start(p_time);
+            alt {
+                [] tc_wait.timeout{ }
+            }
+        } // End of function f_wait
+        
+    } // End of group globalSteps
+    
+    /**
+     * @desc Default 'altstep' statements description
+     */
+    group defaultsTestStep {
         
         /**
          * @desc 
@@ -394,6 +407,6 @@ module LibS1AP_Steps {
              //TODO:...
         } // End of altstep a_defaultS1AP_eNB
         
-    } // End of group DefaultsTestStep
+    } // End of group defaultsTestStep
     
 } // End of module LibS1AP_Steps

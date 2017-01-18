@@ -26,8 +26,10 @@ module LibS1AP_Templates {
         group  g_S1AP_PDU {
             
             /**
-             * 
-             * @desc 
+             * @desc Send template for S1AP PDU with InitiatingMessage payload
+             * @param p_procedureCode   Procedure code
+             * @param p_value           Message value according to the Procedure code
+             * @see ETSI TS 136 413 Clause 9.1 Message Functional Definition and Content
              */
             template (value) S1AP_PDU m_initiatingMessage(
                                                           in ProcedureCode p_procedureCode, 
@@ -42,9 +44,9 @@ module LibS1AP_Templates {
             
         } // End of group g_S1AP_PDU
         
-        group Class1 {
+        group class1 {
             
-            group Send {
+            group sendClass1 {
                 
                 group HandoverPreparation {
                     
@@ -65,6 +67,10 @@ module LibS1AP_Templates {
                 
                 group ERABSetup{
                     
+                    /**
+                     * @desc Send template for InitiatingMessage message with E-RABSetup payload
+                     * @param p_value           Expected procedure code
+                     */
                     template (value) InitiatingMessage m_initiatingMessage_E_RABSetup(
                                                                                       in template (value) RecordOf_ProtocolIE p_value) := {    
                         procedureCode := id_E_RABSetup,
@@ -75,22 +81,25 @@ module LibS1AP_Templates {
                 }// End of group ERABSetup
                 
                 //TODO: Other....
-            } // End of group Send 
+                
+            } // End of group sendClass1 
             
-            group Receive {
-            
+            group receiveClass1 {
+                
                 group HandoverPreparation{
-            
+                    
                 }// End of group HandoverPreparation
-
+                    
                 group HandoverResourceAllocation{
-
+                    
                 }// End of group HandoverResourceAllocation
                 
                 group ERABSetup{
                     
                     /**
-                     * @desc 
+                     * @desc Receive template for SuccessfulOutcome message
+                     * @param p_procedureCode   Expected procedure code. Default: ?
+                     * @param p_value           Expected procedure code. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_successfulOutcome_E_RABSetupResponse(
                                                                                                  template (present) ProcedureCode p_procedureCode := ?,
@@ -105,9 +114,9 @@ module LibS1AP_Templates {
                 
                 //TODO: Other....
             
-            } // End of group Receive
+            } // End of group receiveClass1
             
-        } // End of group Class1
+        } // End of group class1
         
         group Class2{
             
@@ -122,7 +131,9 @@ module LibS1AP_Templates {
             group E_RAB_IEsend {
                 
                 /**
-                 * @desc 
+                 * @desc Send template for MME UE S1AP ID protocol IE
+                 * @param p_value  MME/UE S1AP identifier. Default: 1
+                 * @see ETSI TS 136 413 Clause 9.2.3.3 MME UE S1AP ID
                  */
                 template (value) ProtocolIE m_E_RAB_IE_MME(
                                                            in template (value) MME_UE_S1AP_ID p_value := 1
@@ -133,7 +144,9 @@ module LibS1AP_Templates {
                 } // End of template m_E_RAB_IE_MME
                 
                 /**
-                 * @desc 
+                 * @desc Send template for ENB ID protocol IE
+                 * @param p_value  ENB identifier. Default: 1
+                 * @see ETSI TS 136 413 Clause 9.2.3.4 eNB UE S1AP ID
                  */
                 template (value) ProtocolIE m_E_RAB_IE_ENB(
                                                            in ENB_UE_S1AP_ID p_value := 1
@@ -144,7 +157,8 @@ module LibS1AP_Templates {
                 } // End of template m_E_RAB_IE_ENB
                 
                 /**
-                 * @desc 
+                 * @desc Send template for E-RABToBeSetupListBearerSUReq protocol IE
+                 * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
                  */
                 template (value) ProtocolIE m_E_RAB_IE_ERAB(
                                                             in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_value := { m_E_RABToBeSetupItemBearerSUReq }
@@ -161,8 +175,9 @@ module LibS1AP_Templates {
         group Receive_IEs{
             
             /**
-             * @desc 
-             * @param p_parm
+             * @desc Receive template for MME UE S1AP ID protocol IE
+             * @param p_value  Expected MME/UE S1AP identifier. Default: ?
+             * @see ETSI TS 136 413 Clause 9.2.3.3 MME UE S1AP ID
              */
             template (present) ProtocolIE mw_E_RAB_IE_MME(
                                                           template (present) MME_UE_S1AP_ID p_parm := ?
@@ -173,8 +188,9 @@ module LibS1AP_Templates {
             } // End of template mw_E_RAB_IE_MME
             
             /**
-             * @desc 
-             * @param p_parm
+             * @desc Receive template for ENB ID protocol IE
+             * @param p_value  Expected ENB identifier. Default: ?
+             * @see ETSI TS 136 413 Clause 9.2.3.4 eNB UE S1AP ID
              */
             template (present) ProtocolIE mw_E_RAB_IE_ENB(
                                                           template(present) ENB_UE_S1AP_ID p_parm := ?
@@ -185,7 +201,8 @@ module LibS1AP_Templates {
             } // End of template mw_E_RAB_IE_ENB
             
             /**
-             * @desc 
+             * @desc Receive template for E-RABToBeSetupListBearerSUReq protocol IE
+             * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
              */
             template (present) ProtocolIE mw_E_RAB_IE_ERAB(
                                                            template (present) RecordOf_E_RABSetupItemBearerSURes p_value := { mw_E_RABSetupItemBearerSURes }
