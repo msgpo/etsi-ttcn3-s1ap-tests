@@ -23,6 +23,7 @@ module LibS1AP_Interface {
     import from S1AP_PDU_Contents language "ASN.1:1997" all;
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     import from LibS1AP_Pixits all;
+    import from LibS1AP_TypesAndValues all;
     
     group portDefinitions {
         
@@ -72,7 +73,9 @@ module LibS1AP_Interface {
             var S1AP_PDU vc_recvS1AP_PDUDefault ; //global variable defined to save Dimeter message received within default altstep
             
             // Init of values at component started
-            // TODO:
+            // TODO: generation of following MME and ENB UE IDs can be done randomly in init
+            var MME_UE_S1AP_ID vc_MME_UE_ID         := 10;
+            var ENB_UE_S1AP_ID vc_ENB_UE_ID         := 11;
             
             // General timers
             timer tc_wait  := PX_S1AP_TWAIT;

@@ -20,6 +20,7 @@ module LibS1AP_Templates {
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     
     import from LibS1AP_TypesAndValues all;
+    import from LibS1AP_Interface all;
     
     group g_S1AP {
         
@@ -71,12 +72,21 @@ module LibS1AP_Templates {
                      * @desc Send template for InitiatingMessage message with E-RABSetup payload
                      * @param p_value           Expected procedure code
                      */
-                    template (value) InitiatingMessage m_initiatingMessage_E_RABSetup(
-                                                                                      in template (value) RecordOf_ProtocolIE p_value) := {    
+                    template (value) InitiatingMessage m_E_RABSetupRequest(
+                                                                          in template (value) RecordOf_ProtocolIE p_value) := {
                         procedureCode := id_E_RABSetup,
                         criticality := reject,
                         value_ := {RecordOf_ProtocolIE := valueof(p_value)}
-                    } // End of template m_initiatingMessage_E_RABSetup
+                    } // End of template m_E_RABSetupRequest
+                    
+                    template (value) RecordOf_ProtocolIE m_E_RABSetupReqIEs(
+                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                            in template (value) ENB_UE_S1AP_ID p_ENB_value,
+                            in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABToBeSetupItem_value) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_ENB_UE_S1AP_ID(p_ENB_value),
+                        m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
+                    } // End of template m_E_RABSetupReqIEs
                     
                 }// End of group ERABSetup
                 
@@ -101,14 +111,33 @@ module LibS1AP_Templates {
                      * @param p_procedureCode   Expected procedure code. Default: ?
                      * @param p_value           Expected procedure code. Default: ?
                      */
-                    template (present) SuccessfulOutcome mw_successfulOutcome_E_RABSetupResponse(
-                                                                                                 template (present) ProcedureCode p_procedureCode := ?,
-                                                                                                 template (present) RecordOf_ProtocolIE p_value := ?
+                    template (present) SuccessfulOutcome mw_E_RABSetupResponse(
+                                                                             template (present) RecordOf_ProtocolIE p_value := ?
                     ) := {
-                        procedureCode := p_procedureCode,
+                        procedureCode := id_E_RABSetup,
                         criticality := reject,
                         value_ := {RecordOf_ProtocolIE := p_value}
-                    } // End of template mw_successfulOutcome_E_RABSetupResponse
+                    } // End of template mw_E_RABSetupResponse
+                    
+                    template (present) RecordOf_ProtocolIE mw_E_RABSetupResIEs(
+                            template (present) MME_UE_S1AP_ID p_MME_value,
+                            template (present) ENB_UE_S1AP_ID p_ENB_value,
+                            template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
+                        mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value)
+                    } // End of template mw_E_RABSetupResIEs
+                    
+                    template (present) RecordOf_ProtocolIE mw_E_RABSetupResIEs_FailedToSetupList(
+                            template (present) MME_UE_S1AP_ID p_MME_value,
+                            template (present) ENB_UE_S1AP_ID p_ENB_value,
+                            template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value,
+                            template (present) RecordOf_E_RABItem p_E_RABItem_value := ?) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
+                        mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value),
+                        mw_E_RABFailedToSetupList(p_E_RABItem_value)
+                    } // End of template mw_E_RABSetupResIEs
                     
                 } // End of group ERABSetup
                 
@@ -135,38 +164,40 @@ module LibS1AP_Templates {
                  * @param p_value  MME/UE S1AP identifier. Default: 1
                  * @see ETSI TS 136 413 Clause 9.2.3.3 MME UE S1AP ID
                  */
-                template (value) ProtocolIE m_E_RAB_IE_MME(
-                                                           in template (value) MME_UE_S1AP_ID p_value := 1
+                template (value) ProtocolIE m_MME_UE_S1AP_ID(
+                                                           in template (value) MME_UE_S1AP_ID p_value := 1,
+                                                           in template (value) ProtocolIE.criticality p_criticality := reject
                 ):= {
                     id := S1AP_Constants.id_MME_UE_S1AP_ID,
-                    criticality := reject,
+                    criticality := p_criticality,
                     value_ := { MME_UE_S1AP_ID := valueof(p_value) }
-                } // End of template m_E_RAB_IE_MME
+                } // End of template m_MME_UE_S1AP_ID
                 
                 /**
                  * @desc Send template for ENB ID protocol IE
                  * @param p_value  ENB identifier. Default: 1
                  * @see ETSI TS 136 413 Clause 9.2.3.4 eNB UE S1AP ID
                  */
-                template (value) ProtocolIE m_E_RAB_IE_ENB(
-                                                           in ENB_UE_S1AP_ID p_value := 1
+                template (value) ProtocolIE m_ENB_UE_S1AP_ID(
+                                                           in ENB_UE_S1AP_ID p_value := 1,
+                                                           in template (value) ProtocolIE.criticality p_criticality := reject
                 ):= {
                     id := S1AP_Constants.id_eNB_UE_S1AP_ID,
-                    criticality := reject,
+                    criticality := p_criticality,
                     value_ := { ENB_UE_S1AP_ID := p_value }
-                } // End of template m_E_RAB_IE_ENB
+                } // End of template m_ENB_UE_S1AP_ID
                 
                 /**
                  * @desc Send template for E-RABToBeSetupListBearerSUReq protocol IE
                  * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
                  */
-                template (value) ProtocolIE m_E_RAB_IE_ERAB(
+                template (value) ProtocolIE m_E_RABToBeSetupList(
                                                             in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_value := { m_E_RABToBeSetupItemBearerSUReq }
                 ):= {
                     id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
                     criticality := reject,
                     value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
-                } // End of template m_E_RAB_IE_ERAB
+                } // End of template m_E_RABToBeSetupList
                 
             } // End of group E_RAB_IEsend
             
@@ -179,32 +210,34 @@ module LibS1AP_Templates {
              * @param p_value  Expected MME/UE S1AP identifier. Default: ?
              * @see ETSI TS 136 413 Clause 9.2.3.3 MME UE S1AP ID
              */
-            template (present) ProtocolIE mw_E_RAB_IE_MME(
-                                                          template (present) MME_UE_S1AP_ID p_parm := ?
+            template (present) ProtocolIE mw_MME_UE_S1AP_ID(
+                                                          template (present) MME_UE_S1AP_ID p_parm := ?,
+                                                          template (present) ProtocolIE.criticality p_criticality := reject
             ) := {
                 id := S1AP_Constants.id_MME_UE_S1AP_ID,
-                criticality := ignore,
+                criticality := p_criticality,
                 value_ := {MME_UE_S1AP_ID := p_parm}
-            } // End of template mw_E_RAB_IE_MME
+            } // End of template mw_MME_UE_S1AP_ID
             
             /**
              * @desc Receive template for ENB ID protocol IE
              * @param p_value  Expected ENB identifier. Default: ?
              * @see ETSI TS 136 413 Clause 9.2.3.4 eNB UE S1AP ID
              */
-            template (present) ProtocolIE mw_E_RAB_IE_ENB(
-                                                          template(present) ENB_UE_S1AP_ID p_parm := ?
+            template (present) ProtocolIE mw_ENB_UE_S1AP_ID(
+                                                          template (present) ENB_UE_S1AP_ID p_parm := ?,
+                                                          template (present) ProtocolIE.criticality p_criticality := reject
             ) := {
                 id := S1AP_Constants.id_eNB_UE_S1AP_ID,
-                criticality := ignore,
+                criticality := p_criticality,
                 value_ := {ENB_UE_S1AP_ID := p_parm}
-            } // End of template mw_E_RAB_IE_ENB
+            } // End of template mw_ENB_UE_S1AP_ID
             
             /**
-             * @desc Receive template for E-RABToBeSetupListBearerSUReq protocol IE
+             * @desc Receive template for E-RABSetupListBearerSUReq protocol IE
              * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
              */
-            template (present) ProtocolIE mw_E_RAB_IE_ERAB(
+            template (present) ProtocolIE mw_E_RABSetupList(
                                                            template (present) RecordOf_E_RABSetupItemBearerSURes p_value := { mw_E_RABSetupItemBearerSURes }
             ):= {
                 id := S1AP_Constants.id_E_RABSetupListBearerSURes,
@@ -212,13 +245,13 @@ module LibS1AP_Templates {
                 value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
             } // End of template 
             
-            template (present) ProtocolIE mw_E_RAB_IE_fSUL(
-                                                           template(present) RecordOf_E_RABItem p_value := { ? }
+            template (present) ProtocolIE mw_E_RABFailedToSetupList(
+                                                           template (present) RecordOf_E_RABItem p_value := { ? }
             ):= {
                 id := S1AP_Constants.id_E_RABFailedToSetupListBearerSURes,
                 criticality := ignore,
                 value_ := { RecordOf_E_RABItem := p_value }
-            } // End of template mw_E_RAB_IE_fSUL
+            } // End of template mw_E_RABFailedToSetupList
             
         } // End of group Receive_IEs
         
