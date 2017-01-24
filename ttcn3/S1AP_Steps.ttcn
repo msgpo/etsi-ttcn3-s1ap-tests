@@ -33,8 +33,7 @@ module S1AP_Steps {
     group GlobalSteps {
         
         /**
-         *  @desc    This is a test step that init global variables
-         *  @param   
+         * @desc    This is a test step that init global variables
          */
         function f_S1AP_mme_init()
         runs on S1APComponent {
@@ -53,8 +52,7 @@ module S1AP_Steps {
         } // End of function f_S1AP_init
         
         /**
-         *  @desc    This is a test step that init global variables
-         *  @param   
+         * @desc    This is a test step that init global variables
          */
         function f_S1AP_enb_init()
         runs on S1APComponent {
@@ -73,8 +71,7 @@ module S1AP_Steps {
         } // End of function f_S1AP_enb_init
         
         /**
-         *  @desc    This is a test step that init global variables
-         *  @param   
+         * @desc    This is a test step that init global variables
          */
         function f_S1AP_enb_init2()
         runs on S1APComponent {

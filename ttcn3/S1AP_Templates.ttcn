@@ -1,7 +1,7 @@
 /**
  *    @author   ETSI / STF519
- *    @version  $URL:$
- *              $Id:$
+ *    @version  $URL$
+ *              $Id$
  *    @desc     This module defines S1AP Templates for message, header, and
  *              structured types. <br>
  *              Note that any changes made to the definitions in this module

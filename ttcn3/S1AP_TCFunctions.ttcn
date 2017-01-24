@@ -1,7 +1,7 @@
 /**
  *    @author   ETSI / STF519
- *    @version  $URL:$
- *              $Id:$
+ *    @version  $URL$
+ *              $Id$
  *    @desc     This module provides RfRo test functions used by the test cases.
  *    @copyright   ETSI Copyright Notification
  *                 No part may be reproduced except as authorized by written permission.
@@ -30,12 +30,16 @@ module S1AP_TCFunctions {
     
     group eNB_Role {
         
+        /**
+         * @desc E-RAB management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.2  E-RAB management group
+         */
         group ERAB_management_group {
+            
             /**
-             * @desc 
-             * @verdict 
+             * @desc Testcase function for TC_S1AP_ENB_RAB_01
              */
-            function f_TP_S1AP_ENB_RAB_01() runs on S1APComponent { 
+            function f_TC_S1AP_ENB_RAB_01() runs on S1APComponent { 
                 // Local variables
                 
                 // Preamble
@@ -43,6 +47,7 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
+                // Test body
 //                f_send_S1AP_initiatingMessage(
 //                    m_E_RABSetupRequest(
 //                    {
@@ -99,9 +104,12 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-            } // End of function f_TP_S1AP_ENB_RAB_01
+            } // End of function f_TC_S1AP_ENB_RAB_01
             
-            function f_TP_S1AP_ENB_RAB_02() runs on S1APComponent { 
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_RAB_02
+             */
+            function f_TC_S1AP_ENB_RAB_02() runs on S1APComponent { 
                 // Local variables
                 
                 // Preamble
@@ -109,7 +117,7 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
-
+                // Test body
                 f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
                     vc_MME_UE_ID,
                     vc_ENB_UE_ID,
@@ -189,20 +197,183 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-            } // End of function f_TP_S1AP_ENB_RAB_02
+            } // End of function f_TC_S1AP_ENB_RAB_02
             
         } // End of group ERAB_management_group
+        
+        /**
+         * @desc eNB direct information transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.13  eNB direct information transfer group
+         */
+        group ENB_direct_information_transfer_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_EIT_01
+             */
+            function f_TC_S1AP_ENB_EIT_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an ENB Direct Information Transfer procedure
+                if (fx_ENB_Direct_Information_Transfer_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a ENB_DIRECT_INFORMATION_TRANSFER
+                    f_recv_eNB_Direct_Information_Transfer(
+                        mw_eNBDirectInformationTransfer_EDT(
+                            mw_Inter_SystemInformationTransferType(
+                                mw_RIMTransfer(
+                                    ? // FIXME To be refined
+                    ))));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_EIT_01
+            
+        } // End of group ENB_direct_information_transfer_group
+        
+        /**
+         * @desc LPPa transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.15  eNB configuration transfer group
+         */
+        group ENB_configuration_transfer_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_ECT_01
+             */
+            function f_TC_S1AP_ENB_ECT_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an ENB Configuration Transfer procedure
+                if (fx_ENB_Configuration_Transfer_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a ENB_CONFIGURATION_TRANSFER
+                    f_recv_eNB_Direct_Information_Transfer(
+                        mw_sON_Configuration_Transfer_ECT(
+                            mw_sON_Configuration_Transfer(
+                                mw_TargeteNB_ID(mw_Global_ENB_ID, mw_TAI),
+                                mw_SourceeNB_ID(mw_Global_ENB_ID, mw_TAI),
+                                ? // FIXME To be refined
+                    )));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_ECT_01
+            
+        } // End of group ENB_configuration_transfer_group 
+        
+        /**
+         * @desc LPPa transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.17  LPPa transport group
+         */
+        group LPPa_transport_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_LPP_01
+             */
+            function f_TC_S1AP_ENB_LPP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a LPPa Transport procedure using a UE associated signalling
+                if (fx_eNB_LPPa_Transport_procedure_ind(true) == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+                    f_recv_Uplink_UE_Associated_Lppa_Transport(
+                        mw_UplinkUEAssociatedLppaTransportIEs_LPPa_PDU(
+                            ?
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_LPP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_LPP_02
+             */
+            function f_TC_S1AP_ENB_LPP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a LPPa Transport procedure using a UE associated signalling
+                if (fx_eNB_LPPa_Transport_procedure_ind(false) == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a UPLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT
+                    f_recv_Uplink_Non_UE_Associated_Lppa_Transport(
+                        mw_UplinkNonUEAssociatedLppaTransportIEs_LPPa_PDU(
+                            ?
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_LPP_02
+            
+        } // End of group LPPa_transport_group 
         
     } // End of group eNB_Role
     
     group MME_Role {
         
+        /**
+         * @desc E-RAB management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.2  E-RAB management group
+         */
         group ERAB_management_group { 
             
             /**
-             * @desc 
+             * @desc Testcase function for TC_S1AP_ENB_RAB_01
              */
-            function f_TP_S1AP_MME_RAB_01() runs on S1APComponent { 
+            function f_TC_S1AP_MME_RAB_01() runs on S1APComponent { 
                 // Local variables
                 
                 // Preamble
@@ -216,13 +387,133 @@ module S1AP_TCFunctions {
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
+                // Test body
+                
                 f_postamble_S1AP_MME();
                 f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-            } // End of function f_TP_S1AP_MME_RAB_01                
+            } // End of function f_TC_S1AP_MME_RAB_01                
             
         } // End of group ERAB_management_group
+        
+        /**
+         * @desc MME configuration transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.16  MME configuration transfer group
+         */
+        group MME_configuration_transfer_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MCT_01
+             */
+            function f_TC_S1AP_MME_MCT_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an MME Configuration Transfer procedure
+                if (fx_MME_Configuration_Transfer_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a MME_CONFIGURATION_TRANSFER
+                    f_recv_Mme_Configuration_Transfer(
+                        mw_sON_Configuration_Transfer_MCT(
+                            mw_sON_Configuration_Transfer(
+                                mw_TargeteNB_ID(mw_Global_ENB_ID, mw_TAI),
+                                mw_SourceeNB_ID(mw_Global_ENB_ID, mw_TAI),
+                                ? // FIXME To be refined
+                    )));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MCT_01
+            
+        } // End of group MME_configuration_transfer_group 
+        
+        /**
+         * @desc LPPa transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.17  LPPa transport group
+         */
+        group LPPa_transport_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_LPP_01
+             */
+            function f_TC_S1AP_MME_LPP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a LPPa Transport procedure using a UE associated signalling
+                if (fx_mme_LPPa_Transport_procedure_ind(true) == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+                    f_recv_Downlink_UE_Associated_Lppa_Transport(
+                        mw_DownlinkUEAssociatedLppaTransportIEs_LPPa_PDU(
+                            ?
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_LPP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_LPP_02
+             */
+            function f_TC_S1AP_MME_LPP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a LPPa Transport procedure using a UE associated signalling
+                if (fx_mme_LPPa_Transport_procedure_ind(false) == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a DOWNLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT
+                    f_recv_Downlink_Non_UE_Associated_Lppa_Transport(
+                        mw_DownlinkNonUEAssociatedLppaTransportIEs_LPPa_PDU(
+                            ?
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_LPP_02
+            
+        } // End of group LPPa_transport_group 
         
     } // End of group MME_Role
     

@@ -11,6 +11,10 @@
  */
 module LibS1AP_Templates {
     
+    // LibCommon
+    import from LibCommon_BasicTypesAndValues all;
+    import from LibCommon_DataStrings all;
+    
     // LibS1AP
     import from S1AP_Constants language "ASN.1:1997" all;
     import from S1AP_CommonDataTypes language "ASN.1:1997" all;
@@ -30,12 +34,12 @@ module LibS1AP_Templates {
              * @desc Send template for S1AP PDU with InitiatingMessage payload
              * @param p_procedureCode   Procedure code
              * @param p_value           Message value according to the Procedure code
-             * @see ETSI TS 136 413 Clause 9.1 Message Functional Definition and Content
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1 Message Functional Definition and Content
              */
             template (value) S1AP_PDU m_initiatingMessage(
                                                           in ProcedureCode p_procedureCode, 
                                                           in anytype p_value
-            ):= {
+            ) := {
                 initiatingMessage := {
                     procedureCode := p_procedureCode,
                     criticality := reject,
@@ -73,16 +77,16 @@ module LibS1AP_Templates {
                      * @param p_value           Expected procedure code
                      */
                     template (value) InitiatingMessage m_E_RABSetupRequest(
-                                                                          in template (value) RecordOf_ProtocolIE p_value) := {
+                                                                           in template (value) RecordOf_ProtocolIE p_value) := {
                         procedureCode := id_E_RABSetup,
                         criticality := reject,
                         value_ := {RecordOf_ProtocolIE := valueof(p_value)}
                     } // End of template m_E_RABSetupRequest
                     
                     template (value) RecordOf_ProtocolIE m_E_RABSetupReqIEs(
-                            in template (value) MME_UE_S1AP_ID p_MME_value,
-                            in template (value) ENB_UE_S1AP_ID p_ENB_value,
-                            in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABToBeSetupItem_value) := {
+                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) ENB_UE_S1AP_ID p_ENB_value,
+                                                                            in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABToBeSetupItem_value) := {
                         m_MME_UE_S1AP_ID(p_MME_value),
                         m_ENB_UE_S1AP_ID(p_ENB_value),
                         m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
@@ -107,12 +111,12 @@ module LibS1AP_Templates {
                 group ERABSetup{
                     
                     /**
-                     * @desc Receive template for SuccessfulOutcome message
+                     * @desc Receive template for SuccessfulOutcome/R-RAB_Setup message
                      * @param p_procedureCode   Expected procedure code. Default: ?
                      * @param p_value           Expected procedure code. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_E_RABSetupResponse(
-                                                                             template (present) RecordOf_ProtocolIE p_value := ?
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
                     ) := {
                         procedureCode := id_E_RABSetup,
                         criticality := reject,
@@ -120,19 +124,21 @@ module LibS1AP_Templates {
                     } // End of template mw_E_RABSetupResponse
                     
                     template (present) RecordOf_ProtocolIE mw_E_RABSetupResIEs(
-                            template (present) MME_UE_S1AP_ID p_MME_value,
-                            template (present) ENB_UE_S1AP_ID p_ENB_value,
-                            template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value) := {
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_ENB_value := ?,
+                                                                               template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := ?
+                    ) := {
                         mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                         mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
                         mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value)
                     } // End of template mw_E_RABSetupResIEs
                     
                     template (present) RecordOf_ProtocolIE mw_E_RABSetupResIEs_FailedToSetupList(
-                            template (present) MME_UE_S1AP_ID p_MME_value,
-                            template (present) ENB_UE_S1AP_ID p_ENB_value,
-                            template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value,
-                            template (present) RecordOf_E_RABItem p_E_RABItem_value := ?) := {
+                                                                                                 template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                                                 template (present) ENB_UE_S1AP_ID p_ENB_value := ?,
+                                                                                                 template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := ?,
+                                                                                                 template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
+                    ) := {
                         mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                         mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
                         mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value),
@@ -142,12 +148,374 @@ module LibS1AP_Templates {
                 } // End of group ERABSetup
                 
                 //TODO: Other....
-            
+                
+                
+                
+                
+                
             } // End of group receiveClass1
             
         } // End of group class1
         
         group Class2{
+            
+            /**
+             * @desc eNB direct information transfer group
+             * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.14  eNB direct information transfer group
+             * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.14  MME direct information transfer group
+             */
+            group direct_information_transfer_group {
+                
+                /**
+                 * @desc Receive template for InitiatingMessage/eNB_DIRECT_INFORMATION_TRANSFER message
+                 * @param p_value           Expected values. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.14 eNB DIRECT INFORMATION TRANSFER
+                 */
+                template (present) InitiatingMessage mw_eNB_Direct_Information_Transfer(
+                                                                                        template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_eNBDirectInformationTransfer,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_eNB_Direct_Information_Transfer
+                
+                /**
+                 * @desc Receive template eNB_DIRECT_INFORMATION_TRANSFER/IEs message 
+                 * @param p_RIMTransfer  TIM transfer value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.14 eNB DIRECT INFORMATION TRANSFER
+                 */
+                template (present) RecordOf_ProtocolIE mw_eNBDirectInformationTransfer_EDT(
+                                                                                           template (present) Inter_SystemInformationTransferType p_value := ?
+                ) := {
+                    {
+                        id := S1AP_Constants.id_Inter_SystemInformationTransferTypeEDT,
+                        criticality := reject,
+                        value_ := { Inter_SystemInformationTransferType := p_value }
+                    }
+                } // End of template mw_eNBDirectInformationTransferIEs_EDT
+                
+                /**
+                 * @desc Receive template for ENBDirectInformationTransferIEs message 
+                 * @param p_RIMTransfer  Expected RIM value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.1.55 Inter-system Information Transfer Type
+                 */
+                template (present) Inter_SystemInformationTransferType mw_Inter_SystemInformationTransferType(
+                                                                                                              template (present) RIMTransfer p_RIMTransfer := ?
+                ) := {
+                    rIMTransfer := p_RIMTransfer
+                } // End of template mw_Inter_SystemInformationTransferType
+                
+                /**
+                 * @desc Receive template for RIMTransfer message 
+                 * @param p_RIMTransfer  Expected RIM value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.23 RIM Transfer
+                 */
+                template RIMTransfer mw_RIMTransfer(
+                                                    template (present) RIMInformation p_rIMInformation := ?,
+                                                    template RIMRoutingAddress p_rIMRoutingAddress := *
+                ) := {
+                    rIMInformation     := p_rIMInformation,
+                    rIMRoutingAddress  := p_rIMRoutingAddress,
+                    iE_Extensions      := omit
+                } // End of template mw_RIMTransfer
+                
+                /**
+                 * @desc Receive template for RIMRoutingAddress/GERAN-Cell-ID message 
+                 * @param p_gERAN_Cell_ID  Expected GERAN_Cell_ID value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.25 RIM Routing Address
+                 */
+                template (present) RIMRoutingAddress mw_rIMRoutingAddress_gERAN_Cell_ID(
+                                                                                        template (present) GERAN_Cell_ID p_gERAN_Cell_ID := ?
+                ) := {
+                    gERAN_Cell_ID := p_gERAN_Cell_ID
+                } // End of template mw_rIMRoutingAddress_gERAN_Cell_ID
+                
+                /**
+                 * @desc Receive template for RIMRoutingAddress/TargetRNC-ID message 
+                 * @param p_gERAN_Cell_ID  Expected TargetRNC_ID value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.25 RIM Routing Address
+                 */
+                template (present) RIMRoutingAddress mw_rIMRoutingAddress_targetRNC_ID(
+                                                                                       template (present) TargetRNC_ID p_targetRNC_ID := ?
+                ) := {
+                    targetRNC_ID := p_targetRNC_ID
+                } // End of template mw_rIMRoutingAddress_targetRNC
+                
+                /**
+                 * @desc Receive template for RIMRoutingAddress/eHRPD-Sector-ID message 
+                 * @param p_gERAN_Cell_ID  Expected eHRPD-Sector-ID value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.25 RIM Routing Address
+                 */
+                template (present) RIMRoutingAddress mw_rIMRoutingAddress_eHRPD_Sector_ID(
+                                                                                          template (present) Oct16 p_eHRPD_Sector_ID := ?
+                ) := {
+                    eHRPD_Sector_ID := p_eHRPD_Sector_ID
+                } // End of template mw_rIMRoutingAddress_eHRPD_Sector_ID
+                
+                /**
+                 * @desc Receive template for InitiatingMessage/MME_DIRECT_INFORMATION_TRANSFER message
+                 * @param p_value           Expected values. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.15 MME DIRECT INFORMATION TRANSFER
+                 */
+                template (present) InitiatingMessage mw_Mme_Direct_Information_Transfer(
+                                                                                        template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_MMEDirectInformationTransfer,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_Mme_Direct_Information_Transfer
+                
+                
+            } // End of group direct_information_transfer_group 
+            
+            /**
+             * @desc MME configuration transfer group
+             * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.16  eNB configuration transfer group
+             * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.16  MME configuration transfer group
+             */
+            group configuration_transfer_group {
+                
+                /**
+                 * @desc Receive template for InitiatingMessage/eNB_CONFIGURATION_TRANSFER message
+                 * @param p_value           Expected values. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.16 eNB CONFIGURATION TRANSFER
+                 */
+                template (present) InitiatingMessage mw_eNB_Configuration_Transfer(
+                                                                                   template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_eNBConfigurationTransfer,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_eNB_Configuration_Transfer
+                
+                /**
+                 * @desc Receive template for InitiatingMessage/MME_CONFIGURATION_TRANSFER message
+                 * @param p_value           Expected values. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.17 MME CONFIGURATION TRANSFER
+                 */
+                template (present) InitiatingMessage mw_Mme_Configuration_Transfer(
+                                                                                   template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_MMEConfigurationTransfer,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_Mme_Configuration_Transfer
+                
+                /**
+                 * @desc Receive template for SON Configuration Transfer on MME side
+                 * @param p_value Expected SONConfigurationTransfer value
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.26 SON Configuration Transfer
+                 */
+                template (present) RecordOf_ProtocolIE mw_sON_Configuration_Transfer_MCT(
+                                                                                         template (present) SONConfigurationTransfer p_value := ?
+                ) := {
+                    {
+                        id := S1AP_Constants.id_SONConfigurationTransferMCT,
+                        criticality := ignore,
+                        value_ := { SONConfigurationTransfer := p_value }
+                    }
+                } // End of template mw_sON_Configuration_Transfer_MCT
+                
+                /**
+                 * @desc Receive template for SON Configuration Transfer on ENB side
+                 * @param p_value Expected SONConfigurationTransfer value
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.26 SON Configuration Transfer
+                 */
+                template (present) RecordOf_ProtocolIE mw_sON_Configuration_Transfer_ECT(
+                                                                                         template (present) SONConfigurationTransfer p_value := ?
+                ) := {
+                    {
+                        id := S1AP_Constants.id_SONConfigurationTransferECT,
+                        criticality := ignore,
+                        value_ := { SONConfigurationTransfer := p_value }
+                    }
+                } // End of template mw_sON_Configuration_Transfer_ECT
+                
+            } // End of group configuration_transfer_group
+            
+            /**
+             * @desc LPPa transport group
+             * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.17  LPPa transport group
+             */
+            group LPPa_transport_group {
+                
+                /**
+                 * @desc Receive template for InitiatingMessage/UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT message
+                 * @param p_value           Expected values. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.2 UPLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) InitiatingMessage mw_UplinkUEAssociatedLppaTransport(
+                                                                                        template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_uplinkUEAssociatedLPPaTransport,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_UplinkUEAssociatedLppaTransport
+                
+                /**
+                 * @desc Receive template for InitiatingMessage/DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT message
+                 * @param p_value           Expected values. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.1 DOWNLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) InitiatingMessage mw_DownlinkUEAssociatedLppaTransport(
+                                                                                          template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_downlinkUEAssociatedLPPaTransport,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_DownlinkUEAssociatedLppaTransport
+                
+                /**
+                 * @desc Receive template for SuccessfulOutcome/UPLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT message
+                 * @param p_value           Expected values. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.4 UPLINK NONE UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) InitiatingMessage mw_UplinkNonUEAssociatedLppaTransport(
+                                                                                           template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_uplinkNonUEAssociatedLPPaTransport,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_UplinkNonUEAssociatedLppaTransport
+                
+                /**
+                 * @desc Receive template for InitiatingMessage/DOWNLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT message
+                 * @param p_value           Expected procedure code. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.3 DOWNLINK NONE UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) InitiatingMessage mw_DownlinkNonUEAssociatedLppaTransport(
+                                                                                             template (present) RecordOf_ProtocolIE p_value := ?
+                ) := {
+                    procedureCode := id_downlinkNonUEAssociatedLPPaTransport,
+                    criticality := ignore,
+                    value_ := {RecordOf_ProtocolIE := p_value}
+                } // End of template mw_DownlinkNonUEAssociatedLppaTransport
+                
+                /**
+                 * @desc Receive template UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_MME_value   MME UE S1AP ID value. Default: ?
+                 * @param p_ENB_value   eNB UE S1AP ID value. Default: ?
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.2 UPLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_UplinkUEAssociatedLppaTransportIEs(
+                                                                                             template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                                             template (present) ENB_UE_S1AP_ID p_ENB_value := ?,
+                                                                                             template (present) UInt8 p_Routing_ID := ?
+                ) := {
+                    mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                    mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
+                    mw_Routing_ID(p_Routing_ID)
+                } // End of template mw_UplinkUEAssociatedLppaTransportIEs
+                
+                /**
+                 * @desc Receive template UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_MME_value   MME UE S1AP ID value. Default: ?
+                 * @param p_ENB_value   eNB UE S1AP ID value. Default: ?
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @param p_LPPa_PDU    LPPa-PDU value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.2 UPLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_UplinkUEAssociatedLppaTransportIEs_LPPa_PDU(
+                                                                                                      template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                                                      template (present) ENB_UE_S1AP_ID p_ENB_value := ?,
+                                                                                                      template (present) UInt8 p_Routing_ID := ?,
+                                                                                                      template (present) octetstring p_LPPa_PDU := ?
+                ) modifies mw_UplinkUEAssociatedLppaTransportIEs := {
+                    mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                    mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
+                    mw_Routing_ID(p_Routing_ID),
+                    mw_LPPa_PDU(p_LPPa_PDU)
+                } // End of template mw_UplinkUEAssociatedLppaTransportIEs_LPPa_PDU
+                
+                /**
+                 * @desc Receive template UPLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.4 UPLINK NON UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_UplinkNonUEAssociatedLppaTransportIEs(
+                                                                                                template (present) UInt8 p_Routing_ID := ?
+                ) := {
+                    mw_Routing_ID(p_Routing_ID)
+                } // End of template mw_UplinkNonUEAssociatedLppaTransportIEs
+                
+                /**
+                 * @desc Receive template UPLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @param p_LPPa_PDU    LPPa-PDU value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.4 UPLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_UplinkNonUEAssociatedLppaTransportIEs_LPPa_PDU(
+                                                                                                         template (present) UInt8 p_Routing_ID := ?,
+                                                                                                         template (present) octetstring p_LPPa_PDU := ?
+                ) modifies mw_UplinkNonUEAssociatedLppaTransportIEs := {
+                    mw_Routing_ID(p_Routing_ID),
+                    mw_LPPa_PDU(p_LPPa_PDU)
+                } // End of template mw_UplinkNonUEAssociatedLppaTransportIEs_LPPa_PDU
+                
+                /**
+                 * @desc Receive template DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_MME_value   MME UE S1AP ID value. Default: ?
+                 * @param p_ENB_value   eNB UE S1AP ID value. Default: ?
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.1 DOWNLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_DownlinkUEAssociatedLppaTransportIEs(
+                                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                                               template (present) ENB_UE_S1AP_ID p_ENB_value := ?,
+                                                                                               template (present) UInt8 p_Routing_ID := ?
+                ) := {
+                    mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                    mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
+                    mw_Routing_ID(p_Routing_ID)
+                } // End of template mw_DownlinkUEAssociatedLppaTransportIEs
+                
+                /**
+                 * @desc Receive template DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_MME_value   MME UE S1AP ID value. Default: ?
+                 * @param p_ENB_value   eNB UE S1AP ID value. Default: ?
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @param p_LPPa_PDU    LPPa-PDU value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.1 DOWNLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_DownlinkUEAssociatedLppaTransportIEs_LPPa_PDU(
+                                                                                                        template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                                                        template (present) ENB_UE_S1AP_ID p_ENB_value := ?,
+                                                                                                        template (present) UInt8 p_Routing_ID := ?,
+                                                                                                        template (present) octetstring p_LPPa_PDU := ?
+                ) modifies mw_DownlinkUEAssociatedLppaTransportIEs := {
+                    mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                    mw_ENB_UE_S1AP_ID(p_ENB_value, ignore),
+                    mw_Routing_ID(p_Routing_ID),
+                    mw_LPPa_PDU(p_LPPa_PDU)
+                } // End of template mw_DownlinkUEAssociatedLppaTransportIEs_LPPa_PDU
+                
+                /**
+                 * @desc Receive template DOWNLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.2 DOWNLINK UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_DownlinkNonUEAssociatedLppaTransportIEs(
+                                                                                                  template (present) UInt8 p_Routing_ID := ?
+                ) := {
+                    mw_Routing_ID(p_Routing_ID)
+                } // End of template mw_DownlinkNonUEAssociatedLppaTransportIEs
+                
+                /**
+                 * @desc Receive template DOWNLINK_NONE_UE_ASSOCIATED_LPPA_TRANSPORT/IEs message 
+                 * @param p_Routing_ID  Routing ID value. Default: ?
+                 * @param p_LPPa_PDU    LPPa-PDU value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.3 DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT
+                 */
+                template (present) RecordOf_ProtocolIE mw_DownlinkNonUEAssociatedLppaTransportIEs_LPPa_PDU(
+                                                                                                           template (present) UInt8 p_Routing_ID := ?,
+                                                                                                           template (present) octetstring p_LPPa_PDU := ?
+                ) modifies mw_DownlinkNonUEAssociatedLppaTransportIEs := {
+                    mw_Routing_ID(p_Routing_ID),
+                    mw_LPPa_PDU(p_LPPa_PDU)
+                } // End of template mw_DownlinkNonUEAssociatedLppaTransportIEs_LPPa_PDU
+                
+            } // End of group LPPa_transport_group
             
         } //End of group Class2
         
@@ -162,12 +530,12 @@ module LibS1AP_Templates {
                 /**
                  * @desc Send template for MME UE S1AP ID protocol IE
                  * @param p_value  MME/UE S1AP identifier. Default: 1
-                 * @see ETSI TS 136 413 Clause 9.2.3.3 MME UE S1AP ID
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.3 MME UE S1AP ID
                  */
                 template (value) ProtocolIE m_MME_UE_S1AP_ID(
-                                                           in template (value) MME_UE_S1AP_ID p_value := 1,
-                                                           in template (value) ProtocolIE.criticality p_criticality := reject
-                ):= {
+                                                             in template (value) MME_UE_S1AP_ID p_value := 1,
+                                                             in template (value) ProtocolIE.criticality p_criticality := reject
+                ) := {
                     id := S1AP_Constants.id_MME_UE_S1AP_ID,
                     criticality := p_criticality,
                     value_ := { MME_UE_S1AP_ID := valueof(p_value) }
@@ -176,12 +544,12 @@ module LibS1AP_Templates {
                 /**
                  * @desc Send template for ENB ID protocol IE
                  * @param p_value  ENB identifier. Default: 1
-                 * @see ETSI TS 136 413 Clause 9.2.3.4 eNB UE S1AP ID
+                 * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.4 eNB UE S1AP ID
                  */
                 template (value) ProtocolIE m_ENB_UE_S1AP_ID(
-                                                           in ENB_UE_S1AP_ID p_value := 1,
-                                                           in template (value) ProtocolIE.criticality p_criticality := reject
-                ):= {
+                                                             in template (value) ENB_UE_S1AP_ID p_value := 1,
+                                                             in template (value) ProtocolIE.criticality p_criticality := reject
+                ) := {
                     id := S1AP_Constants.id_eNB_UE_S1AP_ID,
                     criticality := p_criticality,
                     value_ := { ENB_UE_S1AP_ID := p_value }
@@ -192,8 +560,8 @@ module LibS1AP_Templates {
                  * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
                  */
                 template (value) ProtocolIE m_E_RABToBeSetupList(
-                                                            in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_value := { m_E_RABToBeSetupItemBearerSUReq }
-                ):= {
+                                                                 in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_value := { m_E_RABToBeSetupItemBearerSUReq }
+                ) := {
                     id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
                     criticality := reject,
                     value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
@@ -208,11 +576,11 @@ module LibS1AP_Templates {
             /**
              * @desc Receive template for MME UE S1AP ID protocol IE
              * @param p_value  Expected MME/UE S1AP identifier. Default: ?
-             * @see ETSI TS 136 413 Clause 9.2.3.3 MME UE S1AP ID
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.3 MME UE S1AP ID
              */
             template (present) ProtocolIE mw_MME_UE_S1AP_ID(
-                                                          template (present) MME_UE_S1AP_ID p_parm := ?,
-                                                          template (present) ProtocolIE.criticality p_criticality := reject
+                                                            template (present) MME_UE_S1AP_ID p_parm := ?,
+                                                            template (present) ProtocolIE.criticality p_criticality := reject
             ) := {
                 id := S1AP_Constants.id_MME_UE_S1AP_ID,
                 criticality := p_criticality,
@@ -222,11 +590,11 @@ module LibS1AP_Templates {
             /**
              * @desc Receive template for ENB ID protocol IE
              * @param p_value  Expected ENB identifier. Default: ?
-             * @see ETSI TS 136 413 Clause 9.2.3.4 eNB UE S1AP ID
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.4 eNB UE S1AP ID
              */
             template (present) ProtocolIE mw_ENB_UE_S1AP_ID(
-                                                          template (present) ENB_UE_S1AP_ID p_parm := ?,
-                                                          template (present) ProtocolIE.criticality p_criticality := reject
+                                                            template (present) ENB_UE_S1AP_ID p_parm := ?,
+                                                            template (present) ProtocolIE.criticality p_criticality := reject
             ) := {
                 id := S1AP_Constants.id_eNB_UE_S1AP_ID,
                 criticality := p_criticality,
@@ -238,20 +606,163 @@ module LibS1AP_Templates {
              * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
              */
             template (present) ProtocolIE mw_E_RABSetupList(
-                                                           template (present) RecordOf_E_RABSetupItemBearerSURes p_value := { mw_E_RABSetupItemBearerSURes }
-            ):= {
+                                                            template (present) RecordOf_E_RABSetupItemBearerSURes p_value := { mw_E_RABSetupItemBearerSURes }
+            ) := {
                 id := S1AP_Constants.id_E_RABSetupListBearerSURes,
                 criticality := ignore,
                 value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
             } // End of template 
             
             template (present) ProtocolIE mw_E_RABFailedToSetupList(
-                                                           template (present) RecordOf_E_RABItem p_value := { ? }
-            ):= {
+                                                                    template (present) RecordOf_E_RABItem p_value := { ? }
+            ) := {
                 id := S1AP_Constants.id_E_RABFailedToSetupListBearerSURes,
                 criticality := ignore,
                 value_ := { RecordOf_E_RABItem := p_value }
             } // End of template mw_E_RABFailedToSetupList
+            
+            
+            
+            
+            
+            
+            
+            
+            // TODO Template for template (present) SONInformation
+            
+            /**
+             * @desc Receive template for TAI protocol IE
+             * @param p_pLMNidentity  Expected PLMNidentity. Default: ?
+             * @param p_eNB_ID        Expected TAI. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.1.16 TAI
+             */
+            template (present) TAI mw_TAI(
+                                          template (present) PLMNidentity p_pLMNidentity := ?,
+                                          template (present) TAC p_tAC := ?
+            ) := {
+                pLMNidentity    := p_pLMNidentity,
+                tAC             := p_tAC,
+                iE_Extensions   := omit
+            } // End of template mw_TAI
+            
+            /**
+             * @desc Receive template for Global eNB ID protocol IE
+             * @param p_pLMNidentity  Expected PLMNidentity. Default: ?
+             * @param ENB_ID          Expected eNodeB identifier. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.1.37 Global eNB ID
+             */
+            template (present) Global_ENB_ID mw_Global_ENB_ID(
+                                                              template (present) PLMNidentity p_pLMNidentity := ?,
+                                                              template (present) ENB_ID p_eNB_ID := ?
+            ) := {
+                pLMNidentity    := p_pLMNidentity,
+                eNB_ID          := p_eNB_ID,
+                iE_Extensions   := omit
+            } // End of template mw_Global_ENB_ID
+            
+            /**
+             * @desc Receive template for TargeteNB-ID protocol IE
+             * @param p_global_ENB_ID  Expected Global eNB identifier. Default: ?
+             * @param p_selected_TAI   Expected TAI value. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.26 SON Configuration Transfer
+             */
+            template (present) TargeteNB_ID mw_TargeteNB_ID(
+                                                            template (present) Global_ENB_ID p_global_ENB_ID := ?,
+                                                            template (present) TAI p_selected_TAI := ?
+            ) := {
+                global_ENB_ID   := p_global_ENB_ID,
+                selected_TAI    := p_selected_TAI,
+                iE_Extensions   := omit
+            } // End of template mw_TargeteNB_ID
+            
+            /**
+             * @desc Receive template for TargeteNB-ID protocol IE
+             * @param p_global_ENB_ID  Expected Global eNB identifier. Default: ?
+             * @param p_selected_TAI   Expected TAI value. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.26 SON Configuration Transfer
+             */
+            template (present) SourceeNB_ID mw_SourceeNB_ID(
+                                                            template (present) Global_ENB_ID p_global_ENB_ID := ?,
+                                                            template (present) TAI p_selected_TAI := ?
+            ) := {
+                global_ENB_ID   := p_global_ENB_ID,
+                selected_TAI    := p_selected_TAI,
+                iE_Extensions   := omit
+            } // End of template mw_SourceeNB_ID
+            
+            /**
+             * @desc Receive template for SON Configuration Transfer
+             * @param p_value The Routing ID value
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.26 SON Configuration Transfer
+             */
+            template (present) SONConfigurationTransfer mw_sON_Configuration_Transfer(
+                                                                                      template (present) TargeteNB_ID p_target_eNB_ID := ?,
+                                                                                      template (present) SourceeNB_ID p_source_eNB_ID := ?,
+                                                                                      template (present) SONInformation p_sONInformation := ?
+            ) := {
+                targeteNB_ID    := p_target_eNB_ID,
+                sourceeNB_ID    := p_source_eNB_ID,
+                sONInformation  := p_sONInformation
+            } // End of template mw_sON_Configuration_Transfer
+            
+            /**
+             * @desc Receive template for SONInformation/Request
+             * @param p_sONInformationRequest   Expected SONInformationRequest value. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.27 SON Information
+             */
+            template (present) SONInformation mw_sONInformation_Request(
+                                                                        template (present) SONInformationRequest p_sONInformationRequest := ?
+            ) := {
+                sONInformationRequest := p_sONInformationRequest
+            } // End of template mw_sONInformation_Request
+            
+            /**
+             * @desc Receive template for SONInformation/Reply
+             * @param p_sONInformationReply   Expected SONInformationReply value. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.28 SON Information Reply
+             */
+            template (present) SONInformation mw_sONInformation_Reply(
+                                                                      template (present) SONInformationReply p_sONInformationReply := ?
+            ) := {
+                sONInformationReply := p_sONInformationReply
+            } // End of template mw_sONInformation_Reply
+            
+            /**
+             * @desc Receive template for SONInformation/Report
+             * @param p_sONInformationReport   Expected SONInformationReport value. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.39 SON Information Report
+             */
+            template (present) SONInformation mw_sONInformation_Report(
+                                                                       template (present) SONInformation_Extension p_sONInformationReport := ?
+            ) := {
+                sONInformation_Extension := p_sONInformationReport
+            } // End of template mw_sONInformation_Report
+            
+            /**
+             * @desc Receive template for LPPa-PDU
+             * @param p_value The Routing ID value
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.32 LPPa-PDU
+             */
+            template (present) ProtocolIE mw_LPPa_PDU(
+                                                      template (present) octetstring p_value := ?
+            ) := {
+                id := S1AP_Constants.id_LPPa_PDU,
+                criticality := ignore,
+                value_ := { LPPa_PDU := p_value }
+            } // End of template mw_LPPa_PDU
+            
+            /**
+             * @desc Receive template for Routing ID
+             * @param p_value The Routing ID value
+             * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.2.3.33 Routing ID
+             */
+            template (present) ProtocolIE mw_Routing_ID(
+                                                        template (present) UInt8 p_value := ?
+            ) := {
+                id := S1AP_Constants.id_Routing_ID,
+                criticality := ignore,
+                value_ := { Routing_ID := p_value }
+            } // End of template mw_Routing_ID
             
         } // End of group Receive_IEs
         
@@ -278,7 +789,7 @@ module LibS1AP_Templates {
              */
             template (value) E_RABLevelQoSParameters m_e_RABlevelQoSParameters(
                                                                                in QCI p_qCI := 0
-            ):= {
+            ) := {
                 qCI := p_qCI,
                 allocationRetentionPriority := {
                     priorityLevel := 0,
@@ -297,7 +808,7 @@ module LibS1AP_Templates {
              */
             template (present) E_RABSetupItemBearerSURes mw_E_RABSetupItemBearerSURes(
                                                                                       template(present) E_RAB_ID p_e_RAB_ID := ?
-            ):=  {
+            ) :=  {
                  e_RAB_ID                        := p_e_RAB_ID,
                  transportLayerAddress           := '?'B,
                  gTP_TEID                        := ?,

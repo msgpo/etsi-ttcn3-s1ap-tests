@@ -1,7 +1,7 @@
 /**
  *    @author   ETSI / STF519
- *    @version  $URL:$
- *              $Id:$
+ *    @version  $URL$
+ *              $Id$
  *    @desc     This module provides test cases for S1AP tests.
  *    @copyright   ETSI Copyright Notification
  *                 No part may be reproduced except as authorized by written permission.
@@ -31,9 +31,46 @@ module S1AP_TestCases {
     
     group eNB_Role {
         
+        /**
+         * @desc E-RAB management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.2  E-RAB management group
+         */
         group ERAB_management_group {
             
-            testcase TP_S1AP_ENB_RAB_01() runs on S1AP system TestAdapter { 
+            /**
+             * @desc Verify that the IUT can successfully process all mandatory IEs in an E-RAB_SETUP_REQUEST received 
+             *       due to E-RAB management procedure and send E-RAB_SETUP_RESPONSE with successfully established E-RABs 
+             *       included in the E-RAB_Setup_List IE.
+             * <pre>
+             * Pics Selection: PICS A.3/1.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an E-RAB_SETUP_REQUEST
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                         containing QCI
+             *                             indicating value 5
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *         sends an E-RAB_SETUP_RESPONSE
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an E-RAB_Setup_List
+             *                 containing an E-RAB_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_RAB_01
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.2.1.2(1st dashed line in 5th dashed list) and 9.1.3.1 and 9.1.3.2
+             */
+            testcase TC_S1AP_ENB_RAB_01() runs on S1AP system TestAdapter { 
                 // Local variables
                 var S1AP v_s1ap_enb; 
                 
@@ -47,16 +84,63 @@ module S1AP_TestCases {
                 f_cf_S1AP_eNB_Up(v_s1ap_enb);
                 
                 // Start
-                v_s1ap_enb.start(f_TP_S1AP_ENB_RAB_01()); 
+                v_s1ap_enb.start(f_TC_S1AP_ENB_RAB_01()); 
                 
                 // synchronize PTC on 1 sychronization points
                 f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
                 
                 f_cf_Down();
                 
-            } // End of testcase TP_S1AP_ENB_RAB_01
+            } // End of testcase TC_S1AP_ENB_RAB_01
             
-            testcase TP_S1AP_ENB_RAB_02() runs on S1AP system TestAdapter { 
+            /**
+             * @desc Verify that the IUT after receiving an E-RAB_SETUP_REQUEST with failed E-RAB sends an E-RAB_SETUP_RESPONSE 
+             *       with E-RAB_Failed_to_Setup_List.
+             * <pre>
+             * Pics Selection: PICS A.3/1.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an E-RAB_SETUP_REQUEST
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                         indicating value A
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *                 containing an E-RAB_to_be_Setup Item 2(not acceptable data for eNB)
+             *                     containing an E-RAB_ID
+             *                         indicating value B(different to value A)
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                         containing QCI
+             *                             indicating not supported QCI value(255)
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *         sends an E-RAB_SETUP_RESPONSE
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an E-RAB_Setup_List
+             *                 containing an E-RAB_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                         indicating value A
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *             containing an E-RAB_Failed_to_Setup_List
+             *                 containing an E-RAB_List Item 1
+             *                     containing an E-RAB_ID
+             *                         indicating value B
+             *                     containing a Cause
+             *                         indicating ‘not-supported-QCI-value’.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_RAB_02
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.2.1.2(2nd dashed line in 5th dashed list) and 9.1.3.1 and 9.1.3.2
+             */
+            testcase TC_S1AP_ENB_RAB_02() runs on S1AP system TestAdapter { 
                 // Local variables
                 var S1AP v_s1ap_enb; 
                 
@@ -70,24 +154,243 @@ module S1AP_TestCases {
                 f_cf_S1AP_eNB_Up(v_s1ap_enb);
                 
                 // Start
-                v_s1ap_enb.start(f_TP_S1AP_ENB_RAB_02()); 
+                v_s1ap_enb.start(f_TC_S1AP_ENB_RAB_02()); 
                 
                 // synchronize PTC on 1 sychronization points
                 f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
                 
                 f_cf_Down();
                 
-            } // End of testcase TP_S1AP_ENB_RAB_02
+            } // End of testcase TC_S1AP_ENB_RAB_02
              
         } // End of group E-RAB_management_group
+        
+        /**
+         * @desc eNB direct information transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.13  eNB direct information transfer group
+         */
+        group ENB_direct_information_transfer_group {
+            
+            /**
+             * @desc Verify that the IUT can send an eNB_DIRECT_INFORMATION_TRANSFER to indicate an eNB Direct Information Transfer procedure.
+             * <pre>
+             * Pics Selection: PICS A.4/12
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an eNB direct information Transfer procedure,
+             *         sends an eNB_DIRECT_INFORMATION_TRANSFER
+             *             containing an Inter-system_Information_Transfer_Type
+             *                 containing a RIM
+             *                     containing a RIM_Transfer
+             *                         containing a RIM_Information
+             *                         containing a RIM_Routing_Address.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_EIT_01
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.13.2.1 and 9.1.14 and 9.2.3.23
+             */
+            testcase TC_S1AP_ENB_EIT_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_EIT_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_EIT_01
+            
+        } // End of group ENB_direct_information_transfer_group
+        
+        
+        /**
+         * @desc eNB configuration transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.15  eNB configuration transfer group
+         */
+        group ENB_configuration_transfer_group {
+            
+            /**
+             * @desc Verify that the IUT can send an eNB_CONFIGURATION_TRANSFER to indicate an eNB Configuration Transfer procedure.
+             * <pre>
+             * Pics Selection: PICS A.4/14
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an eNB Configuration Transfer procedure,
+             *         sends an eNB_CONFIGURATION_TRANSFER
+             *             containing a SON_Configuration_Transfer
+             *                 containing a Target_eNB-ID
+             *                 containing a Source_eNB-ID
+             *                 containing a SON_Information.
+             *                     containing a SON_Information_Request
+             *                         indicating X2TNL_Configuration_Info
+             *                 containing an X2_TNL_Configuration_Info.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_ECT_01
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.15.2.1 and 9.1.16
+             */
+            testcase TC_S1AP_ENB_ECT_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ECT_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ECT_01
+            
+        } // End of group ENB_configuration_transfer_group
+        
+        /**
+         * @desc LPPa transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.17  LPPa transport group
+         */
+        group LPPa_transport_group {
+            
+            /**
+             * @desc Verify that the IUT can send a UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
+             *       using a UE associated signalling.
+             * <pre>
+             * Pics Selection: PICS A.3/16.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a LPPa Transport procedure using a UE associated signalling,
+             *         sends a UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Routing_ID
+             *                 indicating a valid routing identifier value
+             *             containing an LPPa-PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_LPP_01
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.17.2.2 and 9.1.19.2
+             */
+            testcase TC_S1AP_ENB_LPP_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_LPP_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_LPP_01
+            
+            /**
+             * @desc Verify that the IUT can send a UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
+             *       using a Non-UE associated signalling.
+             * <pre>
+             * Pics Selection: PICS A.3/16.4
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a LPPa Transport procedure using a UE associated signalling,
+             *         sends a UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Routing_ID
+             *                 indicating a valid routing identifier value
+             *             containing an LPPa-PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_LPP_02
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause Clause 8.17.2.4 and 9.1.19.4
+             */
+            testcase TC_S1AP_ENB_LPP_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_LPP_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_LPP_02
+            
+        } // End of group LPPa_transport_group
         
     } // End of group eNB_Role
     
     group MME_Role {
-    	
+        
+        /**
+         * @desc E-RAB management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.2   E-RAB management group
+         */
         group ERAB_management_group { 
             
-            testcase TP_S1AP_MME_RAB_01() runs on S1AP system TestAdapter { 
+            /**
+             * @desc Verify that the IUT can send an E-RAB_SETUP_REQUEST with at least one E-RAB IE to indicate an E-RAB Setup procedure.
+             * <pre>
+             * Pics Selection: PICS A.4/1.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an E-RAB Setup procedure,
+             *         sends an E-RAB_SETUP_REQUEST
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_RAB_01
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.2.1.2 and 9.1.3.1
+             */
+            testcase TC_S1AP_MME_RAB_01() runs on S1AP system TestAdapter { 
                // Local variables
                var S1AP v_s1ap_mme; 
                
@@ -101,15 +404,157 @@ module S1AP_TestCases {
                f_cf_S1AP_MME_Up(v_s1ap_mme);
                
                // Start
-               v_s1ap_mme.start(f_TP_S1AP_MME_RAB_01());
+               v_s1ap_mme.start(f_TC_S1AP_MME_RAB_01());
                
                // synchronize PTC on 1 sychronization points
                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
                
                f_cf_Down();
                
-            } // End of testcase TP_S1AP_MME_RAB_01
-        }
+            } // End of testcase TC_S1AP_MME_RAB_01
+        } // End of group ERAB_management_group
+        
+        
+        /**
+         * @desc LPPa transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.16  MME configuration transfer group
+         */
+        group MME_configuration_transfer_group {
+            
+            /**
+             * @desc Verify that the IUT can send an MME_CONFIGURATION_TRANSFER to indicate an MME Configuration Transfer procedure.
+             * <pre>
+             * Pics Selection: PICS A.4/15
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an MME Configuration Transfer procedure,
+             *         sends an MME_CONFIGURATION_TRANSFER
+             *             containing a SON_Configuration_Transfer
+             *                 containing a Target_eNB-ID
+             *                 containing a Source_eNB-ID
+             *                 containing a SON_Information.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MCT_01
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.16.2.1 and 9.1.17
+             */
+            testcase TC_S1AP_MME_MCT_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MCT_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MCT_01
+            
+        } // End of group MME_configuration_transfer_group
+        
+        /**
+         * @desc LPPa transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.17  LPPa transport group
+         */
+        group LPPa_transport_group {
+            
+            /**
+             * @desc Verify that the IUT can send a DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
+             *       using a UE associated signalling.
+             * <pre>
+             * Pics Selection: PICS A.4/16.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a LPPa Transport procedure using a UE associated signalling,
+             *         sends a DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Routing_ID
+             *                 indicating a valid routing identifier value
+             *             containing an LPPa-PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_LPP_01
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.17.2.1 and 9.1.19.1
+             */
+            testcase TC_S1AP_MME_LPP_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_LPP_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_LPP_01
+            
+            /**
+             * @desc Verify that the IUT can send a DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
+             *       using a non-UE associated signalling.
+             * <pre>
+             * Pics Selection: PICS A.3/16.3
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a LPPa Transport procedure using a UE associated signalling,
+             *         sends a DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Routing_ID
+             *                 indicating a valid routing identifier value
+             *             containing an LPPa-PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_LPP_02
+             * @reference ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.17.2.3 and 9.1.19.3
+             */
+            testcase TC_S1AP_MME_LPP_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_LPP_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_LPP_02
+            
+        } // End of group LPPa_transport_group
+        
         
     } // End of group MME_Role
     

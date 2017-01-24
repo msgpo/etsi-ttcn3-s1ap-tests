@@ -1,7 +1,7 @@
 /**
  *    @author   ETSI / STF519
- *    @version  $URL:$
- *              $Id:$
+ *    @version  $URL$
+ *              $Id$
  *    @desc     This module provides functions used in S1AP.
  *    @copyright   ETSI Copyright Notification
  *                 No part may be reproduced except as authorized by written permission.
@@ -143,10 +143,99 @@ module LibS1AP_Steps {
          * @desc Receive S1AP Message E_RABSetupResponse
          * @param p_value Receive template for E_RABSetupResponse IEs
          */
-        function f_recv_E_RABSetupResponse( template (present) RecordOf_ProtocolIE p_value :=?
+        function f_recv_E_RABSetupResponse(
+                                           template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
             f_recv_S1AP_successfulOutcome(mw_E_RABSetupResponse(p_value))
         } // End of f_recv_E_RABSetupResponse
+        
+        /**
+         * @desc Receive S1AP Message ENB DIRECT INFORMATION TRANSFER
+         * @param p_value Receive template for ENB_DIRECT_INFORMATION_TRANSFER IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.14 eNB DIRECT INFORMATION TRANSFER
+         */
+        function f_recv_eNB_Direct_Information_Transfer(
+                                                        template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_eNB_Direct_Information_Transfer(p_value))
+        } // End of f_recv_eNB_Configuration_Transfer
+        
+        /**
+         * @desc Receive S1AP Message MME DIRECT INFORMATION TRANSFER
+         * @param p_value Receive template for MME_DIRECT_INFORMATION_TRANSFER IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.15 MME DIRECT INFORMATION TRANSFER
+         */
+        function f_recv_Mme_Direct_Information_Transfer(
+                                                        template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_Mme_Direct_Information_Transfer(p_value))
+        } // End of f_recv_Mme_Configuration_Transfer
+        
+        /**
+         * @desc Receive S1AP Message ENB CONFIGURATION TRANSFER
+         * @param p_value Receive template for ENB_CONFIGURATION_TRANSFER IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.16 eNB CONFIGURATION TRANSFER
+         */
+        function f_recv_eNB_Configuration_Transfer(
+                                                   template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_eNB_Configuration_Transfer(p_value))
+        } // End of f_recv_eNB_Configuration_Transfer
+        
+        /**
+         * @desc Receive S1AP Message MME CONFIGURATION TRANSFER
+         * @param p_value Receive template for MME_CONFIGURATION_TRANSFER IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.17 MME CONFIGURATION TRANSFER
+         */
+        function f_recv_Mme_Configuration_Transfer(
+                                                   template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_Mme_Configuration_Transfer(p_value))
+        } // End of f_recv_Mme_Configuration_Transfer
+        
+        /**
+         * @desc Receive S1AP Message DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+         * @param p_value Receive template for DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.1 DOWNLINK UE ASSOCIATED LPPA TRANSPORT
+         */
+        function f_recv_Downlink_UE_Associated_Lppa_Transport(
+                                                              template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_DownlinkUEAssociatedLppaTransport(p_value))
+        } // End of f_recv_Downlink_UE_Associated_Lppa_Transport
+        
+        /**
+         * @desc Receive S1AP Message UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT
+         * @param p_value Receive template for UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.17 MME CONFIGURATION TRANSFER
+         */
+        function f_recv_Uplink_UE_Associated_Lppa_Transport(
+                                                            template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_UplinkUEAssociatedLppaTransport(p_value))
+        } // End of f_recv_Uplink_UE_Associated_Lppa_Transport
+        
+        /**
+         * @desc Receive S1AP Message DOWNLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT
+         * @param p_value Receive template for DOWNLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.3 DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT
+         */
+        function f_recv_Downlink_Non_UE_Associated_Lppa_Transport(
+                                                                  template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_DownlinkNonUEAssociatedLppaTransport(p_value))
+        } // End of f_recv_Downlink_Non_UE_Associated_Lppa_Transport
+        
+        /**
+         * @desc Receive S1AP Message UPLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT
+         * @param p_value Receive template for UPLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT IEs
+         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.4 UPLINK NON UE ASSOCIATED LPPA TRANSPORT
+         */
+        function f_recv_Uplink_Non_UE_Associated_Lppa_Transport(
+                                                                template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_UplinkNonUEAssociatedLppaTransport(p_value))
+        } // End of f_recv_Uplink_Non_UE_Associated_Lppa_Transport
         
     } // End of group receivePDU
     
@@ -229,6 +318,89 @@ module LibS1AP_Steps {
         } // End of function f_send_E_RABSetupRequest
         
     } // End of group sendPDU
+    
+    /**
+     * @desc Setup full procedure functions
+     * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.1 List of S1AP Elementary procedures
+     */
+    group fullProcedures {
+        
+        /**
+         * @desc Setup a full E-RAB Setup procedure
+         */
+        function f_rABSetupRequest() runs on S1APComponent {
+            f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
+                vc_MME_UE_ID,
+                vc_ENB_UE_ID,
+                {
+                     m_E_RABToBeSetupItemBearerSUReq(1),
+                     m_E_RABToBeSetupItemBearerSUReq(
+                        2,
+                        m_e_RABlevelQoSParameters
+                        (255)
+                     )
+                 }
+            ));
+            f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs_FailedToSetupList(
+                vc_MME_UE_ID,
+                vc_ENB_UE_ID,
+                {
+                      mw_E_RABSetupItemBearerSURes(1)
+                },
+                {
+                    mw_E_RABItem(
+                        2,
+                        {
+                            radioNetwork :=not_supported_QCI_value
+                        }
+                    )
+                }
+            ));
+        } // End of function f_rABSetupRequest
+        
+        /**
+         * @desc Setup a full E-RAB Release procedure
+         */
+        function f_rABSetupRelease() runs on S1APComponent {
+            // TODO 
+        } // End of function f_rABSetupRelease
+        
+    } // End of group fullProcedures
+    
+    group externalFunctions {
+        
+        /**
+         * @desc Trigger an ENB direct information Transfer procedure
+         */
+        external function fx_ENB_Direct_Information_Transfer_procedure_ind() return boolean;
+        
+        /**
+         * @desc Trigger an ENB Configuration Transfer procedure
+         */
+        external function fx_ENB_Configuration_Transfer_procedure_ind() return boolean;
+        
+        /**
+         * @desc Trigger an MME Configuration Transfer procedure
+         */
+        external function fx_MME_Configuration_Transfer_procedure_ind() return boolean;
+        
+        /**
+         * @desc Trigger a LPPa Transport procedure using a UE associated signalling on eNodeB
+         * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
+         */
+        external function fx_eNB_LPPa_Transport_procedure_ind(
+                                                              in boolean p_associated_signalling_mode
+        ) return boolean;
+        
+        /**
+         * @desc Trigger a LPPa Transport procedure using a UE associated signalling on MME
+         * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
+         */
+        external function fx_mme_LPPa_Transport_procedure_ind(
+                                                              in boolean p_associated_signalling_mode
+        ) return boolean;
+        
+    } // End of group externalFunctions
     
     group preambles {
         
