@@ -11,6 +11,13 @@
  */
 module LibS1AP_Pixits {
     
+    // LibCommon
+    import from LibCommon_BasicTypesAndValues all;
+    import from LibCommon_DataStrings all;
+    
+    // LibS1AP
+    import from S1AP_IEs language "ASN.1:1997" all;
+    
     /**
      * @desc Define the network transportation layer
      */
@@ -47,6 +54,97 @@ module LibS1AP_Pixits {
         modulepar float    PX_S1AP_TWAIT:= 30.0;
         
     }  // End of group S1AP_Timers
+    
+    /** 
+     * @desc The PLMNidentity indicates the PLMN Identity (Public land mobile network).
+     * @see ETSI TS 136 413 Clause 9.2.3.8 PLMN Identity
+     */
+    modulepar PLMNidentity PX_PLMN_IDENTITY := '000000'O;
+    
+    /** 
+     * @desc eNB Identity.
+     * @see ETSI TS 136 413 Clause 9.2.1.37 Global eNB ID
+     */
+    modulepar ENB_ID PX_ENB_ID := {
+        homeENB_ID := '0000000000000000000000000000'B
+    };
+    
+    /** 
+     * @desc Cell Identity.
+     */
+    modulepar CellIdentity PX_CELL_ID := '0000000000000000000000000000'B;
+    
+    /** 
+     * @desc The TAC is used to uniquely identify a Tracking Area Code.
+     * @see ETSI TS 136 413 Clause 9.2.3.7 TAC
+     */
+    modulepar TAC PX_TAC := '0000'O;
+    
+    /** 
+     * @desc The Serial Number IE identifies a particular message from the source and type indicated by the Message Identifie.
+     * @see ETSI TS 136 413 Clause 9.2.1.45 Serial Number
+     */
+    modulepar MessageIdentifier PX_MESSAGE_IDENTIFIER := oct2bit('0000'O);
+    
+    /** 
+     * @desc The Serial Number IE identifies a particular message from the source and type indicated by the Message Identifie.
+     * @see ETSI TS 136 413 Clause 9.2.1.45 Serial Number
+     */
+    modulepar SerialNumber PX_SERIAL_NUMBER := oct2bit('0000'O);
+    
+    /** 
+     * @desc The Repetition Period IE indicates the periodicity of the warning message to be broadcast.
+     * @see ETSI TS 136 413 Clause 9.2.1.48 Repetition Period
+     */
+    modulepar RepetitionPeriod PX_REPETITION_PERIOD := 1;
+    
+    /** 
+     * @desc The Number of Broadcast Requested IE indicates the number of times a message is to be broadcast.
+     * @see ETSI TS 136 413 Clause 9.2.1.49 Number of Broadcasts Requested
+     */
+    modulepar NumberOfBroadcasts PX_NUMBER_OF_BROADCASTS_REQUESTED := 1;
+    
+    /** 
+     * @desc The Emergency Area ID IE is used to indicate the area which has the emergency impact.
+     * @see ETSI TS 136 413 Clause 9.2.1.47 Emergency Area ID
+     */
+    modulepar EmergencyAreaID PX_EMERGENCY_AREA_ID := '000000'O;
+    
+    /** 
+     * @desc Event Type.
+     * @see ETSI TS 136 413 Clause 9.2.1.34 Request Type
+     */
+    modulepar EventType PX_EVENT_TYPE := direct;
+    
+    /** 
+     * @desc Report Area.
+     * @see ETSI TS 136 413 Clause 9.2.1.34 Request Type
+     */
+    modulepar ReportArea PX_REPORT_AREA := ecgi;
+    
+    /** 
+     * @desc The E-UTRAN Trace ID IE.
+     * @see ETSI TS 136 413 Clause 9.2.1.4 Trace Activation
+     */
+    modulepar E_UTRAN_Trace_ID PX_EUTRAN_TRACE_ID := '0000000000000000'O;
+    
+    /** 
+     * @desc The interfaces to trace.
+     * @see ETSI TS 136 413 Clause 9.2.1.4 Trace Activation
+     */
+    modulepar InterfacesToTrace PX_INTERFACES_TO_TRACE := '00000000'B;
+    
+    /** 
+     * @desc The trace depth.
+     * @see ETSI TS 136 413 Clause 9.2.1.4 Trace Activation
+     */
+    modulepar TraceDepth PX_TRACE_DEPTH := medium;
+    
+    /** 
+     * @desc Transport Layer Address.
+     * @see ETSI TS 136 413 Clause 9.2.2.1 Transport Layer Address
+     */
+    modulepar TransportLayerAddress PX_TRANSPORT_LAYER_ADDRESS := oct2bit('0a00000a'O);
     
 } // End of module LibS1AP_Pixits
 

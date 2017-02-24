@@ -202,6 +202,454 @@ module S1AP_TCFunctions {
         } // End of group ERAB_management_group
         
         /**
+         * @desc Warning message transmission group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.10  Trace group
+         */
+        group Trace_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_TRP_01
+             */
+            function f_TC_S1AP_ENB_TRP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
+                f_rABSetupRequest();
+                f_initiate_handover();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Trace_Start(
+                    m_trace_StartIEs(
+                        m_traceActivation(
+                            PX_EUTRAN_TRACE_ID,
+                            PX_INTERFACES_TO_TRACE,
+                            PX_TRACE_DEPTH,
+                            PX_TRANSPORT_LAYER_ADDRESS
+                )));
+                
+                f_recv_Trace_Failure_Indication(
+                    mw_trace_Failure_IndicationIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        PX_EUTRAN_TRACE_ID,
+                        - // TODO To be refined
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_TRP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_TRP_02
+             */
+            function f_TC_S1AP_ENB_TRP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
+                f_rABSetupRequest();
+                f_initiate_traceStart();
+                f_initiate_handover();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_deactivate_Trace(
+                    m_deactivate_TraceIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        PX_EUTRAN_TRACE_ID
+                ));
+                
+                f_recv_Trace_Failure_Indication(
+                    mw_trace_Failure_IndicationIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        PX_EUTRAN_TRACE_ID,
+                        - // TODO To be refined
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_initiate_deactivateTrace();
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_TRP_02
+            
+        } // End of group Trace_group
+        
+        /**
+         * @desc Warning message transmission group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.11  Location reporting group
+         */
+        group Location_reporting_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_LRP_01
+             */
+            function f_TC_S1AP_ENB_LRP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Location_Reporting_Control(
+                    m_location_Reporting_ControlIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        m_request_Type(
+                            direct,
+                            PX_REPORT_AREA
+                )));
+                
+                f_recv_Location_Report(
+                    mw_location_ReportIEs(
+                        ?,
+                        ?,
+                        mw_eUTRAN_CGI(
+                            PX_PLMN_IDENTITY, 
+                            PX_CELL_ID
+                        ),
+                        mw_TAI(
+                            PX_PLMN_IDENTITY, 
+                            PX_TAC
+                        ),
+                        mw_request_Type(
+                            direct,
+                            PX_REPORT_AREA
+                )));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_LRP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_LRP_02
+             */
+            function f_TC_S1AP_ENB_LRP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Location_Reporting_Control(
+                    m_location_Reporting_ControlIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        m_request_Type(
+                            change_of_serve_cell,
+                            PX_REPORT_AREA
+                )));
+                
+                fx_move_UE_to_new_cell(); // when UE changes to new cell
+                
+                f_recv_Location_Report(
+                    mw_location_ReportIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        mw_eUTRAN_CGI(
+                            PX_PLMN_IDENTITY, 
+                            PX_CELL_ID
+                        ),
+                        mw_TAI(
+                            PX_PLMN_IDENTITY, 
+                            PX_TAC
+                        ),
+                        mw_request_Type(
+                            change_of_serve_cell,
+                            PX_REPORT_AREA
+                )));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_LRP_02
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_LRP_03
+             */
+            function f_TC_S1AP_ENB_LRP_03() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Location_Reporting_Control(
+                    m_location_Reporting_ControlIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        m_request_Type(
+                            stop_change_of_serve_cell,
+                            PX_REPORT_AREA
+                )));
+                
+                fx_check_UE_stops_reporting(); // when UE stop reporting at change of serving cell
+                
+                f_recv_Location_Report(
+                    mw_location_ReportIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        mw_eUTRAN_CGI(
+                            PX_PLMN_IDENTITY, 
+                            PX_CELL_ID
+                        ),
+                        mw_TAI(
+                            PX_PLMN_IDENTITY, 
+                            PX_TAC
+                        ),
+                        mw_request_Type(
+                            stop_change_of_serve_cell,
+                            PX_REPORT_AREA
+                )));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_LRP_03
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_LRP_04
+             */
+            function f_TC_S1AP_ENB_LRP_04() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
+                f_rABSetupRequest();
+                f_initiate_handover();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Location_Reporting_Control(
+                    m_location_Reporting_ControlIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        m_request_Type(
+                            PX_EVENT_TYPE,
+                            PX_REPORT_AREA
+                )));
+                
+                f_recv_Location_Report_Failure_Indication(
+                    mw_location_Report_Failure_IndicationIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        ? // TODO To be refined: what kind of cause :-(
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_LRP_04
+            
+        } // End of group Location_reporting_group
+        
+        /**
+         * @desc Warning message transmission group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.12 Warning message transmission group
+         */
+        group Warning_message_transmission_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_WTP_01
+             */
+            function f_TC_S1AP_ENB_WTP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Write_Replace_Warning_Request(
+                    m_write_Replace_Warning_RequestIEs(
+                        PX_MESSAGE_IDENTIFIER,
+                        PX_SERIAL_NUMBER,
+                        PX_REPETITION_PERIOD, 
+                        PX_NUMBER_OF_BROADCASTS_REQUESTED
+                ));
+                
+                f_recv_Write_Replace_Warning_Response(
+                    mw_write_Replace_Warning_ResponseIEs(
+                        ?,
+                        ?
+                ));
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_WTP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_WTP_02
+             */
+            function f_TC_S1AP_ENB_WTP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Kill_Request(
+                    m_kill_RequestIEs(
+                        PX_MESSAGE_IDENTIFIER,
+                        PX_SERIAL_NUMBER
+                ));
+                
+                f_recv_Kill_Response(
+                    mw_kill_ResponseIEs(
+                        ?,
+                        ?
+                ));
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_WTP_02
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_WTP_03
+             */
+            function f_TC_S1AP_ENB_WTP_03() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a PWS Restart Indication procedure
+                if (fx_ENB_PWS_Restart_Indication_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a PWS_RESTART_INDICATION
+                    f_recv_eNB_PWS_Restart_Indication(
+                        mw_pWS_Restart_IndicationIEs( 
+                            { 
+                                mw_eUTRAN_CGI(
+                                    PX_PLMN_IDENTITY, 
+                                    PX_CELL_ID
+                                ) 
+                            },
+                            mw_Global_ENB_ID(
+                                PX_PLMN_IDENTITY, 
+                                PX_ENB_ID
+                            ),
+                            { 
+                                mw_TAI(
+                                    PX_PLMN_IDENTITY, 
+                                    PX_TAC
+                                ) 
+                            },
+                            { PX_EMERGENCY_AREA_ID }
+                    ));
+                }
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_WTP_03
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_WTP_04
+             */
+            function f_TC_S1AP_ENB_WTP_04() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a PWS Failure Indication procedure
+                if (fx_ENB_PWS_Failure_Indication_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a PWS_FAILURE_INDICATION
+                    f_recv_eNB_PWS_Failure_Indication(
+                        mw_pWS_Failure_IndicationIEs( 
+                            { 
+                                mw_eUTRAN_CGI(
+                                    PX_PLMN_IDENTITY, 
+                                    PX_CELL_ID
+                                ) 
+                            },
+                            mw_Global_ENB_ID(
+                                PX_PLMN_IDENTITY, 
+                                PX_ENB_ID
+                            )
+                    ));
+                }
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_WTP_04
+            
+        } // End of group Warning_message_transmission_group
+        
+        /**
          * @desc eNB direct information transfer group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.13  eNB direct information transfer group
          */
@@ -243,7 +691,7 @@ module S1AP_TCFunctions {
         } // End of group ENB_direct_information_transfer_group
         
         /**
-         * @desc LPPa transport group
+         * @desc eNB configuration transfer group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.15  eNB configuration transfer group
          */
         group ENB_configuration_transfer_group {
@@ -393,13 +841,316 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-            } // End of function f_TC_S1AP_MME_RAB_01                
+            } // End of function f_TC_S1AP_MME_RAB_01
             
         } // End of group ERAB_management_group
         
         /**
+         * @desc Warning message transmission group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.10  Trace group
+         */
+        group Trace_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_TRP_01
+             */
+            function f_TC_S1AP_MME_TRP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Trace Start procedure
+                if (fx_MME_Trace_Start_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a TRACE_START
+                    f_recv_Trace_Start(
+                        mw_trace_StartIEs(
+                            mw_traceActivation(
+                                PX_EUTRAN_TRACE_ID,
+                                PX_INTERFACES_TO_TRACE,
+                                PX_TRACE_DEPTH,
+                                PX_TRANSPORT_LAYER_ADDRESS
+                    )));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_TRP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_TRP_02
+             */
+            function f_TC_S1AP_MME_TRP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_initiate_traceStart();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Trace Start procedure
+                if (fx_MME_Deactivate_Trace_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a TRACE_START
+                    f_recv_Deactivate_Trace(
+                        mw_deactivate_TraceIEs(
+                            vc_MME_UE_ID,
+                            vc_ENB_UE_ID,
+                            PX_EUTRAN_TRACE_ID
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_TRP_02
+            
+        } // End of group Trace_group
+        
+        /**
+         * @desc Warning message transmission group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.11  Location reporting group
+         */
+        group Location_reporting_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_LRP_01
+             */
+            function f_TC_S1AP_MME_LRP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Location Reporting Control procedure
+                if (fx_MME_Location_Reporting_Control_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a LOCATION_REPORTING_CONTROL
+                    f_recv_Location_Reporting_Control(
+                        mw_location_Reporting_ControlIEs(
+                            vc_MME_UE_ID,
+                            vc_ENB_UE_ID,
+                            m_request_Type(
+                                PX_EVENT_TYPE,
+                                PX_REPORT_AREA
+                    )));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_LRP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_LRP_02
+             */
+            function f_TC_S1AP_MME_LRP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
+                f_rABSetupRequest();
+                f_initiate_handover();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Location Reporting Control procedure
+                if (fx_MME_Location_Reporting_Control_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a LOCATION_REPORTING_CONTROL
+                    f_recv_Location_Reporting_Control(
+                        mw_location_Reporting_ControlIEs(
+                            vc_MME_UE_ID,
+                            vc_ENB_UE_ID,
+                            m_request_Type(
+                                direct,
+                                PX_REPORT_AREA
+                    )));
+                    f_send_Location_Report_Failure_Indication(
+                        m_location_Report_Failure_IndicationIEs(
+                            vc_MME_UE_ID,
+                            vc_ENB_UE_ID,
+                            m_cause_nas(
+                                unspecified
+                    )));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_LRP_02
+            
+        } // End of group Location_reporting_group
+        
+        /**
+         * @desc MME direct information transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.12  Warning message transmission group
+         */
+        group MME_Warning_message_transmission_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_WTP_01
+             */
+            function f_TC_S1AP_MME_WTP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Warning Message Transmission procedure
+                if (fx_MME_Write_Replace_Warning_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a WRITE-REPLACE_WARNING_REQUEST
+                    f_recv_Write_Replace_Warning_Request(
+                        mw_write_Replace_Warning_RequestIEs(
+                            PX_MESSAGE_IDENTIFIER,
+                            PX_SERIAL_NUMBER,
+                            PX_REPETITION_PERIOD, 
+                            PX_NUMBER_OF_BROADCASTS_REQUESTED
+                    ));
+                    f_send_Write_Replace_Warning_Response(
+                        m_write_Replace_Warning_ResponseIEs(
+                            PX_MESSAGE_IDENTIFIER,
+                            PX_SERIAL_NUMBER
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_WTP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_WTP_02
+             */
+            function f_TC_S1AP_MME_WTP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_writeReplaceWarningExchanges(); 
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Warning Message Transmission procedure
+                if (fx_MME_Kill_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a KILLG_REQUEST
+                    f_recv_Kill_Request(
+                        mw_kill_RequestIEs(
+                            PX_MESSAGE_IDENTIFIER,
+                            PX_SERIAL_NUMBER
+                    ));
+                    f_send_Kill_Response(
+                        m_kill_ResponseIEs(
+                            PX_MESSAGE_IDENTIFIER,
+                            PX_SERIAL_NUMBER
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_WTP_02
+            
+        } // End of group MME_Warning_message_transmission_group 
+        
+        /**
+         * @desc MME direct information transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.14  MME direct information transfer group
+         */
+        group MME_direct_information_transfer_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MIT_01
+             */
+            function f_TC_S1AP_MME_MIT_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an MME Direct Information Transfer procedure
+                if (fx_MME_Direct_Information_Transfer_procedure_ind() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a MME_DIRECT_INFORMATION_TRANSFER
+                    f_recv_Mme_Direct_Information_Transfer(
+                        mw_mMEDirectInformationTransfer(
+                            mw_Inter_SystemInformationTransferType(
+                                mw_RIMTransfer(
+                                    ? // FIXME To be refined
+                    ))));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MIT_01
+            
+        } // End of group MME_direct_information_transfer_group 
+        
+        /**
          * @desc MME configuration transfer group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.16  MME configuration transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.16 MME configuration transfer group
          */
         group MME_configuration_transfer_group {
             

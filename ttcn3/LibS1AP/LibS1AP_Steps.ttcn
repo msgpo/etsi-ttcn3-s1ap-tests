@@ -150,9 +150,81 @@ module LibS1AP_Steps {
         } // End of f_recv_E_RABSetupResponse
         
         /**
+         * @desc Receive S1AP Message TRACE FAILURE INDICATION
+         * @param p_value Receive template for TRACE FAILURE INDICATION IEs
+         */
+        function f_recv_Trace_Failure_Indication(
+                                                 template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_trace_Failure_Indication(p_value))
+        } // End of f_recv_Trace_Failure_Indication
+        
+        /**
+         * @desc Receive S1AP Message LOCATION REPORT
+         * @param p_value Receive template for LOCATION REPORT IEs
+         */
+        function f_recv_Location_Report(
+                                        template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_location_Report(p_value))
+        } // End of f_recv_Location_Report
+        
+        /**
+         * @desc Receive S1AP Message LOCATION REPORT FAILURE INDICATION
+         * @param p_value Receive template for LOCATION REPORT FAILURE INDICATION IEs
+         */
+        function f_recv_Location_Report_Failure_Indication(
+                                                           template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_location_Report_Failure_Indication(p_value))
+        } // End of f_recv_Location_Report_Failure_Indication
+        
+        /**
+         * @desc Receive S1AP Message WRITE-REPLACE WARNING RESPONSE
+         * @param p_value Receive template for WRITE-REPLACE WARNING RESPONSE IEs
+         */
+        function f_recv_Write_Replace_Warning_Response(
+                                                       template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_write_Replace_Warning_Response(p_value))
+        } // End of f_recv_Write_Replace_Warning_Response
+        
+        /**
+         * @desc Receive S1AP Message WRITE-REPLACE WARNING RESPONSE
+         * @param p_value Receive template for WRITE-REPLACE WARNING RESPONSE IEs
+         */
+        function f_recv_Kill_Response(
+                                                       template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_kill_Response(p_value))
+        } // End of f_recv_Kill_Response
+        
+        /**
+         * @desc Receive S1AP Message PWS RESTART INDICATION
+         * @param p_value Receive template for PWS_RESTART_INDICATION IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.13.5 PWS RESTART INDICATION
+         */
+        function f_recv_eNB_PWS_Restart_Indication(
+                                                   template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_pWS_Restart_Indication(p_value))
+        } // End of f_recv_eNB_PWS_Restart_Indication
+        
+        /**
+         * @desc Receive S1AP Message PWS FAILURE INDICATION
+         * @param p_value Receive template for PWS_FAILURE_INDICATION IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.13.6 PWS FAILURE INDICATION
+         */
+        function f_recv_eNB_PWS_Failure_Indication(
+                                                   template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_pWS_Failure_Indication(p_value))
+        } // End of f_recv_eNB_PWS_Failure_Indication
+        
+        /**
          * @desc Receive S1AP Message ENB DIRECT INFORMATION TRANSFER
          * @param p_value Receive template for ENB_DIRECT_INFORMATION_TRANSFER IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.14 eNB DIRECT INFORMATION TRANSFER
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.14 eNB DIRECT INFORMATION TRANSFER
          */
         function f_recv_eNB_Direct_Information_Transfer(
                                                         template (present) RecordOf_ProtocolIE p_value := ?
@@ -161,9 +233,64 @@ module LibS1AP_Steps {
         } // End of f_recv_eNB_Configuration_Transfer
         
         /**
+         * @desc Receive S1AP Message TRACE START 
+         * @param p_value Receive template for TRACE START IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.11.1 TRACE START
+         */
+        function f_recv_Trace_Start(
+                                    template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_trace_Start(p_value))
+        } // End of f_recv_Trace_Start
+        
+        /**
+         * @desc Receive S1AP Message DEACTIVATE TRACE 
+         * @param p_value Receive template for DEACTIVATE TRACE IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.11.3 DEACTIVATE TRACE
+         */
+        function f_recv_Deactivate_Trace(
+                                         template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_deactivate_Trace(p_value))
+        } // End of f_recv_Deactivate_Trace
+        
+        /**
+         * @desc Receive S1AP Message LOCATION REPORTING CONTROL 
+         * @param p_value Receive template for LOCATION_REPORTING_CONTROL IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.12.1 LOCATION REPORTING CONTROL
+         */
+        function f_recv_Location_Reporting_Control(
+                                                      template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_location_Reporting_Control(p_value))
+        } // End of f_recv_Location_Reporting_Control
+        
+        /**
+         * @desc Receive S1AP Message WRITE-REPLACE WARNING REQUEST 
+         * @param p_value Receive template for WRITE_REPLACE_WARNING_REQUEST IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.13.1 WRITE-REPLACE WARNING REQUEST
+         */
+        function f_recv_Write_Replace_Warning_Request(
+                                                      template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_write_Replace_Warning_RequestResponse(p_value))
+        } // End of f_recv_Write_Replace_Warning_Request
+        
+        /**
+         * @desc Receive S1AP Message KILL_REQUEST
+         * @param p_value Receive template forKILL_REQUEST IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.13.3 KILL REQUEST
+         */
+        function f_recv_Kill_Request(
+                                     template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_kill_RequestResponse(p_value))
+        } // End of f_recv_Kill_Request
+        
+        /**
          * @desc Receive S1AP Message MME DIRECT INFORMATION TRANSFER
          * @param p_value Receive template for MME_DIRECT_INFORMATION_TRANSFER IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.15 MME DIRECT INFORMATION TRANSFER
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.15 MME DIRECT INFORMATION TRANSFER
          */
         function f_recv_Mme_Direct_Information_Transfer(
                                                         template (present) RecordOf_ProtocolIE p_value := ?
@@ -174,7 +301,7 @@ module LibS1AP_Steps {
         /**
          * @desc Receive S1AP Message ENB CONFIGURATION TRANSFER
          * @param p_value Receive template for ENB_CONFIGURATION_TRANSFER IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.16 eNB CONFIGURATION TRANSFER
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.16 eNB CONFIGURATION TRANSFER
          */
         function f_recv_eNB_Configuration_Transfer(
                                                    template (present) RecordOf_ProtocolIE p_value := ?
@@ -183,9 +310,20 @@ module LibS1AP_Steps {
         } // End of f_recv_eNB_Configuration_Transfer
         
         /**
+         * @desc Receive S1AP Message MME Direct Information Transfer
+         * @param p_value Receive template for MME DIRECT INFORMATION TRANSFER IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.15 MME DIRECT INFORMATION TRANSFER
+         */
+        function fx_MME_Direct_Information_Transfer_procedure(
+                                                              template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_Mme_Configuration_Transfer(p_value))
+        } // End of fx_MME_Direct_Information_Transfer_procedure
+        
+        /**
          * @desc Receive S1AP Message MME CONFIGURATION TRANSFER
          * @param p_value Receive template for MME_CONFIGURATION_TRANSFER IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.17 MME CONFIGURATION TRANSFER
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.17 MME CONFIGURATION TRANSFER
          */
         function f_recv_Mme_Configuration_Transfer(
                                                    template (present) RecordOf_ProtocolIE p_value := ?
@@ -196,7 +334,7 @@ module LibS1AP_Steps {
         /**
          * @desc Receive S1AP Message DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT
          * @param p_value Receive template for DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.1 DOWNLINK UE ASSOCIATED LPPA TRANSPORT
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.19.1 DOWNLINK UE ASSOCIATED LPPA TRANSPORT
          */
         function f_recv_Downlink_UE_Associated_Lppa_Transport(
                                                               template (present) RecordOf_ProtocolIE p_value := ?
@@ -207,7 +345,7 @@ module LibS1AP_Steps {
         /**
          * @desc Receive S1AP Message UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT
          * @param p_value Receive template for UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.17 MME CONFIGURATION TRANSFER
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.17 MME CONFIGURATION TRANSFER
          */
         function f_recv_Uplink_UE_Associated_Lppa_Transport(
                                                             template (present) RecordOf_ProtocolIE p_value := ?
@@ -218,7 +356,7 @@ module LibS1AP_Steps {
         /**
          * @desc Receive S1AP Message DOWNLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT
          * @param p_value Receive template for DOWNLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.3 DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.19.3 DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT
          */
         function f_recv_Downlink_Non_UE_Associated_Lppa_Transport(
                                                                   template (present) RecordOf_ProtocolIE p_value := ?
@@ -229,7 +367,7 @@ module LibS1AP_Steps {
         /**
          * @desc Receive S1AP Message UPLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT
          * @param p_value Receive template for UPLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT IEs
-         * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 9.1.19.4 UPLINK NON UE ASSOCIATED LPPA TRANSPORT
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.19.4 UPLINK NON UE ASSOCIATED LPPA TRANSPORT
          */
         function f_recv_Uplink_Non_UE_Associated_Lppa_Transport(
                                                                 template (present) RecordOf_ProtocolIE p_value := ?
@@ -317,11 +455,91 @@ module LibS1AP_Steps {
             f_send_S1AP_initiatingMessage(m_E_RABSetupRequest(p_value))
         } // End of function f_send_E_RABSetupRequest
         
+        /**
+         * @desc Send S1AP Message TRACE START
+         * @param p_value Send template with IE for TRACE START
+         */
+        function f_send_Trace_Start(
+                                    in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_trace_Start(p_value))
+        } // End of function f_send_Trace_Start
+        
+        /**
+         * @desc Send S1AP Message DEACTIVATE TRACE 
+         * @param p_value Send template with IE for DEACTIVATE TRACE
+         */
+        function f_send_deactivate_Trace(
+                                         in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_deactivate_Trace(p_value))
+        } // End of function f_send_deactivate_Trace
+        
+        /**
+         * @desc Send S1AP Message LOCATION REPORTING CONTROL
+         * @param p_value Send template with IE for LOCATION REPORTING CONTROL
+         */
+        function f_send_Location_Reporting_Control(
+                                                   in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_location_Reporting_Control(p_value))
+        } // End of function f_send_Location_Reporting_Control
+        
+        /**
+         * @desc Send S1AP Message LOCATION REPORT FAILURE INDICATION
+         * @param p_value Receive template for LOCATION REPORT FAILURE INDICATION IEs
+         */
+        function f_send_Location_Report_Failure_Indication(
+                                                           template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_location_Report_Failure_Indication(p_value))
+        } // End of f_send_Location_Report_Failure_Indication
+        
+        /**
+         * @desc Send S1AP Message WRITE-REPLACE WARNING REQUEST
+         * @param p_value Send template with IE for WRITE-REPLACE WARNING REQUEST
+         */
+        function f_send_Write_Replace_Warning_Request(
+                                                      in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_write_Replace_Warning_Request(p_value))
+        } // End of function f_send_Write_Replace_Warning_Request
+        
+        /**
+         * @desc Send S1AP Message WRITE-REPLACE WARNING RESPONSE
+         * @param p_value Send template with IE for WRITE-REPLACE WARNING RESPONSE
+         */
+        function f_send_Write_Replace_Warning_Response(
+                                                      in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_write_Replace_Warning_Response(p_value))
+        } // End of function f_send_Write_Replace_Warning_Response
+        
+        /**
+         * @desc Send S1AP Message KILL REQUEST
+         * @param p_value Send template with IE for KILL REQUEST
+         */
+        function f_send_Kill_Request(
+                                     in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_kill_Request(p_value))
+        } // End of function f_send_Kill_Request
+        
+        /**
+         * @desc Send S1AP Message KILL REQUEST
+         * @param p_value Send template with IE for KILL REQUEST
+         */
+        function f_send_Kill_Response(
+                                     in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_kill_Response(p_value))
+        } // End of function f_send_Kill_Response
+        
     } // End of group sendPDU
     
     /**
      * @desc Setup full procedure functions
-     * @see ETSI TS 136 413 V13.4.0 (2016-10) Clause 8.1 List of S1AP Elementary procedures
+     * @see ETSI TS 136 413 V13.4.0 Clause 8.1 List of S1AP Elementary procedures
      */
     group fullProcedures {
         
@@ -365,28 +583,120 @@ module LibS1AP_Steps {
             // TODO 
         } // End of function f_rABSetupRelease
         
+        /**
+         * @desc Initiate an Handover procedure
+         */
+        function f_initiate_handover() runs on S1APComponent {
+            // TODO 
+        } // End of function f_initiate_handover
+        
+        /**
+         * @desc Initiate a Trace Start procedure
+         */
+        function f_initiate_traceStart() runs on S1APComponent {
+            // TODO 
+        } // End of function f_initiate_traceStart
+        
+        /**
+         * @desc Initiate a Deactivate Trace procedure
+         */
+        function f_initiate_deactivateTrace() runs on S1APComponent {
+            // TODO 
+        } // End of function f_initiate_deactivateTrace
+        
+        /**
+         * @desc Initiate a an Write-Replace Warning Request procedure
+         */
+        function f_writeReplaceWarningExchanges() runs on S1APComponent {
+            // TODO 
+        } // End of function f_writeReplaceWarningExchanges
+        
     } // End of group fullProcedures
     
     group externalFunctions {
         
         /**
+         * @desc Force the UE to be registered to a new cell
+         * @return true on success, false otherwise
+         */
+        external function fx_move_UE_to_new_cell() return boolean;
+        
+        /**
+         * @desc Check htat UE stop reporting at change of serving cell
+         * @return true on success, false otherwise
+         */
+        external function fx_check_UE_stops_reporting() return boolean;
+        
+        /**
+         * @desc Trigger a PWS Restart Indication procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_ENB_PWS_Restart_Indication_procedure_ind() return boolean;
+        
+        /**
+         * @desc Trigger a PWS Failure Indication procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_ENB_PWS_Failure_Indication_procedure_ind() return boolean;
+        
+        /**
          * @desc Trigger an ENB direct information Transfer procedure
+         * @return true on success, false otherwise
          */
         external function fx_ENB_Direct_Information_Transfer_procedure_ind() return boolean;
         
         /**
          * @desc Trigger an ENB Configuration Transfer procedure
+         * @return true on success, false otherwise
          */
         external function fx_ENB_Configuration_Transfer_procedure_ind() return boolean;
         
         /**
+         * @desc Trigger a Trace Start procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Trace_Start_ind() return boolean;
+        
+        /**
+         * @desc Trigger a Deactivate Trace procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Deactivate_Trace_ind() return boolean;
+        
+        /**
+         * @desc Trigger a Location Reporting Control procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Location_Reporting_Control_procedure_ind() return boolean;
+        
+        /**
+         * @desc Trigger a Write-Replace Warning procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Write_Replace_Warning_procedure_ind() return boolean;
+        
+        /**
+         * @desc Trigger a Kill procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Kill_procedure_ind() return boolean;
+        
+        /**
+         * @desc Trigger an MME Direct Information Transfer procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Direct_Information_Transfer_procedure_ind() return boolean;
+        
+        /**
          * @desc Trigger an MME Configuration Transfer procedure
+         * @return true on success, false otherwise
          */
         external function fx_MME_Configuration_Transfer_procedure_ind() return boolean;
         
         /**
          * @desc Trigger a LPPa Transport procedure using a UE associated signalling on eNodeB
          * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
+         * @return true on success, false otherwise
          */
         external function fx_eNB_LPPa_Transport_procedure_ind(
                                                               in boolean p_associated_signalling_mode
@@ -395,6 +705,7 @@ module LibS1AP_Steps {
         /**
          * @desc Trigger a LPPa Transport procedure using a UE associated signalling on MME
          * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
+         * @return true on success, false otherwise
          */
         external function fx_mme_LPPa_Transport_procedure_ind(
                                                               in boolean p_associated_signalling_mode

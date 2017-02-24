@@ -49,7 +49,7 @@ module LibS1AP_TypesAndValues {
     }
     
     /**
-     * 
+     * @desc List of ProtocolIEs
      */
     type record of ProtocolIE RecordOf_ProtocolIE;
     
