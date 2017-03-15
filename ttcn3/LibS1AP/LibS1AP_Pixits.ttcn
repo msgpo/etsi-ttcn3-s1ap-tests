@@ -146,5 +146,20 @@ module LibS1AP_Pixits {
      */
     modulepar TransportLayerAddress PX_TRANSPORT_LAYER_ADDRESS := oct2bit('0a00000a'O);
     
+    /** @desc CDMA2000 message
+     * @see ETSI TS 136 413 Clause 9.2.1.23 CDMA2000-PDU
+     */
+    modulepar octetstring PX_CDMA200_PDU := ''O;
+    
+    /** @desc CDMA2000 RAT type
+     * @see ETSI TS 136 413 Clause 9.2.1.24 CDMA2000 RAT Type
+     */
+    modulepar Cdma2000RATType PX_CDMA200_RAT_TYPE := hRPD;
+    
+    /** @desc CDMA2000 Reference Cell ID
+     * @see ETSI TS 136 413 Clause 9.2.1.25 CDMA2000 Sector ID
+     */
+    modulepar octetstring PX_CDMA200_SECTOR_ID := ''O;
+    
 } // End of module LibS1AP_Pixits
 

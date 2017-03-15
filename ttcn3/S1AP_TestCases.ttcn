@@ -166,7 +166,236 @@ module S1AP_TestCases {
         } // End of group E-RAB_management_group
         
         /**
-         * @desc Warning message transmission group
+         * @desc Management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.7 Management group
+         */
+        group Management_group {
+            
+            /**
+             * @desc Verify that the IUT can successfully process all mandatory IEs in a RESET and send a RESET_ACKNOWLEDGE due to a Reset procedure initiated from the MME.
+             * <pre>
+             * Pics Selection: PICS A.3/6.1.2
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of a RESET
+             *             containing a Cause
+             *                 indicating an appropriate cause value
+             *             containing a Reset_Type
+             *                 containing a S1_Interface
+             *                     indicating a value ‘Reset_all’
+             *         sends a RESET_ACKNOWLEDGE
+             *             containing a UE-associated_logical_S1-connection_list.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_MNP_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.1¶2 and 9.1.8.1 and 9.1.8.2
+             */
+            testcase TC_S1AP_ENB_MNP_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_MNP_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_MNP_01
+            
+            /**
+             * @desc Verify that the IUT can send an RESET due to a Reset procedure initiated from the E-UTRAN.
+             * <pre>
+             * Pics Selection: PICS A.3/6.1.2
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a Reset procedure initiated from the E-UTRAN
+             *         sends a  RESET
+             *             containing a Cause
+             *                 indicating an appropriate cause value
+             *             containing a Reset_Type
+             *                 containing a S1_Interface
+             *                     indicating a value ‘Reset_all’.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_MNP_02
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.2¶1 and 9.1.8.1 and 9.1.8.2
+             */
+            testcase TC_S1AP_ENB_MNP_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_MNP_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_MNP_02
+            
+            /**
+             * @desc Verify that the IUT can successfully manage Reset procedure in case of Abnormal Condition at the E-UTRAN.
+             * <pre>
+             * Pics Selection: PICS A.3/6.1.1
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of a RESET
+             *             containing a Cause
+             *                 indicating an appropriate cause value
+             *             containing a Reset_Type
+             *                 containing a Part_of_S1_interface
+             *                     indicating one empty ‘UE-associated_logical_S1-connection’
+             *         sends a RESET_ACKNOWLEDGE
+             *             containing a UE-associated_logical_S1-connection_list.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_MNP_03
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.2¶1 and 9.1.8.1 and 9.1.8.2
+             */
+            testcase TC_S1AP_ENB_MNP_03() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_MNP_03()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_MNP_03
+            
+        } // End of group Management_group
+        
+        /**
+         * @desc S1 CDMA 2000 tunnelling group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.8   S1 CDMA 2000 tunnelling group group
+         */
+        group S1_CDMA_2000_tunelling_group {
+            
+            /**
+             * @desc Verify that the IUT can send a DOWNLINK_S1_CDMA2000_TUNNELLING.
+             * <pre>
+             * Pics Selection: PICS A.3/7.2
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a CDMA2000 to be forwarded
+             *         sends an UPLINK_S1_CDMA2000_TUNNELLING
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a CDMA2000_RAT_Type
+             *             containing a CDMA2000_Sector_ID
+             *             containing a CDMA2000_PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_STP_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.8.2.2¶1 and 9.1.9.2 and 9.2.1.23
+             */
+            testcase TC_S1AP_ENB_STP_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_STP_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_STP_01
+            
+        } // End of group S1_CDMA_2000_tunelling_group
+        
+        /**
+         * @desc UE capability info indication group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.9   UE capability info indication group
+         */
+        group UE_capability_info_indication_group {
+            
+            /**
+             * @desc Verify that the IUT can send a UE_CAPABILITY_INFO_INDICATION to indicate capability-related information update.
+             * <pre>
+             * Pics Selection: PICS A.3/8
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a capability-related information update
+             *         sends an UE_CAPABILITY_INFO_INDICATION
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a containing a UE_Radio_Capability.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_UEC_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.9.2 and 9.1.10
+             */
+            testcase TC_S1AP_ENB_UEC_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_UEC_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_UEC_01
+            
+        } // End of group UE_capability_info_indication_group
+        
+        /**
+         * @desc Trace Procedures group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.10  Trace group
          */
         group Trace_group {
@@ -242,7 +471,7 @@ module S1AP_TestCases {
              * </pre>
              * 
              * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_TRP_02
-             * @reference ETSI TS 136 413 V13.4.0 Clause Clause 8.10.3.2-3 and 8.10.2.2 and 9.1.11.3 and 9.1.11.2
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.3.2-3 and 8.10.2.2 and 9.1.11.3 and 9.1.11.2
              */
             testcase TC_S1AP_ENB_TRP_02() runs on S1AP system TestAdapter { 
                 // Local variables
@@ -267,10 +496,53 @@ module S1AP_TestCases {
                 
             } // End of testcase TC_S1AP_ENB_TRP_02
             
+            /**
+             * @desc Verify that the IUT can send a CELL_TRAFFIC_TRACE when the conditions required for tracing are met.
+             * <pre>
+             * Pics Selection: PICS A.3/9.4
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate the conditions required for tracing are met
+             *         sends CELL_TRAFFIC_TRACE
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an E-UTRAN_Trace_ID
+             *             containing an E-UTRAN_CGI
+             *                 containing a PLMN_Identity
+             *                 containing a Cell_Identity
+             *             containing a Trace_Collection_Entity_IP_Address.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_TRP_03
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.4.2 and 9.1.18
+             */
+            testcase TC_S1AP_ENB_TRP_03() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_TRP_03()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_TRP_03
+            
         } // End of group Trace_group
         
         /**
-         * @desc Warning message transmission group
+         * @desc Location Reporting Procedures group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.11  Location reporting group
          */
         group Location_reporting_group {
@@ -822,7 +1094,7 @@ module S1AP_TestCases {
              * </pre>
              * 
              * @see       ETSI DTS/INT-00135-2 TP_S1AP_ENB_LPP_02
-             * @reference ETSI TS 136 413 V13.4.0 Clause Clause 8.17.2.4 and 9.1.19.4
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.17.2.4 and 9.1.19.4
              */
             testcase TC_S1AP_ENB_LPP_02() runs on S1AP system TestAdapter { 
                 // Local variables
@@ -851,7 +1123,7 @@ module S1AP_TestCases {
         
     } // End of group eNB_Role
     
-    group MME_Role {
+    group MME_Role { // TODO Review all preamble action: E-RAB Setup is exchanged for MME role, shall not be f_rABSetupRequest
         
         /**
          * @desc E-RAB management group
@@ -905,6 +1177,146 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_MME_RAB_01
             
         } // End of group ERAB_management_group
+        
+        /**
+         * @desc Management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.7 Management group
+         */
+        group Management_group {
+            
+            /**
+             * @desc Verify that the IUT can send a RESET to indicate a Reset procedure initiated from the MME.
+             * <pre>
+             * Pics Selection: A.4/6.1.2
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a Reset procedure initiated from the MME
+             *         sends a RESET
+             *             containing a Cause
+             *                 indicating an appropriate cause value
+             *             containing a Reset_Type
+             *                 containing a S1_Interface
+             *                     indicating a value ‘Reset_all’.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.1¶2 and 9.1.8.1 and 9.1.8.2
+             */
+            testcase TC_S1AP_MME_MNP_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_01
+            
+            /**
+             * @desc Verify that the IUT can send process successfully all mandatory IEs in a RESET and send a RESET_ACKNOWLEDGE due to a Reset procedure initiated from the E-UTRAN.
+             * <pre>
+             * Pics Selection: A.4/6.1.1
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of a RESET
+             *             containing a Cause
+             *                 indicating an appropriate cause value
+             *             containing a Reset_Type
+             *             containing an S1_Interface
+             *                 indicating value ‘Reset_all’
+             *         sends a RESET_ACKNOWLEDGE
+             *             containing a UE-associated_logical_S1-connection_list.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_02
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.2¶1 and 9.1.8.1 and 9.1.8.2
+             */
+            testcase TC_S1AP_MME_MNP_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_02
+            
+        } // End of group Management_group
+        
+        /**
+         * @desc S1 CDMA 2000 tunnelling group group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.8   S1 CDMA 2000 tunnelling group group
+         */
+        group S1_CDMA_2000_tunelling_group {
+            
+            /**
+             * @desc Verify that the IUT can send a DOWNLINK_S1_CDMA2000_TUNNELLING.
+             * <pre>
+             * Pics Selection: PICS A.3/7.1
+             * direct information: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a CDMA2000 signalling event
+             *         sends a DOWNLINK_S1_CDMA2000_TUNNELLING
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             not containing an E-RABs_Subject_to_Forwarding_Lis
+             *             containing a CDMA2000_HO_type
+             *             containing a CDMA2000_PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_STP_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.8.2.1¶1 and 9.1.9.1
+             */
+            testcase TC_S1AP_MME_STP_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_STP_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_STP_01
+            
+        } // End of group S1_CDMA_2000_tunelling_group
         
         /**
          * @desc Warning message transmission group
@@ -971,7 +1383,7 @@ module S1AP_TestCases {
              * </pre>
              * 
              * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_TRP_02
-             * @reference ETSI TS 136 413 V13.4.0 Clause Clause 8.10.1.211 and 9.1.11.2
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.1.211 and 9.1.11.2
              */
             testcase TC_S1AP_MME_TRP_02() runs on S1AP system TestAdapter { 
                 // Local variables

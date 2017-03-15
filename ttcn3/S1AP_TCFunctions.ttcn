@@ -202,6 +202,224 @@ module S1AP_TCFunctions {
         } // End of group ERAB_management_group
         
         /**
+         * @desc Management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.7 Management group
+         */
+        group Management_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_TRP_01
+             */
+            function f_TC_S1AP_ENB_MNP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Reset(
+                    m_resetIEs(
+                        m_cause_nas(
+                            unspecified // TODO Check value to be used
+                        ),
+                        m_resetType_all
+                ));
+                
+                f_recv_Reset_Acknowledge(
+                    mw_reset_AcknowledgeIEs(
+                        {
+                            ?/*mw_uE_associatedLogicalS1_ConnectionItemResAck_IE(
+                                mw_uE_associatedLogicalS1_ConnectionItem(
+                                    vc_MME_UE_ID,
+                                    vc_ENB_UE_ID
+                            ))*/
+                        }
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_MNP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_TRP_02
+             */
+            function f_TC_S1AP_ENB_MNP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Reset procedure initiated from the E-UTRAN
+                if (fx_ENB_Reset_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a RESET
+                    f_recv_Reset(
+                        mw_resetIEs(
+                            mw_cause_nas(
+                                unspecified // TODO Check value to be used
+                            ),
+                            m_resetType_all
+                    ));
+                }
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_MNP_02
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_TRP_03
+             */
+            function f_TC_S1AP_ENB_MNP_03() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Reset(
+                    m_resetIEs(
+                        m_cause_nas(
+                            unspecified // TODO Check value to be used
+                        ),
+                        m_resetType_partOfS1_Interface(
+                            {
+                                m_uE_associatedLogicalS1_ConnectionItemResAck_IE(
+                                    m_uE_associatedLogicalS1_ConnectionItem(
+                                        0,
+                                        0
+                                ))
+                            }
+                        )
+                ));
+                
+                f_recv_Reset_Acknowledge(
+                    mw_reset_AcknowledgeIEs(
+                        {
+                            ?/*mw_uE_associatedLogicalS1_ConnectionItemResAck_IE(
+                                mw_uE_associatedLogicalS1_ConnectionItem(
+                                    vc_MME_UE_ID,
+                                    vc_ENB_UE_ID
+                            ))*/
+                        }
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_MNP_03
+            
+        } // End of group Management_group 
+        
+        /**
+         * @desc S1 CDMA 2000 tunnelling group 
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.8   S1 CDMA 2000 tunnelling group 
+         */
+        group S1_CDMA_2000_tunnelling_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_STP_01
+             */
+            function f_TC_S1AP_ENB_STP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a CDMA2000 to be forwarded
+                if (fx_ENB_Uplink_S1_CDMA2000_Tunnelling_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a an UPLINK_S1_CDMA2000_TUNNELLING
+                    f_recv_Uplink_S1_CDMA2000_Tunnelling(
+                        mw_uplink_S1_CDMA2000_TunnellingIEs(
+                            vc_MME_UE_ID,
+                            vc_ENB_UE_ID,
+                            PX_CDMA200_RAT_TYPE, 
+                            PX_CDMA200_SECTOR_ID,
+                            PX_CDMA200_PDU
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_STP_01
+            
+        } // End of group S1_CDMA_2000_tunnelling_group
+        
+        /**
+         * @desc UE capability info indication group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.9   UE capability info indication group
+         */
+        group UE_capability_info_indication_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_UEC_01
+             */
+            function f_TC_S1AP_ENB_UEC_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a capability-related information update
+                if (fx_ENB_UE_Capability_Info_Indication_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a UE_CAPABILITY_INFO_INDICATION
+                    f_recv_eNB_UE_Capability_Info_Indication(
+                        mw_uE_Capability_Info_IndicationIEs(
+                            vc_MME_UE_ID,
+                            vc_ENB_UE_ID,
+                            - // TODO To be refined
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_UEC_01
+            
+        } // End of group UE_capability_info_indication_group
+        
+        /**
          * @desc Warning message transmission group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.10  Trace group
          */
@@ -288,6 +506,41 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_ENB_TRP_02
+            
+            /**
+             * @desc Testcase function for TC_S1AP_ENB_TRP_03
+             */
+            function f_TC_S1AP_ENB_TRP_03() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_initiate_traceStart();
+                
+                f_recv_Cell_Traffic_Trace(
+                    mw_cell_Traffic_TraceIEs(
+                        vc_MME_UE_ID,
+                        vc_ENB_UE_ID,
+                        PX_EUTRAN_TRACE_ID,
+                        mw_eUTRAN_CGI,
+                        - // TODO To be refined
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_initiate_deactivateTrace();
+                f_rABSetupRelease();
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_ENB_TRP_03
             
         } // End of group Trace_group
         
@@ -575,7 +828,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate a PWS Restart Indication procedure
-                if (fx_ENB_PWS_Restart_Indication_procedure_ind() == false) {
+                if (fx_ENB_PWS_Restart_Indication_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a PWS_RESTART_INDICATION
@@ -621,7 +874,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate a PWS Failure Indication procedure
-                if (fx_ENB_PWS_Failure_Indication_procedure_ind() == false) {
+                if (fx_ENB_PWS_Failure_Indication_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a PWS_FAILURE_INDICATION
@@ -668,7 +921,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate an ENB Direct Information Transfer procedure
-                if (fx_ENB_Direct_Information_Transfer_procedure_ind() == false) {
+                if (fx_ENB_Direct_Information_Transfer_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a ENB_DIRECT_INFORMATION_TRANSFER
@@ -709,7 +962,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate an ENB Configuration Transfer procedure
-                if (fx_ENB_Configuration_Transfer_procedure_ind() == false) {
+                if (fx_ENB_Configuration_Transfer_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a ENB_CONFIGURATION_TRANSFER
@@ -846,7 +1099,134 @@ module S1AP_TCFunctions {
         } // End of group ERAB_management_group
         
         /**
-         * @desc Warning message transmission group
+         * @desc Management group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.7 Management group
+         */
+        group Management_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_01
+             */
+            function f_TC_S1AP_MME_MNP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Reset procedure initiated from the MME
+                if (fx_MME_Reset_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a RESET
+                    f_recv_Reset(
+                        mw_resetIEs(
+                            mw_cause_nas(
+                                unspecified // TODO Check value to be used
+                            ),
+                            m_resetType_all
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MNP_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_02
+             */
+            function f_TC_S1AP_MME_MNP_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_Reset(
+                    m_resetIEs(
+                        m_cause_nas(
+                            unspecified // TODO Check value to be used
+                        ),
+                        m_resetType_all
+                ));
+                f_recv_Reset_Acknowledge(
+                    mw_reset_AcknowledgeIEs(
+                        {
+                            ?/*mw_uE_associatedLogicalS1_ConnectionItemResAck_IE(
+                                mw_uE_associatedLogicalS1_ConnectionItem(
+                                    vc_MME_UE_ID,
+                                    vc_ENB_UE_ID
+                            ))*/
+                        }
+                ));
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MNP_02
+            
+        } // End of group Management_group
+        
+        /**
+         * @desc S1 CDMA 2000 tunnelling group 
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.8   S1 CDMA 2000 tunnelling group 
+         */
+        group S1_CDMA_2000_tunnelling_group {
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_STP_01
+             */
+            function f_TC_S1AP_MME_STP_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a CDMA2000 signalling event
+                if (fx_MME_Downlink_S1_CDMA2000_Tunnelling_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a DOWNLINK_S1_CDMA2000_TUNNELLING
+                    f_recv_Downlink_S1_CDMA2000_Tunnelling(
+                        mw_downlink_S1_CDMA2000_TunnellingIEs(
+                            vc_MME_UE_ID,
+                            vc_ENB_UE_ID,
+                            {
+                                mw_eRABDataForwardingItem // TODO To be refined
+                            },
+                            PX_CDMA200_PDU,
+                            PX_CDMA200_RAT_TYPE
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_STP_01
+            
+        } // End of group S1_CDMA_2000_tunnelling_group
+        
+        /**
+         * @desc Trace Procedures group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.10  Trace group
          */
         group Trace_group {
@@ -866,7 +1246,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate a Trace Start procedure
-                if (fx_MME_Trace_Start_ind() == false) {
+                if (fx_MME_Trace_Start_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a TRACE_START
@@ -899,16 +1279,16 @@ module S1AP_TCFunctions {
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged.
                 f_rABSetupRequest();
-                f_initiate_traceStart();
+                fx_MME_Trace_Start_procedure();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
                 // Test body
-                // 1. to indicate a Trace Start procedure
-                if (fx_MME_Deactivate_Trace_ind() == false) {
+                // 1. to indicate a Deactivate Trace procedure
+                if (fx_MME_Deactivate_Trace_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
-                    // 2. sends a TRACE_START
+                    // 2. sends a DEACTIVATE_TRACE
                     f_recv_Deactivate_Trace(
                         mw_deactivate_TraceIEs(
                             vc_MME_UE_ID,
@@ -929,7 +1309,7 @@ module S1AP_TCFunctions {
         } // End of group Trace_group
         
         /**
-         * @desc Warning message transmission group
+         * @desc Location Reporting Procedures group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.11  Location reporting group
          */
         group Location_reporting_group {
@@ -949,7 +1329,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate a Location Reporting Control procedure
-                if (fx_MME_Location_Reporting_Control_procedure_ind() == false) {
+                if (fx_MME_Location_Reporting_Control_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a LOCATION_REPORTING_CONTROL
@@ -988,7 +1368,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate a Location Reporting Control procedure
-                if (fx_MME_Location_Reporting_Control_procedure_ind() == false) {
+                if (fx_MME_Location_Reporting_Control_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a LOCATION_REPORTING_CONTROL
@@ -1039,7 +1419,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate a Warning Message Transmission procedure
-                if (fx_MME_Write_Replace_Warning_procedure_ind() == false) {
+                if (fx_MME_Write_Replace_Warning_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a WRITE-REPLACE_WARNING_REQUEST
@@ -1080,7 +1460,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate a Warning Message Transmission procedure
-                if (fx_MME_Kill_procedure_ind() == false) {
+                if (fx_MME_Kill_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a KILLG_REQUEST
@@ -1126,7 +1506,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate an MME Direct Information Transfer procedure
-                if (fx_MME_Direct_Information_Transfer_procedure_ind() == false) {
+                if (fx_MME_Direct_Information_Transfer_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a MME_DIRECT_INFORMATION_TRANSFER
@@ -1167,7 +1547,7 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. to indicate an MME Configuration Transfer procedure
-                if (fx_MME_Configuration_Transfer_procedure_ind() == false) {
+                if (fx_MME_Configuration_Transfer_procedure() == false) {
                     f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     // 2. sends a MME_CONFIGURATION_TRANSFER

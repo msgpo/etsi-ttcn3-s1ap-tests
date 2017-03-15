@@ -34,6 +34,11 @@ module LibS1AP_TypesAndValues {
     type record of E_RABItem RecordOf_E_RABItem;
     
     /**
+     * @desc List of E-RABs Subject to Forwarding
+     */
+    type record of E_RABDataForwardingItem RecordOf_E_RABDataForwardingItem;
+    
+    /**
      * @desc This data structure redefines ASN.1 ProtocolIE-Field data structure die to parameterization limitation of TTCN-3 tools
      * @member id           Protocol Information Element identifier
      * @member criticality  Criticality value attached to this IE

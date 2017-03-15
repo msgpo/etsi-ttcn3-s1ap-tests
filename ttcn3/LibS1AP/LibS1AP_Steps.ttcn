@@ -150,6 +150,46 @@ module LibS1AP_Steps {
         } // End of f_recv_E_RABSetupResponse
         
         /**
+         * @desc Receive S1AP Message RESET
+         * @param p_value Receive template for RESET IEs
+         */
+        function f_recv_Reset(
+                              template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_reset(p_value))
+        } // End of f_recv_Reset
+        
+        /**
+         * @desc Receive S1AP Message RESET ACKNOWLEDGE
+         * @param p_value Receive template for RESET ACKNOWLEDGE IEs
+         */
+        function f_recv_Reset_Acknowledge(
+                                          template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_reset_Acknowledge(p_value))
+        } // End of f_recv_Reset_Acknowledge
+        
+        /**
+         * @desc Receive S1AP Message an UPLINK S1 CDMA2000 TUNNELLING
+         * @param p_value Receive template for UPLINK S1 CDMA2000 TUNNELLING IEs
+         */
+        function f_recv_Uplink_S1_CDMA2000_Tunnelling(
+                                                          template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_uplink_S1_CDMA2000_Tunnelling(p_value))
+        } // End of f_recv_Uplink_S1_CDMA2000_Tunnelling
+        
+        /**
+         * @desc Receive S1AP Message UE CAPABILITY INFO INDICATION
+         * @param p_value Receive template for UE CAPABILITY INFO INDICATION IEs
+         */
+        function f_recv_eNB_UE_Capability_Info_Indication(
+                                                          template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_uE_Capability_Info_Indication(p_value))
+        } // End of f_recv_eNB_UE_Capability_Info_Indication
+        
+        /**
          * @desc Receive S1AP Message TRACE FAILURE INDICATION
          * @param p_value Receive template for TRACE FAILURE INDICATION IEs
          */
@@ -158,6 +198,16 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_trace_Failure_Indication(p_value))
         } // End of f_recv_Trace_Failure_Indication
+        
+        /**
+         * @desc Receive S1AP Message CELL TRAFFIC TRACE
+         * @param p_value Receive template for CELL TRAFFIC TRACE IEs
+         */
+        function f_recv_Cell_Traffic_Trace(
+                                           template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_cell_Traffic_Trace(p_value))
+        } // End of f_recv_Cell_Traffic_Trace
         
         /**
          * @desc Receive S1AP Message LOCATION REPORT
@@ -231,6 +281,17 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_eNB_Direct_Information_Transfer(p_value))
         } // End of f_recv_eNB_Configuration_Transfer
+        
+        /**
+         * @desc Receive S1AP Message DOWNLINK S1 CDMA2000 TUNNELLING
+         * @param p_value Receive template for DOWNLINK S1 CDMA2000 TUNNELLING IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.9.1 DOWNLINK S1 CDMA2000 TUNNELLING
+         */
+        function f_recv_Downlink_S1_CDMA2000_Tunnelling(
+                                                            template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_downlink_S1_CDMA2000_Tunnelling(p_value))
+        } // End of f_recv_Downlink_S1_CDMA2000_Tunnelling
         
         /**
          * @desc Receive S1AP Message TRACE START 
@@ -314,8 +375,8 @@ module LibS1AP_Steps {
          * @param p_value Receive template for MME DIRECT INFORMATION TRANSFER IEs
          * @see ETSI TS 136 413 V13.4.0 Clause 9.1.15 MME DIRECT INFORMATION TRANSFER
          */
-        function fx_MME_Direct_Information_Transfer_procedure(
-                                                              template (present) RecordOf_ProtocolIE p_value := ?
+        function f_MME_Direct_Information_Transfer_procedure(
+                                                             template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_Mme_Configuration_Transfer(p_value))
         } // End of fx_MME_Direct_Information_Transfer_procedure
@@ -456,6 +517,16 @@ module LibS1AP_Steps {
         } // End of function f_send_E_RABSetupRequest
         
         /**
+         * @desc Send S1AP Message REST
+         * @param p_value Send template with IE for RESET
+         */
+        function f_send_Reset(
+                              in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_reset(p_value))
+        } // End of function f_send_Reset
+        
+        /**
          * @desc Send S1AP Message TRACE START
          * @param p_value Send template with IE for TRACE START
          */
@@ -594,7 +665,14 @@ module LibS1AP_Steps {
          * @desc Initiate a Trace Start procedure
          */
         function f_initiate_traceStart() runs on S1APComponent {
-            // TODO 
+            f_send_Trace_Start(
+                m_trace_StartIEs(
+                    m_traceActivation(
+                        PX_EUTRAN_TRACE_ID,
+                        PX_INTERFACES_TO_TRACE,
+                        PX_TRACE_DEPTH,
+                        PX_TRANSPORT_LAYER_ADDRESS
+            )));
         } // End of function f_initiate_traceStart
         
         /**
@@ -616,6 +694,24 @@ module LibS1AP_Steps {
     group externalFunctions {
         
         /**
+         * @desc Trigger a RESET procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_ENB_Reset_procedure() return boolean;
+        
+        /**
+         * @desc Trigger a CDMA2000 to be forwarded procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_ENB_Uplink_S1_CDMA2000_Tunnelling_procedure() return boolean;
+        
+        /**
+         * @desc Trigger a UE CAPABILITY INFO INDICATION procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_ENB_UE_Capability_Info_Indication_procedure() return boolean;
+        
+        /**
          * @desc Force the UE to be registered to a new cell
          * @return true on success, false otherwise
          */
@@ -631,67 +727,79 @@ module LibS1AP_Steps {
          * @desc Trigger a PWS Restart Indication procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_PWS_Restart_Indication_procedure_ind() return boolean;
+        external function fx_ENB_PWS_Restart_Indication_procedure() return boolean;
         
         /**
          * @desc Trigger a PWS Failure Indication procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_PWS_Failure_Indication_procedure_ind() return boolean;
+        external function fx_ENB_PWS_Failure_Indication_procedure() return boolean;
         
         /**
          * @desc Trigger an ENB direct information Transfer procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_Direct_Information_Transfer_procedure_ind() return boolean;
+        external function fx_ENB_Direct_Information_Transfer_procedure() return boolean;
         
         /**
          * @desc Trigger an ENB Configuration Transfer procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_Configuration_Transfer_procedure_ind() return boolean;
+        external function fx_ENB_Configuration_Transfer_procedure() return boolean;
+        
+        /**
+         * @desc Trigger a RESET event
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Reset_procedure() return boolean;
+        
+        /**
+         * @desc Trigger a CDMA2000 signalling event
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Downlink_S1_CDMA2000_Tunnelling_procedure() return boolean;
         
         /**
          * @desc Trigger a Trace Start procedure
          * @return true on success, false otherwise
          */
-        external function fx_MME_Trace_Start_ind() return boolean;
+        external function fx_MME_Trace_Start_procedure() return boolean;
         
         /**
          * @desc Trigger a Deactivate Trace procedure
          * @return true on success, false otherwise
          */
-        external function fx_MME_Deactivate_Trace_ind() return boolean;
+        external function fx_MME_Deactivate_Trace_procedure() return boolean;
         
         /**
          * @desc Trigger a Location Reporting Control procedure
          * @return true on success, false otherwise
          */
-        external function fx_MME_Location_Reporting_Control_procedure_ind() return boolean;
+        external function fx_MME_Location_Reporting_Control_procedure() return boolean;
         
         /**
          * @desc Trigger a Write-Replace Warning procedure
          * @return true on success, false otherwise
          */
-        external function fx_MME_Write_Replace_Warning_procedure_ind() return boolean;
+        external function fx_MME_Write_Replace_Warning_procedure() return boolean;
         
         /**
          * @desc Trigger a Kill procedure
          * @return true on success, false otherwise
          */
-        external function fx_MME_Kill_procedure_ind() return boolean;
+        external function fx_MME_Kill_procedure() return boolean;
         
         /**
          * @desc Trigger an MME Direct Information Transfer procedure
          * @return true on success, false otherwise
          */
-        external function fx_MME_Direct_Information_Transfer_procedure_ind() return boolean;
+        external function fx_MME_Direct_Information_Transfer_procedure() return boolean;
         
         /**
          * @desc Trigger an MME Configuration Transfer procedure
          * @return true on success, false otherwise
          */
-        external function fx_MME_Configuration_Transfer_procedure_ind() return boolean;
+        external function fx_MME_Configuration_Transfer_procedure() return boolean;
         
         /**
          * @desc Trigger a LPPa Transport procedure using a UE associated signalling on eNodeB
