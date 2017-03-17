@@ -19,37 +19,40 @@ module S1AP_TestControl {
         
         if (PICS_S1AP_eNB_IUT) {
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.2    E-RAB management group
-            execute(TC_S1AP_ENB_RAB_01());
-            execute(TC_S1AP_ENB_RAB_02());
+            execute(TC_S1AP_eNB_RAB_01());
+            execute(TC_S1AP_eNB_RAB_02());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.7 Management group
-            execute(TC_S1AP_ENB_MNP_01());
-            execute(TC_S1AP_ENB_MNP_02());
-            execute(TC_S1AP_ENB_MNP_03());
+            execute(TC_S1AP_eNB_MNP_01());
+            execute(TC_S1AP_eNB_MNP_02());
+            execute(TC_S1AP_eNB_MNP_03());
+            execute(TC_S1AP_eNB_MNP_04());
+            execute(TC_S1AP_eNB_MNP_05());
+            // TODO execute(TC_S1AP_MME_MNP_06());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.8 S1 CDMA 2000 tunnelling group
-            execute(TC_S1AP_ENB_STP_01());
+            execute(TC_S1AP_eNB_STP_01());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.9 UE capability info indication group
-            execute(TC_S1AP_ENB_UEC_01());
+            execute(TC_S1AP_eNB_UEC_01());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.10    Trace group
-            execute(TC_S1AP_ENB_TRP_01());
-            execute(TC_S1AP_ENB_TRP_02());
-            execute(TC_S1AP_ENB_TRP_03());
+            execute(TC_S1AP_eNB_TRP_01());
+            execute(TC_S1AP_eNB_TRP_02());
+            execute(TC_S1AP_eNB_TRP_03());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.11    Location reporting group
-            execute(TC_S1AP_ENB_LRP_01());
-            execute(TC_S1AP_ENB_LRP_02());
-            execute(TC_S1AP_ENB_LRP_03());
-            execute(TC_S1AP_ENB_LRP_04());
+            execute(TC_S1AP_eNB_LRP_01());
+            execute(TC_S1AP_eNB_LRP_02());
+            execute(TC_S1AP_eNB_LRP_03());
+            execute(TC_S1AP_eNB_LRP_04());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.12    Warning message transmission group
-            execute(TC_S1AP_ENB_WTP_01());
-            execute(TC_S1AP_ENB_WTP_02());
-            execute(TC_S1AP_ENB_WTP_03());
-            execute(TC_S1AP_ENB_WTP_04());
+            execute(TC_S1AP_eNB_WTP_01());
+            execute(TC_S1AP_eNB_WTP_02());
+            execute(TC_S1AP_eNB_WTP_03());
+            execute(TC_S1AP_eNB_WTP_04());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.13    eNB direct information transfer group
-            execute(TC_S1AP_ENB_EIT_01());
+            execute(TC_S1AP_eNB_EIT_01());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.16   eNB configuration transfer group
-            execute(TC_S1AP_ENB_ECT_01());
+            execute(TC_S1AP_eNB_ECT_01());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.17  LPPa transport group
-            execute(TC_S1AP_ENB_LPP_01());
-            execute(TC_S1AP_ENB_LPP_02());
+            execute(TC_S1AP_eNB_LPP_01());
+            execute(TC_S1AP_eNB_LPP_02());
         }
         if (PICS_S1AP_MME_IUT) {
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.2.2    E-RAB management group
@@ -57,7 +60,9 @@ module S1AP_TestControl {
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.2.7 Management group
             execute(TC_S1AP_MME_MNP_01());
             execute(TC_S1AP_MME_MNP_02());
-            //execute(TC_S1AP_MME_MNP_02());
+            execute(TC_S1AP_MME_MNP_03());
+            execute(TC_S1AP_MME_MNP_04());
+            execute(TC_S1AP_MME_MNP_05());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.2.8 S1 CDMA 2000 tunnelling group
             execute(TC_S1AP_MME_STP_01());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.2.10    Trace group

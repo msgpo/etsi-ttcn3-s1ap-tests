@@ -35,7 +35,7 @@ module LibS1AP_Pixits {
         /** 
          * @desc    boolean (This is an operator option, not a protocol option), True, if IPv6 addresses are used
          */
-        modulepar boolean PX_IPv6     := true;
+        modulepar boolean PX_IPv6     := false;
         
         /** 
          * @desc enumerated (This is an operator option, not a protocol option)
@@ -65,7 +65,7 @@ module LibS1AP_Pixits {
      * @desc eNB Identity.
      * @see ETSI TS 136 413 Clause 9.2.1.37 Global eNB ID
      */
-    modulepar ENB_ID PX_ENB_ID := {
+    modulepar ENB_ID PX_eNB_ID := {
         homeENB_ID := '0000000000000000000000000000'B
     };
     
@@ -81,8 +81,25 @@ module LibS1AP_Pixits {
     modulepar TAC PX_TAC := '0000'O;
     
     /** 
-     * @desc The Serial Number IE identifies a particular message from the source and type indicated by the Message Identifie.
-     * @see ETSI TS 136 413 Clause 9.2.1.45 Serial Number
+     * @desc The MME Group ID.
+     */
+    modulepar MME_Group_ID PX_MME_GROUP_ID := '0000'O;
+    
+    /** 
+     * @desc The MME Code to uniquely identify an MME within an MME pool area.
+     * @see ETSI TS 136 413 Clause 9.2.3.12 MMEC
+     */
+    modulepar MME_Code PX_MME_CODE := '01'O;
+    
+    /** 
+     * @desc The relative processing capacity of an MME with respect to the other MMEs in the pool in order to load-balance MMEs within a pool defined in TS 23.401.
+     * @see ETSI TS 136 413 Clause 9.2.3.17 Relative MME Capacity
+     */
+    modulepar RelativeMMECapacity PX_RELATIVE_MME_CAPAVCITY := 128;
+    
+    /** 
+     * @desc The Message Identifier IE identifies a warning message.
+     * @see ETSI TS 136 413 Clause 9.2.1.44 Message Identifier
      */
     modulepar MessageIdentifier PX_MESSAGE_IDENTIFIER := oct2bit('0000'O);
     
@@ -123,7 +140,7 @@ module LibS1AP_Pixits {
     modulepar ReportArea PX_REPORT_AREA := ecgi;
     
     /** 
-     * @desc The E-UTRAN Trace ID IE.
+     * @desc The E-UTRAN Trace ID.
      * @see ETSI TS 136 413 Clause 9.2.1.4 Trace Activation
      */
     modulepar E_UTRAN_Trace_ID PX_EUTRAN_TRACE_ID := '0000000000000000'O;
@@ -160,6 +177,11 @@ module LibS1AP_Pixits {
      * @see ETSI TS 136 413 Clause 9.2.1.25 CDMA2000 Sector ID
      */
     modulepar octetstring PX_CDMA200_SECTOR_ID := ''O;
+    
+    /** @desc The Paging DRX as defined in TS 36.304.
+     * @see ETSI TS 136 413 Clause 9.2.1.16 Paging DRX
+     */
+    modulepar PagingDRX PX_PAGING_DRX := v256;
     
 } // End of module LibS1AP_Pixits
 

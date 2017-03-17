@@ -14,9 +14,6 @@ module S1AP_Pixits {
     // LibCommon
     import from LibCommon_BasicTypesAndValues all;
     
-    // LibS1AP
-    //import TODO...
-
     group S1AP_Port_and_addresses {
         
         group S1AP_TS_Port_and_addresses {
@@ -44,22 +41,22 @@ module S1AP_Pixits {
             /** @desc    
              * IP address of the test system
              */
-            modulepar charstring PX_S1AP_ENB_ETS_IPADDR := "1.1.1.12";
+            modulepar charstring PX_S1AP_eNB_ETS_IPADDR := "1.1.1.12";
             
             /** @desc    
              * Port number of the test system
              */
-            modulepar integer PX_S1AP_ENB_ETS_PORT := 3868;
+            modulepar integer PX_S1AP_eNB_ETS_PORT := 3868;
             
             /** @desc    
              * IP address of the test system
              */
-            modulepar charstring PX_S1AP_ENB_ETS_IPADDR2 := "1.1.1.13";
+            modulepar charstring PX_S1AP_eNB_ETS_IPADDR2 := "1.1.1.13";
             
             /** @desc    
              * Port number of the test system
              */
-            modulepar integer PX_S1AP_ENB_ETS_PORT2 := 3868;
+            modulepar integer PX_S1AP_eNB_ETS_PORT2 := 3868;
 
             
         } // End of group S1AP_TS_Port_and_addresses
@@ -79,12 +76,12 @@ module S1AP_Pixits {
             /** @desc    
              * IP address of the system under test
              */
-            modulepar charstring PX_S1AP_ENB_SUT_IPADDR := "1.1.2.11";
+            modulepar charstring PX_S1AP_eNB_SUT_IPADDR := "1.1.2.11";
             
             /** @desc    
              * Port number of the system under test
              */
-            modulepar integer PX_S1AP_ENB_SUT_PORT := 3868;
+            modulepar integer PX_S1AP_eNB_SUT_PORT := 3868;
             
             
         } // End of group S1AP_SUT_Port_and_addresses{

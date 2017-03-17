@@ -150,6 +150,36 @@ module LibS1AP_Steps {
         } // End of f_recv_E_RABSetupResponse
         
         /**
+         * @desc Receive S1AP Message RESET ACKNOWLEDGE
+         * @param p_value Receive template for RESET ACKNOWLEDGE IEs
+         */
+        function f_recv_S1_Setup_Request(
+                                          template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_s1_Setup_Request(p_value))
+        } // End of f_recv_S1_Setup_Request
+        
+        /**
+         * @desc Receive S1AP Message ERROR_INDICATION
+         * @param p_value Receive template for ERROR_INDICATION IEs
+         */
+        function f_recv_Error_Indication(
+                                         template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_error_Indication(p_value))
+        } // End of f_recv_Error_Indication
+        
+        /**
+         * @desc Receive S1AP Message S1 SETUP RESPONSE
+         * @param p_value Receive template for S1 SETUP RESPONSE IEs
+         */
+        function f_recv_S1_Setup_Response(
+                                         template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_s1_Setup_Response(p_value))
+        } // End of f_recv_S1_Setup_Response
+        
+        /**
          * @desc Receive S1AP Message RESET
          * @param p_value Receive template for RESET IEs
          */
@@ -517,7 +547,17 @@ module LibS1AP_Steps {
         } // End of function f_send_E_RABSetupRequest
         
         /**
-         * @desc Send S1AP Message REST
+         * @desc Send S1AP Message S1 SETUP RESPONSE
+         * @param p_value Send template with IE for S1 SETUP RESPONSE
+         */
+        function f_send_S1_Setup_Response(
+                                          in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_successfulOutcome(m_s1_Setup_Response(p_value))
+        } // End of function f_send_S1_Setup_Response
+        
+        /**
+         * @desc Send S1AP Message RESET
          * @param p_value Send template with IE for RESET
          */
         function f_send_Reset(
@@ -525,6 +565,16 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_reset(p_value))
         } // End of function f_send_Reset
+        
+        /**
+         * @desc Send S1AP Message S1 SETUP REQUEST
+         * @param p_value Send template with IE for S1 SETUP REQUEST
+         */
+        function f_send_S1_Setup_Request(
+                                         in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_s1_Setup_Request(p_value))
+        } // End of function f_send_S1_Setup_Request
         
         /**
          * @desc Send S1AP Message TRACE START
@@ -620,7 +670,7 @@ module LibS1AP_Steps {
         function f_rABSetupRequest() runs on S1APComponent {
             f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
                 vc_MME_UE_ID,
-                vc_ENB_UE_ID,
+                vc_eNB_UE_ID,
                 {
                      m_E_RABToBeSetupItemBearerSUReq(1),
                      m_E_RABToBeSetupItemBearerSUReq(
@@ -632,7 +682,7 @@ module LibS1AP_Steps {
             ));
             f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs_FailedToSetupList(
                 vc_MME_UE_ID,
-                vc_ENB_UE_ID,
+                vc_eNB_UE_ID,
                 {
                       mw_E_RABSetupItemBearerSURes(1)
                 },
@@ -694,22 +744,34 @@ module LibS1AP_Steps {
     group externalFunctions {
         
         /**
+         * @desc Trigger an S1 SETUP procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_eNB_S1_Setup_Request_procedure() return boolean;
+        
+        /**
+         * @desc Trigger an Error Indication procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_eNB_Error_Indication_procedure() return boolean;
+        
+        /**
          * @desc Trigger a RESET procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_Reset_procedure() return boolean;
+        external function fx_eNB_Reset_procedure() return boolean;
         
         /**
          * @desc Trigger a CDMA2000 to be forwarded procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_Uplink_S1_CDMA2000_Tunnelling_procedure() return boolean;
+        external function fx_eNB_Uplink_S1_CDMA2000_Tunnelling_procedure() return boolean;
         
         /**
          * @desc Trigger a UE CAPABILITY INFO INDICATION procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_UE_Capability_Info_Indication_procedure() return boolean;
+        external function fx_eNB_UE_Capability_Info_Indication_procedure() return boolean;
         
         /**
          * @desc Force the UE to be registered to a new cell
@@ -727,31 +789,37 @@ module LibS1AP_Steps {
          * @desc Trigger a PWS Restart Indication procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_PWS_Restart_Indication_procedure() return boolean;
+        external function fx_eNB_PWS_Restart_Indication_procedure() return boolean;
         
         /**
          * @desc Trigger a PWS Failure Indication procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_PWS_Failure_Indication_procedure() return boolean;
+        external function fx_eNB_PWS_Failure_Indication_procedure() return boolean;
         
         /**
          * @desc Trigger an ENB direct information Transfer procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_Direct_Information_Transfer_procedure() return boolean;
+        external function fx_eNB_Direct_Information_Transfer_procedure() return boolean;
         
         /**
          * @desc Trigger an ENB Configuration Transfer procedure
          * @return true on success, false otherwise
          */
-        external function fx_ENB_Configuration_Transfer_procedure() return boolean;
+        external function fx_eNB_Configuration_Transfer_procedure() return boolean;
         
         /**
          * @desc Trigger a RESET event
          * @return true on success, false otherwise
          */
         external function fx_MME_Reset_procedure() return boolean;
+        
+        /**
+         * @desc Trigger an ERROR INDICATION event
+         * @return true on success, false otherwise
+         */
+        external function fx_MME_Error_Indication_procedure() return boolean;
         
         /**
          * @desc Trigger a CDMA2000 signalling event

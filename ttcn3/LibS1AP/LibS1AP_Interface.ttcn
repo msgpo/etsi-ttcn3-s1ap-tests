@@ -75,7 +75,7 @@ module LibS1AP_Interface {
             // Init of values at component started
             // TODO: generation of following MME and ENB UE IDs can be done randomly in init
             var MME_UE_S1AP_ID vc_MME_UE_ID         := 10;
-            var ENB_UE_S1AP_ID vc_ENB_UE_ID         := 11;
+            var ENB_UE_S1AP_ID vc_eNB_UE_ID         := 11;
             
             // General timers
             timer tc_wait  := PX_S1AP_TWAIT;

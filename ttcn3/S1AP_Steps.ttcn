@@ -63,10 +63,10 @@ module S1AP_Steps {
             //Base LibDiameter init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
-            vc_ETS_address := PX_S1AP_ENB_ETS_IPADDR;
-            vc_ETS_port    := PX_S1AP_ENB_ETS_PORT;
-            vc_SUT_address := PX_S1AP_ENB_SUT_IPADDR;
-            vc_SUT_port    := PX_S1AP_ENB_SUT_PORT;
+            vc_ETS_address := PX_S1AP_eNB_ETS_IPADDR;
+            vc_ETS_port    := PX_S1AP_eNB_ETS_PORT;
+            vc_SUT_address := PX_S1AP_eNB_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_eNB_SUT_PORT;
             
         } // End of function f_S1AP_enb_init
         
@@ -82,10 +82,10 @@ module S1AP_Steps {
             //Base LibDiameter init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
-            vc_ETS_address := PX_S1AP_ENB_ETS_IPADDR2;
-            vc_ETS_port    := PX_S1AP_ENB_ETS_PORT2;
-            vc_SUT_address := PX_S1AP_ENB_SUT_IPADDR;
-            vc_SUT_port    := PX_S1AP_ENB_SUT_PORT;
+            vc_ETS_address := PX_S1AP_eNB_ETS_IPADDR2;
+            vc_ETS_port    := PX_S1AP_eNB_ETS_PORT2;
+            vc_SUT_address := PX_S1AP_eNB_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_eNB_SUT_PORT;
             
         } // End of function f_S1AP_enb_init2
         
