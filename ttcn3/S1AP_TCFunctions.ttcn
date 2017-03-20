@@ -217,9 +217,9 @@ module S1AP_TCFunctions {
 		group Context_management_group {
 
             /**
-             * @desc Testcase function for TC_S1AP_CON_MGT_01
+             * @desc Testcase function for TC_S1AP_eNB_CMP_01
              */
-            function f_TC_S1AP_CON_MGT_01() runs on S1APComponent { 
+            function f_TC_S1AP_eNB_CMP_01() runs on S1APComponent { 
                 // Local variables
                 
                 // Preamble
@@ -235,13 +235,15 @@ module S1AP_TCFunctions {
                     {m_E_RABToBeSetupItemBearerSUReq (
                         -,
                         m_e_RABlevelQoSParameters
-                        (5)
+                        (5),
+                        -,
+                        - // TODO should be omit
                     )},
 				    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
 				    m_securityKey
                 ));
 
-                f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs(
+				f_recv_InitialContext_SetupResponse(mw_InitialContextSetupResIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     {
@@ -257,7 +259,7 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-            } // End of function f_TC_S1AP_CON_MGT_01
+            } // End of function f_TC_S1AP_eNB_CMP_01
 
             
 		} // End of group Context_management_group
