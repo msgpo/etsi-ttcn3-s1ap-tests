@@ -1264,6 +1264,47 @@ module S1AP_TCFunctions {
             } // End of function f_TC_S1AP_MME_RAB_01
             
         } // End of group ERAB_management_group
+
+		/**
+		 * @desc Context management group
+		 * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.3  Context management group
+		 */
+		group Context_management_group {
+
+            
+		} // End of group Context_management_group
+
+
+		/**
+		 * @desc Handover signalling group
+		 * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.4  Handover signalling group
+		 */
+		group Handover_signalling_group {
+
+            
+		} // End of group Handover_signalling_group
+
+
+
+		/**
+		 * @desc Paging group
+		 * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.5  Paging group
+		 */
+		group Paging_group {
+
+            
+		} // End of group Paging_group
+
+
+		/**
+		 * @desc NAS transport group
+		 * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.6  NAS transport group
+		 */
+		group NAS_transport_group {
+
+            
+		} // End of group NAS_transport_group
+
         
         /**
          * @desc Management group
@@ -1507,6 +1548,15 @@ module S1AP_TCFunctions {
             } // End of function f_TC_S1AP_MME_STP_01
             
         } // End of group S1_CDMA_2000_tunnelling_group
+
+        /**
+         * @desc UE capability info indication group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.9   UE capability info indication group
+         */
+        group UE_capability_info_indication_group {
+            
+        } // End of group UE_capability_info_indication_group
+
         
         /**
          * @desc Trace Procedures group
@@ -1769,6 +1819,17 @@ module S1AP_TCFunctions {
             } // End of function f_TC_S1AP_MME_WTP_02
             
         } // End of group MME_Warning_message_transmission_group 
+
+
+        /**
+         * @desc eNB direct information transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.13  eNB direct information transfer group
+         */
+        group ENB_direct_information_transfer_group {
+            
+        } // End of group ENB_direct_information_transfer_group 
+
+
         
         /**
          * @desc MME direct information transfer group
@@ -1810,6 +1871,17 @@ module S1AP_TCFunctions {
             } // End of function f_TC_S1AP_MME_MIT_01
             
         } // End of group MME_direct_information_transfer_group 
+
+        
+        /**
+         * @desc eNB configuration transfer group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.15  eNB configuration transfer group
+         */
+        group ENB_configuration_transfer_group {
+            
+        } // End of group ENB_configuration_transfer_group 
+
+
         
         /**
          * @desc MME configuration transfer group
@@ -1928,6 +2000,19 @@ module S1AP_TCFunctions {
             } // End of function f_TC_S1AP_MME_LPP_02
             
         } // End of group LPPa_transport_group 
+
+
+		/**
+		 * @desc NAS transport group
+		 * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.18  Unknown, Unforseen and Errorneous Protocol Data group
+		 */
+		group Unknown_unforseen_errorneous_group {
+
+            
+		} // End of group Unknown_unforseen_errorneous_group
+
+
+
         
     } // End of group MME_Role
     
