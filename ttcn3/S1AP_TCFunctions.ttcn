@@ -236,7 +236,9 @@ module S1AP_TCFunctions {
                         -,
                         m_e_RABlevelQoSParameters
                         (5)
-                    )}
+                    )},
+				    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+				    m_securityKey
                 ));
 
                 f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs(
