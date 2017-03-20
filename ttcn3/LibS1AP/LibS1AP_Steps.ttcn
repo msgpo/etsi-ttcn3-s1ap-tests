@@ -556,6 +556,17 @@ module LibS1AP_Steps {
             f_recv_S1AP_initiatingMessage(mw_UplinkNonUEAssociatedLppaTransport(p_value))
         } // End of f_recv_Uplink_Non_UE_Associated_Lppa_Transport
         
+		/**
+		* @desc Receive S1AP Message HANDOVER_REQUIRED
+		* @param p_value Receive template for UPLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT IEs
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.5.1 HANDOVER_REQUIRED
+		*/
+		function f_recv_Handover_Required(
+										template (present) RecordOf_ProtocolIE p_value := ?
+		) runs on S1APComponent {
+			// TODO
+		} // End of f_recv_Uplink_Non_UE_Associated_Lppa_Transport
+        
     } // End of group receivePDU
     
     /**

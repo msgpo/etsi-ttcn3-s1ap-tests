@@ -56,7 +56,7 @@ module LibS1AP_Templates {
         group class1 {
             
             group sendClass1 {
-                
+            
                 group HandoverPreparation {
                     
                     group initiatingMessage {
@@ -426,6 +426,26 @@ module LibS1AP_Templates {
             
             group receiveClass1 {
                 
+				group HandoverRequired{
+					template (value) RecordOf_ProtocolIE mw_HandoverRequiredIEs(
+						template (present) MME_UE_S1AP_ID p_MME_value := ?,
+						template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+						template (present) HandoverType p_HandoverType_value := ?,
+						template (present) Cause p_Cause_value := ?,
+						template (present) TargetID p_TargetId_value := ?,
+						template (present) Source_ToTarget_TransparentContainer p_Source_ToTarget_TransparentContainer_value := ?
+					   ) := {
+							mw_MME_UE_S1AP_ID(p_MME_value),
+							mw_eNB_UE_S1AP_ID(p_eNB_value),
+	  						mw_handoverType_IE(p_HandoverType_value),
+	  						mw_cause_IE(p_Cause_value)
+	  						
+	  						// TODO
+	  						
+	  						
+					   } // End of template m_E_RABSetupReqIEs
+				}// End of group HandoverPreparation
+                
                 group HandoverPreparation{
                     
                 }// End of group HandoverPreparation
@@ -453,7 +473,7 @@ module LibS1AP_Templates {
                                                                                template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
                                                                                template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := ?
-                    ) := {
+                    ) := { 
                         mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
                         mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value)
@@ -2755,6 +2775,19 @@ module LibS1AP_Templates {
                 value_ := { EmergencyAreaIDListForRestart := p_emergencyAreaIDListForRestart }
             } // End of template mw_emergencyAreaIDListForRestart
             
+			/**
+			 * @desc 
+			 * @param p_handoverType
+			 * @param p_criticality
+			 */
+			template (present) ProtocolIE mw_handoverType_IE(
+				template (present) HandoverType p_handoverType := ?,
+				template (present) ProtocolIE.criticality p_criticality := reject
+			) := {
+				id := S1AP_Constants.id_HandoverType,
+				criticality := p_criticality,
+				value_ := { HandoverType := p_handoverType }
+			} // End of template mw_handoverType
         } // End of group Receive_IEs
         
         group g_IEParameters {
