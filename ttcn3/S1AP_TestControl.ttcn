@@ -27,7 +27,9 @@ module S1AP_TestControl {
             execute(TC_S1AP_eNB_MNP_03());
             execute(TC_S1AP_eNB_MNP_04());
             execute(TC_S1AP_eNB_MNP_05());
-            // TODO execute(TC_S1AP_MME_MNP_06());
+            execute(TC_S1AP_eNB_MNP_06());
+            execute(TC_S1AP_eNB_MNP_07());
+            execute(TC_S1AP_eNB_MNP_08());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.8 S1 CDMA 2000 tunnelling group
             execute(TC_S1AP_eNB_STP_01());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.1.9 UE capability info indication group
@@ -63,6 +65,12 @@ module S1AP_TestControl {
             execute(TC_S1AP_MME_MNP_03());
             execute(TC_S1AP_MME_MNP_04());
             execute(TC_S1AP_MME_MNP_05());
+            execute(TC_S1AP_MME_MNP_06());
+            execute(TC_S1AP_MME_MNP_07());
+            execute(TC_S1AP_MME_MNP_08());
+            execute(TC_S1AP_MME_MNP_09());
+            execute(TC_S1AP_MME_MNP_10());
+            execute(TC_S1AP_MME_MNP_11());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.2.8 S1 CDMA 2000 tunnelling group
             execute(TC_S1AP_MME_STP_01());
             // ETSI DTS/INT-00135-2 V0.0.9 Clause 5.2.2.2.10    Trace group

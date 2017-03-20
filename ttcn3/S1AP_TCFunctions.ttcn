@@ -16,6 +16,14 @@ module S1AP_TCFunctions {
     import from LibCommon_VerdictControl all;
 
     // LibS1AP
+    // LibS1AP
+    import from S1AP_Constants language "ASN.1:1997" all;
+    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
+    // import from S1AP_Containers language "ASN.1:1997" all;
+    import from S1AP_IEs language "ASN.1:1997" all;
+    import from S1AP_PDU_Contents language "ASN.1:1997" all;
+    import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
+    
     import from LibS1AP_Pixits all;
     //import from LibS1AP_TypesAndValues all;
     import from LibS1AP_Templates all;
@@ -455,6 +463,127 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_eNB_MNP_05
+            
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_TRP_06
+             */
+            function f_TC_S1AP_eNB_MNP_06() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an eNB Configuration Update procedure
+                if (fx_eNB_Configuration_Update_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends an ENB_CONFIGURATION_UPDATE
+                    f_recv_eNB_Configuration_Update(
+                        mw_eNB_Configuration_UpdateIEs(
+                            mw_Global_eNB_ID(
+                                PX_PLMN_IDENTITY, 
+                                PX_eNB_ID
+                            ),
+                            {
+                                mw_supportedTAs_Item(
+                                    PX_TAC,
+                                    {
+                                        PX_PLMN_IDENTITY
+                                    } 
+                                )
+                            }
+                    ));
+                    // Send the acknowledge to finalyse the procedure
+                    f_send_eNB_Configuration_Update_Acknowledge(
+                        m_eNB_Configuration_Update_AcknowledgeIEs
+                    );
+                }
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_MNP_06
+            
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_TRP_07
+             */
+            function f_TC_S1AP_eNB_MNP_07() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_MME_Configuration_Update(
+                    m_mME_Configuration_UpdateIEs(
+                        {
+                            m_servedGUMMEIsItem(
+                                { PX_PLMN_IDENTITY },
+                                { PX_MME_GROUP_ID },
+                                { PX_MME_CODE }
+                            )
+                        } 
+                ));
+                
+                f_recv_MME_Configuration_Update_Acknowledge(
+                    mw_mME_Configuration_Update_AcknowledgeIEs
+                );
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_MNP_07
+            
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_TRP_08
+             */
+            function f_TC_S1AP_eNB_MNP_08() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_MME_Configuration_Update(
+                    m_mME_Configuration_UpdateIEs(
+                        {
+                            m_servedGUMMEIsItem(
+                                { 
+                                    PX_PLMN_IDENTITY,
+                                    PX_PLMN_IDENTITY_UNKNOWN
+                                },
+                                { PX_MME_GROUP_ID },
+                                { PX_MME_CODE }
+                            )
+                        } 
+                ));
+                
+                f_recv_MME_Configuration_Update_Failure(
+                    mw_mME_Configuration_Update_FailureIEs(
+                        mw_cause_misc(
+                            unknown_PLMN
+                )));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_MNP_08
             
         } // End of group Management_group 
         
@@ -1375,6 +1504,7 @@ module S1AP_TCFunctions {
                             ))*/
                         }
                 ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
                 // Postamble
                 f_postamble_S1AP_MME();
@@ -1412,6 +1542,7 @@ module S1AP_TCFunctions {
                             ))*/
                         }
                 ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
                 // Postamble
                 f_postamble_S1AP_MME();
@@ -1491,6 +1622,7 @@ module S1AP_TCFunctions {
                         }, 
                         PX_RELATIVE_MME_CAPAVCITY
                 ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
                 // Postamble
                 f_postamble_S1AP_MME();
@@ -1498,6 +1630,240 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_MME_MNP_05
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_06
+             */
+            function f_TC_S1AP_MME_MNP_06() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_S1_Setup_Request(
+                    m_s1_Setup_RequestIEs(
+                        m_Global_eNB_ID(
+                            PX_PLMN_IDENTITY, 
+                            PX_eNB_ID
+                        ),
+                        {
+                            m_supportedTAs_Item(
+                                PX_TAC,
+                                {
+                                    PX_PLMN_IDENTITY,
+                                    PX_PLMN_IDENTITY_UNKNOWN
+                                } 
+                            )
+                        },
+                        PX_PAGING_DRX
+                ));
+                f_recv_S1_Setup_Failure(
+                    mw_s1_Setup_FailureIEs(
+                        mw_cause_misc(
+                            unknown_PLMN
+                )));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MNP_06
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_07
+             */
+            function f_TC_S1AP_MME_MNP_07() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_eNB_Configuration_Update(
+                    m_eNB_Configuration_UpdateIEs(
+                        m_Global_eNB_ID(
+                            PX_PLMN_IDENTITY, 
+                            PX_eNB_ID
+                        ),
+                        {
+                            m_supportedTAs_Item(
+                                PX_TAC,
+                                {
+                                    PX_PLMN_IDENTITY
+                                } 
+                            )
+                        }
+                ));
+                f_recv_eNB_Configuration_Update_Acknowledge(
+                    mw_mME_Configuration_Update_AcknowledgeIEs
+                );
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MNP_07
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_08
+             */
+            function f_TC_S1AP_MME_MNP_08() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_eNB_Configuration_Update(
+                    m_eNB_Configuration_UpdateIEs(
+                        m_Global_eNB_ID(
+                            PX_PLMN_IDENTITY_UNKNOWN, 
+                            PX_eNB_ID_UNKNOWN
+                        ),
+                        {
+                            m_supportedTAs_Item(
+                                PX_TAC,
+                                {
+                                    PX_PLMN_IDENTITY_UNKNOWN
+                                } 
+                            )
+                        }
+                ));
+                f_recv_eNB_Configuration_Update_Failure(
+                    mw_eNB_Configuration_Update_FailureIEs(
+                        mw_cause_misc(
+                            unknown_PLMN
+                )));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_MNP_08
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_09
+             */
+            function f_TC_S1AP_MME_MNP_09() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an eNB Configuration Update procedure
+                if (fx_eNB_Configuration_Update_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends an ENB Configuration Update
+                    f_recv_eNB_Configuration_Update(
+                        mw_eNB_Configuration_UpdateIEs(
+                            mw_Global_eNB_ID(
+                                PX_PLMN_IDENTITY, 
+                                PX_eNB_ID
+                            ),
+                            {
+                                mw_supportedTAs_Item(
+                                    PX_TAC,
+                                    {
+                                        PX_PLMN_IDENTITY
+                                    } 
+                                )
+                            }
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MNP_09
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_10
+             */
+            function f_TC_S1AP_MME_MNP_10() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an Overload Start procedure
+                if (fx_eNB_Overload_Start_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends an OVERLOAD_START
+                    f_recv_eNB_Overload_Start(
+                        mw_eNB_Overload_StartIEs(
+                            mw_OverloadResponse(
+                                reject_non_emergency_mo_dt 
+                    )));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MNP_10
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_MNP_11
+             */
+            function f_TC_S1AP_MME_MNP_11() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate an Overload Stop procedure
+                if (fx_eNB_Overload_Stop_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends an OVERLOAD_STOP
+                    f_recv_eNB_Overload_Stop(
+                        mw_eNB_Overload_StopIEs(
+                            { 
+                                mw_gUMMEI(
+                                    -,
+                                    -,
+                                    -
+                                )
+                            } 
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_MNP_11
             
         } // End of group Management_group
         

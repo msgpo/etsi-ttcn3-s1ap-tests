@@ -172,7 +172,7 @@ module S1AP_TestCases {
         group Management_group {
             
             /**
-             * @desc Verify that the IUT can successfully process all mandatory IEs in a RESET and send a RESET_ACKNOWLEDGE due to a Reset procedure initiated from the MME.
+             * @desc Verify that the IUT can successfully process all mandatory IEs in a RESET and sends a RESET_ACKNOWLEDGE due to a Reset procedure initiated from the MME.
              * <pre>
              * Pics Selection: PICS A.3/6.1.2
              * Configuration: CF_S1-MME
@@ -373,6 +373,125 @@ module S1AP_TestCases {
                 f_cf_Down();
                 
             } // End of testcase TC_S1AP_eNB_MNP_05
+            
+            /**
+             * @desc Verify that the IUT can send an ENB_CONFIGURATION_UPDATE to indicate an eNB Configuration Update procedure.
+             * <pre>
+             * Pics Selection: PICS A.3/6.4
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an eNB Configuration Update procedure
+             *         sends an ENB_CONFIGURATION_UPDATE
+             *             containing a Global_eNB_ID
+             *             containing a Supported_TAs
+             *                 containing a TAC.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_06
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.4.2¶1 and 9.1.8.7 and 9.1.8.8
+             */
+            testcase TC_S1AP_eNB_MNP_06() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_eNB_MNP_06()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_eNB_MNP_06
+            
+            /**
+             * @desc Verify that the IUT can successfully process all mandatory IEs in an MME_CONFIGURATION_UPDATE and 
+             *       sends an MME_CONFIGURATION_UPDATE_ACKNOWLEDGE due to an MME Configuration Update procedure.
+             * <pre>
+             * Pics Selection: PICS A.3/6.5
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an MME_CONFIGURATION_UPDATE
+             *             may containing a Served_GUMMEIs
+             *             may containing a Served_PLMNs
+             *         sends an MME_CONFIGURATION_UPDATE_ACKNOWLEDGE.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_07
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.5.2¶1 and 9.1.8.10 and 9.1.8.11
+             */
+            testcase TC_S1AP_eNB_MNP_07() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_eNB_MNP_07()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_eNB_MNP_07
+            
+            /**
+             * @desc Verify that the IUT can successfully process all mandatory IEs in an MME_CONFIGURATION_UPDATE and 
+             *       sends an MME CONFIGURATION UPDATE_FAILURE due to an invalid MME Configuration Update procedure.
+             * <pre>
+             * Pics Selection: PICS A.3/6.5
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an MME_CONFIGURATION_UPDATE
+             *             containing a Broadcast_PLMNs
+             *                 indicating at least one unknown PLMN identity
+             *         sends an MME_CONFIGURATION_UPDATE_FAILURE
+             *             containing a Cause
+             *                 indicating an appropriate cause value.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_08
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.5.3 and 9.1.8.10 and 9.1.8.12
+             */
+            testcase TC_S1AP_eNB_MNP_08() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_eNB_MNP_08()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_eNB_MNP_08
             
         } // End of group Management_group
         
@@ -626,7 +745,7 @@ module S1AP_TestCases {
         group Location_reporting_group {
             
             /**
-             * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Directly and send a LOCATION_REPORT.
+             * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Directly and sends a LOCATION_REPORT.
              * <pre>
              * Pics Selection: PICS A.3/10.1 and A.3/10.3
              * Configuration: CF_S1-MME
@@ -680,7 +799,7 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_eNB_LRP_01
             
             /**
-             * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Change of service cell and send a LOCATION_REPORT.
+             * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Change of service cell and sends a LOCATION_REPORT.
              * <pre>
              * Pics Selection: PICS A.3/10.1 and A.3/10.3
              * Configuration: CF_S1-MME
@@ -735,7 +854,7 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_eNB_LRP_02
             
             /**
-             * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Stop change of service cell and send a LOCATION_REPORT.
+             * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Stop change of service cell and sends a LOCATION_REPORT.
              * <pre>
              * Pics Selection: PICS A.3/10.1 and A.3/10.3
              * Configuration: CF_S1-MME
@@ -843,7 +962,7 @@ module S1AP_TestCases {
         group Warning_message_transmission_group {
             
             /**
-             * @desc Verify that the IUT can successfully process all mandatory IEs in a WRITE-REPLACE_WARNING_REQUEST received and send a WRITE-REPLACE_WARNING_RESPONSE.
+             * @desc Verify that the IUT can successfully process all mandatory IEs in a WRITE-REPLACE_WARNING_REQUEST received and sends a WRITE-REPLACE_WARNING_RESPONSE.
              * <pre>
              * Pics Selection: PICS A.3/11.1
              * Configuration: CF_S1-MME
@@ -884,7 +1003,7 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_eNB_WTP_01
             
             /**
-             * @desc Verify that the IUT can successfully process all mandatory IEs in an KILL_REQUEST received and send a KILL_RESPONSE.
+             * @desc Verify that the IUT can successfully process all mandatory IEs in an KILL_REQUEST received and sends a KILL_RESPONSE.
              * <pre>
              * Pics Selection: PICS A.3/11.2
              * Configuration: CF_S1-MME
@@ -1304,7 +1423,7 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_MME_MNP_01
             
             /**
-             * @desc Verify that the IUT can send process successfully all mandatory IEs in a RESET and send a RESET_ACKNOWLEDGE 
+             * @desc Verify that the IUT can send process successfully all mandatory IEs in a RESET and sends a RESET_ACKNOWLEDGE 
              *       due to a Reset procedure initiated from the E-UTRAN.
              * <pre>
              * Pics Selection: A.4/6.1.1
@@ -1347,7 +1466,7 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_MME_MNP_02
             
             /**
-             * @desc Verify that the IUT can successfully all mandatory IEs in a RESET and send a RESET_ACKNOWLEDGE 
+             * @desc Verify that the IUT can successfully all mandatory IEs in a RESET and sends a RESET_ACKNOWLEDGE 
              *       due to a Reset procedure in case of Abnormal Condition at the EPC.
              * <pre>
              * Pics Selection: A.4/6.1.1
@@ -1429,12 +1548,13 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_MME_MNP_04
             
             /**
-             * @desc Verify that the IUT can process all mandatory IEs in a S1_SETUP_REQUEST and send a S1_SETUP_RESPONSE to indicate a S1 Setup procedure.
+             * @desc Verify that the IUT can process all mandatory IEs in a S1_SETUP_REQUEST and 
+             *       sends a S1_SETUP_RESPONSE to indicate a S1 Setup procedure.
              * <pre>
              * Pics Selection: A.4/6.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
-             *         On receipt of a S1_SETUP_REQUEST
+             *         on receipt of a S1_SETUP_REQUEST
              *             containing a Global_eNB_ID
              *             containing a Supported_TAs
              *                 containing a TAC
@@ -1467,6 +1587,244 @@ module S1AP_TestCases {
                 f_cf_Down();
                 
             } // End of testcase TC_S1AP_MME_MNP_05
+            
+            /**
+             * @desc Verify that the IUT can process all mandatory IEs in a S1_SETUP_REQUEST and 
+             *       sends a S1_SETUP_FAILURE to indicate an invalid S1 Setup procedure due to an unknown PLMN identities.
+             * <pre>
+             * Pics Selection: A.4/6.3
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of a S1_SETUP_REQUEST
+             *             containing a Global_eNB_ID
+             *             containing a Supported_TAs
+             *                 containing a TAC
+             *             containing a Broadcast_PLMNs
+             *                 indicating at least one unknown PLMN identity
+             *         sends a S1_SETUP_FAILURE
+             *             containing a Cause
+             *                 indicating the cause value 'Unknown PLMN'.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_06
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.3.2¶1 and 9.1.8.4 and 9.1.8.6
+             */
+            testcase TC_S1AP_MME_MNP_06() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_06()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_06
+            
+            /**
+             * @desc Verify that the IUT can process all mandatory IEs in an ENB_CONFIGURATION_UPDATE and 
+             *       sends an ENB_CONFIGURATION_UPDATE_ACKNOWLEDGE to indicate an eNB Configuration Update procedure.
+             * <pre>
+             * Pics Selection: A.4/6.4
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an ENB_CONFIGURATION_UPDATE
+             *             containing a Global_eNB_ID
+             *             containing a Supported_TAs
+             *                 containing a TAC
+             *         sends an MME_CONFIGURATION_UPDATE_ACKNOWLEDGE.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_07
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.4.2¶1 and 9.1.8.7 and 9.1.8.8
+             */
+            testcase TC_S1AP_MME_MNP_07() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_07()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_07
+            
+            /**
+             * @desc Verify that the IUT can process all mandatory IEs in an ENB_CONFIGURATION_UPDATE and 
+             *       sends an ENB_CONFIGURATION_UPDATE_FAILURE to indicate an invalid eNB Configuration Update procedure due to an invalid Global eNB identifier.
+             * <pre>
+             * Pics Selection: A.4/6.4
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an ENB_CONFIGURATION_UPDATE
+             *             containing a Global_eNB_ID
+             *                 indicating invalid value
+             *         sends an ENB_CONFIGURATION_UPDATE_FAILURE
+             *             containing a Cause
+             *                 indicating an appropriate cause value.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_08
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.3.2¶1 and 9.1.8.7 and 9.1.8.9
+             */
+            testcase TC_S1AP_MME_MNP_08() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_08()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_08
+            
+            /**
+             * @desc Verify that the IUT can send an ENB_CONFIGURATION_UPDATE to indicate an eNB Configuration Update procedure.
+             * <pre>
+             * Pics Selection: A.4/6.5
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an eNB Configuration Update procedure
+             *         sends an ENB_CONFIGURATION_UPDATE
+             *             containing a Global_eNB_ID
+             *             containing a Supported_TAs
+             *                 containing a TAC.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_09
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.4.2¶1 and 9.1.8.10
+             */
+            testcase TC_S1AP_MME_MNP_09() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_09()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_09
+            
+            /**
+             * @desc Verify that the IUT can send an OVERLOAD_START to indicate an Overload Start procedure.
+             * <pre>
+             * Pics Selection: A.4/6.6
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an Overload Start procedure
+             *         sends an OVERLOAD_START
+             *             containing an Overload_Response.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_10
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.6.2¶1 and 9.1.8.13
+             */
+            testcase TC_S1AP_MME_MNP_10() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_10()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_10
+            
+            /**
+             * @desc Verify that the IUT can send an OVERLOAD_STOP to indicate an Overload Stop procedure.
+             * <pre>
+             * Pics Selection: A.4/6.7
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an Overload Stop procedure
+             *         sends an OVERLOAD_STOP
+             *             containing an Overload_Response.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_11
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.7.2¶1 and 9.1.8.14
+             */
+            testcase TC_S1AP_MME_MNP_11() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_MNP_11()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_MNP_11
             
         } // End of group Management_group
         

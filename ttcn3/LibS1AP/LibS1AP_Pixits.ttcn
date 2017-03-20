@@ -62,11 +62,25 @@ module LibS1AP_Pixits {
     modulepar PLMNidentity PX_PLMN_IDENTITY := '000000'O;
     
     /** 
+     * @desc An unknown PLMNidentity indicates the PLMN Identity (Public land mobile network).
+     * @see ETSI TS 136 413 Clause 9.2.3.8 PLMN Identity
+     */
+    modulepar PLMNidentity PX_PLMN_IDENTITY_UNKNOWN := 'f00000'O;
+    
+    /** 
      * @desc eNB Identity.
      * @see ETSI TS 136 413 Clause 9.2.1.37 Global eNB ID
      */
     modulepar ENB_ID PX_eNB_ID := {
         homeENB_ID := '0000000000000000000000000000'B
+    };
+    
+    /** 
+     * @desc eNB Identity.
+     * @see ETSI TS 136 413 Clause 9.2.1.37 Global eNB ID
+     */
+    modulepar ENB_ID PX_eNB_ID_UNKNOWN := {
+        homeENB_ID := '1100000000000000000000000000'B
     };
     
     /** 
@@ -182,6 +196,11 @@ module LibS1AP_Pixits {
      * @see ETSI TS 136 413 Clause 9.2.1.16 Paging DRX
      */
     modulepar PagingDRX PX_PAGING_DRX := v256;
+    
+    /** @desc The identifier of the Closed Subscriber Group, as defined in TS 23.003.
+     * @see ETSI TS 136 413 Clause 9.2.1.62 CSG Id
+     */
+    modulepar Bit27 PX_CGS_ID := '000000000000000000000000000'B;
     
 } // End of module LibS1AP_Pixits
 

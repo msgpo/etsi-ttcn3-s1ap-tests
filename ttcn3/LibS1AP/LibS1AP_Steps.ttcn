@@ -150,14 +150,44 @@ module LibS1AP_Steps {
         } // End of f_recv_E_RABSetupResponse
         
         /**
-         * @desc Receive S1AP Message RESET ACKNOWLEDGE
-         * @param p_value Receive template for RESET ACKNOWLEDGE IEs
+         * @desc Receive S1AP Message S1 SETUP REQUEST
+         * @param p_value Receive template for S1 SETUP REQUEST IEs
          */
         function f_recv_S1_Setup_Request(
                                           template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_s1_Setup_Request(p_value))
         } // End of f_recv_S1_Setup_Request
+        
+        /**
+         * @desc Receive S1AP Message ENB CONFIGURATION UPDATE
+         * @param p_value Receive template for ENB CONFIGURATION UPDATE IEs
+         */
+        function f_recv_eNB_Configuration_Update(
+                                                 template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_eNB_Configuration_Update(p_value))
+        } // End of f_recv_eNB_Configuration_Update
+        
+        /**
+         * @desc Receive S1AP Message OVERLOAD START
+         * @param p_value Receive template for OVERLOAD START IEs
+         */
+        function f_recv_eNB_Overload_Start(
+                                           template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_eNB_Overload_Start(p_value))
+        } // End of f_recv_eNB_Overload_Start
+        
+        /**
+         * @desc Receive S1AP Message OVERLOAD STOP
+         * @param p_value Receive template for OVERLOAD STOP IEs
+         */
+        function f_recv_eNB_Overload_Stop(
+                                          template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_eNB_Overload_Stop(p_value))
+        } // End of f_recv_eNB_Overload_Stop
         
         /**
          * @desc Receive S1AP Message ERROR_INDICATION
@@ -178,6 +208,56 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_successfulOutcome(mw_s1_Setup_Response(p_value))
         } // End of f_recv_S1_Setup_Response
+        
+        /**
+         * @desc Receive S1AP Message S1 SETUP FAILURE
+         * @param p_value Receive template for S1 SETUP FAILURE IEs
+         */
+        function f_recv_S1_Setup_Failure(
+                                         template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_s1_Setup_Failure(p_value))
+        } // End of f_recv_S1_Setup_Failure
+        
+        /**
+         * @desc Receive S1AP Message ENB CONFIGURATION UPDATE ACKNOWLEDGE
+         * @param p_value Receive template for ENB CONFIGURATION UPDATE ACKNOWLEDGE IEs
+         */
+        function f_recv_eNB_Configuration_Update_Acknowledge(
+                                                             template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_eNB_Configuration_Update_Acknowledge(p_value))
+        } // End of f_recv_eNB_Configuration_Update_Acknowledge
+        
+        /**
+         * @desc Receive S1AP Message ENB CONFIGURATION UPDATE FAILURE
+         * @param p_value Receive template for ENB CONFIGURATION UPDATE FAILURE IEs
+         */
+        function f_recv_eNB_Configuration_Update_Failure(
+                                                         template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_eNB_Configuration_Update_Failure(p_value))
+        } // End of f_recv_eNB_Configuration_Update_Failure
+        
+        /**
+         * @desc Receive S1AP Message MME CONFIGURATION UPDATE ACKNOWLEDGE
+         * @param p_value Receive template for MME CONFIGURATION UPDATE ACKNOWLEDGE IEs
+         */
+        function f_recv_MME_Configuration_Update_Acknowledge(
+                                                             template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_mME_Configuration_Update_Acknowledge(p_value))
+        } // End of f_recv_MME_Configuration_Update_Acknowledge
+        
+        /**
+         * @desc Receive S1AP Message MME CONFIGURATION UPDATE FAILURE
+         * @param p_value Receive template for MME CONFIGURATION UPDATE FAILURE IEs
+         */
+        function f_recv_MME_Configuration_Update_Failure(
+                                                         template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_mME_Configuration_Update_Failure(p_value))
+        } // End of f_recv_MME_Configuration_Update_Failure
         
         /**
          * @desc Receive S1AP Message RESET
@@ -557,6 +637,16 @@ module LibS1AP_Steps {
         } // End of function f_send_S1_Setup_Response
         
         /**
+         * @desc Send S1AP Message ENB CONFIGURATION UPDATE ACKNOWLEDGE
+         * @param p_value Send template with IE for ENB CONFIGURATION UPDATE ACKNOWLEDGE
+         */
+        function f_send_eNB_Configuration_Update_Acknowledge(
+                                                             in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_successfulOutcome(m_eNB_Configuration_Update_Acknowledge(p_value))
+        } // End of function f_send_eNB_Configuration_Update_Acknowledge
+        
+        /**
          * @desc Send S1AP Message RESET
          * @param p_value Send template with IE for RESET
          */
@@ -575,6 +665,26 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_s1_Setup_Request(p_value))
         } // End of function f_send_S1_Setup_Request
+        
+        /**
+         * @desc Send S1AP Message ENB CONFIGURATION UPDATE
+         * @param p_value Send template with IE for ENB CONFIGURATION UPDATE 
+         */
+        function f_send_eNB_Configuration_Update(
+                                                 in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_eNB_Configuration_Update(p_value))
+        } // End of function f_send_eNB_Configuration_Update
+        
+        /**
+         * @desc Send S1AP Message MME CONFIGURATION UPDATE 
+         * @param p_value Send template with IE for MME CONFIGURATION UPDATE
+         */
+        function f_send_MME_Configuration_Update(
+                                                 in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_mME_Configuration_Update(p_value))
+        } // End of function f_send_MME_Configuration_Update
         
         /**
          * @desc Send S1AP Message TRACE START
@@ -748,6 +858,24 @@ module LibS1AP_Steps {
          * @return true on success, false otherwise
          */
         external function fx_eNB_S1_Setup_Request_procedure() return boolean;
+        
+        /**
+         * @desc Trigger an eNB Configuration Update procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_eNB_Configuration_Update_procedure() return boolean;
+        
+        /**
+         * @desc Trigger an an Overload Start procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_eNB_Overload_Start_procedure() return boolean;
+        
+        /**
+         * @desc Trigger an an Overload Stop procedure
+         * @return true on success, false otherwise
+         */
+        external function fx_eNB_Overload_Stop_procedure() return boolean;
         
         /**
          * @desc Trigger an Error Indication procedure

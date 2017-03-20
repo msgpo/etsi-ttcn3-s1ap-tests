@@ -78,7 +78,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with E-RABSetup payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The procedure code value
                      */
                     template (value) InitiatingMessage m_E_RABSetupRequest(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -106,7 +106,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with S1_SETUP_REQUEST payload
-                     * @param p_value           Expected protocol information elements.
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_s1_Setup_Request(
                                                                            in template (value) RecordOf_ProtocolIE p_value
@@ -118,9 +118,9 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for S1_SETUP_REQUEST message
-                     * @param p_global_ENB_ID   The expected Global eNB ID value
-                     * @param p_supportedTAs    The expected list of SupportedTAs-Item protocol IE
-                     * @param p_pagingDRXs      The expected Paging DRX as defined in TS 36.304
+                     * @param p_global_ENB_ID   The Global eNB ID value
+                     * @param p_supportedTAs    The list of SupportedTAs-Item protocol IE
+                     * @param p_pagingDRXs      The Paging DRX as defined in TS 36.304
                      */
                     template (value) RecordOf_ProtocolIE m_s1_Setup_RequestIEs(
                                                                                in template (value) Global_ENB_ID p_global_ENB_ID,
@@ -134,7 +134,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with S1_SETUP_RESPONSE payload
-                     * @param p_value           Expected protocol information elements.
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) SuccessfulOutcome m_s1_Setup_Response(
                                                                            in template (value) RecordOf_ProtocolIE p_value
@@ -146,7 +146,8 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for S1_SETUP_RESPONSE message
-                     * @param p_global_ENB_ID   The expected Global eNB ID value.
+                     * @param p_global_ENB_ID       The Global eNB ID value.
+                     * @param p_relativeMMECapacity The relative MME capacity value.
                      */
                     template (value) RecordOf_ProtocolIE m_s1_Setup_ResponseIEs(
                                                                                 in template (value) ServedGUMMEIs p_servedGUMMEIs,
@@ -156,16 +157,102 @@ module LibS1AP_Templates {
                         m_relativeMMECapacity_IE(p_relativeMMECapacity)
                     } // End of template m_s1_Setup_ResponseIEs
                     
+                    /**
+                     * @desc Send template for InitiatingMessage message with ENB CONFIGURATION UPDATE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (value) InitiatingMessage m_eNB_Configuration_Update(
+                                                                                  in template (value) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_ENBConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_eNB_Configuration_Update
+                    
+                    /**
+                     * @desc Send template for ENB CONFIGURATION UPDATE message
+                     * @param p_global_ENB_ID   The Global eNB ID value. Default: ?
+                     * @param p_supportedTAs    The list of SupportedTAs-Item protocol IE. Default: ?
+                     */
+                    template (value) RecordOf_ProtocolIE m_eNB_Configuration_UpdateIEs(
+                                                                                       in template (value) Global_ENB_ID p_global_ENB_ID,
+                                                                                       in template (value) SupportedTAs p_supportedTAs
+                    ) := {
+                        m_global_eNB_ID_IE(p_global_ENB_ID),
+                        m_supportedTAs_IE(p_supportedTAs)
+                    } // End of template m_eNB_Configuration_UpdateIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with ENB CONFIGURATION UPDATE ACKNOWLEDGE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (value) SuccessfulOutcome m_eNB_Configuration_Update_Acknowledge(
+                                                                                              in template (value) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_ENBConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_eNB_Configuration_Update_Acknowledge
+                    
+                    /**
+                     * @desc Send template for ENB CONFIGURATION UPDATE ACKNOWLEDGE message
+                     * 
+                     */
+                    template (value) RecordOf_ProtocolIE m_eNB_Configuration_Update_AcknowledgeIEs := {
+                    } // End of template m_eNB_Configuration_Update_AcknowledgeIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with MME CONFIGURATION UPDATE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (value) InitiatingMessage m_mME_Configuration_Update(
+                                                                                  in template (value) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_MMEConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_mME_Configuration_Update
+                    
+                    /**
+                     * @desc Send template for MME CONFIGURATION UPDATE message
+                     * @param p_global_MME_ID   The Global mME ID value. Default: ?
+                     * @param p_supportedTAs    The list of SupportedTAs-Item protocol IE. Default: ?
+                     */
+                    template (value) RecordOf_ProtocolIE m_mME_Configuration_UpdateIEs(
+                                                                                       in template (value) ServedGUMMEIs p_servedGUMMEIs
+                    ) := {
+                        m_servedGUMMEIs_IE(p_servedGUMMEIs)
+                    } // End of template m_mME_Configuration_UpdateIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with MME CONFIGURATION UPDATE ACKNOWLEDGE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (value) SuccessfulOutcome m_mME_Configuration_Update_Acknowledge(
+                                                                                              in template (value) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_MMEConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_mME_Configuration_Update_Acknowledge
+                    
+                    /**
+                     * @desc Send template for MME CONFIGURATION UPDATE ACKNOWLEDGE message
+                     * 
+                     */
+                    template (value) RecordOf_ProtocolIE m_mME_Configuration_Update_AcknowledgeIEs := {
+                    } // End of template m_mME_Configuration_Update_AcknowledgeIEs
+                    
                 } // End of group Management_group
                 
                 /**
                  * @desc Send messages for Reset Procedures
                  */
-                group Reset_send {
+                group Reset {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with RESET payload
-                     * @param p_value           Expected protocol information elements
+                     * @param p_value           The protocol information elements
                      */
                     template (value) InitiatingMessage m_reset(
                                                                in template (value) RecordOf_ProtocolIE p_value
@@ -177,7 +264,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for RESET message
-                     * @param p_cause       The expected Cause value
+                     * @param p_cause       The Cause value
                      * @param p_resetType   The RESET type value
                      */
                     template (value) RecordOf_ProtocolIE m_resetIEs(
@@ -188,7 +275,7 @@ module LibS1AP_Templates {
                         m_resetType_IE(p_resetType)
                     } // End of template m_resetIEs
                     
-                } // End of group Reset_send
+                } // End of group Reset
                 
                 /**
                  * @desc Send messages for Warning Message Transmission Procedures
@@ -197,7 +284,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with WRITE-REPLACE WARNING REQUEST payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The procedure code value
                      */
                     template (value) InitiatingMessage m_write_Replace_Warning_Request(
                                                                                        in template (value) RecordOf_ProtocolIE p_value) := {
@@ -210,7 +297,7 @@ module LibS1AP_Templates {
                      * @desc Send template for WRITE-REPLACE WARNING REQUEST message
                      * @param p_message_Identifier              The Message Identifier value
                      * @param p_serial_Number                   The Serial Number value
-                     * @param p_repetition_Period               TheRepetition Period value
+                     * @param p_repetition_Period               The Repetition Period value
                      * @param p_number_of_Broadcasts_Requested  The Number of Broadcasts Requested value
                      */
                     template (value) RecordOf_ProtocolIE m_write_Replace_Warning_RequestIEs(
@@ -251,7 +338,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with KILL REQUEST payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The procedure code value
                      */
                     template (value) InitiatingMessage m_kill_Request(
                                                                       in template (value) RecordOf_ProtocolIE p_value) := {
@@ -275,7 +362,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with KILL REQUEST payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The procedure code value
                      */
                     template (value) InitiatingMessage m_kill_Response(
                                                                       in template (value) RecordOf_ProtocolIE p_value) := {
@@ -410,6 +497,135 @@ module LibS1AP_Templates {
                         mw_servedGUMMEIs_IE(p_servedGUMMEIs),
                         mw_relativeMMECapacity_IE(p_relativeMMECapacity)
                     } // End of template mw_s1_Setup_ResponseIEs
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with S1_SETUP_RESPONSE payload
+                     * @param p_value           Expected protocol information elements. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_s1_Setup_Failure(
+                                                                             template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_S1Setup,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_s1_Setup_Failure
+                    
+                    /**
+                     * @desc Receive template for S1_SETUP_RESPONSE message
+                     * @param p_cause       The expected Cause value. Default: ?
+                     */
+                    template (present) RecordOf_ProtocolIE mw_s1_Setup_FailureIEs(
+                                                                                  template (present) Cause p_cause := ?
+                    ) := {
+                        mw_cause_IE(p_cause)
+                    } // End of template mw_s1_Setup_FailureIEs
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with ENB_CONFIGURATION_UPDATE payload
+                     * @param p_value           Expected protocol information elements. Default: ?
+                     */
+                    template (present) InitiatingMessage mw_eNB_Configuration_Update(
+                                                                                     template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_ENBConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_eNB_Configuration_Update
+                    
+                    /**
+                     * @desc Receive template for ENB_CONFIGURATION_UPDATE message
+                     * @param p_global_ENB_ID   The expected Global eNB ID value. Default: ?
+                     * @param p_supportedTAs    The expected list of SupportedTAs-Item protocol IE. Default: ?
+                     */
+                    template (present) RecordOf_ProtocolIE mw_eNB_Configuration_UpdateIEs(
+                                                                                          template (present) Global_ENB_ID p_global_ENB_ID := ?,
+                                                                                          template (present) SupportedTAs p_supportedTAs := ?
+                    ) := {
+                        mw_global_eNB_ID_IE(p_global_ENB_ID),
+                        mw_supportedTAs_IE(p_supportedTAs)
+                    } // End of template mw_eNB_Configuration_UpdateIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with ENB CONFIGURATION UPDATE ACKNOWLEDGE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (present) SuccessfulOutcome mw_eNB_Configuration_Update_Acknowledge(
+                                                                                                 template (present) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_ENBConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_eNB_Configuration_Update_Acknowledge
+                    
+                    /**
+                     * @desc Receive template for ENB CONFIGURATION UPDATE ACKNOWLEDGE message
+                     * 
+                     */
+                    template (present) RecordOf_ProtocolIE mw_eNB_Configuration_Update_AcknowledgeIEs := {
+                    } // End of template mw_eNB_Configuration_Update_AcknowledgeIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with ENB CONFIGURATION UPDATE FAILURE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (present) SuccessfulOutcome mw_eNB_Configuration_Update_Failure(
+                                                                                                 template (present) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_ENBConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_eNB_Configuration_Update_Failure
+                    
+                    /**
+                     * @desc Receive template for ENB CONFIGURATION UPDATE FAILURE message
+                     * @param p_cause       The expected Cause value. Default: ?
+                     */
+                    template (present) RecordOf_ProtocolIE mw_eNB_Configuration_Update_FailureIEs(
+                                                                                                  template (present) Cause p_cause := ?
+                    ) := {
+                        mw_cause_IE(p_cause)
+                    } // End of template mw_eNB_Configuration_Update_FailureIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with MME CONFIGURATION UPDATE ACKNOWLEDGE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (present) SuccessfulOutcome mw_mME_Configuration_Update_Acknowledge(
+                                                                                                 template (present) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_MMEConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_mME_Configuration_Update_Acknowledge
+                    
+                    /**
+                     * @desc Receive template for MME CONFIGURATION UPDATE ACKNOWLEDGE message
+                     * 
+                     */
+                    template (present) RecordOf_ProtocolIE mw_mME_Configuration_Update_AcknowledgeIEs := {
+                    } // End of template mw_mME_Configuration_Update_AcknowledgeIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with MME CONFIGURATION UPDATE FAILURE payload
+                     * @param p_value           Expected protocol information elements.
+                     */
+                    template (present) SuccessfulOutcome mw_mME_Configuration_Update_Failure(
+                                                                                             template (present) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_MMEConfigurationUpdate,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_mME_Configuration_Update_Failure
+                    
+                    /**
+                     * @desc Receive template for MME CONFIGURATION UPDATE FAILURE message
+                     * @param p_cause       The expected Cause value. Default: ?
+                     */
+                    template (present) RecordOf_ProtocolIE mw_mME_Configuration_Update_FailureIEs(
+                                                                                                  template (present) Cause p_cause := ?
+                    ) := {
+                        mw_cause_IE(p_cause)
+                    } // End of template mw_mME_Configuration_Update_FailureIEs
                     
                 } // End of group Management_group
                 
@@ -779,7 +995,7 @@ module LibS1AP_Templates {
                      * @param p_MME_value               The expected MME UE S1AP ID value. Default: ?
                      * @param p_eNB_value               The expected eNB UE S1AP ID value. Default: ?
                      * @param p_cause                   The expected Cause value. Default: ?
-                     * @param p_criticalityDiagnostics  TODO. Default: ?
+                     * @param p_criticalityDiagnostics  Information about which IEs were not comprehended or were missing. Default: ?
                      */
                     template (present) RecordOf_ProtocolIE mw_error_IndicationIEs(
                                                                                   template (present) MME_UE_S1AP_ID p_MME_value := ?,
@@ -789,11 +1005,62 @@ module LibS1AP_Templates {
                     ) := {
                         mw_MME_UE_S1AP_ID(p_MME_value),
                         mw_eNB_UE_S1AP_ID(p_eNB_value),
-                        mw_cause_IE(p_cause) ifpresent, // FIXME 'ifpresent' is not correct, how to achieve cause or criticalityDiagnostics condiftion?
-                        mw_criticalityDiagnostics_IE(p_criticalityDiagnostics) ifpresent
+                        mw_cause_IE(p_cause), // FIXME 'ifpresent' is not correct, how to achieve cause or criticalityDiagnostics condiftion?
+                        mw_criticalityDiagnostics_IE(p_criticalityDiagnostics)
                     } // End of template mw_error_IndicationIEs
                     
                 } // End of group Error_Indication_receive
+                
+                /**
+                 * @desc Receive messages for Management procedures
+                 */
+                group Management_group {
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with OVERLOAD_START payload
+                     * @param p_value           Expected protocol information elements. Default: ?
+                     */
+                    template (present) InitiatingMessage mw_eNB_Overload_Start(
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_OverloadStart,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_eNB_Overload_Start
+                    
+                    /**
+                     * @desc Receive template for OVERLOAD_START message
+                     * @param p_overloadResponse   The expected required behaviour of the eNB in an overload situation. Default: ?
+                     */
+                    template (present) RecordOf_ProtocolIE mw_eNB_Overload_StartIEs(
+                                                                                    template (present) OverloadResponse p_overloadResponse := ?
+                    ) := {
+                        mw_overloadResponse_IE(p_overloadResponse)
+                    } // End of template mw_eNB_Overload_StartIEs
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with OVERLOAD_STOP payload
+                     * @param p_value           Expected protocol information elements. Default: ?
+                     */
+                    template (present) InitiatingMessage mw_eNB_Overload_Stop(
+                                                                              template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_OverloadStop,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_eNB_Overload_Stop
+                    
+                    /**
+                     * @desc Receive template for OVERLOAD_STOP message
+                     * @param p_overloadResponse   The expected required behaviour of the eNB in an overload situation. Default: ?
+                     */
+                    template (present) RecordOf_ProtocolIE mw_eNB_Overload_StopIEs(
+                                                                                   template (present) GUMMEIList p_gUMMEIList := ?
+                    ) := {
+                        mw_gUMMEIList_IE(p_gUMMEIList)
+                    } // End of template mw_eNB_Overload_StopIEs
+                    
+                } // End of group Management_group
                 
                 /**
                  * @desc Receive messages for CDMA2000 Tunnelling
@@ -1731,6 +1998,20 @@ module LibS1AP_Templates {
                     value_ := { RelativeMMECapacity := valueof(p_value) }
                 } // End of template m_relativeMMECapacity_IE
                 
+            /**
+             * @desc Send template for Cause protocol IE
+             * @param p_criticalityDiagnostics  Information about which IEs were not comprehended or were missing.
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.3 Cause
+             */
+            template (value) ProtocolIE m_criticalityDiagnostics_IE(
+                                                                    in template (value) CriticalityDiagnostics p_criticalityDiagnostics,
+                                                                    in template (value) ProtocolIE.criticality p_criticality := ignore
+            ) := {
+                id := S1AP_Constants.id_CriticalityDiagnostics,
+                criticality := p_criticality,
+                value_ := {CriticalityDiagnostics := valueof(p_criticalityDiagnostics)}
+            } // End of template m_criticalityDiagnostics_IE
+            
             } // End of group Management_group
             
             /**
@@ -1974,6 +2255,18 @@ module LibS1AP_Templates {
             } // End of template mw_pagingDRX_IE
             
             /**
+             * @desc Receive template for Overload Response protocol IE 
+             * @param p_value The required behaviour of the eNB in an overload situation value. Default: ?
+             */
+            template (present) ProtocolIE mw_overloadResponse_IE(
+                                                                 template (present) OverloadResponse p_value := ?
+            ) := {
+                id := S1AP_Constants.id_OverloadResponse,
+                criticality := reject,
+                value_ := {OverloadResponse := p_value}
+            } // End of template mw_overloadResponse_IE
+            
+            /**
              * @desc Receive template for UE_associatedLogicalS1_ConnectionItem protocol IE 
              * @param p_value The UE_associatedLogicalS1_ConnectionItem value. Default: ?
              */
@@ -1984,6 +2277,18 @@ module LibS1AP_Templates {
                 criticality := reject,
                 value_ := { UE_associatedLogicalS1_ConnectionItem := p_value }
             } // End of template mw_uE_associatedLogicalS1_ConnectionItemResAck_IE
+            
+            /**
+             * @desc Receive template for GUMMEIList protocol IE 
+             * @param p_gUMMEIList The GUMMEIList value. Default: ?
+             */
+            template (present) ProtocolIE mw_gUMMEIList_IE(
+                                                           template (present) GUMMEIList p_gUMMEIList := ?
+            ) := {
+                id := S1AP_Constants.id_GUMMEIList,
+                criticality := ignore,
+                value_ := { GUMMEIList := p_gUMMEIList }
+            } // End of template mw_gUMMEIList_IE
             
             /**
              * @desc Receive template for TAI protocol IE 
@@ -2679,6 +2984,53 @@ module LibS1AP_Templates {
                     eNB_UE_S1AP_ID  := p_eNB_value,
                     iE_Extensions   := *
                 } // End of template mw_uE_associatedLogicalS1_ConnectionItem
+                
+                /**
+                 * @desc Send template for GUMMEI protocol IE
+                 * @param p_pLMNidentity  The expected PLMNidentity value.
+                 * @param p_mME_Group_ID  The expected MME_Group_ID value.
+                 * @param p_mME_Code      The expected MME_Code value.
+                 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.9 GUMMEI
+                 */
+                template (value) GUMMEI m_gUMMEI(
+                                                 in template (value) PLMNidentity p_pLMNidentity,
+                                                 in template (value) MME_Group_ID p_mME_Group_ID,
+                                                 in template (value) MME_Code p_mME_Code
+                ) := {
+                    pLMN_Identity  := valueof(p_pLMNidentity),
+                    mME_Group_ID   := valueof(p_mME_Group_ID),
+                    mME_Code       := valueof(p_mME_Code),
+                    iE_Extensions  := omit
+                } // End of template m_gUMMEI
+                
+                /**
+                 * @desc Receive template for GUMMEI protocol IE
+                 * @param p_pLMNidentity  The expected PLMNidentity value. Default: ?
+                 * @param p_mME_Group_ID  The expected MME_Group_ID value. Default: ?
+                 * @param p_mME_Code      The expected MME_Code value. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.9 GUMMEI
+                 */
+                template (present) GUMMEI mw_gUMMEI(
+                                                    template (present) PLMNidentity p_pLMNidentity := ?,
+                                                    template (present) MME_Group_ID p_mME_Group_ID := ?,
+                                                    template (present) MME_Code p_mME_Code := ?
+                ) := {
+                    pLMN_Identity  := valueof(p_pLMNidentity),
+                    mME_Group_ID   := valueof(p_mME_Group_ID),
+                    mME_Code       := valueof(p_mME_Code),
+                    iE_Extensions  := omit
+                } // End of template mw_gUMMEI
+                
+                /**
+                 * @desc Receive template for TAI protocol IE
+                 * @param p_overloadAction  Expected required behaviour of the eNB in an overload situation. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.19 Overload Response
+                 */
+                template (present) OverloadResponse mw_OverloadResponse(
+                                                                        template (present) OverloadAction p_overloadAction := ?
+                ) := {
+                    overloadAction := p_overloadAction
+                } // End of template mw_OverloadResponse
                 
                 /**
                  * @desc Receive template for TAI protocol IE
