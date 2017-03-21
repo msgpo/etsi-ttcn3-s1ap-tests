@@ -213,54 +213,54 @@ module S1AP_TCFunctions {
 			/**
 			 * @desc Testcase function for TC_S1AP_eNB_RAB_03
 			 */
-			function f_TC_S1AP_eNB_RAB_03() runs on S1APComponent { 
-				// Local variables
-    
-				// Preamble
-				f_S1AP_enb_init();
-				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
-				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
-    
-				f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
-					vc_MME_UE_ID,
-					vc_eNB_UE_ID,
-					{
-						m_E_RABToBeSetupItemBearerSUReq
-					}
-				));
-   	
-				f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs_FailedToSetupList(
-					vc_MME_UE_ID,
-					vc_eNB_UE_ID,
-					{
-						mw_E_RABItem(
-							0,
-							{
-								radioNetwork :=
-							(CauseRadioNetwork.s1_intra_system_handover_triggered,
-							 CauseRadioNetwork.s1_inter_system_handover_triggered,
-							 CauseRadioNetwork.x2_handover_triggered)
-							}
-						)
-					}
-				));
-								
-   				f_recv_Handover_Required(mw_HandoverRequiredIEs(
-					vc_MME_UE_ID,
-					vc_eNB_UE_ID,
-					mw_handoverType_IE(HandoverType.ltetoutran),
-					?,
-					?,
-					?
-				));
-    
-				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
-    
-				f_postamble_S1AP_eNB();
-				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
-				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
-    
-			} // End of function f_TC_S1AP_eNB_RAB_03
+//			function f_TC_S1AP_eNB_RAB_03() runs on S1APComponent { 
+//				// Local variables
+//    
+//				// Preamble
+//				f_S1AP_enb_init();
+//				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+//				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+//    
+//				f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
+//					vc_MME_UE_ID,
+//					vc_eNB_UE_ID,
+//					{
+//						m_E_RABToBeSetupItemBearerSUReq
+//					}
+//				));
+//   	
+//				f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs_FailedToSetupList(
+//					vc_MME_UE_ID,
+//					vc_eNB_UE_ID,
+//					{
+//						mw_E_RABItem(
+//							0,
+//							{
+//								radioNetwork :=
+//							(CauseRadioNetwork.s1_intra_system_handover_triggered,
+//							 CauseRadioNetwork.s1_inter_system_handover_triggered,
+//							 CauseRadioNetwork.x2_handover_triggered)
+//							}
+//						)
+//					}
+//				));
+//								
+//   				f_recv_Handover_Required(mw_HandoverRequiredIEs(
+//					vc_MME_UE_ID,
+//					vc_eNB_UE_ID,
+//					mw_handoverType_IE(HandoverType.ltetoutran),
+//					?,
+//					?,
+//					?
+//				));
+//    
+//				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+//    
+//				f_postamble_S1AP_eNB();
+//				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+//				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+//    
+//			} // End of function f_TC_S1AP_eNB_RAB_03
 //            
         } // End of group ERAB_management_group
         
