@@ -631,11 +631,9 @@ module S1AP_TCFunctions {
 					m_securityKey
 				));
 
-				f_recv_InitialContext_SetupResponse(mw_InitialContextSetupResIEs(
+				f_recv_InitialContext_SetupResponse(mw_InitialContextSetupFailureIEs(
 					vc_MME_UE_ID,
 					vc_eNB_UE_ID,
-					-,
-					-,
 					mw_cause_ran(encryption_and_or_integrity_protection_algorithms_not_supported)
 				));
                 
@@ -681,11 +679,9 @@ module S1AP_TCFunctions {
 					m_securityKey
 				));
 
-				f_recv_InitialContext_SetupResponse(mw_InitialContextSetupResIEs(
+				f_recv_InitialContext_SetupResponse(mw_InitialContextSetupFailureIEs(
 					vc_MME_UE_ID,
 					vc_eNB_UE_ID,
-					-,
-					-,
 					mw_cause_ran(encryption_and_or_integrity_protection_algorithms_not_supported)
 				));
                 
