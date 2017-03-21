@@ -510,12 +510,12 @@ module LibS1AP_Templates {
 					template (present) RecordOf_ProtocolIE mw_InitialContextSetupResIEs(
 																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
 																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-																			   template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := ?,
+																			   template RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := omit,
 																			   template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
 					) := {
 						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
 						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value),
+						mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value) ifpresent,
 						mw_E_RABFailedToSetupList(p_E_RABItem_value)
 					} // End of template mw_InitialContextSetupResIEs
                     
