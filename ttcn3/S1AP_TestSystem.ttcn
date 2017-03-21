@@ -31,7 +31,7 @@ module S1AP_TestSystem {
                    port 
                        S1APPort S1AP_MME,
                        S1AP_eNB_1, 
-                       S1AP_eNb_2
+                       S1AP_eNB_2
                 } // End of type TestAdapter
                 
         } // End of group TestSystemInterfaces

@@ -166,6 +166,146 @@ module S1AP_TestCases {
         } // End of group E-RAB_management_group
         
         /**
+         * @desc NAS transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.6   NAS transport group
+         */
+        group NAS_transport_group {
+            
+            /**
+             * @desc Verify that the IUT can send an INITIAL_UE_MESSAGE to indicate the initiation of a NAS Transport procedure.
+             * <pre>
+             * Pics Selection: PICS A.3/5.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate the initiation of a NAS Transport procedure
+             *         sends an INITIAL_UE_MESSAGE
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a NAS-PDU
+             *             containg a TAI
+             *                 containing a PLMN_Identity
+             *                 containing a TAC
+             *             containing an E-UTRAN_CGI
+             *                 containing a PLMN_Identity
+             *                 containing a Cell_Identity
+             *             containing a RRC_Establishment_Cause.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_NAS_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.1¶1 and 9.1.7.1
+             */
+            testcase TC_S1AP_eNB_NAS_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_eNB_NAS_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_eNB_NAS_01
+            
+            /**
+             * @desc Verify that the IUT can send an UPLINK_NAS_TRANSPORT to indicate an ongoing NAS Transport procedure.
+             * <pre>
+             * Pics Selection: PICS A.3/5.3
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an ongoing NAS Transport procedure
+             *         sends an UPLINK_NAS_TRANSPORT
+             *             containing an MME UE S1AP ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a NAS-PDU
+             *             containg a TAI
+             *                 containing a PLMN_Identity
+             *                 containing a TAC
+             *             containing an E-UTRAN_CGI
+             *                 containing a PLMN_Identity
+             *                 containing a Cell_Identity
+             *             containing a RRC_Establishment_Cause.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_NAS_02
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.3¶1 and 9.1.7.3
+             */
+            testcase TC_S1AP_eNB_NAS_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_eNB_NAS_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_eNB_NAS_02
+            
+            /**
+             * @desc Verify that the IUT can send a NAS_NON_DELIVERY_INDICATION to indicate the eNB was unable to ensure that the message has been received by the UE.
+             * <pre>
+             * Pics Selection: PICS A.3/5.4
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a UE has not received a INITIAL_UE_MESSAGE
+             *         sends a NAS_NON_DELIVERY_INDICATION
+             *             containing an MME UE S1AP ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a NAS-PDU
+             *             containing a Cause
+             *                 indicating an appropriate cause value.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_NAS_03
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.4 and 9.1.7.4
+             */
+            testcase TC_S1AP_eNB_NAS_03() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not PICS_S1AP_eNB_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_eNB_NAS_03()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_eNB_NAS_03
+            
+        } // End of group group NAS_transport_group
+        
+        /**
          * @desc Management group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.7 Management group
          */
@@ -1374,6 +1514,92 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_MME_RAB_01
             
         } // End of group ERAB_management_group
+        
+        /**
+         * @desc NAS transport group
+         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.6   NAS transport group
+         */
+        group NAS_transport_group {
+            
+            /**
+             * @desc Verify that the IUT can send a DOWNLINK_NAS_TRANSPORT to indicate an ongoing NAS Transport procedure.
+             * <pre>
+             * Pics Selection: A.4/5.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate an ongoing NAS Transport procedure
+             *         sends a DOWNLINK_NAS_TRANSPORT
+             *             containing an MME UE S1AP ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a NAS-PDU.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_NAS_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.2¶1 and 9.1.7.2
+             */
+            testcase TC_S1AP_MME_NAS_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_NAS_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_NAS_01
+            
+            /**
+             * @desc Verify that the IUT can send a REROUTE_NAS_REQUEST to indicate a Reroute NAS Request procedure.
+             * <pre>
+             * Pics Selection: A.4/5.5
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a Reroute NAS Request procedure
+             *         sends a REROUTE_NAS_REQUEST
+             *             containing an MME UE S1AP ID
+             *             containing a S1_Message
+             *             containing an MME_Group_ID.
+             * </pre>
+             * 
+             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_NAS_02
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.2¶1 and 9.1.7.2
+             */
+            testcase TC_S1AP_MME_NAS_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_NAS_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_NAS_02
+            
+        } // End of group NAS_transport_group
         
         /**
          * @desc Management group

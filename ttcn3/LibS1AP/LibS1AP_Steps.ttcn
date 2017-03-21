@@ -160,6 +160,16 @@ module LibS1AP_Steps {
         } // End of f_recv_InitialContext_SetupResponse
 
         /**
+         * @desc Receive S1AP Message INITIAL UE MESSAGE
+         * @param p_value Receive template for INITIAL UE MESSAGE IEs
+         */
+        function f_recv_Initial_UE_Message(
+                                           template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_initial_uE_Message(p_value))
+        } // End of f_recv_Initial_UE_Message
+        
+        /**
          * @desc Receive S1AP Message S1 SETUP REQUEST
          * @param p_value Receive template for S1 SETUP REQUEST IEs
          */
@@ -268,6 +278,46 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_successfulOutcome(mw_mME_Configuration_Update_Failure(p_value))
         } // End of f_recv_MME_Configuration_Update_Failure
+        
+        /**
+         * @desc Receive S1AP Message DOWNLINK NAS TRANSPORT
+         * @param p value Receive template for DOWNLINK NAS TRANSPORT IEs
+         */
+        function f_recv_Downlink_NAS_Transport(
+                                               template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_downlink_nAS_Transport(p_value))
+        } // End of f_recv_Downlink_NAS_Transport
+        
+        /**
+         * @desc Receive S1AP Message UPLINK NAS TRANSPORT
+         * @param p value Receive template for UPLINK NAS TRANSPORT IEs
+         */
+        function f_recv_Uplink_NAS_Transport(
+                                               template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_uplink_nAS_Transport(p_value))
+        } // End of f_recv_Uplink_NAS_Transport
+        
+        /**
+         * @desc Receive S1AP Message sends a NAS NON DELIVERY INDICATION
+         * @param p value Receive template for NAS NON DELIVERY INDICATION IEs
+         */
+        function f_recv_NAS_Non_Delivery_Indication(
+                                                    template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_nAS_Non_Delivery_Indication(p_value))
+        } // End of f_recv_NAS_Non_Delivery_Indication
+        
+        /**
+         * @desc Receive S1AP Message REROUTE NAS REQUEST
+         * @param p value Receive template for REROUTE NAS REQUEST IEs
+         */
+        function f_recv_Reroute_NAS_Request(
+                                            template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_reroute_nAS_Request(p_value))
+        } // End of f_recv_Reroute_NAS_Request
         
         /**
          * @desc Receive S1AP Message RESET
@@ -883,6 +933,20 @@ module LibS1AP_Steps {
     
     group externalFunctions {
         
+        group eNBRole {
+            
+            /**
+             * @desc Trigger an INITIAL UE MESSAGE procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Initiate_NAS_transport_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an INITIAL UE MESSAGE procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_NAS_transport_procedure() return boolean;
+            
         /**
          * @desc Trigger an S1 SETUP procedure
          * @return true on success, false otherwise
@@ -968,6 +1032,31 @@ module LibS1AP_Steps {
         external function fx_eNB_Configuration_Transfer_procedure() return boolean;
         
         /**
+             * @desc Trigger a LPPa Transport procedure using a UE associated signalling on eNodeB
+             * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_LPPa_Transport_procedure_ind(
+                                                                  in boolean p_associated_signalling_mode
+            ) return boolean;
+            
+        } // End of group eNBRole
+        
+        group mmeRole {
+            
+            /**
+             * @desc Trigger a DOWNLINK NAS TRANSPORT event
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Downlink_NAS_Transport_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a REROUTE NAS REQUEST event
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Reroute_NAS_Request_procedure() return boolean;
+            
+            /**
          * @desc Trigger a RESET event
          * @return true on success, false otherwise
          */
@@ -1028,22 +1117,15 @@ module LibS1AP_Steps {
         external function fx_MME_Configuration_Transfer_procedure() return boolean;
         
         /**
-         * @desc Trigger a LPPa Transport procedure using a UE associated signalling on eNodeB
-         * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_LPPa_Transport_procedure_ind(
-                                                              in boolean p_associated_signalling_mode
-        ) return boolean;
-        
-        /**
          * @desc Trigger a LPPa Transport procedure using a UE associated signalling on MME
          * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
          * @return true on success, false otherwise
          */
-        external function fx_mme_LPPa_Transport_procedure_ind(
+            external function fx_MME_LPPa_Transport_procedure_ind(
                                                               in boolean p_associated_signalling_mode
         ) return boolean;
+            
+        } // End of group mmeRole
         
     } // End of group externalFunctions
     

@@ -32,7 +32,7 @@ module S1AP_TestConfiguration {
          */
         function f_cf_S1AP_MME_Up(
                                   out S1AP p_S1APComponent_mme
-        ) runs on S1AP {
+        ) runs on S1AP system TestAdapter {
             //Variables
             var FncRetCode v_ret := e_success;
             
@@ -57,7 +57,7 @@ module S1AP_TestConfiguration {
          */
         function f_cf_S1AP_eNB_Up(
                                   out S1AP p_S1APComponent_enb
-        ) runs on S1AP {
+        ) runs on S1AP system TestAdapter {
             //Variables
             var FncRetCode v_ret := e_success;
             
@@ -83,7 +83,7 @@ module S1AP_TestConfiguration {
         function f_cf_S1AP_2eNB_Up(
                                    out S1AP p_S1APComponent_enb1,
                                    out S1AP p_S1APComponent_enb2
-        ) runs on S1AP {
+        ) runs on S1AP system TestAdapter {
             //Variables
             var FncRetCode v_ret := e_success;
             
@@ -114,8 +114,7 @@ module S1AP_TestConfiguration {
          * @desc Deletes configuration
          * @param 
          */
-        function f_cf_Down()
-        runs on S1AP {
+        function f_cf_Down() runs on S1AP system TestAdapter {
             // Deactivte all
             deactivate;
             // Unmap all
