@@ -96,6 +96,7 @@ module LibS1AP_Templates {
                         m_eNB_UE_S1AP_ID(p_eNB_value),
                         m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
                     } // End of template m_E_RABSetupReqIEs
+
                     
                 }// End of group ERABSetup
 
@@ -437,10 +438,9 @@ module LibS1AP_Templates {
                        ) := {
                             mw_MME_UE_S1AP_ID(p_MME_value),
                             mw_eNB_UE_S1AP_ID(p_eNB_value),
-                              mw_handoverType_IE(p_HandoverType_value),
-                              mw_cause_IE(p_Cause_value)
-                              
-                              // TODO
+                            mw_handoverType_IE(p_HandoverType_value),
+                            mw_cause_IE(p_Cause_value),
+							mw_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
                               
                               
                        } // End of template m_E_RABSetupReqIEs
@@ -482,12 +482,12 @@ module LibS1AP_Templates {
                     template (present) RecordOf_ProtocolIE mw_E_RABSetupResIEs_FailedToSetupList(
                                                                                                  template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                                  template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-                                                                                                 template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := ?,
+                                                                                                 template RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := omit,
                                                                                                  template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
                     ) := {
                         mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-                        mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value),
+                        mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value) ifpresent,
                         mw_E_RABFailedToSetupList(p_E_RABItem_value)
                     } // End of template mw_E_RABSetupResIEs
                     
@@ -511,11 +511,13 @@ module LibS1AP_Templates {
                     template (present) RecordOf_ProtocolIE mw_InitialContextSetupResIEs(
                                                                                template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-                                                                               template (present) RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := ?
+                                                                               template RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := omit,
+																			   template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
                     ) := {
-                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-                        mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value)
+						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+						mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value) ifpresent,
+						mw_E_RABFailedToSetupList(p_E_RABItem_value)
                     } // End of template mw_InitialContextSetupResIEs
 
 					template (present) RecordOf_ProtocolIE mw_InitialContextSetupFailureIEs(
@@ -2984,19 +2986,33 @@ module LibS1AP_Templates {
                 value_ := { EmergencyAreaIDListForRestart := p_emergencyAreaIDListForRestart }
             } // End of template mw_emergencyAreaIDListForRestart
             
-            /**
-             * @desc 
-             * @param p_handoverType
-             * @param p_criticality
-             */
-            template (present) ProtocolIE mw_handoverType_IE(
-                template (present) HandoverType p_handoverType := ?,
-                template (present) ProtocolIE.criticality p_criticality := reject
-            ) := {
-                id := S1AP_Constants.id_HandoverType,
-                criticality := p_criticality,
-                value_ := { HandoverType := p_handoverType }
-            } // End of template mw_handoverType
+			/**
+			 * @desc 
+			 * @param p_handoverType
+			 * @param p_criticality
+			 */
+			template (present) ProtocolIE mw_handoverType_IE(
+				template (present) HandoverType p_handoverType := ?,
+				template (present) ProtocolIE.criticality p_criticality := reject
+			) := {
+				id := S1AP_Constants.id_HandoverType,
+				criticality := p_criticality,
+				value_ := { HandoverType := p_handoverType }
+			} // End of template mw_handoverType
+			
+			/**
+			 * @desc 
+			 * @param p_value
+			 * @param p_criticality
+			 */
+			template (present) ProtocolIE mw_source_ToTarget_TransparentContainer_IE(
+				template (present) Source_ToTarget_TransparentContainer p_value := ?,
+				template (present) ProtocolIE.criticality p_criticality := reject
+			) := {
+				id := S1AP_Constants.id_Source_ToTarget_TransparentContainer,
+				criticality := p_criticality,
+				value_ := { Source_ToTarget_TransparentContainer := p_value }
+			} // End of template mw_handoverType	
         } // End of group Receive_IEs
         
         group g_IEParameters {
