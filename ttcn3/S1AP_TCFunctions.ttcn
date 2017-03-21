@@ -246,13 +246,11 @@ module S1AP_TCFunctions {
 					}
 				));
 								
-   			f_recv_Handover_Required(mw_HandoverRequiredIEs(
+   				f_recv_Handover_Required(mw_HandoverRequiredIEs(
 					vc_MME_UE_ID,
 					vc_eNB_UE_ID,
-					ltetoutran,
-					?,
-					?,
-					?
+					ltetoutran, ?,
+					?, ?
 				));
     
 				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
@@ -262,9 +260,56 @@ module S1AP_TCFunctions {
 				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
     
 			} // End of function f_TC_S1AP_eNB_RAB_03
-//            
+
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_RAB_04
+			 */
+			function f_TC_S1AP_eNB_RAB_04() runs on S1APComponent { 
+				// Local variables
+				const QCI c_qci_id := 1; // TODO
+				
+				// Preamble
+				f_S1AP_enb_init();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+				f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{m_E_RABToBeSetupItemBearerSUReq (
+						-,
+						m_e_RABlevelQoSParameters(c_qci_id)
+					)}
+				));
+				
+				
+
+				f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs_FailedToSetupList(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					-, //omit
+					{
+						mw_E_RABItem(
+							0,
+							{
+								radioNetwork := not_supported_QCI_value
+							}
+						)
+					}
+				));
+                                
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+			} // End of function f_TC_S1AP_eNB_RAB_04
+			
+			
         } // End of group ERAB_management_group
         
+
 
 		/**
 		 * @desc Context management group
