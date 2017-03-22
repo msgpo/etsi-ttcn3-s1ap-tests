@@ -816,6 +816,28 @@ module LibS1AP_Templates {
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
                         mw_cause_IE(p_cause)
                     } // End of template mw_UeContextModificationFailureIEs
+
+                    
+					/**
+					 * @desc Receive template for mw_UeContextModificationIndication message
+					 * @param p_procedureCode   Expected procedure code. Default: ?
+					 * @param p_value           Expected procedure code. Default: ?
+					 */
+					template (present) SuccessfulOutcome mw_UeContextModificationIndication(
+																			   template (present) RecordOf_ProtocolIE p_value := ?
+					) := {
+						procedureCode := id_UEContextModification,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := p_value}
+					} // End of template mw_UeContextModificationIndication
+                    
+					template (present) RecordOf_ProtocolIE mw_UeContextModificationIndicationIEs(
+																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
+																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?
+					) := {
+						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
+					} // End of template mw_UeContextModificationIndicationIEs
                     
                     /**
                      * @desc Receive template for mw_UeRadioCapabilityMatchResponse message
