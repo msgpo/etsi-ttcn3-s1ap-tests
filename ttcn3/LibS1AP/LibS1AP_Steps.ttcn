@@ -168,7 +168,7 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_successfulOutcome(mw_InitialContextSetupResponse(p_value))
         } // End of f_recv_InitialContext_SetupResponse
-
+        
         /**
          * @desc Receive S1AP Message INITIAL UE MESSAGE
          * @param p_value Receive template for INITIAL UE MESSAGE IEs
@@ -184,7 +184,7 @@ module LibS1AP_Steps {
          * @param p_value Receive template for S1 SETUP REQUEST IEs
          */
         function f_recv_S1_Setup_Request(
-                                          template (present) RecordOf_ProtocolIE p_value := ?
+                                         template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_s1_Setup_Request(p_value))
         } // End of f_recv_S1_Setup_Request
@@ -288,6 +288,16 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_successfulOutcome(mw_mME_Configuration_Update_Failure(p_value))
         } // End of f_recv_MME_Configuration_Update_Failure
+        
+        /**
+         * @desc Receive S1AP Message PAGING
+         * @param p value Receive template for PAGING IEs
+         */
+        function f_recv_Paging(
+                               template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_paging(p_value))
+        } // End of f_recv_Paging
         
         /**
          * @desc Receive S1AP Message DOWNLINK NAS TRANSPORT
@@ -1033,91 +1043,91 @@ module LibS1AP_Steps {
              */
             external function fx_eNB_NAS_transport_procedure() return boolean;
             
-        /**
-         * @desc Trigger an S1 SETUP procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_S1_Setup_Request_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an eNB Configuration Update procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Configuration_Update_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an an Overload Start procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Overload_Start_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an an Overload Stop procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Overload_Stop_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an Error Indication procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Error_Indication_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a RESET procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Reset_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a CDMA2000 to be forwarded procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Uplink_S1_CDMA2000_Tunnelling_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a UE CAPABILITY INFO INDICATION procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_UE_Capability_Info_Indication_procedure() return boolean;
-        
-        /**
-         * @desc Force the UE to be registered to a new cell
-         * @return true on success, false otherwise
-         */
-        external function fx_move_UE_to_new_cell() return boolean;
-        
-        /**
-         * @desc Check htat UE stop reporting at change of serving cell
-         * @return true on success, false otherwise
-         */
-        external function fx_check_UE_stops_reporting() return boolean;
-        
-        /**
-         * @desc Trigger a PWS Restart Indication procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_PWS_Restart_Indication_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a PWS Failure Indication procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_PWS_Failure_Indication_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an ENB direct information Transfer procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Direct_Information_Transfer_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an ENB Configuration Transfer procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_eNB_Configuration_Transfer_procedure() return boolean;
-        
-        /**
+            /**
+             * @desc Trigger an S1 SETUP procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_S1_Setup_Request_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an eNB Configuration Update procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Configuration_Update_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an an Overload Start procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Overload_Start_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an an Overload Stop procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Overload_Stop_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an Error Indication procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Error_Indication_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a RESET procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Reset_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a CDMA2000 to be forwarded procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Uplink_S1_CDMA2000_Tunnelling_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a UE CAPABILITY INFO INDICATION procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_UE_Capability_Info_Indication_procedure() return boolean;
+            
+            /**
+             * @desc Force the UE to be registered to a new cell
+             * @return true on success, false otherwise
+             */
+            external function fx_move_UE_to_new_cell() return boolean;
+            
+            /**
+             * @desc Check htat UE stop reporting at change of serving cell
+             * @return true on success, false otherwise
+             */
+            external function fx_check_UE_stops_reporting() return boolean;
+            
+            /**
+             * @desc Trigger a PWS Restart Indication procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_PWS_Restart_Indication_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a PWS Failure Indication procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_PWS_Failure_Indication_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an ENB direct information Transfer procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Direct_Information_Transfer_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an ENB Configuration Transfer procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Configuration_Transfer_procedure() return boolean;
+            
+            /**
              * @desc Trigger a LPPa Transport procedure using a UE associated signalling on eNodeB
              * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
              * @return true on success, false otherwise
@@ -1129,6 +1139,12 @@ module LibS1AP_Steps {
         } // End of group eNBRole
         
         group mmeRole {
+            
+            /**
+             * @desc Trigger a PAGING event
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Paging_procedure() return boolean;
             
             /**
              * @desc Trigger a DOWNLINK NAS TRANSPORT event
@@ -1143,73 +1159,73 @@ module LibS1AP_Steps {
             external function fx_MME_Reroute_NAS_Request_procedure() return boolean;
             
             /**
-         * @desc Trigger a RESET event
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Reset_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an ERROR INDICATION event
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Error_Indication_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a CDMA2000 signalling event
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Downlink_S1_CDMA2000_Tunnelling_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a Trace Start procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Trace_Start_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a Deactivate Trace procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Deactivate_Trace_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a Location Reporting Control procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Location_Reporting_Control_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a Write-Replace Warning procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Write_Replace_Warning_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a Kill procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Kill_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an MME Direct Information Transfer procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Direct_Information_Transfer_procedure() return boolean;
-        
-        /**
-         * @desc Trigger an MME Configuration Transfer procedure
-         * @return true on success, false otherwise
-         */
-        external function fx_MME_Configuration_Transfer_procedure() return boolean;
-        
-        /**
-         * @desc Trigger a LPPa Transport procedure using a UE associated signalling on MME
-         * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
-         * @return true on success, false otherwise
-         */
+             * @desc Trigger a RESET event
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Reset_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an ERROR INDICATION event
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Error_Indication_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a CDMA2000 signalling event
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Downlink_S1_CDMA2000_Tunnelling_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a Trace Start procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Trace_Start_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a Deactivate Trace procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Deactivate_Trace_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a Location Reporting Control procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Location_Reporting_Control_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a Write-Replace Warning procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Write_Replace_Warning_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a Kill procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Kill_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an MME Direct Information Transfer procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Direct_Information_Transfer_procedure() return boolean;
+            
+            /**
+             * @desc Trigger an MME Configuration Transfer procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Configuration_Transfer_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a LPPa Transport procedure using a UE associated signalling on MME
+             * @param p_associated_signalling_mode Set to true for an associated signalling mode, false otherwise
+             * @return true on success, false otherwise
+             */
             external function fx_MME_LPPa_Transport_procedure_ind(
-                                                              in boolean p_associated_signalling_mode
-        ) return boolean;
+                                                                  in boolean p_associated_signalling_mode
+            ) return boolean;
             
         } // End of group mmeRole
         

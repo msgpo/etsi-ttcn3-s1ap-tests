@@ -96,7 +96,6 @@ module LibS1AP_Templates {
                         m_eNB_UE_S1AP_ID(p_eNB_value),
                         m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
                     } // End of template m_E_RABSetupReqIEs
-
                     
                 }// End of group ERABSetup
 
@@ -536,7 +535,7 @@ module LibS1AP_Templates {
                        ) := {
                             mw_MME_UE_S1AP_ID(p_MME_value),
                             mw_eNB_UE_S1AP_ID(p_eNB_value),
-                            mw_handoverType_IE(p_HandoverType_value),
+                              mw_handoverType_IE(p_HandoverType_value),
                             mw_cause_IE(p_Cause_value),
 							mw_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
                               
@@ -653,12 +652,12 @@ module LibS1AP_Templates {
                                                                                template RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := omit,
 																			   template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
                     ) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
 						mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value) ifpresent,
 						mw_E_RABFailedToSetupList(p_E_RABItem_value)
                     } // End of template mw_InitialContextSetupResIEs
-
+                    
 					template (present) RecordOf_ProtocolIE mw_InitialContextSetupFailureIEs(
 																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
 																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
@@ -1336,7 +1335,45 @@ module LibS1AP_Templates {
                 } // End of group Error_Indication_receive
                 
                 /**
-                 * @desc Receive messages for Management procedures
+                 * @desc Receive messages for Paging
+                 */
+                group Paging_group {
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with PAGING payload
+                     * @param p_value           Expected protocol information elements. Default: ?
+                     */
+                    template (present) InitiatingMessage mw_paging(
+                                                                   template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_Paging,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_paging
+                    
+                    /**
+                     * @desc Receive template for PAGING message
+                     * @param p_uEIdentityIndexValue    The expected UE Identity Index value value. Default: ?
+                     * @param p_uEPagingID              The expected UEPagingID value. Default: ?
+                     * @param p_cNDomain                The expected CNDomain value. Default: ?
+                     * @param p_tAI                     The expected TAI list value. Default: ?
+                     */
+                    template (present) RecordOf_ProtocolIE mw_pagingIEs(
+                                                                        template (present) UEIdentityIndexValue p_uEIdentityIndexValue := ?,
+                                                                        template (present) UEPagingID p_uEPagingID := ?,
+                                                                        template (present) CNDomain p_cNDomain := ?,
+                                                                        template (present) TAIList p_tAIs := ?
+                    ) := {
+                        mw_uEIdentityIndexValue_IE(p_uEIdentityIndexValue),
+                        mw_uEPagingID_IE(p_uEPagingID),
+                        mw_cNDomain_IE(p_cNDomain),
+                        mw_tAIs_IE(p_tAIs)
+                    } // End of template mw_pagingIEs
+                    
+                } // End of group Paging_group
+                
+                /**
+                 * @desc Receive messages for NAS transport
                  */
                 group NAS_transport_group {
                     
@@ -2890,6 +2927,42 @@ module LibS1AP_Templates {
             } // End of template mw_uE_associatedLogicalS1_ConnectionItemResAck_IE
             
             /**
+             * @desc Receive template for UEIdentityIndexValue protocol IE 
+             * @param p_value The expected UE Identity Index value IE is used by the eNB to calculate the Paging Frame TS 36.304. Default: ?
+             */
+            template (present) ProtocolIE mw_uEIdentityIndexValue_IE(
+                                                                     template (present) UEIdentityIndexValue p_value := ?
+            ) := {
+                id := S1AP_Constants.id_UEIdentityIndexValue,
+                criticality := ignore,
+                value_ := { UEIdentityIndexValue := p_value }
+            } // End of template mw_uEIdentityIndexValue_IE
+            
+            /**
+             * @desc Receive template for UEPagingID protocol IE 
+             * @param p_value The expected Identity with which the UE is paged. Default: ?
+             */
+            template (present) ProtocolIE mw_uEPagingID_IE(
+                                                           template (present) UEPagingID p_value := ?
+            ) := {
+                id := S1AP_Constants.id_UEPagingID,
+                criticality := ignore,
+                value_ := { UEPagingID := p_value }
+            } // End of template mw_uEPagingID_IE
+            
+            /**
+             * @desc Receive template for CNDomain protocol IE 
+             * @param p_value The expected CN Domain. Default: ?
+             */
+            template (present) ProtocolIE mw_cNDomain_IE(
+                                                         template (present) CNDomain p_value := ?
+            ) := {
+                id := S1AP_Constants.id_CNDomain,
+                criticality := ignore,
+                value_ := { CNDomain := p_value }
+            } // End of template mw_cNDomain_IE
+            
+            /**
              * @desc Receive template for GUMMEIList protocol IE 
              * @param p_gUMMEIList The GUMMEIList value. Default: ?
              */
@@ -2900,6 +2973,18 @@ module LibS1AP_Templates {
                 criticality := ignore,
                 value_ := { GUMMEIList := p_gUMMEIList }
             } // End of template mw_gUMMEIList_IE
+            
+            /**
+             * @desc Receive template for TAI protocol IE 
+             * @param p_tAI The TAI value. Default: ?
+             */
+            template (present) ProtocolIE mw_tAIs_IE(
+                                                     template (present) TAIList p_tAIs := ?
+            ) := {
+                id := S1AP_Constants.id_TAIList,
+                criticality := ignore,
+                value_ := { TAIList := p_tAIs }
+            } // End of template mw_tAs_IE
             
             /**
              * @desc Receive template for TAI protocol IE 
@@ -3287,19 +3372,19 @@ module LibS1AP_Templates {
                 value_ := { EmergencyAreaIDListForRestart := p_emergencyAreaIDListForRestart }
             } // End of template mw_emergencyAreaIDListForRestart
             
-			/**
-			 * @desc 
-			 * @param p_handoverType
-			 * @param p_criticality
-			 */
-			template (present) ProtocolIE mw_handoverType_IE(
-				template (present) HandoverType p_handoverType := ?,
-				template (present) ProtocolIE.criticality p_criticality := reject
-			) := {
-				id := S1AP_Constants.id_HandoverType,
-				criticality := p_criticality,
-				value_ := { HandoverType := p_handoverType }
-			} // End of template mw_handoverType
+            /**
+             * @desc 
+             * @param p_handoverType
+             * @param p_criticality
+             */
+            template (present) ProtocolIE mw_handoverType_IE(
+                template (present) HandoverType p_handoverType := ?,
+                template (present) ProtocolIE.criticality p_criticality := reject
+            ) := {
+                id := S1AP_Constants.id_HandoverType,
+                criticality := p_criticality,
+                value_ := { HandoverType := p_handoverType }
+            } // End of template mw_handoverType
 			
 			/**
 			 * @desc 
@@ -3710,6 +3795,28 @@ module LibS1AP_Templates {
                     eNB_UE_S1AP_ID  := p_eNB_value,
                     iE_Extensions   := *
                 } // End of template mw_uE_associatedLogicalS1_ConnectionItem
+                
+                /**
+                 * @desc Receive template for UEPagingID protocol IE
+                 * @param p_s_tMSI   The Temporary Mobile Subscriber Identity. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.6 S-TMSI
+                 */
+                template (present) UEPagingID mw_uEPagingID_s_tMSI(
+                                                                   template (present) S_TMSI p_s_tMSI := ?
+                ) := {
+                    s_TMSI := p_s_tMSI
+                } // End of template mw_uEPagingID_s_tMSI
+                
+                /**
+                 * @desc Receive template for UEPagingID protocol IE
+                 * @param p_s_tMSI   The International Mobile Subscriber Identity. Default: ?
+                 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.11 IMSI
+                 */
+                template (present) UEPagingID mw_uEPagingID_iMSI(
+                                                                 template (present) IMSI p_iMSI := ?
+                ) := {
+                    iMSI := p_iMSI
+                } // End of template mw_uEPagingID_iMSI
                 
                 /**
                  * @desc Send template for GUMMEI protocol IE

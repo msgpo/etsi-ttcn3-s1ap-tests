@@ -202,5 +202,20 @@ module LibS1AP_Pixits {
      */
     modulepar Bit27 PX_CGS_ID := '000000000000000000000000000'B;
     
+    /** @desc The UE Identity Index value IE is used by the eNB to calculate the Paging Frame TS 36.304.
+     * @see ETSI TS 136 413 Clause 9.2.3.10 UE Identity Index value
+     */
+    modulepar UEIdentityIndexValue PX_UE_IDENTITY_INDEX_VALUE := '0000000000'B;
+    
+    /** @desc The International Mobile Subscriber Identity, which is commonly used to identify the UE in the CN.
+     * @see ETSI TS 136 413 Clause 9.2.3.11 IMSI
+     */
+    modulepar IMSI PX_IMSI := '000000'O;
+    
+    /** @desc Indicates whether Paging is originated from the CS or PS domain.
+     * @see ETSI TS 136 413 Clause 9.2.3.22 CN Domain
+     */
+    modulepar CNDomain PX_CNDOMAIN := ps;
+    
 } // End of module LibS1AP_Pixits
 

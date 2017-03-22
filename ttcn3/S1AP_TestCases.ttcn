@@ -33,7 +33,7 @@ module S1AP_TestCases {
         
         /**
          * @desc E-RAB management group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.2  E-RAB management group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.2  E-RAB management group
          */
         group ERAB_management_group {
             
@@ -67,7 +67,7 @@ module S1AP_TestCases {
              *                     containing a GTP-TEID.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_RAB_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_RAB_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.2.1.2(1st dashed line in 5th dashed list) and 9.1.3.1 and 9.1.3.2
              */
             testcase TC_S1AP_eNB_RAB_01() runs on S1AP system TestAdapter { 
@@ -137,7 +137,7 @@ module S1AP_TestCases {
              *                         indicating ‘not-supported-QCI-value’.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_RAB_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_RAB_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.2.1.2(2nd dashed line in 5th dashed list) and 9.1.3.1 and 9.1.3.2
              */
             testcase TC_S1AP_eNB_RAB_02() runs on S1AP system TestAdapter { 
@@ -166,8 +166,8 @@ module S1AP_TestCases {
         } // End of group E-RAB_management_group
         
         /**
-         * @desc NAS transport group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.6   NAS transport group
+         * @desc Management group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.6   NAS transport group
          */
         group NAS_transport_group {
             
@@ -190,7 +190,7 @@ module S1AP_TestCases {
              *             containing a RRC_Establishment_Cause.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_NAS_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_NAS_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.1¶1 and 9.1.7.1
              */
             testcase TC_S1AP_eNB_NAS_01() runs on S1AP system TestAdapter { 
@@ -236,7 +236,7 @@ module S1AP_TestCases {
              *             containing a RRC_Establishment_Cause.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_NAS_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_NAS_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.3¶1 and 9.1.7.3
              */
             testcase TC_S1AP_eNB_NAS_02() runs on S1AP system TestAdapter { 
@@ -277,7 +277,7 @@ module S1AP_TestCases {
              *                 indicating an appropriate cause value.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_NAS_03
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_NAS_03
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.4 and 9.1.7.4
              */
             testcase TC_S1AP_eNB_NAS_03() runs on S1AP system TestAdapter { 
@@ -307,7 +307,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Management group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.7 Management group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.7 Management group
          */
         group Management_group {
             
@@ -327,7 +327,7 @@ module S1AP_TestCases {
              *             containing a UE-associated_logical_S1-connection_list.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.1¶2 and 9.1.8.1 and 9.1.8.2
              */
             testcase TC_S1AP_eNB_MNP_01() runs on S1AP system TestAdapter { 
@@ -368,7 +368,7 @@ module S1AP_TestCases {
              *                     indicating a value ‘Reset_all’.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.2¶1 and 9.1.8.1 and 9.1.8.2
              */
             testcase TC_S1AP_eNB_MNP_02() runs on S1AP system TestAdapter { 
@@ -410,7 +410,7 @@ module S1AP_TestCases {
              *             containing a UE-associated_logical_S1-connection_list.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_03
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_03
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.2¶1 and 9.1.8.1 and 9.1.8.2
              */
             testcase TC_S1AP_eNB_MNP_03() runs on S1AP system TestAdapter { 
@@ -448,7 +448,7 @@ module S1AP_TestCases {
              *             or containing a Criticality_Diagnostics).
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_04
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_04
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.2.2 and 9.1.8.3
              */
             testcase TC_S1AP_eNB_MNP_04() runs on S1AP system TestAdapter { 
@@ -488,7 +488,7 @@ module S1AP_TestCases {
              *         containing a Default_Paging_DRX.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_05
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_05
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.3.2¶1 and 9.1.8.4 and 9.1.8.5
              */
             testcase TC_S1AP_eNB_MNP_05() runs on S1AP system TestAdapter { 
@@ -527,7 +527,7 @@ module S1AP_TestCases {
              *                 containing a TAC.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_06
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_06
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.4.2¶1 and 9.1.8.7 and 9.1.8.8
              */
             testcase TC_S1AP_eNB_MNP_06() runs on S1AP system TestAdapter { 
@@ -566,7 +566,7 @@ module S1AP_TestCases {
              *         sends an MME_CONFIGURATION_UPDATE_ACKNOWLEDGE.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_07
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_07
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.5.2¶1 and 9.1.8.10 and 9.1.8.11
              */
             testcase TC_S1AP_eNB_MNP_07() runs on S1AP system TestAdapter { 
@@ -607,7 +607,7 @@ module S1AP_TestCases {
              *                 indicating an appropriate cause value.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_MNP_08
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_MNP_08
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.5.3 and 9.1.8.10 and 9.1.8.12
              */
             testcase TC_S1AP_eNB_MNP_08() runs on S1AP system TestAdapter { 
@@ -637,7 +637,7 @@ module S1AP_TestCases {
         
         /**
          * @desc S1 CDMA 2000 tunnelling group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.8   S1 CDMA 2000 tunnelling group group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.8   S1 CDMA 2000 tunnelling group group
          */
         group S1_CDMA_2000_tunelling_group {
             
@@ -656,7 +656,7 @@ module S1AP_TestCases {
              *             containing a CDMA2000_PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_STP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_STP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.8.2.2¶1 and 9.1.9.2 and 9.2.1.23
              */
             testcase TC_S1AP_eNB_STP_01() runs on S1AP system TestAdapter { 
@@ -686,7 +686,7 @@ module S1AP_TestCases {
         
         /**
          * @desc UE capability info indication group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.9   UE capability info indication group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.9   UE capability info indication group
          */
         group UE_capability_info_indication_group {
             
@@ -703,7 +703,7 @@ module S1AP_TestCases {
              *             containing a containing a UE_Radio_Capability.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_UEC_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_UEC_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.9.2 and 9.1.10
              */
             testcase TC_S1AP_eNB_UEC_01() runs on S1AP system TestAdapter { 
@@ -733,7 +733,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Trace Procedures group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.10  Trace group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.10  Trace group
          */
         group Trace_group {
             
@@ -762,7 +762,7 @@ module S1AP_TestCases {
              *                 indicating an appropriate cause value.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_TRP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_TRP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.1.2-8 and 8.10.2.2 and 9.1.11.1 and 9.1.11.2
              */
             testcase TC_S1AP_eNB_TRP_01() runs on S1AP system TestAdapter { 
@@ -807,7 +807,7 @@ module S1AP_TestCases {
              *                 indicating an appropriate cause value.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_TRP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_TRP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.3.2-3 and 8.10.2.2 and 9.1.11.3 and 9.1.11.2
              */
             testcase TC_S1AP_eNB_TRP_02() runs on S1AP system TestAdapter { 
@@ -850,7 +850,7 @@ module S1AP_TestCases {
              *             containing a Trace_Collection_Entity_IP_Address.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_TRP_03
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_TRP_03
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.4.2 and 9.1.18
              */
             testcase TC_S1AP_eNB_TRP_03() runs on S1AP system TestAdapter { 
@@ -880,7 +880,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Location Reporting Procedures group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.11  Location reporting group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.11  Location reporting group
          */
         group Location_reporting_group {
             
@@ -912,7 +912,7 @@ module S1AP_TestCases {
              *                 containing a Report_Area.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_LRP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_LRP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.11.1.2-2(1st dashed line) and 9.1.12.1 and 9.1.12.3 and 9.2.1.16,34,38
              */
             testcase TC_S1AP_eNB_LRP_01() runs on S1AP system TestAdapter { 
@@ -967,7 +967,7 @@ module S1AP_TestCases {
              *                 containing a Report_Area.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_LRP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_LRP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.11.1.2-2(1st dashed line) and 9.1.12.1 and 9.1.12.3 and 9.2.1.16,34,38
              */
             testcase TC_S1AP_eNB_LRP_02() runs on S1AP system TestAdapter { 
@@ -1022,7 +1022,7 @@ module S1AP_TestCases {
              *                 containing a Report_Area.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_LRP_03
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_LRP_03
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.11.1.2-2(1st dashed line) and 9.1.12.1 and 9.1.12.3 and 9.2.1.16,34,38
              */
             testcase TC_S1AP_eNB_LRP_03() runs on S1AP system TestAdapter { 
@@ -1067,7 +1067,7 @@ module S1AP_TestCases {
              *                 indicating an appropriate cause value.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_LRP_04
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_LRP_04
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.11.2.2-1 and 9.1.12.2
              */
             testcase TC_S1AP_eNB_LRP_04() runs on S1AP system TestAdapter { 
@@ -1097,7 +1097,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Warning message transmission group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.12 Warning message transmission group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.12 Warning message transmission group
          */
         group Warning_message_transmission_group {
             
@@ -1116,7 +1116,7 @@ module S1AP_TestCases {
              *             containing a Serial_Number.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_WTP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_WTP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.12.1.2-1 and 9.1.13.1 and 9.1.13.2
              */
             testcase TC_S1AP_eNB_WTP_01() runs on S1AP system TestAdapter { 
@@ -1156,7 +1156,7 @@ module S1AP_TestCases {
              *             containing a Serial_Number.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_WTP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_WTP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.12.2.2-1,3 and 9.1.13.3 and 9.1.13.4
              */
             testcase TC_S1AP_eNB_WTP_02() runs on S1AP system TestAdapter { 
@@ -1199,7 +1199,7 @@ module S1AP_TestCases {
              *                 indicating an empty list.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_WTP_03
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_WTP_03
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.12.3.2 and 9.1.13.5
              */
             testcase TC_S1AP_eNB_WTP_03() runs on S1AP system TestAdapter { 
@@ -1238,7 +1238,7 @@ module S1AP_TestCases {
              *             containing a Global_ENB_ID.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_WTP_04
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_WTP_04
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.12.4.2 and 9.1.13.6
              */
             testcase TC_S1AP_eNB_WTP_04() runs on S1AP system TestAdapter { 
@@ -1268,7 +1268,7 @@ module S1AP_TestCases {
         
         /**
          * @desc eNB direct information transfer group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.13  eNB direct information transfer group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.13  eNB direct information transfer group
          */
         group ENB_direct_information_transfer_group {
             
@@ -1287,7 +1287,7 @@ module S1AP_TestCases {
              *                         containing a RIM_Routing_Address.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_EIT_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_EIT_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.13.2.1 and 9.1.14 and 9.2.3.23
              */
             testcase TC_S1AP_eNB_EIT_01() runs on S1AP system TestAdapter { 
@@ -1317,7 +1317,7 @@ module S1AP_TestCases {
         
         /**
          * @desc eNB configuration transfer group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.15  eNB configuration transfer group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.15  eNB configuration transfer group
          */
         group ENB_configuration_transfer_group {
             
@@ -1338,7 +1338,7 @@ module S1AP_TestCases {
              *                 containing an X2_TNL_Configuration_Info.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_ECT_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_ECT_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.15.2.1 and 9.1.16
              */
             testcase TC_S1AP_eNB_ECT_01() runs on S1AP system TestAdapter { 
@@ -1368,7 +1368,7 @@ module S1AP_TestCases {
         
         /**
          * @desc LPPa transport group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.17  LPPa transport group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.17  LPPa transport group
          */
         group LPPa_transport_group {
             
@@ -1388,7 +1388,7 @@ module S1AP_TestCases {
              *             containing an LPPa-PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_LPP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_LPP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.17.2.2 and 9.1.19.2
              */
             testcase TC_S1AP_eNB_LPP_01() runs on S1AP system TestAdapter { 
@@ -1430,7 +1430,7 @@ module S1AP_TestCases {
              *             containing an LPPa-PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_LPP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_LPP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.17.2.4 and 9.1.19.4
              */
             testcase TC_S1AP_eNB_LPP_02() runs on S1AP system TestAdapter { 
@@ -1464,7 +1464,7 @@ module S1AP_TestCases {
         
         /**
          * @desc E-RAB management group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.2   E-RAB management group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.2   E-RAB management group
          */
         group ERAB_management_group { 
             
@@ -1487,7 +1487,7 @@ module S1AP_TestCases {
              *                     containing a NAS-PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_eNB_RAB_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_eNB_RAB_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.2.1.2 and 9.1.3.1
              */
             testcase TC_S1AP_MME_RAB_01() runs on S1AP system TestAdapter { 
@@ -1516,8 +1516,57 @@ module S1AP_TestCases {
         } // End of group ERAB_management_group
         
         /**
-         * @desc NAS transport group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.6   NAS transport group
+         * @desc Paging group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.5  Paging group
+         */
+        group Pagin_group {
+            
+            /**
+             * @desc Verify that the IUT can send a PAGING to indicate a Paging procedure.
+             * <pre>
+             * Pics Selection: A.4/4.4
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a Paging  procedure
+             *         sends a PAGING
+             *             containing a UE_Identity_Index_value
+             *             containing a UE_Paging_Identity
+             *                 containing a S-TMSI
+             *                 containing an IMSI
+             *             containing a CN_Domain.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_PAG_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.5.2¶1 and 9.1.6
+             */
+            testcase TC_S1AP_MME_PAG_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not PICS_S1AP_MME_IUT) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component direct information
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_PAG_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_PAG_01
+            
+        } // End of group Paging group
+        
+        /**
+         * @desc Management group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.1.6   NAS transport group
          */
         group NAS_transport_group {
             
@@ -1534,7 +1583,7 @@ module S1AP_TestCases {
              *             containing a NAS-PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_NAS_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_NAS_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.2¶1 and 9.1.7.2
              */
             testcase TC_S1AP_MME_NAS_01() runs on S1AP system TestAdapter { 
@@ -1573,7 +1622,7 @@ module S1AP_TestCases {
              *             containing an MME_Group_ID.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_NAS_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_NAS_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.6.2.2¶1 and 9.1.7.2
              */
             testcase TC_S1AP_MME_NAS_02() runs on S1AP system TestAdapter { 
@@ -1603,7 +1652,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Management group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.7 Management group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.7 Management group
          */
         group Management_group {
             
@@ -1622,7 +1671,7 @@ module S1AP_TestCases {
              *                     indicating a value ‘Reset_all’.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.1¶2 and 9.1.8.1 and 9.1.8.2
              */
             testcase TC_S1AP_MME_MNP_01() runs on S1AP system TestAdapter { 
@@ -1665,7 +1714,7 @@ module S1AP_TestCases {
              *             containing a UE-associated_logical_S1-connection_list.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.1¶2 and 9.1.8.1 and 9.1.8.2
              */
             testcase TC_S1AP_MME_MNP_02() runs on S1AP system TestAdapter { 
@@ -1709,7 +1758,7 @@ module S1AP_TestCases {
              *                 indicating an empty ‘UE-associated_logical_S1-connection’.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_03
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_03
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.3.2¶1 and 9.1.8.1 and 9.1.8.2
              */
             testcase TC_S1AP_MME_MNP_03() runs on S1AP system TestAdapter { 
@@ -1747,7 +1796,7 @@ module S1AP_TestCases {
              *             or containing a Criticality_Diagnostics).
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_04
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_04
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.1.2.1¶2 and 9.1.8.1 and 9.1.8.2
              */
             testcase TC_S1AP_MME_MNP_04() runs on S1AP system TestAdapter { 
@@ -1788,7 +1837,7 @@ module S1AP_TestCases {
              *         sends a S1_SETUP_RESPONSE.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_05
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_05
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.3.2¶1 and 9.1.8.4 and 9.1.8.5
              */
             testcase TC_S1AP_MME_MNP_05() runs on S1AP system TestAdapter { 
@@ -1832,7 +1881,7 @@ module S1AP_TestCases {
              *                 indicating the cause value 'Unknown PLMN'.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_06
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_06
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.3.2¶1 and 9.1.8.4 and 9.1.8.6
              */
             testcase TC_S1AP_MME_MNP_06() runs on S1AP system TestAdapter { 
@@ -1872,7 +1921,7 @@ module S1AP_TestCases {
              *         sends an MME_CONFIGURATION_UPDATE_ACKNOWLEDGE.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_07
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_07
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.4.2¶1 and 9.1.8.7 and 9.1.8.8
              */
             testcase TC_S1AP_MME_MNP_07() runs on S1AP system TestAdapter { 
@@ -1913,7 +1962,7 @@ module S1AP_TestCases {
              *                 indicating an appropriate cause value.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_08
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_08
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.3.2¶1 and 9.1.8.7 and 9.1.8.9
              */
             testcase TC_S1AP_MME_MNP_08() runs on S1AP system TestAdapter { 
@@ -1952,7 +2001,7 @@ module S1AP_TestCases {
              *                 containing a TAC.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_09
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_09
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.4.2¶1 and 9.1.8.10
              */
             testcase TC_S1AP_MME_MNP_09() runs on S1AP system TestAdapter { 
@@ -1989,7 +2038,7 @@ module S1AP_TestCases {
              *             containing an Overload_Response.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_10
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_10
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.6.2¶1 and 9.1.8.13
              */
             testcase TC_S1AP_MME_MNP_10() runs on S1AP system TestAdapter { 
@@ -2026,7 +2075,7 @@ module S1AP_TestCases {
              *             containing an Overload_Response.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MNP_11
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MNP_11
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.7.7.2¶1 and 9.1.8.14
              */
             testcase TC_S1AP_MME_MNP_11() runs on S1AP system TestAdapter { 
@@ -2056,7 +2105,7 @@ module S1AP_TestCases {
         
         /**
          * @desc S1 CDMA 2000 tunnelling group group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.8   S1 CDMA 2000 tunnelling group group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.8   S1 CDMA 2000 tunnelling group group
          */
         group S1_CDMA_2000_tunelling_group {
             
@@ -2075,7 +2124,7 @@ module S1AP_TestCases {
              *             containing a CDMA2000_PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_STP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_STP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.8.2.1¶1 and 9.1.9.1
              */
             testcase TC_S1AP_MME_STP_01() runs on S1AP system TestAdapter { 
@@ -2105,7 +2154,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Warning message transmission group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.10  Trace group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.10  Trace group
          */
         group Trace_group {
             
@@ -2128,7 +2177,7 @@ module S1AP_TestCases {
              *                 containing a Trace_Collection_Entity_IP_Address.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_TRP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_TRP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.1.2¶1 and 9.1.11.1 and 9.2.1.4
              */
             testcase TC_S1AP_MME_TRP_01() runs on S1AP system TestAdapter { 
@@ -2167,7 +2216,7 @@ module S1AP_TestCases {
              *             containing an E-UTRAN_Trace_ID.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_TRP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_TRP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.10.1.211 and 9.1.11.2
              */
             testcase TC_S1AP_MME_TRP_02() runs on S1AP system TestAdapter { 
@@ -2197,7 +2246,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Warning message transmission group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.11  Location reporting group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.11  Location reporting group
          */
         group Location_reporting_group {
             
@@ -2217,7 +2266,7 @@ module S1AP_TestCases {
              *                     indicating ECGI.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_LRP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_LRP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.11.1.2-1 and 9.1.12.1 and 9.1.12.3 and 9.2.1.16,34,38
              */
             testcase TC_S1AP_MME_LRP_01() runs on S1AP system TestAdapter { 
@@ -2264,7 +2313,7 @@ module S1AP_TestCases {
              *                 indicating an appropriate cause value.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_LRP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_LRP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.11.1.2-1 and 9.1.12.1 and 9.1.12.3 and 9.2.1.16,34,38
              */
             testcase TC_S1AP_MME_LRP_02() runs on S1AP system TestAdapter { 
@@ -2294,7 +2343,7 @@ module S1AP_TestCases {
         
         /**
          * @desc Warning message transmission group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.12  Warning message transmission group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.12  Warning message transmission group
          */
         group Warning_message_transmission_group {
             
@@ -2312,7 +2361,7 @@ module S1AP_TestCases {
              *             containing an Number_of_Broadcasts_Requested
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_WTP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_WTP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.12.1.2-1 and 9.1.13.1 and 9.1.13.2
              */
             testcase TC_S1AP_MME_WTP_01() runs on S1AP system TestAdapter { 
@@ -2350,7 +2399,7 @@ module S1AP_TestCases {
              *             containing a Serial_Number
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_WTP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_WTP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.12.2.2-1 and 9.1.13.3 and 9.1.13.4
              */
             testcase TC_S1AP_MME_WTP_02() runs on S1AP system TestAdapter { 
@@ -2380,7 +2429,7 @@ module S1AP_TestCases {
         
         /**
          * @desc MME direct information transfer group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.14  MME direct information transfer group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.14  MME direct information transfer group
          */
         group MME_direct_information_transfer_group {
             
@@ -2398,7 +2447,7 @@ module S1AP_TestCases {
              *                         containing a RIM_Information.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MIT_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MIT_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.14.2.1 and 9.2.3.23
              */
             testcase TC_S1AP_MME_MIT_01() runs on S1AP system TestAdapter { 
@@ -2429,7 +2478,7 @@ module S1AP_TestCases {
         
         /**
          * @desc MME configuration transfer 
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.16  MME configuration transfer group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.16  MME configuration transfer group
          */
         group MME_configuration_transfer_group {
             
@@ -2447,7 +2496,7 @@ module S1AP_TestCases {
              *                 containing a SON_Information.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_MCT_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_MCT_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.16.2.1 and 9.1.17
              */
             testcase TC_S1AP_MME_MCT_01() runs on S1AP system TestAdapter { 
@@ -2477,7 +2526,7 @@ module S1AP_TestCases {
         
         /**
          * @desc LPPa transport group
-         * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.17  LPPa transport group
+         * @see ETSI TS 103 497-2 Clause 5.2.2.2.17  LPPa transport group
          */
         group LPPa_transport_group {
             
@@ -2497,7 +2546,7 @@ module S1AP_TestCases {
              *             containing an LPPa-PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_LPP_01
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_LPP_01
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.17.2.1 and 9.1.19.1
              */
             testcase TC_S1AP_MME_LPP_01() runs on S1AP system TestAdapter { 
@@ -2539,7 +2588,7 @@ module S1AP_TestCases {
              *             containing an LPPa-PDU.
              * </pre>
              * 
-             * @see       ETSI DTS/INT-00135-2 TP_S1AP_MME_LPP_02
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_LPP_02
              * @reference ETSI TS 136 413 V13.4.0 Clause 8.17.2.3 and 9.1.19.3
              */
             testcase TC_S1AP_MME_LPP_02() runs on S1AP system TestAdapter { 

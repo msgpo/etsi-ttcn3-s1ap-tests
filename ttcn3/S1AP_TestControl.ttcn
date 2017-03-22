@@ -63,6 +63,8 @@ module S1AP_TestControl {
         if (PICS_S1AP_MME_IUT) {
             // ETSI TS 103 497-2 Clause 5.2.2.2.2    E-RAB management group
             execute(TC_S1AP_MME_RAB_01());
+            // ETSI TS 103 497-2 Clause 5.2.2.2.5   Paging group
+            execute(TC_S1AP_MME_PAG_01());
             // ETSI TS 103 497-2 Clause 5.2.2.2.6    NAS transport group
             execute(TC_S1AP_MME_NAS_01());
             execute(TC_S1AP_MME_NAS_02());
