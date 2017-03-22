@@ -2143,6 +2143,35 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := {SecurityKey := valueof(p_value)}
             } // End of template m_securityKey_IE
+
+			/**
+			 * @desc Send template for correlation ID IE
+			 * @param p_value  UESecurityCapabilities value
+			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.80 correlation ID
+			 */
+			template (value) ProtocolIE m_correlationID_IE(
+												   in template (value) Correlation_ID p_value,
+												   in template (value) ProtocolIE.criticality p_criticality := ignore
+			) := {
+				id := S1AP_Constants.id_Correlation_ID,
+				criticality := p_criticality,
+				value_ := {Correlation_ID := valueof(p_value)}
+			} // End of template m_correlationID_IE
+
+
+			/**
+			 * @desc Send template for correlation ID IE
+			 * @param p_value  UESecurityCapabilities value
+			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.80 SIPTO correlation ID
+			 */
+			template (value) ProtocolIE m_SIPTO_correlationID_IE(
+												   in template (value) Correlation_ID p_value,
+												   in template (value) ProtocolIE.criticality p_criticality := ignore
+			) := {
+				id := S1AP_Constants.id_SIPTO_Correlation_ID,
+				criticality := p_criticality,
+				value_ := {Correlation_ID := valueof(p_value)}
+			} // End of template m_SIPTO_correlationID_IE
             
             group E_RAB_IEsend {
                 
@@ -3065,14 +3094,15 @@ module LibS1AP_Templates {
                                                                                           in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
                                                                                           in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
                                                                                           in template (value) GTP_TEID p_gTP_TEID := '00000000'O,
-                                                                                          in template (value) NAS_PDU p_nAS_PDU := '0000'O
+                                                                                          in template (value) NAS_PDU p_nAS_PDU := '0000'O,
+                                                                                          in template (value) E_RABToBeSetupItemBearerSUReq.iE_Extensions p_iE_Extensions := omit
             ) := {
                 e_RAB_ID := p_e_RAB_ID,
                 e_RABlevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
                 transportLayerAddress := p_transportLayerAddress,
                 gTP_TEID := p_gTP_TEID,
                 nAS_PDU := p_nAS_PDU,
-                iE_Extensions := omit
+                iE_Extensions := p_iE_Extensions
             } // End of template m_E_RABToBeSetupItemBearerSUReq
             
             /**
