@@ -196,7 +196,7 @@ module LibS1AP_Templates {
 						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
 					} // End of template m_UeContextModificationRequest
 
-					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEs(
+					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsUEAgg(
 																			in template (value) MME_UE_S1AP_ID p_MME_value,
 																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
 																			in template (value) UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate
@@ -205,6 +205,30 @@ module LibS1AP_Templates {
 						m_eNB_UE_S1AP_ID(p_eNB_value),
 						m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate)
 					} // End of template m_ContextModificationReqIEs
+
+					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsSecKey(
+																			in template (value) MME_UE_S1AP_ID p_MME_value,
+																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
+																			in template (value) CSFallbackIndicator p_CSFallbackIndicator,
+																			in template (value) SecurityKey p_SecurityKey
+					) := {
+						m_MME_UE_S1AP_ID(p_MME_value),
+						m_eNB_UE_S1AP_ID(p_eNB_value),
+						m_CS_Fallback_indicator_IE(p_CSFallbackIndicator),
+						m_securityKey_IE(p_SecurityKey)
+					} // End of template m_ContextModificationReqIEsSecKey
+
+					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsSecCap(
+																			in template (value) MME_UE_S1AP_ID p_MME_value,
+																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
+																			in template (value) CSFallbackIndicator p_CSFallbackIndicator,
+																			in template (value) UESecurityCapabilities p_UeSecurityCapabilities
+					) := {
+						m_MME_UE_S1AP_ID(p_MME_value),
+						m_eNB_UE_S1AP_ID(p_eNB_value),
+						m_CS_Fallback_indicator_IE(p_CSFallbackIndicator),
+						m_UE_securityCapabilities_IE(p_UeSecurityCapabilities)
+					} // End of template m_ContextModificationReqIEsSecCap
                     
                 }// End of group Context_management_group
                 
@@ -713,6 +737,29 @@ module LibS1AP_Templates {
 						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
 						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
 					} // End of template mw_UeContextReleaseCompleteIEs
+
+					/**
+					 * @desc Receive template for mw_UeContextModificationFailure message
+					 * @param p_procedureCode   Expected procedure code. Default: ?
+					 * @param p_value           Expected procedure code. Default: ?
+					 */
+					template (present) SuccessfulOutcome mw_UeContextModificationFailure(
+																			   template (present) RecordOf_ProtocolIE p_value := ?
+					) := {
+						procedureCode := id_UEContextModification,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := p_value}
+					} // End of template mw_UeContextModificationFailure
+                    
+					template (present) RecordOf_ProtocolIE mw_UeContextModificationFailureIEs(
+																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
+																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+																			   template (present) Cause p_cause := ?
+					) := {
+						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+						mw_cause_IE(p_cause)
+					} // End of template mw_UeContextModificationFailureIEs
                     
                 } // End of group Context_management_group
                 
@@ -2356,6 +2403,21 @@ module LibS1AP_Templates {
 				criticality := p_criticality,
 				value_ := {Correlation_ID := valueof(p_value)}
 			} // End of template m_SIPTO_correlationID_IE
+
+
+			/**
+			 * @desc Send template for CS Fallback indicator IE
+			 * @param p_value  CSFallbackIndicator value
+			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.21 CS Fallback indicator
+			 */
+			template (value) ProtocolIE m_CS_Fallback_indicator_IE(
+												   in template (value) CSFallbackIndicator p_value,
+												   in template (value) ProtocolIE.criticality p_criticality := ignore
+			) := {
+				id := S1AP_Constants.id_CSFallbackIndicator,
+				criticality := p_criticality,
+				value_ := {CSFallbackIndicator := valueof(p_value)}
+			} // End of template m_CS_Fallback_indicator_IE
             
             group E_RAB_IEsend {
                 
