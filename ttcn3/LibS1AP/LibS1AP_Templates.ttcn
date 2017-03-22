@@ -158,7 +158,7 @@ module LibS1AP_Templates {
                     } // End of template m_InitialContextSetupReqIEs
 
 					/**
-					 * @desc Send template for InitiatingMessage message with InitialContextSetup payload
+					 * @desc Send template for InitiatingMessage message with UeContextReleaseCommand payload
 					 * @param p_value           Expected procedure code
 					 */
 					template (value) InitiatingMessage m_UeContextReleaseCommand(
@@ -183,6 +183,28 @@ module LibS1AP_Templates {
 						m_eNB_UE_S1AP_ID(p_eNB_value),
 						m_cause_IE(p_cause)
 					} // End of template m_UeContextReleaseCommandIEs_ENB
+
+
+					/**
+					 * @desc Send template for InitiatingMessage message with m_UeContextModificationRequest payload
+					 * @param p_value           Expected procedure code
+					 */
+					template (value) InitiatingMessage m_UeContextModificationRequest(
+																		   in template (value) RecordOf_ProtocolIE p_value) := {
+						procedureCode := id_UEContextModification,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+					} // End of template m_UeContextModificationRequest
+
+					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEs(
+																			in template (value) MME_UE_S1AP_ID p_MME_value,
+																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
+																			in template (value) UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate
+					) := {
+						m_MME_UE_S1AP_ID(p_MME_value),
+						m_eNB_UE_S1AP_ID(p_eNB_value),
+						m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate)
+					} // End of template m_ContextModificationReqIEs
                     
                 }// End of group Context_management_group
                 
@@ -669,6 +691,27 @@ module LibS1AP_Templates {
 						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
 						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
 						mw_cause_IE(p_cause)
+					} // End of template mw_UeContextReleaseCompleteIEs
+
+					/**
+					 * @desc Receive template for mw_UeContextModificationResponse message
+					 * @param p_procedureCode   Expected procedure code. Default: ?
+					 * @param p_value           Expected procedure code. Default: ?
+					 */
+					template (present) SuccessfulOutcome mw_UeContextModificationResponse(
+																			   template (present) RecordOf_ProtocolIE p_value := ?
+					) := {
+						procedureCode := id_UEContextModification,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := p_value}
+					} // End of template mw_UeContextReleaseComplete
+                    
+					template (present) RecordOf_ProtocolIE mw_UeContextModificationResponseIEs(
+																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
+																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?
+					) := {
+						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
 					} // End of template mw_UeContextReleaseCompleteIEs
                     
                 } // End of group Context_management_group
