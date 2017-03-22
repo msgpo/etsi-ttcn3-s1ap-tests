@@ -1156,6 +1156,58 @@ module S1AP_TCFunctions {
                 
 			} // End of function f_TC_S1AP_eNB_CMP_11
 
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_CMP_12
+             */
+            function f_TC_S1AP_eNB_CMP_12() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                f_send_InitialContext_SetupRequest(m_InitialContextSetupReqIEs(
+                    vc_MME_UE_ID,
+                    vc_eNB_UE_ID,
+                    m_UEAggregateMaximumBitrate(1,1),
+                    {m_E_RABToBeSetupItemBearerSUReq (
+                        -,
+                        m_e_RABlevelQoSParameters
+                        (5),
+                        -,
+                        -
+                    )},
+                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                    m_securityKey
+                ));
+
+                f_recv_InitialContext_SetupResponse(mw_InitialContextSetupResIEs(
+                    vc_MME_UE_ID,
+                    vc_eNB_UE_ID,
+                    {
+                        mw_E_RABSetupItemBearerSURes
+                    }
+                ));
+
+				tc_wait.start(PX_TS1RELOCOverall);
+				tc_wait.timeout;
+                
+				f_recv_UE_Context_Release_Request(mw_UeContextReleaseRequestIEs
+												  (vc_MME_UE_ID, vc_eNB_UE_ID,
+												   ?));    
+												                   
+                // Postamble
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_CMP_12
+
+
         } // End of group Context_management_group
         
         /**
