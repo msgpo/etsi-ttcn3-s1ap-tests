@@ -137,7 +137,16 @@ module LibS1AP_Steps {
                                                  template (present) UnsuccessfulOutcome p_unsuccessfulOutcome := ?
         ) runs on S1APComponent {
             f_recv_S1AP_PDU( {unsuccessfulOutcome := p_unsuccessfulOutcome})
-        } // End of function f_recv_S1AP_unsuccessfulOutcome
+        } // End of function f_recv_S1AP_unsuccessfulOutcome 
+        
+        /**
+         * @desc Receive S1AP Message E-RAB_SetupRequest
+         * @param p_value Receive template for E-RAB_SetupRequest IEs
+         */
+        function f_recv_E_RABSetupRequest(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_E_RABSetupRequest(p_value))
+        } // End of function f_recv_E_RABSetupRequest
         
         /**
          * @desc Receive S1AP Message E_RABSetupResponse

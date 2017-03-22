@@ -97,6 +97,18 @@ module LibS1AP_Templates {
                         m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
                     } // End of template m_E_RABSetupReqIEs
                     
+                    template (value) RecordOf_ProtocolIE m_E_RABSetupReqIEs_UeAggregateMaxBitRate(
+                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                            in template (value) UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate,
+                                                                            in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABToBeSetupItem_value
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate),
+                        m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
+                    } // End of template m_E_RABSetupReqIEs
+                    
                 }// End of group ERABSetup
 
                 group ERABModify {
@@ -614,6 +626,30 @@ module LibS1AP_Templates {
                 }
                 
                 group ERABSetup{
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with E-RABSetup payload
+                     * @param p_value           The procedure code value
+                     */
+                    template (present) InitiatingMessage mw_E_RABSetupRequest(
+                                                                           template (present) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_E_RABSetup,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_E_RABSetupRequest
+                    
+                    template (present) RecordOf_ProtocolIE mw_E_RABSetupReqIEs(
+                                                                            template (present) MME_UE_S1AP_ID p_MME_value,
+                                                                            template (present) ENB_UE_S1AP_ID p_eNB_value,
+                                                                            template UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate := ?,
+                                                                            template (present) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABToBeSetupItem_value
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value),
+                        mw_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate) ifpresent,
+                        mw_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
+                    } // End of template mw_E_RABSetupReqIEs
+                    
                     
                     /**
                      * @desc Receive template for SuccessfulOutcome/R-RAB_Setup message
@@ -2863,6 +2899,18 @@ module LibS1AP_Templates {
                 criticality := ignore,
                 value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
             } // End of template 
+                
+            /**
+             * @desc Receive template for E-RABToBeSetupListBearerSUReq protocol IE
+             * @param p_value  Protocol IE value. Default: mw_E_RABToBeSetupItemBearerSUReq
+             */
+            template (present) ProtocolIE mw_E_RABToBeSetupList(
+                                                             template (present) RecordOf_E_RABToBeSetupItemBearerSUReq p_value := { mw_E_RABToBeSetupItemBearerSUReq }
+            ) := {
+                id := S1AP_Constants.id_E_RABToBeSetupListBearerSUReq,
+                criticality := reject,
+                value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := p_value }
+            } // End of template mw_E_RABToBeSetupList
  
             /**
              * @desc Receive template for E-RABModifiedListBearerModReq protocol IE
@@ -2883,8 +2931,19 @@ module LibS1AP_Templates {
                 criticality := ignore,
                 value_ := { RecordOf_E_RABItem := p_value }
             } // End of template mw_E_RABFailedToSetupList
-            
-            // TODO To be continued
+
+            /**
+             * @desc Receive template for UE aggregate maxmum bitrate IE
+             * @param p_value  UEAggregateMaximumBitrate value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.20 UEAggregateMaximumBitrate
+             */
+            template ProtocolIE mw_UE_aggregate_maximum_bitrate_IE(
+                                                   template (present) UEAggregateMaximumBitrate p_value
+            ) := {
+                id := S1AP_Constants.id_uEaggregateMaximumBitrate,
+                criticality := reject,
+                value_ := {UEAggregateMaximumBitrate := p_value}
+            } // End of template mw_UE_aggregate_maximum_bitrate_IE
             
             /**
              * @desc Receive template for ResetType protocol IE 
@@ -3541,6 +3600,25 @@ module LibS1AP_Templates {
                 nAS_PDU := p_nAS_PDU,
                 iE_Extensions := p_iE_Extensions
             } // End of template m_E_RABToBeSetupItemBearerSUReq
+            
+            /**
+             * @desc 
+             */
+            template (present) E_RABToBeSetupItemBearerSUReq mw_E_RABToBeSetupItemBearerSUReq(
+                                                                                          template (present) E_RAB_ID p_e_RAB_ID := 0,
+                                                                                          template (present) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := mw_e_RABlevelQoSParameters,
+                                                                                          template (present) TransportLayerAddress p_transportLayerAddress := '0'B,
+                                                                                          template (present) GTP_TEID p_gTP_TEID := '00000000'O,
+                                                                                          template (present) NAS_PDU p_nAS_PDU := '0000'O,
+                                                                                          template E_RABToBeSetupItemBearerSUReq.iE_Extensions p_iE_Extensions := *
+            ) := {
+                e_RAB_ID := p_e_RAB_ID,
+                e_RABlevelQoSParameters := p_e_RABlevelQoSParameters,
+                transportLayerAddress := p_transportLayerAddress,
+                gTP_TEID := p_gTP_TEID,
+                nAS_PDU := p_nAS_PDU,
+                iE_Extensions := p_iE_Extensions
+            } // End of template mw_E_RABToBeSetupItemBearerSUReq
 
             /**
              * @desc 
@@ -3574,6 +3652,24 @@ module LibS1AP_Templates {
                 gbrQosInformation := omit,
                 iE_Extensions := omit
             } // End of template m_e_RABlevelQoSParameters
+            
+            /**
+             * @desc 
+             * @param p_qCI
+             */
+            template (present) E_RABLevelQoSParameters mw_e_RABlevelQoSParameters(
+                                                                               template (present) QCI p_qCI := 0
+            ) := {
+                qCI := p_qCI,
+                allocationRetentionPriority := {
+                    priorityLevel :=?,
+                    pre_emptionCapability := ?,
+                    pre_emptionVulnerability := ?,
+                    iE_Extensions := *
+                },
+                gbrQosInformation := *,
+                iE_Extensions := *
+            } // End of template mw_e_RABlevelQoSParameters
             
             /**
              * @desc 
@@ -3618,6 +3714,15 @@ module LibS1AP_Templates {
               uEaggregateMaximumBitRateDL := p_dl,
               uEaggregateMaximumBitRateUL := p_ul,
               iE_Extensions := omit
+            }
+
+            /**
+             * @desc 
+             */
+            template (present) UEAggregateMaximumBitrate mw_UEAggregateMaximumBitrate (template (present) BitRate p_dl, template (present) BitRate p_ul):= {
+              uEaggregateMaximumBitRateDL := p_dl,
+              uEaggregateMaximumBitRateUL := p_ul,
+              iE_Extensions := *
             }
 
             /**
