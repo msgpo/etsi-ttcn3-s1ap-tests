@@ -627,6 +627,17 @@ module LibS1AP_Steps {
 		) runs on S1APComponent {
 			f_recv_S1AP_initiatingMessage(mw_UeContextReleaseRequest(p_value))
 		} // End of f_recv_UE_Context_Release_Request
+
+		/**
+		* @desc Receive S1AP Message UE Context Release Request
+		* @param p_value Receive template for UE CONTEXT RELEASE COMPLETE
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.7 UE CONTEXT RELEASE COMPLETE
+		*/
+		function f_recv_UE_Context_Release_Complete(
+										template (present) RecordOf_ProtocolIE p_value := ?
+		) runs on S1APComponent {
+			f_recv_S1AP_initiatingMessage(mw_UeContextReleaseComplete(p_value))
+		} // End of f_recv_UE_Context_Release_Complete
         
     } // End of group receivePDU
     
@@ -856,6 +867,17 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_kill_Response(p_value))
         } // End of function f_send_Kill_Response
+
+		/**
+		* @desc Send S1AP Message UE Context Release Command
+		* @param p_value Send template for UE CONTEXT RELEASE REQUEST
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.6 UE CONTEXT RELEASE COMMAND
+		*/
+		function f_send_UE_Context_Release_Command(
+										template (value) RecordOf_ProtocolIE p_value
+		) runs on S1APComponent {
+			f_send_S1AP_initiatingMessage(m_UeContextReleaseCommand(p_value))
+		} // End of f_recv_UE_Context_Release_Request
         
     } // End of group sendPDU
     
