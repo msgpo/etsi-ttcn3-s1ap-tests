@@ -941,6 +941,17 @@ module LibS1AP_Steps {
 			f_send_S1AP_initiatingMessage(m_UeContextModificationRequest(p_value))
 		} // End of f_send_UE_Context_Modification_Request
 
+		/**
+		* @desc Send S1AP Message UE Radio Capability Match Request
+		* @param p_value Send template for UE_RADIO_CAPABILITY_MATCH_REQUEST
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.11 UE CONTEXT MODIFICATION COMMAND
+		*/
+		function f_send_UE_Radio_Capability_Match_Request(
+										template (value) RecordOf_ProtocolIE p_value
+		) runs on S1APComponent {
+			f_send_S1AP_initiatingMessage(m_UeRadioCapabilityMatchRequest(p_value))
+		} // End of f_send_UE_Radio_Capability_Match_Request
+
         
     } // End of group sendPDU
     
