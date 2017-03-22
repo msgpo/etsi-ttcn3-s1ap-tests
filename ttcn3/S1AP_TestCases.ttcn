@@ -164,7 +164,463 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_eNB_RAB_02
              
         } // End of group E-RAB_management_group
-        
+
+		group Context_Management_group {
+
+			testcase TC_S1AP_eNB_CMP_01() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_01()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_01
+
+			testcase TC_S1AP_eNB_CMP_02() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_02()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_02
+
+
+			testcase TC_S1AP_eNB_CMP_03() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_03()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_03
+
+
+			testcase TC_S1AP_eNB_CMP_04() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_04()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_04
+			
+
+			testcase TC_S1AP_eNB_CMP_05() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_05()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_05						
+
+
+			testcase TC_S1AP_eNB_CMP_06() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_06()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_06
+
+
+			testcase TC_S1AP_eNB_CMP_07() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_07()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_07
+
+
+			testcase TC_S1AP_eNB_CMP_08() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_08()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_08
+
+
+			testcase TC_S1AP_eNB_CMP_09() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_09()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_09
+
+
+			testcase TC_S1AP_eNB_CMP_10() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_10()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_10
+
+			testcase TC_S1AP_eNB_CMP_111() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_11()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_11
+
+			testcase TC_S1AP_eNB_CMP_12() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_12()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_12
+
+
+			testcase TC_S1AP_eNB_CMP_13() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_13()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_13
+
+
+			testcase TC_S1AP_eNB_CMP_14() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_14()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_14
+            
+
+			testcase TC_S1AP_eNB_CMP_15() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_15()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_15                     
+
+
+			testcase TC_S1AP_eNB_CMP_16() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_16()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_16
+
+
+			testcase TC_S1AP_eNB_CMP_17() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_17()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_17
+
+
+			testcase TC_S1AP_eNB_CMP_18() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_18()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_18
+
+
+			testcase TC_S1AP_eNB_CMP_19() runs on S1AP system TestAdapter { 
+				// Local variables
+				var S1AP v_s1ap_enb; 
+                
+				// Test control
+				if (not PICS_S1AP_eNB_IUT) {
+					log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT' shall be set to true for executing the TC. ***"); 
+					stop;
+				}
+                
+				// Test component configuration
+				f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+				// Start
+				v_s1ap_enb.start(f_TC_S1AP_eNB_CMP_19()); 
+                
+				// synchronize PTC on 1 sychronization points
+				f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+				f_cf_Down();
+                
+			} // End of testcase TC_S1AP_eNB_CMP_19
+			
+        } // End of group Context_Management_group
+			        
         /**
          * @desc Management group
          * @see ETSI TS 103 497-2 Clause 5.2.2.1.6   NAS transport group
