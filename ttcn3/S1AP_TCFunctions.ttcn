@@ -1393,11 +1393,11 @@ module S1AP_TCFunctions {
 					'0001'O // UERadioCapability
 				));
 
-//				f_recv_UE_Context_Modification_Failure(mw_UeContextModificationFailureIEs(
-//					vc_MME_UE_ID,
-//					vc_eNB_UE_ID,
-//					? // cause
-//				)); 
+				f_recv_UeRadioCapabilityMatchResponse(mw_UeRadioCapabilityMatchResponseIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					? // Voice_Support_Match_Indicator
+				)); 
 												                   
 				// Postamble
 				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
