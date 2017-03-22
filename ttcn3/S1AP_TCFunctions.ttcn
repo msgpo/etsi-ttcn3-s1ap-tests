@@ -1390,6 +1390,35 @@ module S1AP_TCFunctions {
                 
 			} // End of function f_TC_S1AP_eNB_CMP_18
 
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_CMP_19
+			 */
+			function f_TC_S1AP_eNB_CMP_19() runs on S1APComponent { 
+				// Local variables
+                
+				// Preamble
+				f_S1AP_enb_init();
+                                
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+				// Test body
+				action("trigger a UE context resume request");
+
+				f_recv_Ue_Context_Resume_Request(mw_UeContextResumeRequestIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID
+				)); 
+                                                                   
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+			} // End of function f_TC_S1AP_eNB_CMP_19
+
         } // End of group Context_management_group
         
         /**

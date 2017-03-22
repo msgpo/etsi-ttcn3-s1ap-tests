@@ -713,6 +713,18 @@ module LibS1AP_Steps {
         } // End of f_recv_Ue_Context_Suspend_Request
 
 
+        /**
+        * @desc Receive S1AP Message UE Context Resume Request
+        * @param p_value Receive template for UE CONTEXT Resume Request
+        * @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.17 UE CONTEXT Resume Request
+        */
+        function f_recv_Ue_Context_Resume_Request(
+                                        template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_UeContextResumeRequest(p_value))
+        } // End of f_recv_Ue_Context_Resume_Request
+
+
 		/**
 		* @desc Receive S1AP Message UE RADIO_CAPABILITY_MATCH_RESPONSE
 		* @param p_value Receive template for UE_RADIO_CAPABILITY_MATCH_RESPONSE
