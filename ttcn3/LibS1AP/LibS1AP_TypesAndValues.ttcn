@@ -22,11 +22,22 @@ module LibS1AP_TypesAndValues {
      * @desc List of E-RABSetupItemBearerSURes IEs
      */
     type record of E_RABToBeSetupItemBearerSUReq RecordOf_E_RABToBeSetupItemBearerSUReq;
+
+    /**
+     * @desc List of E-RABModifiedItemBearerSURes IEs
+     */
+    type record of E_RABToBeModifiedItemBearerModReq RecordOf_E_RABToBeModifiedItemBearerModReq;
     
     /**
      * @desc List of E-RABSetupItemBearerSURes IEs
      */
     type record of E_RABSetupItemBearerSURes RecordOf_E_RABSetupItemBearerSURes;
+ 
+     /**
+     * @desc List of E-RABModifyItemBearerModRes IEs
+     */
+    type record of E_RABModifyItemBearerModRes RecordOf_E_RABModifyItemBearerModRes;
+ 
     
     /**
      * @desc List of E-RAB IEs

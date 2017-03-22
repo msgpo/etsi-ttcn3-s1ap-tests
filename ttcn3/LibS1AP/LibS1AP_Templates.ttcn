@@ -100,6 +100,31 @@ module LibS1AP_Templates {
                     
                 }// End of group ERABSetup
 
+				group ERABModify {
+					
+					/**
+					 * @desc Send template for InitiatingMessage message with E-RABModify payload
+					 * @param p_value           The procedure code value
+					 */
+					template (value) InitiatingMessage m_E_RABModifiedRequest(
+																		   in template (value) RecordOf_ProtocolIE p_value) := {
+						procedureCode := id_E_RABSetup,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+					} // End of template m_E_RABModifiedRequest		
+
+					template (value) RecordOf_ProtocolIE m_E_RABModifiedReqIEs(
+								in template (value) MME_UE_S1AP_ID p_MME_value,
+								in template (value) ENB_UE_S1AP_ID p_eNB_value,
+								in template (value) RecordOf_E_RABToBeModifiedItemBearerModReq p_RecordOf_E_RABToBeModifiedItem_value
+					) := {
+						m_MME_UE_S1AP_ID(p_MME_value),
+						m_eNB_UE_S1AP_ID(p_eNB_value),
+						m_E_RABToBeModifiedList(p_RecordOf_E_RABToBeModifiedItem_value)
+					} // End of template m_E_RABSetupReqIEs
+							
+				}
+
                 /**
                  * @desc Send messages for Context Management procedures
                  */
@@ -474,6 +499,35 @@ module LibS1AP_Templates {
                 group HandoverResourceAllocation{
                     
                 }// End of group HandoverResourceAllocation
+                
+                
+                group ERABModify{
+
+					/**
+					 * @desc Receive template for SuccessfulOutcome/R-RAB_Setup message
+					 * @param p_procedureCode   Expected procedure code. Default: ?
+					 * @param p_value           Expected procedure code. Default: ?
+					 */
+					template (present) SuccessfulOutcome mw_E_RABModifiedResponse(
+																			   template (present) RecordOf_ProtocolIE p_value := ?
+					) := {
+						procedureCode := id_E_RABModify,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := p_value}
+					} // End of template mw_E_RABResponse
+                    
+					template (present) RecordOf_ProtocolIE mw_E_RABModifiedResIEs(
+																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
+																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+																			   template (present) RecordOf_E_RABModifyItemBearerModRes p_RecordOf_E_RABModifyItem_value := ?
+					) := { 
+						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+						mw_E_RABModifiedList(p_RecordOf_E_RABModifyItem_value)
+					} // End of template mw_E_RABSetupResIEs
+                   				
+					                
+                }
                 
                 group ERABSetup{
                     
@@ -2284,6 +2338,20 @@ module LibS1AP_Templates {
                     value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := valueof(p_value) }
                 } // End of template m_E_RABToBeSetupList
                 
+                /**
+                 * @desc Send template for E-RABToBeModifiedItemBearerModReq protocol IE
+                 * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
+                 */
+                template (value) ProtocolIE m_E_RABToBeModifiedList(
+                                                                 in template (value) RecordOf_E_RABToBeModifiedItemBearerModReq p_value := { m_E_RABToBeModifiedItemBearerSUReq }
+                ) := {
+                    id := S1AP_Constants.id_E_RABToBeModifiedItemBearerModReq,
+                    criticality := reject,
+                    value_ := { RecordOf_E_RABToBeModifiedItemBearerModReq := valueof(p_value) }
+                } // End of template m_E_RABToBeSetupList
+                
+                
+                
             } // End of group E_RAB_IEsend
             
             /**
@@ -2576,7 +2644,19 @@ module LibS1AP_Templates {
                 criticality := ignore,
                 value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
             } // End of template 
-            
+ 
+			/**
+			 * @desc Receive template for E-RABModifiedListBearerModReq protocol IE
+			 * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
+			 */
+			template (present) ProtocolIE mw_E_RABModifiedList(
+															template (present) RecordOf_E_RABModifyItemBearerModRes p_value := { mw_E_RABModifyItemBearerModRes }
+			) := {
+				id := S1AP_Constants.id_E_RABModifyListBearerModRes,
+				criticality := ignore,
+				value_ := { RecordOf_E_RABModifyItemBearerModRes := p_value }
+			} // End of template 
+			           
             template (present) ProtocolIE mw_E_RABFailedToSetupList(
                                                                     template (present) RecordOf_E_RABItem p_value := { ? }
             ) := {
@@ -3179,6 +3259,21 @@ module LibS1AP_Templates {
                 nAS_PDU := p_nAS_PDU,
                 iE_Extensions := p_iE_Extensions
             } // End of template m_E_RABToBeSetupItemBearerSUReq
+
+            /**
+             * @desc 
+             */
+            template(value) E_RABToBeModifiedItemBearerModReq m_E_RABToBeModifiedItemBearerSUReq(
+                                                                                          in E_RAB_ID p_e_RAB_ID := 0,
+                                                                                          in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
+                                                                                          in template (value) NAS_PDU p_nAS_PDU := '0000'O,
+                                                                                          in template (value) E_RABToBeModifiedItemBearerModReq.iE_Extensions p_iE_Extensions := omit
+            ) := {
+                e_RAB_ID := p_e_RAB_ID,
+				e_RABLevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
+                nAS_PDU := p_nAS_PDU,
+                iE_Extensions := p_iE_Extensions
+            } // End of template m_E_RABToBeSetupItemBearerSUReq
             
             /**
              * @desc 
@@ -3211,6 +3306,18 @@ module LibS1AP_Templates {
                  gTP_TEID                        := ?,
                  iE_Extensions                   := *
             } // End of template mw_E_RABSetupItemBearerSURes
+            
+			/**
+			 * @desc 
+			 * @param p_e_RAB_ID
+			 * @param p_cause
+			 */
+			template (present) E_RABModifyItemBearerModRes mw_E_RABModifyItemBearerModRes(
+																					  template(present) E_RAB_ID p_e_RAB_ID := ?
+			) :=  {
+				 e_RAB_ID                        := p_e_RAB_ID,
+				 iE_Extensions                   := *
+			} // End of template mw_E_RABSetupItemBearerSURes
             
             /**
              * @desc 
