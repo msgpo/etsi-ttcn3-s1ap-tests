@@ -99,30 +99,30 @@ module LibS1AP_Templates {
                     
                 }// End of group ERABSetup
 
-				group ERABModify {
-					
-					/**
-					 * @desc Send template for InitiatingMessage message with E-RABModify payload
-					 * @param p_value           The procedure code value
-					 */
-					template (value) InitiatingMessage m_E_RABModifiedRequest(
-																		   in template (value) RecordOf_ProtocolIE p_value) := {
-						procedureCode := id_E_RABSetup,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
-					} // End of template m_E_RABModifiedRequest		
+                group ERABModify {
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with E-RABModify payload
+                     * @param p_value           The procedure code value
+                     */
+                    template (value) InitiatingMessage m_E_RABModifiedRequest(
+                                                                           in template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_E_RABSetup,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                    } // End of template m_E_RABModifiedRequest        
 
-					template (value) RecordOf_ProtocolIE m_E_RABModifiedReqIEs(
-								in template (value) MME_UE_S1AP_ID p_MME_value,
-								in template (value) ENB_UE_S1AP_ID p_eNB_value,
-								in template (value) RecordOf_E_RABToBeModifiedItemBearerModReq p_RecordOf_E_RABToBeModifiedItem_value
-					) := {
-						m_MME_UE_S1AP_ID(p_MME_value),
-						m_eNB_UE_S1AP_ID(p_eNB_value),
-						m_E_RABToBeModifiedList(p_RecordOf_E_RABToBeModifiedItem_value)
-					} // End of template m_E_RABSetupReqIEs
-							
-				}
+                    template (value) RecordOf_ProtocolIE m_E_RABModifiedReqIEs(
+                                in template (value) MME_UE_S1AP_ID p_MME_value,
+                                in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                in template (value) RecordOf_E_RABToBeModifiedItemBearerModReq p_RecordOf_E_RABToBeModifiedItem_value
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_E_RABToBeModifiedList(p_RecordOf_E_RABToBeModifiedItem_value)
+                    } // End of template m_E_RABSetupReqIEs
+                            
+                }
 
                 /**
                  * @desc Send messages for Context Management procedures
@@ -156,78 +156,78 @@ module LibS1AP_Templates {
                         m_securityKey_IE(p_SecurityKey)
                     } // End of template m_InitialContextSetupReqIEs
 
-					/**
-					 * @desc Send template for InitiatingMessage message with UeContextReleaseCommand payload
-					 * @param p_value           Expected procedure code
-					 */
-					template (value) InitiatingMessage m_UeContextReleaseCommand(
-																		   in template (value) RecordOf_ProtocolIE p_value) := {
-						procedureCode := id_UEContextRelease,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
-					} // End of template m_UeContextReleaseCommand
+                    /**
+                     * @desc Send template for InitiatingMessage message with InitialContextSetup payload
+                     * @param p_value           Expected procedure code
+                     */
+                    template (value) InitiatingMessage m_UeContextReleaseCommand(
+                                                                           in template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_UEContextRelease,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                    } // End of template m_UeContextReleaseCommand
 
-					template (value) RecordOf_ProtocolIE m_UeContextReleaseCommandIEs_MME(
-																			in template (value) MME_UE_S1AP_ID p_MME_value,
-																			in template (value) Cause p_cause
-					) := {
-						m_MME_UE_S1AP_ID(p_MME_value),
-						m_cause_IE(p_cause)
-					} // End of template m_UeContextReleaseCommandIEs_MME
+                    template (value) RecordOf_ProtocolIE m_UeContextReleaseCommandIEs_MME(
+                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) Cause p_cause
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_cause_IE(p_cause)
+                    } // End of template m_UeContextReleaseCommandIEs_MME
 
-					template (value) RecordOf_ProtocolIE m_UeContextReleaseCommandIEs_ENB(
-																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
-																			in template (value) Cause p_cause
-					) := {
-						m_eNB_UE_S1AP_ID(p_eNB_value),
-						m_cause_IE(p_cause)
-					} // End of template m_UeContextReleaseCommandIEs_ENB
+                    template (value) RecordOf_ProtocolIE m_UeContextReleaseCommandIEs_ENB(
+                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                            in template (value) Cause p_cause
+                    ) := {
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_cause_IE(p_cause)
+                    } // End of template m_UeContextReleaseCommandIEs_ENB
+                    
 
+                    /**
+                     * @desc Send template for InitiatingMessage message with m_UeContextModificationRequest payload
+                     * @param p_value           Expected procedure code
+                     */
+                    template (value) InitiatingMessage m_UeContextModificationRequest(
+                                                                           in template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_UEContextModification,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                    } // End of template m_UeContextModificationRequest
 
-					/**
-					 * @desc Send template for InitiatingMessage message with m_UeContextModificationRequest payload
-					 * @param p_value           Expected procedure code
-					 */
-					template (value) InitiatingMessage m_UeContextModificationRequest(
-																		   in template (value) RecordOf_ProtocolIE p_value) := {
-						procedureCode := id_UEContextModification,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
-					} // End of template m_UeContextModificationRequest
+                    template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsUEAgg(
+                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                            in template (value) UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate)
+                    } // End of template m_ContextModificationReqIEs
+                    
+                    template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsSecKey(
+                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                            in template (value) CSFallbackIndicator p_CSFallbackIndicator,
+                                                                            in template (value) SecurityKey p_SecurityKey
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_CS_Fallback_indicator_IE(p_CSFallbackIndicator),
+                        m_securityKey_IE(p_SecurityKey)
+                    } // End of template m_ContextModificationReqIEsSecKey
 
-					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsUEAgg(
-																			in template (value) MME_UE_S1AP_ID p_MME_value,
-																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
-																			in template (value) UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate
-					) := {
-						m_MME_UE_S1AP_ID(p_MME_value),
-						m_eNB_UE_S1AP_ID(p_eNB_value),
-						m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate)
-					} // End of template m_ContextModificationReqIEs
-
-					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsSecKey(
-																			in template (value) MME_UE_S1AP_ID p_MME_value,
-																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
-																			in template (value) CSFallbackIndicator p_CSFallbackIndicator,
-																			in template (value) SecurityKey p_SecurityKey
-					) := {
-						m_MME_UE_S1AP_ID(p_MME_value),
-						m_eNB_UE_S1AP_ID(p_eNB_value),
-						m_CS_Fallback_indicator_IE(p_CSFallbackIndicator),
-						m_securityKey_IE(p_SecurityKey)
-					} // End of template m_ContextModificationReqIEsSecKey
-
-					template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsSecCap(
-																			in template (value) MME_UE_S1AP_ID p_MME_value,
-																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
-																			in template (value) CSFallbackIndicator p_CSFallbackIndicator,
-																			in template (value) UESecurityCapabilities p_UeSecurityCapabilities
-					) := {
-						m_MME_UE_S1AP_ID(p_MME_value),
-						m_eNB_UE_S1AP_ID(p_eNB_value),
-						m_CS_Fallback_indicator_IE(p_CSFallbackIndicator),
-						m_UE_securityCapabilities_IE(p_UeSecurityCapabilities)
-					} // End of template m_ContextModificationReqIEsSecCap
+                    template (value) RecordOf_ProtocolIE m_ContextModificationReqIEsSecCap(
+                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                            in template (value) CSFallbackIndicator p_CSFallbackIndicator,
+                                                                            in template (value) UESecurityCapabilities p_UeSecurityCapabilities
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_CS_Fallback_indicator_IE(p_CSFallbackIndicator),
+                        m_UE_securityCapabilities_IE(p_UeSecurityCapabilities)
+                    } // End of template m_ContextModificationReqIEsSecCap
                     
                 }// End of group Context_management_group
                 
@@ -537,7 +537,7 @@ module LibS1AP_Templates {
                             mw_eNB_UE_S1AP_ID(p_eNB_value),
                               mw_handoverType_IE(p_HandoverType_value),
                             mw_cause_IE(p_Cause_value),
-							mw_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
+                            mw_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
                               
                               
                        } // End of template m_E_RABSetupReqIEs
@@ -554,42 +554,42 @@ module LibS1AP_Templates {
                 
                 group ERABModify{
 
-					/**
-					 * @desc Receive template for SuccessfulOutcome/R-RAB_Setup message
-					 * @param p_procedureCode   Expected procedure code. Default: ?
-					 * @param p_value           Expected procedure code. Default: ?
-					 */
-					template (present) SuccessfulOutcome mw_E_RABModifiedResponse(
-																			   template (present) RecordOf_ProtocolIE p_value := ?
-					) := {
-						procedureCode := id_E_RABModify,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := p_value}
-					} // End of template mw_E_RABResponse
+                    /**
+                     * @desc Receive template for SuccessfulOutcome/R-RAB_Setup message
+                     * @param p_procedureCode   Expected procedure code. Default: ?
+                     * @param p_value           Expected procedure code. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_E_RABModifiedResponse(
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_E_RABModify,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_E_RABResponse
                     
-					template (present) RecordOf_ProtocolIE mw_E_RABModifiedResIEs(
-																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
-																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-																			   template (present) RecordOf_E_RABModifyItemBearerModRes p_RecordOf_E_RABModifyItem_value := ?
-					) := { 
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_E_RABModifiedList(p_RecordOf_E_RABModifyItem_value)
-					} // End of template mw_E_RABSetupResIEs
-                   				
-					template (present) RecordOf_ProtocolIE mw_E_RABModifiedResIEs_FailedToModifyList(
-						 template (present) MME_UE_S1AP_ID p_MME_value := ?,
-						 template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-						 template RecordOf_E_RABModifyItemBearerModRes p_RecordOf_E_RABModifyItem_value := omit,
-						 template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
-					) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_E_RABModifiedList(p_RecordOf_E_RABModifyItem_value) ifpresent,
-						mw_E_RABFailedToSetupList(p_E_RABItem_value)
-					} // End of template mw_E_RABSetupResIEs
-					
-										                
+                    template (present) RecordOf_ProtocolIE mw_E_RABModifiedResIEs(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                               template (present) RecordOf_E_RABModifyItemBearerModRes p_RecordOf_E_RABModifyItem_value := ?
+                    ) := { 
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_E_RABModifiedList(p_RecordOf_E_RABModifyItem_value)
+                    } // End of template mw_E_RABSetupResIEs
+                                   
+                    template (present) RecordOf_ProtocolIE mw_E_RABModifiedResIEs_FailedToModifyList(
+                         template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                         template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                         template RecordOf_E_RABModifyItemBearerModRes p_RecordOf_E_RABModifyItem_value := omit,
+                         template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_E_RABModifiedList(p_RecordOf_E_RABModifyItem_value) ifpresent,
+                        mw_E_RABFailedToSetupList(p_E_RABItem_value)
+                    } // End of template mw_E_RABSetupResIEs
+                    
+                                                        
                 }
                 
                 group ERABSetup{
@@ -650,115 +650,115 @@ module LibS1AP_Templates {
                                                                                template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
                                                                                template RecordOf_E_RABSetupItemBearerSURes p_RecordOf_E_RABSetupItem_value := omit,
-																			   template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
+                                                                               template (present) RecordOf_E_RABItem p_E_RABItem_value := ?
                     ) := {
                         mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value) ifpresent,
-						mw_E_RABFailedToSetupList(p_E_RABItem_value)
+                        mw_E_RABSetupList(p_RecordOf_E_RABSetupItem_value) ifpresent,
+                        mw_E_RABFailedToSetupList(p_E_RABItem_value)
                     } // End of template mw_InitialContextSetupResIEs
                     
-					template (present) RecordOf_ProtocolIE mw_InitialContextSetupFailureIEs(
-																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
-																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-																			   template (present) Cause p_cause := ?
-					) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_cause_IE(p_cause)
-					} // End of template mw_InitialContextSetupResIEs                    
+                    template (present) RecordOf_ProtocolIE mw_InitialContextSetupFailureIEs(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                               template (present) Cause p_cause := ?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_cause_IE(p_cause)
+                    } // End of template mw_InitialContextSetupResIEs                    
 
-					/**
-					 * @desc Receive template for UeContextReleaseRequest message
-					 * @param p_procedureCode   Expected procedure code. Default: ?
-					 * @param p_value           Expected procedure code. Default: ?
-					 */
-					template (present) SuccessfulOutcome mw_UeContextReleaseRequest(
-																			   template (present) RecordOf_ProtocolIE p_value := ?
-					) := {
-						procedureCode := id_UEContextReleaseRequest,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := p_value}
-					} // End of template mw_UeContextReleaseRequest
-
-                    
-					template (present) RecordOf_ProtocolIE mw_UeContextReleaseRequestIEs(
-																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
-																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-																			   template (present) Cause p_cause := ?
-					) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_cause_IE(p_cause)
-					} // End of template mw_UeContextReleaseRequestIEs
-
-					/**
-					 * @desc Receive template for UeContextReleaseComplete message
-					 * @param p_procedureCode   Expected procedure code. Default: ?
-					 * @param p_value           Expected procedure code. Default: ?
-					 */
-					template (present) SuccessfulOutcome mw_UeContextReleaseComplete(
-																			   template (present) RecordOf_ProtocolIE p_value := ?
-					) := {
-						procedureCode := id_UEContextRelease,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := p_value}
-					} // End of template mw_UeContextReleaseComplete
+                    /**
+                     * @desc Receive template for UeContextReleaseRequest message
+                     * @param p_procedureCode   Expected procedure code. Default: ?
+                     * @param p_value           Expected procedure code. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_UeContextReleaseRequest(
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_UEContextReleaseRequest,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_UeContextReleaseRequest
 
                     
-					template (present) RecordOf_ProtocolIE mw_UeContextReleaseCompleteIEs(
-																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
-																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-																			   template (present) Cause p_cause := ?
-					) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_cause_IE(p_cause)
-					} // End of template mw_UeContextReleaseCompleteIEs
+                    template (present) RecordOf_ProtocolIE mw_UeContextReleaseRequestIEs(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                               template (present) Cause p_cause := ?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_cause_IE(p_cause)
+                    } // End of template mw_UeContextReleaseRequestIEs
 
-					/**
-					 * @desc Receive template for mw_UeContextModificationResponse message
-					 * @param p_procedureCode   Expected procedure code. Default: ?
-					 * @param p_value           Expected procedure code. Default: ?
-					 */
-					template (present) SuccessfulOutcome mw_UeContextModificationResponse(
-																			   template (present) RecordOf_ProtocolIE p_value := ?
-					) := {
-						procedureCode := id_UEContextModification,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := p_value}
-					} // End of template mw_UeContextReleaseComplete
-                    
-					template (present) RecordOf_ProtocolIE mw_UeContextModificationResponseIEs(
-																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
-																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?
-					) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
-					} // End of template mw_UeContextReleaseCompleteIEs
+                    /**
+                     * @desc Receive template for UeContextReleaseComplete message
+                     * @param p_procedureCode   Expected procedure code. Default: ?
+                     * @param p_value           Expected procedure code. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_UeContextReleaseComplete(
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_UEContextRelease,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_UeContextReleaseComplete
 
-					/**
-					 * @desc Receive template for mw_UeContextModificationFailure message
-					 * @param p_procedureCode   Expected procedure code. Default: ?
-					 * @param p_value           Expected procedure code. Default: ?
-					 */
-					template (present) SuccessfulOutcome mw_UeContextModificationFailure(
-																			   template (present) RecordOf_ProtocolIE p_value := ?
-					) := {
-						procedureCode := id_UEContextModification,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := p_value}
-					} // End of template mw_UeContextModificationFailure
                     
-					template (present) RecordOf_ProtocolIE mw_UeContextModificationFailureIEs(
-																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
-																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-																			   template (present) Cause p_cause := ?
-					) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_cause_IE(p_cause)
-					} // End of template mw_UeContextModificationFailureIEs
+                    template (present) RecordOf_ProtocolIE mw_UeContextReleaseCompleteIEs(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                               template (present) Cause p_cause := ?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_cause_IE(p_cause)
+                    } // End of template mw_UeContextReleaseCompleteIEs
+                    
+                    /**
+                     * @desc Receive template for mw_UeContextModificationResponse message
+                     * @param p_procedureCode   Expected procedure code. Default: ?
+                     * @param p_value           Expected procedure code. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_UeContextModificationResponse(
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_UEContextModification,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_UeContextReleaseComplete
+                    
+                    template (present) RecordOf_ProtocolIE mw_UeContextModificationResponseIEs(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
+                    } // End of template mw_UeContextReleaseCompleteIEs
+                    
+                    /**
+                     * @desc Receive template for mw_UeContextModificationFailure message
+                     * @param p_procedureCode   Expected procedure code. Default: ?
+                     * @param p_value           Expected procedure code. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_UeContextModificationFailure(
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_UEContextModification,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_UeContextModificationFailure
+                    
+                    template (present) RecordOf_ProtocolIE mw_UeContextModificationFailureIEs(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                               template (present) Cause p_cause := ?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_cause_IE(p_cause)
+                    } // End of template mw_UeContextModificationFailureIEs
                     
                 } // End of group Context_management_group
                 
@@ -2412,49 +2412,49 @@ module LibS1AP_Templates {
                 value_ := {SecurityKey := valueof(p_value)}
             } // End of template m_securityKey_IE
 
-			/**
-			 * @desc Send template for correlation ID IE
-			 * @param p_value  UESecurityCapabilities value
-			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.80 correlation ID
-			 */
-			template (value) ProtocolIE m_correlationID_IE(
-												   in template (value) Correlation_ID p_value,
-												   in template (value) ProtocolIE.criticality p_criticality := ignore
-			) := {
-				id := S1AP_Constants.id_Correlation_ID,
-				criticality := p_criticality,
-				value_ := {Correlation_ID := valueof(p_value)}
-			} // End of template m_correlationID_IE
+            /**
+             * @desc Send template for correlation ID IE
+             * @param p_value  UESecurityCapabilities value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.80 correlation ID
+             */
+            template (value) ProtocolIE m_correlationID_IE(
+                                                   in template (value) Correlation_ID p_value,
+                                                   in template (value) ProtocolIE.criticality p_criticality := ignore
+            ) := {
+                id := S1AP_Constants.id_Correlation_ID,
+                criticality := p_criticality,
+                value_ := {Correlation_ID := valueof(p_value)}
+            } // End of template m_correlationID_IE
 
 
-			/**
-			 * @desc Send template for correlation ID IE
-			 * @param p_value  UESecurityCapabilities value
-			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.80 SIPTO correlation ID
-			 */
-			template (value) ProtocolIE m_SIPTO_correlationID_IE(
-												   in template (value) Correlation_ID p_value,
-												   in template (value) ProtocolIE.criticality p_criticality := ignore
-			) := {
-				id := S1AP_Constants.id_SIPTO_Correlation_ID,
-				criticality := p_criticality,
-				value_ := {Correlation_ID := valueof(p_value)}
-			} // End of template m_SIPTO_correlationID_IE
+            /**
+             * @desc Send template for correlation ID IE
+             * @param p_value  UESecurityCapabilities value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.80 SIPTO correlation ID
+             */
+            template (value) ProtocolIE m_SIPTO_correlationID_IE(
+                                                   in template (value) Correlation_ID p_value,
+                                                   in template (value) ProtocolIE.criticality p_criticality := ignore
+            ) := {
+                id := S1AP_Constants.id_SIPTO_Correlation_ID,
+                criticality := p_criticality,
+                value_ := {Correlation_ID := valueof(p_value)}
+            } // End of template m_SIPTO_correlationID_IE
+            
 
-
-			/**
-			 * @desc Send template for CS Fallback indicator IE
-			 * @param p_value  CSFallbackIndicator value
-			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.21 CS Fallback indicator
-			 */
-			template (value) ProtocolIE m_CS_Fallback_indicator_IE(
-												   in template (value) CSFallbackIndicator p_value,
-												   in template (value) ProtocolIE.criticality p_criticality := ignore
-			) := {
-				id := S1AP_Constants.id_CSFallbackIndicator,
-				criticality := p_criticality,
-				value_ := {CSFallbackIndicator := valueof(p_value)}
-			} // End of template m_CS_Fallback_indicator_IE
+            /**
+             * @desc Send template for CS Fallback indicator IE
+             * @param p_value  CSFallbackIndicator value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.21 CS Fallback indicator
+             */
+            template (value) ProtocolIE m_CS_Fallback_indicator_IE(
+                                                   in template (value) CSFallbackIndicator p_value,
+                                                   in template (value) ProtocolIE.criticality p_criticality := ignore
+            ) := {
+                id := S1AP_Constants.id_CSFallbackIndicator,
+                criticality := p_criticality,
+                value_ := {CSFallbackIndicator := valueof(p_value)}
+            } // End of template m_CS_Fallback_indicator_IE
             
             group E_RAB_IEsend {
                 
@@ -2805,18 +2805,18 @@ module LibS1AP_Templates {
                 value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
             } // End of template 
  
-			/**
-			 * @desc Receive template for E-RABModifiedListBearerModReq protocol IE
-			 * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
-			 */
-			template (present) ProtocolIE mw_E_RABModifiedList(
-															template (present) RecordOf_E_RABModifyItemBearerModRes p_value := { mw_E_RABModifyItemBearerModRes }
-			) := {
-				id := S1AP_Constants.id_E_RABModifyListBearerModRes,
-				criticality := ignore,
-				value_ := { RecordOf_E_RABModifyItemBearerModRes := p_value }
-			} // End of template 
-			           
+            /**
+             * @desc Receive template for E-RABModifiedListBearerModReq protocol IE
+             * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
+             */
+            template (present) ProtocolIE mw_E_RABModifiedList(
+                                                            template (present) RecordOf_E_RABModifyItemBearerModRes p_value := { mw_E_RABModifyItemBearerModRes }
+            ) := {
+                id := S1AP_Constants.id_E_RABModifyListBearerModRes,
+                criticality := ignore,
+                value_ := { RecordOf_E_RABModifyItemBearerModRes := p_value }
+            } // End of template 
+                       
             template (present) ProtocolIE mw_E_RABFailedToSetupList(
                                                                     template (present) RecordOf_E_RABItem p_value := { ? }
             ) := {
@@ -3385,20 +3385,20 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := { HandoverType := p_handoverType }
             } // End of template mw_handoverType
-			
-			/**
-			 * @desc 
-			 * @param p_value
-			 * @param p_criticality
-			 */
-			template (present) ProtocolIE mw_source_ToTarget_TransparentContainer_IE(
-				template (present) Source_ToTarget_TransparentContainer p_value := ?,
-				template (present) ProtocolIE.criticality p_criticality := reject
-			) := {
-				id := S1AP_Constants.id_Source_ToTarget_TransparentContainer,
-				criticality := p_criticality,
-				value_ := { Source_ToTarget_TransparentContainer := p_value }
-			} // End of template mw_handoverType	
+            
+            /**
+             * @desc 
+             * @param p_value
+             * @param p_criticality
+             */
+            template (present) ProtocolIE mw_source_ToTarget_TransparentContainer_IE(
+                template (present) Source_ToTarget_TransparentContainer p_value := ?,
+                template (present) ProtocolIE.criticality p_criticality := reject
+            ) := {
+                id := S1AP_Constants.id_Source_ToTarget_TransparentContainer,
+                criticality := p_criticality,
+                value_ := { Source_ToTarget_TransparentContainer := p_value }
+            } // End of template mw_handoverType    
         } // End of group Receive_IEs
         
         group g_IEParameters {
@@ -3411,12 +3411,12 @@ module LibS1AP_Templates {
                     nas := p_nas
                 } // End of template m_cause_nas
                 
-				template(value) Cause m_cause_ran(
-												  in template (value) CauseRadioNetwork p_radioNetwork
-				) := {
-					radioNetwork := p_radioNetwork
-				} // End of template m_cause_ran
-				                
+                template(value) Cause m_cause_ran(
+                                                  in template (value) CauseRadioNetwork p_radioNetwork
+                ) := {
+                    radioNetwork := p_radioNetwork
+                } // End of template m_cause_ran
+                                
                 template(present) Cause mw_cause_ran(
                                                      template (present) CauseRadioNetwork p_radioNetwork := ?
                 ) := {
@@ -3478,7 +3478,7 @@ module LibS1AP_Templates {
                                                                                           in template (value) E_RABToBeModifiedItemBearerModReq.iE_Extensions p_iE_Extensions := omit
             ) := {
                 e_RAB_ID := p_e_RAB_ID,
-				e_RABLevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
+                e_RABLevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
                 nAS_PDU := p_nAS_PDU,
                 iE_Extensions := p_iE_Extensions
             } // End of template m_E_RABToBeSetupItemBearerSUReq
@@ -3515,17 +3515,17 @@ module LibS1AP_Templates {
                  iE_Extensions                   := *
             } // End of template mw_E_RABSetupItemBearerSURes
             
-			/**
-			 * @desc 
-			 * @param p_e_RAB_ID
-			 * @param p_cause
-			 */
-			template (present) E_RABModifyItemBearerModRes mw_E_RABModifyItemBearerModRes(
-																					  template(present) E_RAB_ID p_e_RAB_ID := ?
-			) :=  {
-				 e_RAB_ID                        := p_e_RAB_ID,
-				 iE_Extensions                   := *
-			} // End of template mw_E_RABSetupItemBearerSURes
+            /**
+             * @desc 
+             * @param p_e_RAB_ID
+             * @param p_cause
+             */
+            template (present) E_RABModifyItemBearerModRes mw_E_RABModifyItemBearerModRes(
+                                                                                      template(present) E_RAB_ID p_e_RAB_ID := ?
+            ) :=  {
+                 e_RAB_ID                        := p_e_RAB_ID,
+                 iE_Extensions                   := *
+            } // End of template mw_E_RABSetupItemBearerSURes
             
             /**
              * @desc 

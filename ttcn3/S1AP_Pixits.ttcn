@@ -100,7 +100,7 @@ module S1AP_Pixits {
         * @desc    integer for timer TS1RELOCOverall, 
         * @see ETSI  TS 136 413, chapter 9.5
         */
-		modulepar float PX_TS1RELOCOverall := 10.0;
+        modulepar float PX_TS1RELOCOverall := 10.0;
        
     } // End of group S1AP_CommonData
     
