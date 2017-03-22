@@ -1069,7 +1069,18 @@ module S1AP_TCFunctions {
 			 */
 			function f_TC_S1AP_eNB_CMP_10() runs on S1APComponent { 
 				// Local variables
-
+				var template(value) Cause v_cause;
+				select(PX_VA){
+					case(1){v_cause := m_cause_ran(user_inactivity)}
+					case(2){v_cause := m_cause_ran(radio_connection_with_ue_lost)}
+					case(3){v_cause := m_cause_nas(csg_subscription_expiry)}
+					case(4){v_cause := m_cause_ran(cs_fallback_triggered)}
+					case(5){v_cause := m_cause_ran(redirection_towards_1xRTT)}
+					case(6){v_cause := m_cause_ran(interrat_redirection)}
+					case(7){v_cause := m_cause_ran(ue_not_available_for_ps_service)}
+					case else {setverdict(fail, "undefined PIXIT value for variant")}
+				}
+				
 				// Preamble
 				f_S1AP_enb_init();
 				
@@ -1080,10 +1091,9 @@ module S1AP_TCFunctions {
                 
 				// Test body
 
-				f_send_UE_Context_Release_Command(m_UeContextReleaseCommandIEs(
+				f_send_UE_Context_Release_Command(m_UeContextReleaseCommandIEs_MME(
 					vc_MME_UE_ID,
-					vc_eNB_UE_ID,
-					m_cause_ran(user_inactivity)
+					v_cause
 					));
 
 				f_recv_UE_Context_Release_Complete(mw_UeContextReleaseCompleteIEs(
@@ -1099,6 +1109,52 @@ module S1AP_TCFunctions {
 				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
 			} // End of function f_TC_S1AP_eNB_CMP_10
+
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_CMP_11
+			 */
+			function f_TC_S1AP_eNB_CMP_11() runs on S1APComponent { 
+				// Local variables
+				var template(value) Cause v_cause;
+				select(PX_VA){
+					case(1){v_cause := m_cause_ran(user_inactivity)}
+					case(2){v_cause := m_cause_ran(radio_connection_with_ue_lost)}
+					case(3){v_cause := m_cause_nas(csg_subscription_expiry)}
+					case(4){v_cause := m_cause_ran(cs_fallback_triggered)}
+					case(5){v_cause := m_cause_ran(redirection_towards_1xRTT)}
+					case(6){v_cause := m_cause_ran(interrat_redirection)}
+					case(7){v_cause := m_cause_ran(ue_not_available_for_ps_service)}
+					case else {setverdict(fail, "undefined PIXIT value for variant")}
+				}
+				
+				// Preamble
+				f_S1AP_enb_init();
+				
+				f_rABSetupRequest();
+				
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+				// Test body
+
+				f_send_UE_Context_Release_Command(m_UeContextReleaseCommandIEs_ENB(
+					vc_eNB_UE_ID,
+					v_cause
+					));
+
+				f_recv_UE_Context_Release_Complete(mw_UeContextReleaseCompleteIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID
+				));
+                
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+			} // End of function f_TC_S1AP_eNB_CMP_11
 
         } // End of group Context_management_group
         

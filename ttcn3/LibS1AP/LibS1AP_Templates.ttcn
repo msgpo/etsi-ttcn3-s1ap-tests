@@ -168,15 +168,21 @@ module LibS1AP_Templates {
 						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
 					} // End of template m_UeContextReleaseCommand
 
-					template (value) RecordOf_ProtocolIE m_UeContextReleaseCommandIEs(
+					template (value) RecordOf_ProtocolIE m_UeContextReleaseCommandIEs_MME(
 																			in template (value) MME_UE_S1AP_ID p_MME_value,
-																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
 																			in template (value) Cause p_cause
 					) := {
 						m_MME_UE_S1AP_ID(p_MME_value),
+						m_cause_IE(p_cause)
+					} // End of template m_UeContextReleaseCommandIEs_MME
+
+					template (value) RecordOf_ProtocolIE m_UeContextReleaseCommandIEs_ENB(
+																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
+																			in template (value) Cause p_cause
+					) := {
 						m_eNB_UE_S1AP_ID(p_eNB_value),
 						m_cause_IE(p_cause)
-					} // End of template m_UeContextReleaseCommandIEs
+					} // End of template m_UeContextReleaseCommandIEs_ENB
                     
                 }// End of group Context_management_group
                 
