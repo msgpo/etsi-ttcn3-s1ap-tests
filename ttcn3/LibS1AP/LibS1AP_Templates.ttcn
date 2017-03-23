@@ -3651,13 +3651,13 @@ module LibS1AP_Templates {
             /**
              * @desc 
              */
-            template(value) E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq(
+            template(omit) E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq(
                                                                                           in E_RAB_ID p_e_RAB_ID := 0,
                                                                                           in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
                                                                                           in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
                                                                                           in template (value) GTP_TEID p_gTP_TEID := '00000000'O,
                                                                                           in template (value) NAS_PDU p_nAS_PDU := '0000'O,
-                                                                                          in template (value) E_RABToBeSetupItemBearerSUReq.iE_Extensions p_iE_Extensions := omit
+                                                                                         in template (omit) E_RABToBeSetupItemBearerSUReq.iE_Extensions p_iE_Extensions := omit
             ) := {
                 e_RAB_ID := p_e_RAB_ID,
                 e_RABlevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
@@ -3689,11 +3689,11 @@ module LibS1AP_Templates {
             /**
              * @desc 
              */
-            template(value) E_RABToBeModifiedItemBearerModReq m_E_RABToBeModifiedItemBearerSUReq(
+            template(omit) E_RABToBeModifiedItemBearerModReq m_E_RABToBeModifiedItemBearerSUReq(
                                                                                           in E_RAB_ID p_e_RAB_ID := 0,
                                                                                           in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
                                                                                           in template (value) NAS_PDU p_nAS_PDU := '0000'O,
-                                                                                          in template (value) E_RABToBeModifiedItemBearerModReq.iE_Extensions p_iE_Extensions := omit
+                                                                                                in template (omit) E_RABToBeModifiedItemBearerModReq.iE_Extensions p_iE_Extensions := omit
             ) := {
                 e_RAB_ID := p_e_RAB_ID,
                 e_RABLevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
