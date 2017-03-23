@@ -67,7 +67,7 @@ module LibS1AP_TypesAndValues {
     /**
      * @desc List of ProtocolIEs
      */
-    type record of ProtocolIE RecordOf_ProtocolIE;
+    type set of ProtocolIE RecordOf_ProtocolIE;
     
 } with {
     encode "LibS1AP_asn1"
