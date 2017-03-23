@@ -137,7 +137,7 @@ module LibS1AP_Steps {
                                                  template (present) UnsuccessfulOutcome p_unsuccessfulOutcome := ?
         ) runs on S1APComponent {
             f_recv_S1AP_PDU( {unsuccessfulOutcome := p_unsuccessfulOutcome})
-        } // End of function f_recv_S1AP_unsuccessfulOutcome 
+        } // End of function f_recv_S1AP_unsuccessfulOutcome
         
         /**
          * @desc Receive S1AP Message E-RAB_SetupRequest
@@ -689,7 +689,7 @@ module LibS1AP_Steps {
 		) runs on S1APComponent {
 			f_recv_S1AP_initiatingMessage(mw_UeContextModificationFailure(p_value))
 		} // End of f_recv_UE_Context_Modification_Failure
-
+        
         /**
         * @desc Receive S1AP Message UE Context Modification Indication
         * @param p_value Receive template for UE CONTEXT MODIFICATION Indication
