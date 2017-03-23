@@ -169,6 +169,15 @@ module LibS1AP_Steps {
 		} // End of f_recv_E_RABModifiedResponse
         
         /**
+         * @desc Receive S1AP Message Handover Required
+         * @param p_value Receive template for Handover Required IEs
+         */
+        function f_recv_HandoverRequired(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_HandoverRequired(p_value))
+        } // End of function f_recv_HandoverRequired
+        
+        /**
          * @desc Receive S1AP Message InitialContext_SetupResponse
          * @param p_value Receive template for InitialContext_SetupResponse IEs
          */
@@ -568,17 +577,6 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_eNB_Configuration_Transfer(p_value))
         } // End of f_recv_eNB_Configuration_Transfer
-        
-        /**
-         * @desc Receive S1AP Message MME Direct Information Transfer
-         * @param p_value Receive template for MME DIRECT INFORMATION TRANSFER IEs
-         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.15 MME DIRECT INFORMATION TRANSFER
-         */
-        function f_MME_Direct_Information_Transfer_procedure(
-                                                             template (present) RecordOf_ProtocolIE p_value := ?
-        ) runs on S1APComponent {
-            f_recv_S1AP_initiatingMessage(mw_Mme_Configuration_Transfer(p_value))
-        } // End of fx_MME_Direct_Information_Transfer_procedure
         
         /**
          * @desc Receive S1AP Message MME CONFIGURATION TRANSFER
@@ -1096,6 +1094,12 @@ module LibS1AP_Steps {
     group externalFunctions {
         
         group eNBRole {
+            
+            /**
+             * @desc Trigger a Handover preparation procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_eNB_Handover_preparation_procedure() return boolean;
             
             /**
              * @desc Trigger an INITIAL UE MESSAGE procedure

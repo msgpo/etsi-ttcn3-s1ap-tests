@@ -53,154 +53,6 @@ module S1AP_TCFunctions {
                 f_S1AP_enb_init();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
-//              TODO Delete folowing loopback execution code
-
-
-                              log("V1: Send E_RAB WITH UE_Agregate_Max_Bit_Rate_IE");
-                              log("V1: Await E_RAB WITH UE_Agregate_Max_Bit_Rate_IE");
-                              f_send_E_RABSetupRequest(m_E_RABSetupReqIEs_UeAggregateMaxBitRate(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  m_UEAggregateMaximumBitrate(1024,2048),
-                                  {m_E_RABToBeSetupItemBearerSUReq (
-                                      -,
-                                      m_e_RABlevelQoSParameters
-                                      (5)
-                                  )}
-                              ));
-
-                              f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  mw_UEAggregateMaximumBitrate(?,?),
-                                  {mw_E_RABToBeSetupItemBearerSUReq(
-                                      -,
-                                      mw_e_RABlevelQoSParameters(?))}
-                              ));
-
-
-//                              log("V2: Send E_RAB WITH UE_Agregate_Max_Bit_Rate_IE");
-//                              log("V2: Await E_RAB without UE_Agregate_Max_Bit_Rate_IE");
-//
-//                              f_send_E_RABSetupRequest(m_E_RABSetupReqIEs_UeAggregateMaxBitRate(
-//                                  vc_MME_UE_ID,
-//                                  vc_eNB_UE_ID,
-//                                  m_UEAggregateMaximumBitrate(1024,2048),
-//                                  {m_E_RABToBeSetupItemBearerSUReq (
-//                                      -,
-//                                      m_e_RABlevelQoSParameters
-//                                      (5)
-//                                  )}
-//                              ));
-//                
-//                              f_recv_E_RABSetupRequest(
-//                              mw_E_RABSetupReqIEs(
-//                                  vc_MME_UE_ID,
-//                                  vc_eNB_UE_ID,
-//                                  {mw_E_RABToBeSetupItemBearerSUReq(
-//                                      -,
-//                                      mw_e_RABlevelQoSParameters(?))}
-//                              )
-//                              );
-
-
-                              log("V3: Send E_RAB WITH UE_Agregate_Max_Bit_Rate_IE");
-                              log("V3: Await E_RAB with AND without UE_Agregate_Max_Bit_Rate_IE");
-                              f_send_E_RABSetupRequest(m_E_RABSetupReqIEs_UeAggregateMaxBitRate(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  m_UEAggregateMaximumBitrate(1024,2048),
-                                  {m_E_RABToBeSetupItemBearerSUReq (
-                                      -,
-                                      m_e_RABlevelQoSParameters
-                                      (5)
-                                  )}
-                              ));
-
-                              f_recv_E_RABSetupRequest(
-                              (
-                              mw_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  mw_UEAggregateMaximumBitrate(?,?),
-                                  {mw_E_RABToBeSetupItemBearerSUReq(
-                                      -,
-                                      mw_e_RABlevelQoSParameters(?))}
-                              ),
-                              mw_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  -,
-                                  {mw_E_RABToBeSetupItemBearerSUReq(
-                                      -,
-                                      mw_e_RABlevelQoSParameters(?))}
-                              )
-                              )
-                              );
-
-
-                              log("V4: Send E_RAB WITH UE_Agregate_Max_Bit_Rate_IE");
-                              log("V4: Await E_RAB with ifpresent UE_Agregate_Max_Bit_Rate_IE");
-                              f_send_E_RABSetupRequest(m_E_RABSetupReqIEs_UeAggregateMaxBitRate(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  m_UEAggregateMaximumBitrate(1024,2048),
-                                  {m_E_RABToBeSetupItemBearerSUReq (
-                                      -,
-                                      m_e_RABlevelQoSParameters
-                                      (5)
-                                  )}
-                              ));
-
-                              f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  -,
-                                  ?
-                              ));
-
-
-                              log("V5: Send E_RAB without UE_Agregate_Max_Bit_Rate_IE");
-                              log("V5: Await E_RAB without UE_Agregate_Max_Bit_Rate_IE");
-                              f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  {m_E_RABToBeSetupItemBearerSUReq (
-                                      -,
-                                      m_e_RABlevelQoSParameters
-                                      (5)
-                                  )}
-                              ));
-
-                              f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  -,
-                                  ?
-                              ));
-
-
-                              log("V6: Send E_RAB without UE_Agregate_Max_Bit_Rate_IE");
-                              log("V6: Await E_RAB with ifpresent UE_Agregate_Max_Bit_Rate_IE");
-                              f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  {m_E_RABToBeSetupItemBearerSUReq (
-                                      -,
-                                      m_e_RABlevelQoSParameters
-                                      (5)
-                                  )}
-                              ));
-
-                              f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
-                                  vc_MME_UE_ID,
-                                  vc_eNB_UE_ID,
-                                  -,
-                                  ?
-                              ));
-
-
-//              TODO Delete above loopback execution code
                 
                 f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
                     vc_MME_UE_ID,
@@ -1681,6 +1533,174 @@ module S1AP_TCFunctions {
          */
         group Handover_signalling_group {
             
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_HAS_01
+             */
+            function f_TC_S1AP_eNB_HAS_01() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: TODO check if some preamble required
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Handover to be forwarded
+                if (fx_eNB_Handover_preparation_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a HANDOVER_REQUIRED
+                    f_recv_HandoverRequired(
+                        mw_HandoverRequiredIEs(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            intralte,//handover_Type
+                            -,//Cause
+                            -,//TargetId
+                            -//SourceToTargetTransparentContainer
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_HAS_01
+            
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_HAS_02
+             */
+            function f_TC_S1AP_eNB_HAS_02() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: TODO check if some preamble required
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Handover to be forwarded
+                if (fx_eNB_Handover_preparation_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a HANDOVER_REQUIRED
+                    f_recv_HandoverRequired(
+                        mw_HandoverRequiredIEs(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            ltetoutran,//handover_Type
+                            -,//Cause
+                            -,//TargetId
+                            -//TODO Check if SourceRNCToTargetRNCTransparentContainer with UE History Information is present
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_HAS_02
+            
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_HAS_03
+             */
+            function f_TC_S1AP_eNB_HAS_03() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: TODO check if some preamble required
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Handover to be forwarded
+                if (fx_eNB_Handover_preparation_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a HANDOVER_REQUIRED
+                    f_recv_HandoverRequired(
+                        mw_HandoverRequiredIEs(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            ltetogeran,//handover_Type
+                            -,//Cause
+                            -,//TargetId
+                            -//TODO Check if SourceBSSToTargetBSSTransparentContainer
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_HAS_03
+            
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_HAS_04
+             */
+            function f_TC_S1AP_eNB_HAS_04() runs on S1APComponent { 
+                // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
+                const NAS_PDU c_nAS_PDU := '0000'O;
+                
+                // Preamble
+                f_S1AP_enb_init();
+                // Preamble action: TODO check if some preamble required
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. to indicate a Handover to be forwarded
+                if (fx_eNB_Handover_preparation_procedure() == false) {
+                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    // 2. sends a HANDOVER_REQUIRED
+                    f_recv_HandoverRequired(
+                        mw_HandoverRequiredIEs(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            intralte,//handover_Type
+                            -,//Cause
+                            -,//TargetId
+                            -//SourceToTargetTransparentContainer
+                    ));
+                    
+                    f_send_E_RABModifiedRequest(m_E_RABModifiedReqIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        {m_E_RABToBeModifiedItemBearerSUReq(
+                            c_E_RAB_ID_A,
+                            m_e_RABlevelQoSParameters(5),
+                            c_nAS_PDU
+                        )}
+                    ));
+                    
+                    
+                    
+                    
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                }
+                
+                // Postamble
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_HAS_04
+            
         } // End of group Handover_signalling_group
         
         /**
@@ -2968,9 +2988,12 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
-                //f_send_(                    );
                 
-                //f_recv_(                    );
+                f_recv_E_RABSetupRequest(superset (all from mw_E_RABSetupReqIEs(
+                    vc_MME_UE_ID,
+                    vc_eNB_UE_ID,
+                    ?
+                )));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
