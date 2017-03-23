@@ -729,15 +729,50 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_RAB_12  () runs on S1APComponent {
                 // Local variables
-                
+				const QCI c_qci_id := 0; 
+				const E_RAB_ID c_E_RAB_ID_A := 0;
+				const NAS_PDU c_nAS_PDU := '0000'O;
                 
                 // Preamble
                 f_S1AP_enb_init();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
-                // TODO
-
+				f_send_E_RABModifiedRequest(m_E_RABModifiedReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						m_E_RABToBeModifiedItemBearerSUReq(
+							c_E_RAB_ID_A,
+							m_e_RABlevelQoSParameters(c_qci_id),
+							c_nAS_PDU
+						),m_E_RABToBeModifiedItemBearerSUReq(
+							c_E_RAB_ID_A,
+							m_e_RABlevelQoSParameters(c_qci_id),
+							c_nAS_PDU
+						)
+					}
+				));
+				
+				f_recv_E_RABModifiedResponse(mw_E_RABModifiedResIEs_FailedToModifyList(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					omit,
+					{
+						 mw_E_RABItem(
+							 c_E_RAB_ID_A,
+							 {
+								 radioNetwork := multiple_E_RAB_ID_instances
+							 }
+						 ),
+						 mw_E_RABItem(
+							 c_E_RAB_ID_A,
+							 {
+								 radioNetwork := multiple_E_RAB_ID_instances
+							 }
+						 )
+					 }
+				));
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
 
                 f_postamble_S1AP_eNB();
@@ -746,6 +781,55 @@ module S1AP_TCFunctions {
 
             } // End of function f_TC_S1AP_eNB_RAB_12
 
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_RAB_13
+			 */
+			function f_TC_S1AP_eNB_RAB_13  () runs on S1APComponent {
+				// Local variables
+				const QCI c_qci_id := 99; // TODO unknown QCI Id 
+				const E_RAB_ID c_E_RAB_ID_A := 0;
+				const NAS_PDU c_nAS_PDU := '0000'O;
+				
+				
+				// Preamble
+				f_S1AP_enb_init();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+
+				f_send_E_RABModifiedRequest(m_E_RABModifiedReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						m_E_RABToBeModifiedItemBearerSUReq(
+							c_E_RAB_ID_A,
+							m_e_RABlevelQoSParameters(c_qci_id),
+							c_nAS_PDU
+						)
+					}
+				));
+				
+				f_recv_E_RABModifiedResponse(mw_E_RABModifiedResIEs_FailedToModifyList(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					omit,
+					{
+						mw_E_RABItem(
+							c_E_RAB_ID_A,
+							{
+								radioNetwork := unknown_E_RAB_ID
+							}
+						 )
+					 }
+				));
+				
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TC_S1AP_eNB_RAB_13
+			
         } // End of group ERAB_management_group
         
         /**
