@@ -1978,6 +1978,55 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_MME_RAB_01
             
         } // End of group ERAB_management_group
+
+        group Context_Management_group {
+            testcase TC_S1AP_MME_CMP_01() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_01());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_01
+            
+            testcase TC_S1AP_MME_CMP_02() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_02());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_02
+
+        } // End of group Context_Management_group
         
         /**
          * @desc Paging group
