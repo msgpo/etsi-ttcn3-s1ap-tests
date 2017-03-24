@@ -160,8 +160,31 @@ module LibS1AP_Templates {
                         m_securityKey_IE(p_SecurityKey)
                     } // End of template m_InitialContextSetupReqIEs
 
+					/**
+					 * @desc Send template for InitiatingMessage message with UeContextReleaseRequest payload
+					 * @param p_value           Expected procedure code
+					 */
+					template (value) InitiatingMessage m_UeContextReleaseRequest(
+																		   in template (value) RecordOf_ProtocolIE p_value) := {
+						procedureCode := id_UEContextReleaseRequest,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+					} // End of template m_UeContextReleaseRequest
+
+
+					template (value) RecordOf_ProtocolIE m_UeContextReleaseRequestIEs(
+																			in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+																			in template (value) Cause p_cause
+					) := {
+						m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+						m_cause_IE(p_cause)
+					} // End of template m_UeContextReleaseRequestIEs_MME
+
+
                     /**
-                     * @desc Send template for InitiatingMessage message with InitialContextSetup payload
+                     * @desc Send template for InitiatingMessage message with UEContextRelease payload
                      * @param p_value           Expected procedure code
                      */
                     template (value) InitiatingMessage m_UeContextReleaseCommand(
@@ -186,7 +209,25 @@ module LibS1AP_Templates {
                         m_eNB_UE_S1AP_ID(p_eNB_value),
                         m_cause_IE(p_cause)
                     } // End of template m_UeContextReleaseCommandIEs_ENB
-                    
+
+					/**
+					 * @desc Send template for InitiatingMessage message with UEContextReleaseComplete payload
+					 * @param p_value           Expected procedure code
+					 */
+					template (value) InitiatingMessage m_UeContextReleaseComplete(
+																		   in template (value) RecordOf_ProtocolIE p_value) := {
+						procedureCode := id_UEContextRelease,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+					} // End of template m_UeContextReleaseComplete                    
+
+					template (value) RecordOf_ProtocolIE m_UeContextReleaseCompleteIEs(
+																			in template (value) MME_UE_S1AP_ID p_MME_value,
+																			in template (value) ENB_UE_S1AP_ID p_eNB_value
+					) := {
+						m_MME_UE_S1AP_ID(p_MME_value),
+						m_eNB_UE_S1AP_ID(p_eNB_value)
+					} // End of template m_UeContextReleaseCompleteIEs
 
                     /**
                      * @desc Send template for InitiatingMessage message with m_UeContextModificationRequest payload
@@ -780,6 +821,37 @@ module LibS1AP_Templates {
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
                         mw_cause_IE(p_cause)
                     } // End of template mw_UeContextReleaseRequestIEs
+
+
+					/**
+					 * @desc Receive template for UeContextReleaseCommand message
+					 * @param p_procedureCode   Expected procedure code. Default: ?
+					 * @param p_value           Expected procedure code. Default: ?
+					 */
+					template (present) SuccessfulOutcome mw_UeContextReleaseCommand(
+																			   template (present) RecordOf_ProtocolIE p_value := ?
+					) := {
+						procedureCode := id_UEContextRelease,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := p_value}
+					} // End of template mw_UeContextReleaseCommand
+
+					template (present) RecordOf_ProtocolIE mw_UeContextReleaseCommandIEs_MME(
+																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
+																			   template (present) Cause p_cause := ?
+					) := {
+						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+						mw_cause_IE(p_cause)
+					} // End of template mw_UeContextReleaseCommandIEs
+
+
+					template (present) RecordOf_ProtocolIE mw_UeContextReleaseCommandIEs_ENB(
+																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+																			   template (present) Cause p_cause := ?
+					) := {
+						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+						mw_cause_IE(p_cause)
+					} // End of template mw_UeContextReleaseCommandIEs
 
                     /**
                      * @desc Receive template for UeContextReleaseComplete message

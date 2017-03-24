@@ -676,6 +676,18 @@ module LibS1AP_Steps {
 			f_recv_S1AP_initiatingMessage(mw_UeContextReleaseComplete(p_value))
 		} // End of f_recv_UE_Context_Release_Complete
 
+
+		/**
+		* @desc Receive S1AP Message UE Context Release Command
+		* @param p_value Receive template for UE CONTEXT RELEASE COMMAND
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.6 UE CONTEXT RELEASE COMMAND
+		*/
+		function f_recv_UE_Context_Release_Command(
+										template (present) RecordOf_ProtocolIE p_value := ?
+		) runs on S1APComponent {
+			f_recv_S1AP_initiatingMessage(mw_UeContextReleaseCommand(p_value))
+		} // End of f_recv_UE_Context_Release_Command
+
 		/**
 		* @desc Receive S1AP Message UE Context Modification Response
 		* @param p_value Receive template for UE CONTEXT MODIFICATION RESPONSE
@@ -992,6 +1004,29 @@ module LibS1AP_Steps {
 		) runs on S1APComponent {
 			f_send_S1AP_initiatingMessage(m_UeContextReleaseCommand(p_value))
 		} // End of f_send_UE_Context_Release_Command
+
+
+		/**
+		* @desc Send S1AP Message UE Context Release Complete
+		* @param p_value Send template for UE CONTEXT RELEASE COMPLETE
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.7 UE CONTEXT RELEASE COMPLETE
+		*/
+		function f_send_UE_Context_Release_Complete(
+										template (value) RecordOf_ProtocolIE p_value
+		) runs on S1APComponent {
+			f_send_S1AP_initiatingMessage(m_UeContextReleaseComplete(p_value))
+		} // End of f_send_UE_Context_Release_Command
+		
+		/**
+		* @desc Send S1AP Message UE Context Release Request
+		* @param p_value Receive template for UE CONTEXT RELEASE REQUEST
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.5 UE CONTEXT RELEASE REQUEST
+		*/
+		function f_send_UE_Context_Release_Request(
+										template (value) RecordOf_ProtocolIE p_value
+		) runs on S1APComponent {
+			f_send_S1AP_initiatingMessage(m_UeContextReleaseRequest(p_value))
+		} // End of f_send_UE_Context_Release_Request
 
 		/**
 		* @desc Send S1AP Message UE Context Modification Request
