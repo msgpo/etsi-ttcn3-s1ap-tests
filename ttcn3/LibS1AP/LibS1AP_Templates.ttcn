@@ -572,7 +572,7 @@ module LibS1AP_Templates {
                        ) := {
                             mw_MME_UE_S1AP_ID(p_MME_value),
                             mw_eNB_UE_S1AP_ID(p_eNB_value),
-                            mw_handoverType_IE(p_HandoverType_value),
+                              mw_handoverType_IE(p_HandoverType_value),
                             mw_cause_IE(p_Cause_value),
                             mw_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
                               
@@ -727,35 +727,35 @@ module LibS1AP_Templates {
                         mw_cause_IE(p_cause)
                     } // End of template mw_InitialContextSetupResIEs                    
 
-					/**
-					 * @desc Receive template for InitialContextSetup message
-					 * @param p_procedureCode   Expected procedure code. Default: ?
-					 * @param p_value           Expected procedure code. Default: ?
-					 */
-					template (present) SuccessfulOutcome mw_InitialContextSetupRequest(
-																			   template (present) RecordOf_ProtocolIE p_value := ?
-					) := {
-						procedureCode := id_E_RABSetup,
-						criticality := reject,
-						value_ := {RecordOf_ProtocolIE := p_value}
-					} // End of template mw_InitialContextSetupRequest
+                    /**
+                     * @desc Receive template for InitialContextSetup message
+                     * @param p_procedureCode   Expected procedure code. Default: ?
+                     * @param p_value           Expected procedure code. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_InitialContextSetupRequest(
+                                                                               template (present) RecordOf_ProtocolIE p_value := ?
+                    ) := {
+                        procedureCode := id_E_RABSetup,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_InitialContextSetupRequest
 
                     
-					template (present) RecordOf_ProtocolIE mw_InitialContextSetupRequestIEs(
-																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
-																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-																			   template (present) UEAggregateMaximumBitrate p_UEAggregateMaximumBitrate := ?,
-																			   template (present) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABSetupItem_value,
-					                                                           template (present) UESecurityCapabilities p_UESecurityCapabilities:=?,
-					                                                           template (present) SecurityKey p_SecurityKey:=?
-					) := {
-						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-						mw_UE_aggregate_maximum_bitrate_IE(p_UEAggregateMaximumBitrate),
-						mw_E_RABToBeSetupList(p_RecordOf_E_RABSetupItem_value),
-						mw_UE_securityCapabilities_IE(p_UESecurityCapabilities),                       
-						mw_securityKey_IE(p_SecurityKey)
-					} // End of template mw_InitialContextSetupRequestIEs
+                    template (present) RecordOf_ProtocolIE mw_InitialContextSetupRequestIEs(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                               template (present) UEAggregateMaximumBitrate p_UEAggregateMaximumBitrate := ?,
+                                                                               template (present) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABSetupItem_value,
+                                                                               template (present) UESecurityCapabilities p_UESecurityCapabilities:=?,
+                                                                               template (present) SecurityKey p_SecurityKey:=?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_UE_aggregate_maximum_bitrate_IE(p_UEAggregateMaximumBitrate),
+                        mw_E_RABToBeSetupList(p_RecordOf_E_RABSetupItem_value),
+                        mw_UE_securityCapabilities_IE(p_UESecurityCapabilities),                       
+                        mw_securityKey_IE(p_SecurityKey)
+                    } // End of template mw_InitialContextSetupRequestIEs
 
                     /**
                      * @desc Receive template for UeContextReleaseRequest message
@@ -1495,19 +1495,16 @@ module LibS1AP_Templates {
                      * @desc Receive template for ERROR_INDICATION message
                      * @param p_MME_value               The expected MME UE S1AP ID value. Default: ?
                      * @param p_eNB_value               The expected eNB UE S1AP ID value. Default: ?
-                     * @param p_cause                   The expected Cause value. Default: ?
-                     * @param p_criticalityDiagnostics  Information about which IEs were not comprehended or were missing. Default: ?
+                     * @param p_value                   The expected Cause value or CriticalityDiagnostics value. Default: ?
                      */
                     template (present) RecordOf_ProtocolIE mw_error_IndicationIEs(
                                                                                   template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-                                                                                  template (present) Cause p_cause := ?,
-                                                                                  template (present) CriticalityDiagnostics p_criticalityDiagnostics := ?
+                                                                                  template (present) ProtocolIE p_value
                     ) := {
                         mw_MME_UE_S1AP_ID(p_MME_value),
                         mw_eNB_UE_S1AP_ID(p_eNB_value),
-                        mw_cause_IE(p_cause), // FIXME 'ifpresent' is not correct, how to achieve cause or criticalityDiagnostics condiftion?
-                        mw_criticalityDiagnostics_IE(p_criticalityDiagnostics)
+                        p_value
                     } // End of template mw_error_IndicationIEs
                     
                 } // End of group Error_Indication_receive
@@ -3629,34 +3626,34 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := { VoiceSupportMatchIndicator := p_value }
             } // End of template mw_handoverType   
+            
+            /**
+             * @desc receive template for UE security Capabilities IE
+             * @param p_value  UESecurityCapabilities value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.40 UESecurityCapabilities
+             */
+            template (present) ProtocolIE mw_UE_securityCapabilities_IE(
+                                                   in template (present) UESecurityCapabilities p_value:=?,
+                                                   in template (present) ProtocolIE.criticality p_criticality := reject
+            ) := {
+                id := S1AP_Constants.id_UESecurityCapabilities,
+                criticality := p_criticality,
+                value_ := {UESecurityCapabilities := p_value}
+            } // End of template mw_UE_securityCapabilities_IE
 
-			/**
-			 * @desc receive template for UE security Capabilities IE
-			 * @param p_value  UESecurityCapabilities value
-			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.40 UESecurityCapabilities
-			 */
-			template (present) ProtocolIE mw_UE_securityCapabilities_IE(
-												   in template (present) UESecurityCapabilities p_value:=?,
-												   in template (present) ProtocolIE.criticality p_criticality := reject
-			) := {
-				id := S1AP_Constants.id_UESecurityCapabilities,
-				criticality := p_criticality,
-				value_ := {UESecurityCapabilities := p_value}
-			} // End of template mw_UE_securityCapabilities_IE
-
-			/**
-			 * @desc receive template for security key IE
-			 * @param p_value  UESecurityCapabilities value
-			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.41 Security Key
-			 */
-			template (present) ProtocolIE mw_securityKey_IE(
-												   in template (present) SecurityKey p_value:=?,
-												   in template (present) ProtocolIE.criticality p_criticality := reject
-			) := {
-				id := S1AP_Constants.id_SecurityKey,
-				criticality := p_criticality,
-				value_ := {SecurityKey := p_value}
-			} // End of template mw_securityKey_IE
+            /**
+             * @desc receive template for security key IE
+             * @param p_value  UESecurityCapabilities value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.41 Security Key
+             */
+            template (present) ProtocolIE mw_securityKey_IE(
+                                                   in template (present) SecurityKey p_value:=?,
+                                                   in template (present) ProtocolIE.criticality p_criticality := reject
+            ) := {
+                id := S1AP_Constants.id_SecurityKey,
+                criticality := p_criticality,
+                value_ := {SecurityKey := p_value}
+            } // End of template mw_securityKey_IE
             
         } // End of group Receive_IEs
         
@@ -3712,11 +3709,11 @@ module LibS1AP_Templates {
              * @desc 
              */
             template(omit) E_RABToBeSetupItemBearerSUReq m_E_RABToBeSetupItemBearerSUReq(
-                                                                                          in E_RAB_ID p_e_RAB_ID := 0,
-                                                                                          in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
-                                                                                          in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
-                                                                                          in template (value) GTP_TEID p_gTP_TEID := '00000000'O,
-                                                                                          in template (value) NAS_PDU p_nAS_PDU := '0000'O,
+                                                                                         in E_RAB_ID p_e_RAB_ID := 0,
+                                                                                         in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
+                                                                                         in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
+                                                                                         in template (value) GTP_TEID p_gTP_TEID := '00000000'O,
+                                                                                         in template (value) NAS_PDU p_nAS_PDU := '0000'O,
                                                                                          in template (omit) E_RABToBeSetupItemBearerSUReq.iE_Extensions p_iE_Extensions := omit
             ) := {
                 e_RAB_ID := p_e_RAB_ID,
@@ -3750,9 +3747,9 @@ module LibS1AP_Templates {
              * @desc 
              */
             template(omit) E_RABToBeModifiedItemBearerModReq m_E_RABToBeModifiedItemBearerSUReq(
-                                                                                          in E_RAB_ID p_e_RAB_ID := 0,
-                                                                                          in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
-                                                                                          in template (value) NAS_PDU p_nAS_PDU := '0000'O,
+                                                                                                in E_RAB_ID p_e_RAB_ID := 0,
+                                                                                                in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
+                                                                                                in template (value) NAS_PDU p_nAS_PDU := '0000'O,
                                                                                                 in template (omit) E_RABToBeModifiedItemBearerModReq.iE_Extensions p_iE_Extensions := omit
             ) := {
                 e_RAB_ID := p_e_RAB_ID,

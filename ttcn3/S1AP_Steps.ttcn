@@ -37,7 +37,7 @@ module S1AP_Steps {
          */
         function f_S1AP_mme_init()
         runs on S1APComponent {
-        	
+            
             //Defaults
             vc_default_s1ap := activate (a_defaultS1AP());
             
