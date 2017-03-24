@@ -11,22 +11,14 @@
  */
 module S1AP_TestCases {
     
-    //LibCommon
+    // LibCommon
     import from LibCommon_Sync all ;
-    import from LibCommon_VerdictControl all;
     
-    //LibS1AP
-    //import from LibS1AP_TypesAndValues all;
-    import from LibS1AP_Interface all;
-    import from LibS1AP_Steps all;
-    
-    //Ats
+    // S1AP_Ats
     import from S1AP_TestConfiguration all;
     import from S1AP_TestSystem all;
     import from S1AP_TCFunctions all;
     import from S1AP_Pics all;
-    import from S1AP_Pixits all;
-    import from S1AP_Steps all;
     import from S1AP_TestSystem all;
     
     group eNB_Role {

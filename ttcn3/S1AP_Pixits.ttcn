@@ -12,7 +12,7 @@
 module S1AP_Pixits {
     
     // LibCommon
-    import from LibCommon_BasicTypesAndValues all;
+//    import from LibCommon_BasicTypesAndValues all;
     
     group S1AP_Port_and_addresses {
         

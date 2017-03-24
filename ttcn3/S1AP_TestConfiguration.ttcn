@@ -11,18 +11,12 @@
  */
 module S1AP_TestConfiguration {
     
-    //LibCommon
+    // LibCommon
     import from LibCommon_Sync all;
     import from LibCommon_VerdictControl all;
-    import from LibCommon_BasicTypesAndValues all; 
     
-    //LibS1AP
-    import from LibS1AP_Interface all;
-    import from LibS1AP_Pixits all;
-    
-    //Ats
+    // S1AP_Ats
     import from S1AP_TestSystem all;
-    //import from S1AP_Pixits all;
     
     group cfUp {
         

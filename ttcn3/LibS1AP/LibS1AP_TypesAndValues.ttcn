@@ -12,11 +12,8 @@
 module LibS1AP_TypesAndValues {
     
     // LibS1AP
-    import from S1AP_Constants language "ASN.1:1997" all;
-    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
     import from S1AP_IEs language "ASN.1:1997" all;
     import from S1AP_PDU_Contents language "ASN.1:1997" all;
-    import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     
     /**
      * @desc List of E-RABSetupItemBearerSURes IEs

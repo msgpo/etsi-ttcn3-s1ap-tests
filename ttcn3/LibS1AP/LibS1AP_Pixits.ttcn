@@ -12,7 +12,6 @@
 module LibS1AP_Pixits {
     
     // LibCommon
-    import from LibCommon_BasicTypesAndValues all;
     import from LibCommon_DataStrings all;
     
     // LibS1AP

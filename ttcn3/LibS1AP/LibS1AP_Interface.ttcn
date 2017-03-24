@@ -13,17 +13,11 @@ module LibS1AP_Interface {
     
     // LibCommon
     import from LibCommon_Sync all;
-    import from LibCommon_BasicTypesAndValues all;
     
     // LibS1AP
-    import from S1AP_Constants language "ASN.1:1997" all;
-    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
-    import from S1AP_Containers language "ASN.1:1997" all;
     import from S1AP_IEs language "ASN.1:1997" all;
-    import from S1AP_PDU_Contents language "ASN.1:1997" all;
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     import from LibS1AP_Pixits all;
-    import from LibS1AP_TypesAndValues all;
     
     group portDefinitions {
         
