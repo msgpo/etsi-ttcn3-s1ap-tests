@@ -178,6 +178,15 @@ module LibS1AP_Steps {
         } // End of function f_recv_HandoverRequired
         
         /**
+         * @desc Receive S1AP Message Handover Cancel
+         * @param p_value Receive template for Handover Cancel IEs
+         */
+        function f_recv_HandoverCancel(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_HandoverCancel(p_value))
+        } // End of function f_recv_HandoverCancel
+        
+        /**
          * @desc Receive S1AP Message InitialContext_SetupResponse
          * @param p_value Receive template for InitialContext_SetupResponse IEs
          */

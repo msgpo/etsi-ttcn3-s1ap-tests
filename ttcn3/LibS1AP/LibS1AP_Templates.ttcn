@@ -614,9 +614,8 @@ module LibS1AP_Templates {
                               mw_handoverType_IE(p_HandoverType_value),
                             mw_cause_IE(p_Cause_value),
                             mw_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
-                              
-                              
-                       } // End of template m_E_RABSetupReqIEs
+                       } // End of template mw_HandoverRequiredIEs
+                       
                 }// End of group HandoverPreparation
                 
                 group HandoverPreparation{
@@ -626,6 +625,31 @@ module LibS1AP_Templates {
                 group HandoverResourceAllocation{
                     
                 }// End of group HandoverResourceAllocation
+                
+                group HandoverCancelation{
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with Handover Cancel payload
+                     * @param p_value           The procedure code value
+                     */
+                    template (present) InitiatingMessage mw_HandoverCancel(
+                                                                           template (present) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_HandoverCancel,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_HandoverCancel
+                    
+                    template (value) RecordOf_ProtocolIE mw_HandoverCancelIEs(
+                        template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                        template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                        template (present) Cause p_Cause_value := ?
+                       ) := {
+                            mw_MME_UE_S1AP_ID(p_MME_value),
+                            mw_eNB_UE_S1AP_ID(p_eNB_value),
+                            mw_cause_IE(p_Cause_value)
+                       } // End of template mw_HandoverCancelIEs
+                       
+                }// End of group HandoverCancelation
                 
                 
                 group ERABModify{
@@ -2759,6 +2783,20 @@ module LibS1AP_Templates {
                 } // End of template m_E_RABToBeSetupList
                 
                 /**
+                 * @desc Send template for E-RABToBeSetupListCtxtSUReq protocol IE
+                 * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupListCtxtSUReq
+                 */
+                template (value) ProtocolIE m_E_RABToBeSetupListCtxt(
+                                                                 in template (value) RecordOf_E_RABToBeSetupItemCtxtSUReq p_value := { m_E_RABToBeSetupItemCtxtSUReq }
+                ) := {
+                    id := S1AP_Constants.id_E_RABToBeSetupListCtxtSUReq,
+                    criticality := reject,
+                    value_ := { RecordOf_E_RABToBeSetupItemCtxtSUReq := valueof(p_value) }
+                } // End of template m_E_RABToBeSetupListCtxt
+                
+                
+                
+                /**
                  * @desc Send template for E-RABToBeModifiedItemBearerModReq protocol IE
                  * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
                  */
@@ -3063,6 +3101,18 @@ module LibS1AP_Templates {
                 id := S1AP_Constants.id_E_RABSetupListBearerSURes,
                 criticality := ignore,
                 value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
+            } // End of template 
+            
+            /**
+             * @desc Receive template for E-RABSetupListCtxtSUReq protocol IE
+             * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
+             */
+            template (present) ProtocolIE mw_E_RABSetupListCtxt(
+                                                            template (present) RecordOf_E_RABToBeSetupItemCtxtSUReq p_value := { mw_E_RABToBeSetupItemCtxtSUReq }
+            ) := {
+                id := S1AP_Constants.id_E_RABToBeSetupListCtxtSUReq,
+                criticality := ignore,
+                value_ := { RecordOf_E_RABToBeSetupItemCtxtSUReq := p_value }
             } // End of template 
  
             /**
@@ -3889,6 +3939,44 @@ module LibS1AP_Templates {
                  e_RAB_ID                        := p_e_RAB_ID,
                  iE_Extensions                   := *
             } // End of template mw_E_RABSetupItemBearerSURes
+            
+            /**
+             * @desc 
+             */
+            template(omit) E_RABToBeSetupItemCtxtSUReq m_E_RABToBeSetupItemCtxtSUReq(
+                                                                                          in E_RAB_ID p_e_RAB_ID := 0,
+                                                                                          in template (value) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := m_e_RABlevelQoSParameters,
+                                                                                          in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
+                                                                                          in template (value) GTP_TEID p_gTP_TEID := '00000000'O,
+                                                                                          in template (omit) NAS_PDU p_nAS_PDU := '0000'O,
+                                                                                          in template (omit) E_RABToBeSetupItemCtxtSUReq.iE_Extensions p_iE_Extensions := omit
+            ) := {
+                e_RAB_ID := p_e_RAB_ID,
+                e_RABlevelQoSParameters := valueof(p_e_RABlevelQoSParameters),
+                transportLayerAddress := p_transportLayerAddress,
+                gTP_TEID := p_gTP_TEID,
+                nAS_PDU := p_nAS_PDU,
+                iE_Extensions := p_iE_Extensions
+            } // End of template m_E_RABToBeSetupItemCtxtSUReq
+
+            /**
+             * @desc 
+             */
+            template (present) E_RABToBeSetupItemCtxtSUReq mw_E_RABToBeSetupItemCtxtSUReq(
+                                                                                          template (present) E_RAB_ID p_e_RAB_ID := 0,
+                                                                                          template (present) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := mw_e_RABlevelQoSParameters,
+                                                                                          template (present) TransportLayerAddress p_transportLayerAddress := '0'B,
+                                                                                          template (present) GTP_TEID p_gTP_TEID := '00000000'O,
+                                                                                          template NAS_PDU p_nAS_PDU := ?,
+                                                                                          template E_RABToBeSetupItemCtxtSUReq.iE_Extensions p_iE_Extensions := *
+            ) := {
+                e_RAB_ID := p_e_RAB_ID,
+                e_RABlevelQoSParameters := p_e_RABlevelQoSParameters,
+                transportLayerAddress := p_transportLayerAddress,
+                gTP_TEID := p_gTP_TEID,
+                nAS_PDU := p_nAS_PDU,
+                iE_Extensions := p_iE_Extensions
+            } // End of template mw_E_RABToBeSetupItemCtxtSUReq
             
             /**
              * @desc 

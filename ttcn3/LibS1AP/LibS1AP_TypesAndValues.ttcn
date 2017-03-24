@@ -21,6 +21,11 @@ module LibS1AP_TypesAndValues {
     type record of E_RABToBeSetupItemBearerSUReq RecordOf_E_RABToBeSetupItemBearerSUReq;
 
     /**
+     * @desc List of E-RABToBeSetupItemCtxtSUReq IEs
+     */
+    type record of E_RABToBeSetupItemCtxtSUReq RecordOf_E_RABToBeSetupItemCtxtSUReq;
+    
+    /**
      * @desc List of E-RABModifiedItemBearerSURes IEs
      */
     type record of E_RABToBeModifiedItemBearerModReq RecordOf_E_RABToBeModifiedItemBearerModReq;
