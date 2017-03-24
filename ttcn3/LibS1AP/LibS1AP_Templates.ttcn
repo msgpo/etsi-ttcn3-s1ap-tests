@@ -727,6 +727,36 @@ module LibS1AP_Templates {
                         mw_cause_IE(p_cause)
                     } // End of template mw_InitialContextSetupResIEs                    
 
+					/**
+					 * @desc Receive template for InitialContextSetup message
+					 * @param p_procedureCode   Expected procedure code. Default: ?
+					 * @param p_value           Expected procedure code. Default: ?
+					 */
+					template (present) SuccessfulOutcome mw_InitialContextSetupRequest(
+																			   template (present) RecordOf_ProtocolIE p_value := ?
+					) := {
+						procedureCode := id_E_RABSetup,
+						criticality := reject,
+						value_ := {RecordOf_ProtocolIE := p_value}
+					} // End of template mw_InitialContextSetupRequest
+
+                    
+					template (present) RecordOf_ProtocolIE mw_InitialContextSetupRequestIEs(
+																			   template (present) MME_UE_S1AP_ID p_MME_value := ?,
+																			   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+																			   template (present) UEAggregateMaximumBitrate p_UEAggregateMaximumBitrate := ?,
+																			   template (present) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABSetupItem_value,
+					                                                           template (present) UESecurityCapabilities p_UESecurityCapabilities:=?,
+					                                                           template (present) SecurityKey p_SecurityKey:=?
+					) := {
+						mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+						mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+						mw_UE_aggregate_maximum_bitrate_IE(p_UEAggregateMaximumBitrate),
+						mw_E_RABToBeSetupList(p_RecordOf_E_RABSetupItem_value),
+						mw_UE_securityCapabilities_IE(p_UESecurityCapabilities),                       
+						mw_securityKey_IE(p_SecurityKey)
+					} // End of template mw_InitialContextSetupRequestIEs
+
                     /**
                      * @desc Receive template for UeContextReleaseRequest message
                      * @param p_procedureCode   Expected procedure code. Default: ?
@@ -3599,6 +3629,34 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := { VoiceSupportMatchIndicator := p_value }
             } // End of template mw_handoverType   
+
+			/**
+			 * @desc receive template for UE security Capabilities IE
+			 * @param p_value  UESecurityCapabilities value
+			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.40 UESecurityCapabilities
+			 */
+			template (present) ProtocolIE mw_UE_securityCapabilities_IE(
+												   in template (present) UESecurityCapabilities p_value:=?,
+												   in template (present) ProtocolIE.criticality p_criticality := reject
+			) := {
+				id := S1AP_Constants.id_UESecurityCapabilities,
+				criticality := p_criticality,
+				value_ := {UESecurityCapabilities := p_value}
+			} // End of template mw_UE_securityCapabilities_IE
+
+			/**
+			 * @desc receive template for security key IE
+			 * @param p_value  UESecurityCapabilities value
+			 * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.41 Security Key
+			 */
+			template (present) ProtocolIE mw_securityKey_IE(
+												   in template (present) SecurityKey p_value:=?,
+												   in template (present) ProtocolIE.criticality p_criticality := reject
+			) := {
+				id := S1AP_Constants.id_SecurityKey,
+				criticality := p_criticality,
+				value_ := {SecurityKey := p_value}
+			} // End of template mw_securityKey_IE
             
         } // End of group Receive_IEs
         

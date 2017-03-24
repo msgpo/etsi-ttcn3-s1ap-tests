@@ -187,6 +187,16 @@ module LibS1AP_Steps {
             f_recv_S1AP_successfulOutcome(mw_InitialContextSetupResponse(p_value))
         } // End of f_recv_InitialContext_SetupResponse
         
+		/**
+		 * @desc Receive S1AP Message InitialContext_SetupRequest
+		 * @param p_value Receive template for InitialContext_SetupRequest IEs
+		 */
+		function f_recv_InitialContext_SetupRequest(
+										   template (present) RecordOf_ProtocolIE p_value := ?
+		) runs on S1APComponent {
+			f_recv_S1AP_successfulOutcome(mw_InitialContextSetupRequest(p_value))
+		} // End of f_recv_InitialContext_SetupRequest
+        
         /**
          * @desc Receive S1AP Message INITIAL UE MESSAGE
          * @param p_value Receive template for INITIAL UE MESSAGE IEs

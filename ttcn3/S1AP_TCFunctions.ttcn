@@ -3013,6 +3013,40 @@ module S1AP_TCFunctions {
          */
         group Context_management_group {
 
+			/**
+			 * @desc Testcase function for TC_S1AP_mME_CMP_01
+			 */
+			function f_TC_S1AP_mME_CMP_01() runs on S1APComponent { 
+				// Local variables
+                
+				// Preamble
+				f_S1AP_mme_init();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+				// Test body
+                action("trigger an Initial Context Setup procedure");
+
+				f_recv_InitialContext_SetupRequest(mw_InitialContextSetupRequestIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+				    mw_UEAggregateMaximumBitrate(?,?),
+					{
+						mw_E_RABToBeSetupItemBearerSUReq(?,mw_e_RABlevelQoSParameters(5),?,?,?,omit)
+					},
+					?,                       
+				    ?
+				));
+                
+                
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+				f_postamble_S1AP_MME();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+			} // End of function f_TC_S1AP_eNB_CMP_01
             
         } // End of group Context_management_group
 
