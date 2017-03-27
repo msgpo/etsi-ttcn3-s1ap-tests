@@ -1692,7 +1692,7 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_eNB_HAS_04
-            
+                    
             /**
              * @desc Testcase function for TC_S1AP_eNB_HAS_05
              */
@@ -1729,11 +1729,11 @@ module S1AP_TCFunctions {
                     //TODO f_wait
                     
                     f_recv_HandoverCancel(
-	                    mw_HandoverCancelIEs(
-	                        vc_MME_UE_ID,
-	                        vc_eNB_UE_ID,
-	                        -//Cause
-	                ));
+                        mw_HandoverCancelIEs(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            -//Cause
+                    ));
                     
                     
                     f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 

@@ -615,7 +615,7 @@ module LibS1AP_Templates {
                             mw_cause_IE(p_Cause_value),
                             mw_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
                        } // End of template mw_HandoverRequiredIEs
-                       
+                              
                 }// End of group HandoverPreparation
                 
                 group HandoverPreparation{
@@ -3102,7 +3102,7 @@ module LibS1AP_Templates {
                 criticality := ignore,
                 value_ := { RecordOf_E_RABSetupItemBearerSURes := p_value }
             } // End of template 
-            
+ 
             /**
              * @desc Receive template for E-RABSetupListCtxtSUReq protocol IE
              * @param p_value  Expected protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
