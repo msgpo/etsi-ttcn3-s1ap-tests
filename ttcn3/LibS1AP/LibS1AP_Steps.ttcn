@@ -158,15 +158,26 @@ module LibS1AP_Steps {
             f_recv_S1AP_successfulOutcome(mw_E_RABSetupResponse(p_value))
         } // End of f_recv_E_RABSetupResponse
 
-        /**
-         * @desc Receive S1AP Message E_RABModifiedResponse
-         * @param p_value Receive template for E_RABModifiedResponse IEs
-         */
-        function f_recv_E_RABModifiedResponse(
-                                           template (present) RecordOf_ProtocolIE p_value := ?
-        ) runs on S1APComponent {
-            f_recv_S1AP_successfulOutcome(mw_E_RABModifiedResponse(p_value))
-        } // End of f_recv_E_RABModifiedResponse
+		
+		/**
+		  * @desc Receive S1AP Message E_RABReleaseResponse
+		  * @param p_value Receive template for E_RABReleaseResponse IEs
+		  */
+		 function f_recv_E_RABReleaseResponse(
+											template (present) RecordOf_ProtocolIE p_value := ?
+		 ) runs on S1APComponent {
+			 f_recv_S1AP_successfulOutcome(mw_E_RABReleaseResponse(p_value))
+		 } // End of f_recv_E_RABReleaseResponse
+		
+		/**
+		  * @desc Receive S1AP Message E_RABModifiedResponse
+		  * @param p_value Receive template for E_RABModifiedResponse IEs
+		  */
+		 function f_recv_E_RABModifiedResponse(
+											template (present) RecordOf_ProtocolIE p_value := ?
+		 ) runs on S1APComponent {
+			 f_recv_S1AP_successfulOutcome(mw_E_RABModifiedResponse(p_value))
+		 } // End of f_recv_E_RABModifiedResponse
         
         /**
          * @desc Receive S1AP Message Handover Required
@@ -846,13 +857,22 @@ module LibS1AP_Steps {
         } // End of function f_send_E_RABSetupRequest
         
         /**
+         * @desc Send S1AP Message E-RAB_ReleaseRequest
+         * @param p_value Send template with IE for E-RAB_ReleaseRequest
+         */
+        function f_send_E_RABReleaseRequest(in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_E_RABReleaseRequest(p_value))
+        } // End of function f_send_E_RABReleaseRequest
+
+        /**
          * @desc Send S1AP Message E-RAB_ModifiedRequest
          * @param p_value Send template with IE for E-RAB_ModifiedRequest
          */
         function f_send_E_RABModifiedRequest(in template (value) RecordOf_ProtocolIE p_value
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_E_RABModifiedRequest(p_value))
-        } // End of function f_send_E_RABSetupRequest
+        } // End of function f_send_E_RABModifiedRequest
         
         /**
          * @desc Send S1AP Message InitialContext_SetupRequest
