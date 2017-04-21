@@ -714,6 +714,54 @@ module S1AP_TCFunctions {
 
 			} // End of function f_TC_S1AP_eNB_RAB_14
 
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_RAB_15
+			 */
+			function f_TC_S1AP_eNB_RAB_15  () runs on S1APComponent {
+				// Local variables
+				const E_RAB_ID c_E_RAB_ID_A := 0;
+				
+				// Preamble
+				f_S1AP_enb_init();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+
+				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						m_E_RABItem(
+							c_E_RAB_ID_A
+						)
+					}
+				));
+                
+				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						mw_E_RABItem(
+							c_E_RAB_ID_A
+						)
+					},
+					mw_UserLocationInformation(
+						mw_TAI(
+							PX_PLMN_IDENTITY, 
+							PX_TAC
+						),
+						mw_eUTRAN_CGI(
+							PX_PLMN_IDENTITY, 
+							PX_CELL_ID
+						)
+					)
+				));
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TC_S1AP_eNB_RAB_15
         } // End of group ERAB_management_group
         
         /**
