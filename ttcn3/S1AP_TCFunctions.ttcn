@@ -755,6 +755,8 @@ module S1AP_TCFunctions {
 						)
 					)
 				));
+				
+
 				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
 
 				f_postamble_S1AP_eNB();
@@ -762,6 +764,63 @@ module S1AP_TCFunctions {
 				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
 
 			} // End of function f_TC_S1AP_eNB_RAB_15
+			
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_RAB_16
+			 */
+			function f_TC_S1AP_eNB_RAB_16  () runs on S1APComponent {
+				const E_RAB_ID c_E_RAB_ID_A := 0;
+				
+				// Preamble
+				f_S1AP_enb_init();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+
+				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						m_E_RABItem(
+							c_E_RAB_ID_A
+						)
+					}
+				));
+                
+				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						mw_E_RABItem(
+							c_E_RAB_ID_A
+						)
+					}
+				));
+				
+				f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{m_E_RABToBeSetupItemBearerSUReq (
+						c_E_RAB_ID_A,
+						m_e_RABlevelQoSParameters
+						(5)
+					)}
+				));
+    
+				f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						mw_E_RABSetupItemBearerSURes(c_E_RAB_ID_A)
+					}
+				));				
+
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TC_S1AP_eNB_RAB_16
         } // End of group ERAB_management_group
         
         /**
