@@ -845,11 +845,10 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq (
                         -,
                         m_e_RABlevelQoSParameters
                         (5),
-                        -,
                         -
                     )},
                     m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
@@ -896,19 +895,17 @@ module S1AP_TCFunctions {
                         vc_eNB_UE_ID,
                         m_UEAggregateMaximumBitrate(1,1),
                         {
-                            m_E_RABToBeSetupItemBearerSUReq (
+                            m_E_RABToBeSetupItemCtxtSUReq (
                                 c_E_RAB_ID_A,
                                 m_e_RABlevelQoSParameters(5),
                                 c_transportLayerAddress,
-                                c_gTP_TEID,
-                                c_nAS_PDU
+                                c_gTP_TEID
                             ),
-                            m_E_RABToBeSetupItemBearerSUReq(
+                            m_E_RABToBeSetupItemCtxtSUReq(
                                 c_E_RAB_ID_B,
                                 m_e_RABlevelQoSParameters(255),
                                 c_transportLayerAddress,
-                                c_gTP_TEID,
-                                c_nAS_PDU
+                                c_gTP_TEID
                             )
                         },
                         m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
@@ -961,13 +958,12 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq (
                         c_E_RAB_ID_A,
                         m_e_RABlevelQoSParameters
                         (1),
                         c_transportLayerAddress,
-                        c_gTP_TEID,
-                        c_nAS_PDU
+                        c_gTP_TEID
                     )},
                     m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
                     m_securityKey
@@ -1014,21 +1010,19 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq (
                         c_E_RAB_ID_A,
                         m_e_RABlevelQoSParameters
                         (5),
                         c_transportLayerAddress,
-                        c_gTP_TEID,
-                        c_nAS_PDU
+                        c_gTP_TEID
                     ),
-                    m_E_RABToBeSetupItemBearerSUReq (
+                    m_E_RABToBeSetupItemCtxtSUReq (
                         c_E_RAB_ID_A,
                         m_e_RABlevelQoSParameters
                         (5),
                         c_transportLayerAddress,
-                        c_gTP_TEID,
-                        c_nAS_PDU
+                        c_gTP_TEID
                     )},
                     m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
                     m_securityKey
@@ -1084,13 +1078,12 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq (
                         c_E_RAB_ID_A,
                         m_e_RABlevelQoSParameters
                         (5),
                         c_transportLayerAddress,
-                        c_gTP_TEID,
-                        c_nAS_PDU
+                        c_gTP_TEID
                     )},
                     m_UESecurityCapabilities(c_notSupportedEncryptionAlgorithms,'0101010101010101'B),
                     m_securityKey
@@ -1132,13 +1125,12 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq (
                         c_E_RAB_ID_A,
                         m_e_RABlevelQoSParameters
                         (5),
                         c_transportLayerAddress,
-                        c_gTP_TEID,
-                        c_nAS_PDU
+                        c_gTP_TEID
                     )},
                     m_UESecurityCapabilities('0101010101010101'B, c_notSupportedIntegrityProtectionAlgorithms),
                     m_securityKey
@@ -1179,13 +1171,12 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq (
                         c_E_RAB_ID_A,
                         m_e_RABlevelQoSParameters
                         (5),
                         c_transportLayerAddress,
-                        c_gTP_TEID,
-                        c_nAS_PDU
+                        c_gTP_TEID
                     )},
                     m_UESecurityCapabilities('0101010101010101'B, '0101010101010101'B),
                     m_securityKey
@@ -1397,11 +1388,10 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq (
                         -,
                         m_e_RABlevelQoSParameters
                         (5),
-                        -,
                         -
                     )},
                     m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
@@ -3238,7 +3228,7 @@ module S1AP_TCFunctions {
                     vc_eNB_UE_ID,
                     mw_UEAggregateMaximumBitrate(?,?),
                     {
-                        mw_E_RABToBeSetupItemBearerSUReq(?,mw_e_RABlevelQoSParameters(5),?,?,?,omit)
+                        mw_E_RABToBeSetupItemCtxtSUReq(?,mw_e_RABlevelQoSParameters(5),?,?,?,omit)
                     },
                     ?,                       
                     ?

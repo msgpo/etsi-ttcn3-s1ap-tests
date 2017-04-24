@@ -175,14 +175,14 @@ module LibS1AP_Templates {
                                                                             in template (value) MME_UE_S1AP_ID p_MME_value,
                                                                             in template (value) ENB_UE_S1AP_ID p_eNB_value,
                                                                             in template (value) UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate,
-                                                                            in template (value) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABToBeSetupItem_value,
+                                                                            in template (value) RecordOf_E_RABToBeSetupItemCtxtSUReq p_RecordOf_E_RABToBeSetupItemCtxt_value,
                                                                             in template (value) UESecurityCapabilities p_uESecurityCapabilities,
                                                                             in template (value) SecurityKey p_SecurityKey
                     ) := {
                         m_MME_UE_S1AP_ID(p_MME_value),
                         m_eNB_UE_S1AP_ID(p_eNB_value),
                         m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate),
-                        m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value),
+                        m_E_RABToBeSetupListCtxt(p_RecordOf_E_RABToBeSetupItemCtxt_value),
                         m_UE_securityCapabilities_IE(p_uESecurityCapabilities),
                         m_securityKey_IE(p_SecurityKey)
                     } // End of template m_InitialContextSetupReqIEs
@@ -838,7 +838,7 @@ module LibS1AP_Templates {
                     template (present) SuccessfulOutcome mw_InitialContextSetupResponse(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
                     ) := {
-                        procedureCode := id_E_RABSetup,
+                        procedureCode := id_InitialContextSetup,
                         criticality := reject,
                         value_ := {RecordOf_ProtocolIE := p_value}
                     } // End of template mw_InitialContextSetupResponse
@@ -873,7 +873,7 @@ module LibS1AP_Templates {
                     template (present) SuccessfulOutcome mw_InitialContextSetupRequest(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
                     ) := {
-                        procedureCode := id_E_RABSetup,
+                        procedureCode := id_InitialContextSetup,
                         criticality := reject,
                         value_ := {RecordOf_ProtocolIE := p_value}
                     } // End of template mw_InitialContextSetupRequest
@@ -883,14 +883,14 @@ module LibS1AP_Templates {
                                                                                template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
                                                                                template (present) UEAggregateMaximumBitrate p_UEAggregateMaximumBitrate := ?,
-                                                                               template (present) RecordOf_E_RABToBeSetupItemBearerSUReq p_RecordOf_E_RABSetupItem_value,
+                                                                               template (present) RecordOf_E_RABToBeSetupItemCtxtSUReq p_RecordOf_E_RABSetupItemCtxt_value,
                                                                                template (present) UESecurityCapabilities p_UESecurityCapabilities:=?,
                                                                                template (present) SecurityKey p_SecurityKey:=?
                     ) := {
                         mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
                         mw_UE_aggregate_maximum_bitrate_IE(p_UEAggregateMaximumBitrate),
-                        mw_E_RABToBeSetupList(p_RecordOf_E_RABSetupItem_value),
+                        mw_E_RABToBeSetupCtxtList(p_RecordOf_E_RABSetupItemCtxt_value),
                         mw_UE_securityCapabilities_IE(p_UESecurityCapabilities),                       
                         mw_securityKey_IE(p_SecurityKey)
                     } // End of template mw_InitialContextSetupRequestIEs
@@ -3216,6 +3216,18 @@ module LibS1AP_Templates {
                 criticality := reject,
                 value_ := { RecordOf_E_RABToBeSetupItemBearerSUReq := p_value }
             } // End of template mw_E_RABToBeSetupList
+ 
+            /**
+             * @desc Receive template for E-RABToBeSetupListCtxtSUReq protocol IE
+             * @param p_value  Protocol IE value. Default: mw_E_RABToBeSetupItemCtxtSUReq
+             */
+            template (present) ProtocolIE mw_E_RABToBeSetupCtxtList(
+                                                             template (present) RecordOf_E_RABToBeSetupItemCtxtSUReq p_value := { mw_E_RABToBeSetupItemCtxtSUReq }
+            ) := {
+                id := S1AP_Constants.id_E_RABToBeSetupListCtxtSUReq,
+                criticality := reject,
+                value_ := { RecordOf_E_RABToBeSetupItemCtxtSUReq := p_value }
+            } // End of template mw_E_RABToBeSetupCtxtList
  
             /**
              * @desc Receive template for E-RABModifiedListBearerModReq protocol IE
