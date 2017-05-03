@@ -686,15 +686,15 @@ module S1AP_TCFunctions {
 				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
 				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
-				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
-					vc_MME_UE_ID,
-					vc_eNB_UE_ID,
-					{
-						m_E_RABItem(
-							c_E_RAB_ID_A
-						)
-					}
-				));
+//				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+//					vc_MME_UE_ID,
+//					vc_eNB_UE_ID,
+//					{
+//						m_E_RABItem(
+//							c_E_RAB_ID_A
+//						)
+//					}
+//				));
                 
 				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
 					vc_MME_UE_ID,
@@ -725,16 +725,19 @@ module S1AP_TCFunctions {
 				f_S1AP_enb_init();
 				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
 				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
-
-				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
-					vc_MME_UE_ID,
-					vc_eNB_UE_ID,
-					{
-						m_E_RABItem(
-							c_E_RAB_ID_A
-						)
-					}
-				));
+				
+				// S1-MME Interface
+				
+//				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+//					vc_MME_UE_ID,
+//					vc_eNB_UE_ID,
+//					{
+//						m_E_RABItem(
+//							c_E_RAB_ID_A
+//						)
+//					}
+//				)
+//				);
                 
 				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
 					vc_MME_UE_ID,
@@ -743,17 +746,17 @@ module S1AP_TCFunctions {
 						mw_E_RABItem(
 							c_E_RAB_ID_A
 						)
-					},
-					mw_UserLocationInformation(
-						mw_TAI(
-							PX_PLMN_IDENTITY, 
-							PX_TAC
-						),
-						mw_eUTRAN_CGI(
-							PX_PLMN_IDENTITY, 
-							PX_CELL_ID
-						)
-					)
+					}
+//					(
+//						mw_TAI(
+//							PX_PLMN_IDENTITY, 
+//							PX_TAC
+//						),
+//						mw_eUTRAN_CGI(
+//							PX_PLMN_IDENTITY, 
+//							PX_CELL_ID
+//						)
+//					)
 				));
 				
 
@@ -776,15 +779,16 @@ module S1AP_TCFunctions {
 				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
 				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
-				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
-					vc_MME_UE_ID,
-					vc_eNB_UE_ID,
-					{
-						m_E_RABItem(
-							c_E_RAB_ID_A
-						)
-					}
-				));
+//				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+//					vc_MME_UE_ID,
+//					vc_eNB_UE_ID,
+//					{
+//						m_E_RABItem(
+//							c_E_RAB_ID_A
+//						)
+//					}
+//				)
+//				);
                 
 				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
 					vc_MME_UE_ID,
