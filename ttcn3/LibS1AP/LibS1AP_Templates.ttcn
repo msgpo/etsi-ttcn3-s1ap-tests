@@ -115,7 +115,7 @@ module LibS1AP_Templates {
                         m_securityContext_IE(p_securityContext)
                     } // End of template m_HandoverReqIEs
     
-                    template (value) RecordOf_ProtocolIE m_HandoverReqIEs_nASSecParToEUTRAN(
+                    template (value) RecordOf_ProtocolIE m_HandoverReqIEs_nASSecParToEUTRAN (
                             in template (value) MME_UE_S1AP_ID p_MME_value,
                             in template (value) HandoverType p_handoverType,
                             in template (value) Cause p_cause,
@@ -125,17 +125,9 @@ module LibS1AP_Templates {
                             in template (value) UESecurityCapabilities p_uESecurityCapabilities,
                             in template (value) SecurityContext p_securityContext,
                             in template (value) NASSecurityParameterstoE_UTRAN p_nasSecurityParametersToEutran_value
-                    ) := {
-                        m_MME_UE_S1AP_ID(p_MME_value),
-                        m_handoverType_IE(p_handoverType),
-                        m_cause_IE(p_cause),
-                        m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate),
-                        m_E_RABToBeSetupListHOReq(p_RecordOf_E_RABToBeSetupItemHOR),
-                        m_source_ToTarget_TransparentContainer_IE(p_source_ToTarget_TransparentContainer),
-                        m_UE_securityCapabilities_IE(p_uESecurityCapabilities),
-                        m_securityContext_IE(p_securityContext),
+                    ) modifies m_HandoverReqIEs := {
                         m_nasSecurityParametersToEutran_IE(p_nasSecurityParametersToEutran_value)
-                    } // End of template m_HandoverReqIEs
+                    } // End of template m_HandoverReqIEs_nASSecParToEUTRAN
     
                     template (value) RecordOf_ProtocolIE m_HandoverReqIEs_cSGMembershipStatus(
                             in template (value) MME_UE_S1AP_ID p_MME_value,
@@ -147,17 +139,9 @@ module LibS1AP_Templates {
                             in template (value) UESecurityCapabilities p_uESecurityCapabilities,
                             in template (value) SecurityContext p_securityContext,
                             in template (value) CSGMembershipStatus p_cSGMembershipStatu_value
-                    ) := {
-                        m_MME_UE_S1AP_ID(p_MME_value),
-                        m_handoverType_IE(p_handoverType),
-                        m_cause_IE(p_cause),
-                        m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate),
-                        m_E_RABToBeSetupListHOReq(p_RecordOf_E_RABToBeSetupItemHOR),
-                        m_source_ToTarget_TransparentContainer_IE(p_source_ToTarget_TransparentContainer),
-                        m_UE_securityCapabilities_IE(p_uESecurityCapabilities),
-                        m_securityContext_IE(p_securityContext),
+                    ) modifies m_HandoverReqIEs := {
                         m_cSGMembershipStatus_IE(p_cSGMembershipStatu_value)
-                    } // End of template m_HandoverReqIEs
+                    } // End of template m_HandoverReqIEs_cSGMembershipStatus
                     
                     
                 }// End of group HandoverResourceAllocation
