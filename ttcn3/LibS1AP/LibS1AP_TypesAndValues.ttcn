@@ -40,6 +40,15 @@ module LibS1AP_TypesAndValues {
      */
     type record of E_RABModifyItemBearerModRes RecordOf_E_RABModifyItemBearerModRes;
  
+    /**
+    * @desc List of E-RABModifyItemHOReq IEs
+    */
+    type record of E_RABToBeSetupItemHOReq RecordOf_E_RABToBeSetupItemHOReq;
+ 
+    /**
+    * @desc List of E-RABToBeSwitchedDLItem IEs
+    */
+    type record of E_RABToBeSwitchedDLItem RecordOf_E_RABToBeSwitchedDLItem;
     
     /**
      * @desc List of E-RAB IEs
@@ -50,6 +59,11 @@ module LibS1AP_TypesAndValues {
      * @desc List of E-RABs Subject to Forwarding
      */
     type record of E_RABDataForwardingItem RecordOf_E_RABDataForwardingItem;
+    
+    /**
+     * @desc List of E-RABAdmittedItem IEs
+     */
+    type record of E_RABAdmittedItem RecordOf_E_RABAdmittedItem;
     
     /**
      * @desc This data structure redefines ASN.1 ProtocolIE-Field data structure die to parameterization limitation of TTCN-3 tools
