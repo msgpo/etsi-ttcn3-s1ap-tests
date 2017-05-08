@@ -395,6 +395,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
+				f_rABSetupRequest();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -433,6 +434,7 @@ module S1AP_TCFunctions {
                 const NAS_PDU c_nAS_PDU := '0000'O;
                 // Preamble
                 f_S1AP_enb_init();
+				f_rABSetupRequest();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -478,6 +480,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
+				f_rABSetupRequest();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -536,6 +539,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
+				f_rABSetupRequest();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -580,6 +584,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
+				f_rABSetupRequest();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -638,6 +643,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
+				f_rABSetupRequest();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -684,18 +690,22 @@ module S1AP_TCFunctions {
 				
 				// Preamble
 				f_S1AP_enb_init();
+				f_rABSetupRequest();
 				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
 				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
-//				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
-//					vc_MME_UE_ID,
-//					vc_eNB_UE_ID,
-//					{
-//						m_E_RABItem(
-//							c_E_RAB_ID_A
-//						)
-//					}
-//				));
+				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						m_E_RABItem(
+							c_E_RAB_ID_A,
+							{
+								radioNetwork :=not_supported_QCI_value
+							}
+						)
+					}
+				));
                 
 				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
 					vc_MME_UE_ID,
@@ -724,21 +734,25 @@ module S1AP_TCFunctions {
 				
 				// Preamble
 				f_S1AP_enb_init();
+				f_rABSetupRequest();
 				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
 				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 				
 				// S1-MME Interface
 				
-//				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
-//					vc_MME_UE_ID,
-//					vc_eNB_UE_ID,
-//					{
-//						m_E_RABItem(
-//							c_E_RAB_ID_A
-//						)
-//					}
-//				)
-//				);
+				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						m_E_RABItem(
+							c_E_RAB_ID_A,
+							{
+								radioNetwork :=not_supported_QCI_value
+							}
+						)
+					}
+				)
+				);
                 
 				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
 					vc_MME_UE_ID,
@@ -777,19 +791,23 @@ module S1AP_TCFunctions {
 				
 				// Preamble
 				f_S1AP_enb_init();
+				f_rABSetupRequest();
 				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
 				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
-//				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
-//					vc_MME_UE_ID,
-//					vc_eNB_UE_ID,
-//					{
-//						m_E_RABItem(
-//							c_E_RAB_ID_A
-//						)
-//					}
-//				)
-//				);
+				f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					{
+						m_E_RABItem(
+							c_E_RAB_ID_A,
+							{
+								radioNetwork :=not_supported_QCI_value
+							}
+						)
+					}
+				)
+				);
                 
 				f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
 					vc_MME_UE_ID,
