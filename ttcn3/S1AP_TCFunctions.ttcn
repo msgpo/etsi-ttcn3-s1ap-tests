@@ -701,6 +701,7 @@ module S1AP_TCFunctions {
 						m_E_RABItem(
 							c_E_RAB_ID_A,
 							{
+								// TODO
 								radioNetwork :=not_supported_QCI_value
 							}
 						)
@@ -747,6 +748,7 @@ module S1AP_TCFunctions {
 						m_E_RABItem(
 							c_E_RAB_ID_A,
 							{
+								// TODO
 								radioNetwork :=not_supported_QCI_value
 							}
 						)
@@ -793,6 +795,7 @@ module S1AP_TCFunctions {
 						m_E_RABItem(
 							c_E_RAB_ID_A,
 							{
+								// TODO 
 								radioNetwork :=not_supported_QCI_value
 							}
 						)
@@ -835,6 +838,79 @@ module S1AP_TCFunctions {
 				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
 
 			} // End of function f_TC_S1AP_eNB_RAB_16
+			
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_RAB_17
+			 */
+			function f_TC_S1AP_eNB_RAB_17  () runs on S1APComponent {
+				// Local variables
+				const E_RAB_ID c_E_RAB_ID_A := 0;
+				
+				// Preamble
+				f_S1AP_enb_init();
+				f_rABSetupRequest();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+
+				// 1. to indicate a LPPa Transport procedure using a UE associated signalling
+			    if (fx_eNB_erab_Release_indication_procedure(false) == false) {
+				   f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+			    } else {
+					f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
+						vc_MME_UE_ID,
+						vc_eNB_UE_ID,
+						{
+							mw_E_RABItem(
+								c_E_RAB_ID_A
+							)
+						}
+					));
+					f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+			    }
+
+
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TC_S1AP_eNB_RAB_17
+			
+			/**
+			 * @desc Testcase function for TC_S1AP_eNB_RAB_18
+			 */
+			function f_TC_S1AP_eNB_RAB_18  () runs on S1APComponent {
+				// Local variables
+				const E_RAB_ID c_E_RAB_ID_A := 0;
+				
+				// Preamble
+				f_S1AP_enb_init();
+				f_rABSetupRequest();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+
+				// 1. to indicate a LPPa Transport procedure using a UE associated signalling
+				if (fx_eNB_erab_Release_indication_procedure(false) == false) {
+				   f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+				} else {
+					f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
+						vc_MME_UE_ID,
+						vc_eNB_UE_ID,
+						{
+							mw_E_RABItem(
+								c_E_RAB_ID_A
+							)
+						},
+						mw_UserLocationInformation(?,?)
+					));
+					f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+				}
+
+
+				f_postamble_S1AP_eNB();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+			} // End of function f_TC_S1AP_eNB_RAB_18
         } // End of group ERAB_management_group
         
         /**
@@ -3646,90 +3722,179 @@ module S1AP_TCFunctions {
          */
         group Context_management_group {
 
-            /**
-             * @desc Testcase function for TC_S1AP_mME_CMP_01
-             */
-            function f_TC_S1AP_mME_CMP_01() runs on S1APComponent { 
-                // Local variables
+			/**
+			 * @desc Testcase function for TC_S1AP_mME_CMP_01
+			 */
+			function f_TC_S1AP_mME_CMP_01() runs on S1APComponent { 
+				// Local variables
                 
-                // Preamble
-                f_S1AP_mme_init();
-                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
-                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+				// Preamble
+				f_S1AP_mme_init();
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
-                // Test body
-                action("trigger an Initial Context Setup procedure");
+				// Test body
+				action("trigger an Initial Context Setup procedure");
 
-                f_recv_InitialContext_SetupRequest(mw_InitialContextSetupRequestIEs(
-                    vc_MME_UE_ID,
-                    vc_eNB_UE_ID,
-                    mw_UEAggregateMaximumBitrate(?,?),
-                    {
-                        mw_E_RABToBeSetupItemCtxtSUReq(?,mw_e_RABlevelQoSParameters(5),?,?,?,omit)
-                    },
-                    ?,                       
-                    ?
-                ));
+				f_recv_InitialContext_SetupRequest(mw_InitialContextSetupRequestIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					mw_UEAggregateMaximumBitrate(?,?),
+					{
+						mw_E_RABToBeSetupItemCtxtSUReq(?,mw_e_RABlevelQoSParameters(5),?,?,?,omit)
+					},
+					?,                       
+					?
+				));
                 
                 
-                // Postamble
-                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
-                f_postamble_S1AP_MME();
-                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
-                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+				f_postamble_S1AP_MME();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-            } // End of function f_TC_S1AP_eNB_CMP_01
+			} // End of function f_TC_S1AP_eNB_CMP_01
 
-            /**
-             * @desc Testcase function for TC_S1AP_mME_CMP_02
-             */
-            function f_TC_S1AP_mME_CMP_02() runs on S1APComponent { 
-                // Local variables
-                var template(value) Cause v_cause;
-                select(PX_VA){
-                    case(1){v_cause := m_cause_ran(user_inactivity)}
-                    case(2){v_cause := m_cause_ran(radio_connection_with_ue_lost)}
-                    case(3){v_cause := m_cause_nas(csg_subscription_expiry)}
-                    case(4){v_cause := m_cause_ran(cs_fallback_triggered)}
-                    case(5){v_cause := m_cause_ran(redirection_towards_1xRTT)}
-                    case(6){v_cause := m_cause_ran(interrat_redirection)}
-                    case(7){v_cause := m_cause_ran(ue_not_available_for_ps_service)}
-                    case else {setverdict(fail, "undefined PIXIT value for variant")}
-                }
+			/**
+			 * @desc Testcase function for TC_S1AP_mME_CMP_02
+			 */
+			function f_TC_S1AP_mME_CMP_02() runs on S1APComponent { 
+				// Local variables
+				var template(value) Cause v_cause;
+				select(PX_VA){
+					case(1){v_cause := m_cause_ran(user_inactivity)}
+					case(2){v_cause := m_cause_ran(radio_connection_with_ue_lost)}
+					case(3){v_cause := m_cause_nas(csg_subscription_expiry)}
+					case(4){v_cause := m_cause_ran(cs_fallback_triggered)}
+					case(5){v_cause := m_cause_ran(redirection_towards_1xRTT)}
+					case(6){v_cause := m_cause_ran(interrat_redirection)}
+					case(7){v_cause := m_cause_ran(ue_not_available_for_ps_service)}
+					case else {setverdict(fail, "undefined PIXIT value for variant")}
+				}
                                 
-                // Preamble
-                f_S1AP_mme_init();
+				// Preamble
+				f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+				f_rABSetupRequest();
                 
-                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
-                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
-                // Test body
+				// Test body
 
-                f_send_UE_Context_Release_Command(m_UeContextReleaseRequestIEs(
-                    vc_MME_UE_ID,
-                    vc_eNB_UE_ID,
-                    v_cause
-                    ));
+				f_send_UE_Context_Release_Command(m_UeContextReleaseRequestIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID,
+					v_cause
+					));
                     
-                f_recv_InitialContext_SetupRequest((mw_UeContextReleaseCommandIEs_MME, mw_UeContextReleaseCommandIEs_ENB));                
+				f_recv_InitialContext_SetupRequest((mw_UeContextReleaseCommandIEs_MME, mw_UeContextReleaseCommandIEs_ENB));                
                 
-                // Postamble
-                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
 
-                f_send_UE_Context_Release_Complete(m_UeContextReleaseCompleteIEs(
-                    vc_MME_UE_ID,
-                    vc_eNB_UE_ID
-                    ));
+				f_send_UE_Context_Release_Complete(m_UeContextReleaseCompleteIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID
+					));
                 
-                f_postamble_S1AP_MME();
-                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
-                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+				f_postamble_S1AP_MME();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-            } // End of function f_TC_S1AP_eNB_CMP_02
-            
+			} // End of function f_TC_S1AP_eNB_CMP_02
+
+			/**
+			 * @desc Testcase function for TC_S1AP_mME_CMP_03
+			 */
+			function f_TC_S1AP_mME_CMP_03() runs on S1APComponent { 
+				// Local variables
+				var template(value) Cause v_cause;
+                                
+				// Preamble
+				f_S1AP_mme_init();
+                
+				f_rABSetupRequest();
+                
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+				// Test body                    
+				action("trigger a UE context modification request");
+				f_recv_UE_Context_Modification_Request(mw_UeContextModificationRequestIEs);                
+                
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+				f_postamble_S1AP_MME();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+			} // End of function f_TC_S1AP_eNB_CMP_03
+
+
+			/**
+			 * @desc Testcase function for TC_S1AP_mME_CMP_04
+			 */
+			function f_TC_S1AP_mME_CMP_04() runs on S1APComponent { 
+				// Local variables
+				var template(value) Cause v_cause;
+                                
+				// Preamble
+				f_S1AP_mme_init();
+                
+				f_rABSetupRequest();
+                
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+				// Test body                    
+				action("trigger a UE radio capability match request");
+				f_recv_UE_Context_Modification_Request(mw_UeRadioCapabilityMatchRequestIEs);                
+                
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+				f_postamble_S1AP_MME();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+			} // End of function f_TC_S1AP_eNB_CMP_04
+
+			/**
+			 * @desc Testcase function for TC_S1AP_mME_CMP_05
+			 */
+			function f_TC_S1AP_mME_CMP_05() runs on S1APComponent { 
+				// Local variables
+				var template(value) Cause v_cause;
+                                
+				// Preamble
+				f_S1AP_mme_init();
+                
+				f_rABSetupRequest();
+                
+				f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+				// Test body
+
+				f_send_UE_Context_Modification_Indication(m_UeContextModificationIndicationIEs(
+					vc_MME_UE_ID,
+					vc_eNB_UE_ID
+					));
+                    
+				f_recv_Ue_Context_Modification_Confirm(mw_UeContextModificationConfirmIEs);                
+                
+				// Postamble
+				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+				f_postamble_S1AP_MME();
+				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+			} // End of function f_TC_S1AP_eNB_CMP_05            
         } // End of group Context_management_group
 
 
