@@ -18,6 +18,8 @@ module LibS1AP_Steps {
     
     // LibS1AP
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
+    import from S1AP_IEs language "ASN.1:1997" all;
+    
     import from LibS1AP_TypesAndValues all;
     import from LibS1AP_Interface all;
     import from LibS1AP_Pixits all;
@@ -33,7 +35,7 @@ module LibS1AP_Steps {
          * @return true if value of p_int greater than 0
          * @param p_int - integer value
          */
-        function f_gtZero( // FIXME Do we really need a function for <= mathematical operation???
+        function f_gtZero( // FIXME: Not used to be removed
                           in integer p_int
         ) return boolean {
             if (p_int > 0){
@@ -49,7 +51,7 @@ module LibS1AP_Steps {
          * @return incremented value of p_int 0
          * @param p_int - integer value
          */
-        function f_inc(
+        function f_inc( // FIXME: Not used to be removed
                        inout UInt32 p_int
         ) return UInt32 {
             p_int := p_int + 1;
@@ -158,26 +160,26 @@ module LibS1AP_Steps {
             f_recv_S1AP_successfulOutcome(mw_E_RABSetupResponse(p_value))
         } // End of f_recv_E_RABSetupResponse
 
-		
-		/**
-		  * @desc Receive S1AP Message E_RABReleaseResponse
-		  * @param p_value Receive template for E_RABReleaseResponse IEs
-		  */
-		 function f_recv_E_RABReleaseResponse(
-											template (present) RecordOf_ProtocolIE p_value := ?
-		 ) runs on S1APComponent {
-			 f_recv_S1AP_successfulOutcome(mw_E_RABReleaseResponse(p_value))
-		 } // End of f_recv_E_RABReleaseResponse
-		
-		/**
-		  * @desc Receive S1AP Message E_RABModifiedResponse
-		  * @param p_value Receive template for E_RABModifiedResponse IEs
-		  */
-		 function f_recv_E_RABModifiedResponse(
-											template (present) RecordOf_ProtocolIE p_value := ?
-		 ) runs on S1APComponent {
-			 f_recv_S1AP_successfulOutcome(mw_E_RABModifiedResponse(p_value))
-		 } // End of f_recv_E_RABModifiedResponse
+        
+        /**
+          * @desc Receive S1AP Message E_RABReleaseResponse
+          * @param p_value Receive template for E_RABReleaseResponse IEs
+          */
+         function f_recv_E_RABReleaseResponse(
+                                            template (present) RecordOf_ProtocolIE p_value := ?
+         ) runs on S1APComponent {
+             f_recv_S1AP_successfulOutcome(mw_E_RABReleaseResponse(p_value))
+         } // End of f_recv_E_RABReleaseResponse
+        
+        /**
+          * @desc Receive S1AP Message E_RABModifiedResponse
+          * @param p_value Receive template for E_RABModifiedResponse IEs
+          */
+         function f_recv_E_RABModifiedResponse(
+                                            template (present) RecordOf_ProtocolIE p_value := ?
+         ) runs on S1APComponent {
+             f_recv_S1AP_successfulOutcome(mw_E_RABModifiedResponse(p_value))
+         } // End of f_recv_E_RABModifiedResponse
         
         /**
          * @desc Receive S1AP Message Handover Required
@@ -809,7 +811,6 @@ module LibS1AP_Steps {
             f_recv_S1AP_initiatingMessage(mw_UeContextResumeRequest(p_value))
         } // End of f_recv_Ue_Context_Resume_Request
 
-
         /**
         * @desc Receive S1AP Message UE RADIO_CAPABILITY_MATCH_RESPONSE
         * @param p_value Receive template for UE_RADIO_CAPABILITY_MATCH_RESPONSE
@@ -1209,7 +1210,29 @@ module LibS1AP_Steps {
          * @desc Setup a full E-RAB Release procedure
          */
         function f_rABSetupRelease() runs on S1APComponent {
-            // TODO 
+            // Local variables
+            const E_RAB_ID c_E_RAB_ID_A := 0;
+            
+            f_send_E_RABReleaseRequest(m_E_RABReleaseReqIEs(
+                vc_MME_UE_ID,
+                vc_eNB_UE_ID,
+                {
+                    m_E_RABItem(
+                        c_E_RAB_ID_A,
+                        m_cause_ran(user_inactivity) // FIXME To be checked
+                    )
+                }
+            ));
+                
+            f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
+                vc_MME_UE_ID,
+                vc_eNB_UE_ID,
+                {
+                    mw_E_RABItem(
+                        c_E_RAB_ID_A
+                    )
+                }
+            ));
         } // End of function f_rABSetupRelease
         
         /**
@@ -1237,14 +1260,33 @@ module LibS1AP_Steps {
          * @desc Initiate a Deactivate Trace procedure
          */
         function f_initiate_deactivateTrace() runs on S1APComponent {
-            // TODO 
+            f_send_deactivate_Trace(
+                m_deactivate_TraceIEs(
+                    vc_MME_UE_ID,
+                    vc_eNB_UE_ID,
+                    PX_EUTRAN_TRACE_ID
+            ));
         } // End of function f_initiate_deactivateTrace
         
         /**
          * @desc Initiate a an Write-Replace Warning Request procedure
          */
         function f_writeReplaceWarningExchanges() runs on S1APComponent {
-            // TODO 
+            if (fx_MME_Write_Replace_Warning_procedure() == true) {
+                f_recv_Write_Replace_Warning_Request(
+                    mw_write_Replace_Warning_RequestIEs(
+                        PX_MESSAGE_IDENTIFIER,
+                        PX_SERIAL_NUMBER,
+                        PX_REPETITION_PERIOD, 
+                        PX_NUMBER_OF_BROADCASTS_REQUESTED
+                ));
+                f_send_Write_Replace_Warning_Response(
+                    m_write_Replace_Warning_ResponseIEs(
+                        PX_MESSAGE_IDENTIFIER,
+                        PX_SERIAL_NUMBER
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+            }
         } // End of function f_writeReplaceWarningExchanges
         
     } // End of group fullProcedures
@@ -1533,7 +1575,7 @@ module LibS1AP_Steps {
          */
         function f_S1AP_Init_Component()
         runs on S1APComponent {
-            
+            // Nothing to do
         } // End of function  f_S1AP_Init_Component
         
         /**
@@ -1570,19 +1612,6 @@ module LibS1AP_Steps {
             }
             return v_ret;
         } // End of function 
-        
-        /**
-         * 
-         * @desc Wait for particular time before next expected message
-         */
-//        function f_wait(float p_time) // FIXME To be replace by LibCommon.f_sleep!!!
-//        runs on S1APComponent {
-//            
-//            tc_wait.start(p_time);
-//            alt {
-//                [] tc_wait.timeout{ }
-//            }
-//        } // End of function f_wait
         
     } // End of group globalSteps
     
@@ -1650,7 +1679,7 @@ module LibS1AP_Steps {
                     stop;
                 }
             }
-            //TODO:...
+            // TODO:...
         } // End of altstep a_defaultS1AP_MME
         
         altstep a_defaultS1AP_eNB()
@@ -1664,7 +1693,7 @@ module LibS1AP_Steps {
                     stop;
                 }
             }
-             //TODO:...
+            // TODO:...
         } // End of altstep a_defaultS1AP_eNB
         
     } // End of group defaultsTestStep

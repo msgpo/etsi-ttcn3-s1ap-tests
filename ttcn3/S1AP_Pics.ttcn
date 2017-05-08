@@ -27,9 +27,53 @@ module S1AP_Pics {
     } // End of group PICS_A2
     
     group PICS_A3 {
+        
+        /**
+         * @desc Does eNB support repetition of the sending of eNB CONFIGURATION UPDATE messages in case of no reply? 
+         * @see  ETSI DTS_INT-00135-1 A.3/6.4.1 
+         */
+        modulepar boolean PICS_S1AP_eNB_REPETITION_SENDING_CONF_UPDATE := false;
+        
+        /**
+         * @desc Does eNB support initiation oft the Error Indication procedure when a transfer syntax error is detected? 
+         * @see  ETSI DTS_INT-00135-1 A.3/17.1 
+         */
+        modulepar boolean PICS_S1AP_eNB_INITIATION_ERROR_IND_PROCEDURE := false;
+        
+        /**
+         * @desc Does eNB support initiation of the Error Indication procedure when an abstract syntax error is detected? 
+         * @see  ETSI DTS_INT-00135-1 A.3/17.2 
+         */
+        modulepar boolean PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE := false;
+        
+        /**
+         * @desc Does eNB support initiation of the Error Indication procedure when a logical error is detected? 
+         * @see  ETSI DTS_INT-00135-1 A.3/17.3 
+         */
+        modulepar boolean PICS_S1AP_eNB_INITIATION_ERROR_IND_LOGICAL_ERROR_PROCEDURE := false;
+        
     } // End of group PICS_A3
     
     group PICS_A4 { 
+        
+        /**
+         * @desc Does eNB support initiation oft the Error Indication procedure when a transfer syntax error is detected? 
+         * @see  ETSI DTS_INT-00135-1 A.4/17.1 
+         */
+        modulepar boolean PICS_S1AP_MME_INITIATION_ERROR_IND_PROCEDURE := false;
+        
+        /**
+         * @desc Does eNB support initiation of the Error Indication procedure when an abstract syntax error is detected? 
+         * @see  ETSI DTS_INT-00135-1 A.4/17.2 
+         */
+        modulepar boolean PICS_S1AP_MME_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE := false;
+        
+        /**
+         * @desc Does eNB support initiation of the Error Indication procedure when a logical error is detected? 
+         * @see  ETSI DTS_INT-00135-1 A.4/17.3 
+         */
+        modulepar boolean PICS_S1AP_MME_INITIATION_ERROR_IND_LOGICAL_ERROR_PROCEDURE := false;
+        
     } // End of group PICS_A4
     
 } // End of module S1AP_Pics 

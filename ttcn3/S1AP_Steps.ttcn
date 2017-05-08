@@ -26,10 +26,10 @@ module S1AP_Steps {
         function f_S1AP_mme_init()
         runs on S1APComponent {
             
-            //Defaults
+            // Defaults
             vc_default_s1ap := activate (a_defaultS1AP());
             
-            //Base LibDiameter init function if there will be any base initialisation
+            // Base LibS1AP init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
             vc_ETS_address := PX_S1AP_MME_ETS_IPADDR;
@@ -45,10 +45,10 @@ module S1AP_Steps {
         function f_S1AP_enb_init()
         runs on S1APComponent {
             
-            //Defaults
+            // Defaults
             vc_default_s1ap := activate (a_defaultS1AP());
             
-            //Base LibDiameter init function if there will be any base initialisation
+            // Base LibS1AP init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
             vc_ETS_address := PX_S1AP_eNB_ETS_IPADDR;
@@ -64,10 +64,10 @@ module S1AP_Steps {
         function f_S1AP_enb_init2()
         runs on S1APComponent {
             
-            //Defaults
+            // Defaults
             vc_default_s1ap := activate (a_defaultS1AP());
             
-            //Base LibDiameter init function if there will be any base initialisation
+            // Base LibS1AP init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
             vc_ETS_address := PX_S1AP_eNB_ETS_IPADDR2;

@@ -3449,19 +3449,14 @@ module S1AP_TCFunctions {
             
         } // End of group ENB_direct_information_transfer_group
 
-
-
         /**
          * @desc NAS transport group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.14  MME direct information transport group
          */
         group MME_direct_information_transfer_group {
-
-            
+            // Void
         } // End of group MME_direct_information_transfer_group
 
-
-        
         /**
          * @desc eNB configuration transfer group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.15  eNB configuration transfer group
@@ -3504,18 +3499,14 @@ module S1AP_TCFunctions {
             
         } // End of group ENB_configuration_transfer_group 
 
-
         /**
          * @desc NAS transport group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.16  MME configuration transport group
          */
         group MME_configuration_transfer_group {
-
-            
+            // Void
         } // End of group MME_configuration_transfer_group
 
-
-        
         /**
          * @desc LPPa transport group
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.1.17  LPPa transport group
@@ -4595,7 +4586,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                // Preamble action: E-RAB Setup is exchanged
+                // Preamble action: A warning message procedure is exchanged
                 f_writeReplaceWarningExchanges(); 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
