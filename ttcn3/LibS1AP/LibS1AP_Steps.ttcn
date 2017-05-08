@@ -755,6 +755,19 @@ module LibS1AP_Steps {
             f_recv_S1AP_initiatingMessage(mw_UeContextReleaseCommand(p_value))
         } // End of f_recv_UE_Context_Release_Command
 
+
+		/**
+		* @desc Receive S1AP Message UE Context Modification Request
+		* @param p_value Receive template for UE CONTEXT MODIFICATION REQUEST
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.8 UE CONTEXT MODIFICATION REQUEST
+		*/
+		function f_recv_UE_Context_Modification_Request(
+										template (present) RecordOf_ProtocolIE p_value := ?
+		) runs on S1APComponent {
+			f_recv_S1AP_initiatingMessage(mw_UeContextModificationRequest(p_value))
+		} // End of f_recv_UE_Context_Modification_Request
+
+
         /**
         * @desc Receive S1AP Message UE Context Modification Response
         * @param p_value Receive template for UE CONTEXT MODIFICATION RESPONSE
