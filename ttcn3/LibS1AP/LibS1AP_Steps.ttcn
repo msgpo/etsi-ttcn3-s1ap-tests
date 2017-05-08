@@ -1578,6 +1578,8 @@ module LibS1AP_Steps {
                                                                   in boolean p_associated_signalling_mode
             ) return boolean;
             
+			external function fx_eNB_erab_Release_indication_procedure( in boolean p_param) return boolean;
+            
         } // End of group mmeRole
         
     } // End of group externalFunctions
