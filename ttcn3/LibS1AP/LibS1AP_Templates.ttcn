@@ -1086,27 +1086,39 @@ module LibS1AP_Templates {
                         template (present) RecordOf_ProtocolIE mw_E_RABReleaseResIEs(
                                                                                          template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                          template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
-                                                                                         template (present) RecordOf_E_RABItem p_RecordOf_E_RABItem_value := ?
+                                                                                         template (present) RecordOf_E_RABItem p_RecordOf_E_RABItem_value := ?,
+                                                                                         template (present) UserLocationInformation p_UserLocationInformation := ?
                          ) := { 
                               mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                               mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
-                              mw_E_RABReleaseList(p_RecordOf_E_RABItem_value)
+                              mw_E_RABReleaseList(p_RecordOf_E_RABItem_value),
+							  mw_UserLocationInformation_IE(p_UserLocationInformation)
                          } // End of template mw_E_RABReleaseResIEs
                     
-                    
-                         /**
-                          * @desc Receive template for UserLocationInformation message
-                          * @param p_tAI                 The expected TAI value. Default: ?
-                          * @param p_eUTRAN_CGI          The expected Type Request value. Default: ?
-                          */
-                         template (present) RecordOf_ProtocolIE mw_UserLocationInformation(
-                            template (present) TAI p_tAI := ?,
-                            template (present) EUTRAN_CGI p_eUTRAN_CGI := ?
-                                                                                        
-                         ) := {
-                             mw_tAI_IE(p_tAI),
-                             mw_eUTRAN_CGI_IE(p_eUTRAN_CGI)
-                         } // End of template mw_UserLocationInformation
+						template (present) UserLocationInformation mw_UserLocationInformation(
+						             template (present) EUTRAN_CGI p_EUTRAN_CGI := ?,
+									 template (present) TAI p_TAI := ?
+						 ) := { 
+							  eutran_cgi := p_EUTRAN_CGI, //mw_eUTRAN_CGI_IE(p_EUTRAN_CGI_value),
+							  tai := p_TAI,//mw_tAI_IE(p_TAI_value)
+							  iE_Extensions := *
+							  
+							  
+						 } // End of template mw_UserLocationInformation
+						 
+						 /**
+						  * @desc Receive template for UserLocationInformation message
+						  * @param p_tAI                 The expected TAI value. Default: ?
+						  * @param p_eUTRAN_CGI          The expected Type Request value. Default: ?
+						  */
+						 template (present) ProtocolIE mw_UserLocationInformation_IE(
+							template (present) UserLocationInformation p_UserLocationInformation_value																						
+						 ) := {
+							id := S1AP_Constants.id_UserLocationInformation,
+			   				criticality := ignore,
+			   				value_ := {UserLocationInformation := p_UserLocationInformation_value}
+						 } // End of template mw_UserLocationInformation
+
                     }
                 
                 }
