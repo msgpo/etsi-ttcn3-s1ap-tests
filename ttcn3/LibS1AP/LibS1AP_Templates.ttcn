@@ -501,6 +501,16 @@ module LibS1AP_Templates {
 						m_MME_UE_S1AP_ID(p_MME_value),
 						m_eNB_UE_S1AP_ID(p_eNB_value)
 					} // End of template m_UeContextModificationIndicationIEs
+
+					template (value) RecordOf_ProtocolIE m_UeContextModificationIndicationIEsCSG(
+																			in template (value) MME_UE_S1AP_ID p_MME_value,
+																			in template (value) ENB_UE_S1AP_ID p_eNB_value,
+																			in template (value) CSGMembershipInfo p_cSGMembershipInfo_value                                                                         
+					) := {
+						m_MME_UE_S1AP_ID(p_MME_value),
+						m_eNB_UE_S1AP_ID(p_eNB_value),
+						m_cSGMembershipInfo_IE(p_cSGMembershipInfo_value)
+					} // End of template m_UeContextModificationIndicationIEsCSG
                     
                     /**
                      * @desc Send template for InitiatingMessage message with m_UeRadioCapabilityMatchRequest payload
@@ -3313,6 +3323,15 @@ module LibS1AP_Templates {
                 value_ := {CSGMembershipStatus := valueof(p_value)}
             } // End of template m_cSGMembershipStatus_IE
             
+			template (value) ProtocolIE m_cSGMembershipInfo_IE(
+												   in template (value) CSGMembershipInfo p_value,
+												   in template (value) ProtocolIE.criticality p_criticality := reject
+			) := {
+				id := S1AP_Constants.id_CSGMembershipInfo,
+				criticality := p_criticality,
+				value_ := {CSGMembershipInfo := valueof(p_value)}
+			} // End of template m_cSGMembershipInfoIE
+			
             
             group E_RAB_IEsend {
                 template (value) ProtocolIE m_E_RABReleaseList(
@@ -4853,6 +4872,19 @@ module LibS1AP_Templates {
                 integrityProtectionAlgorithms := p_integrityProtectionAlgorithms,
                 iE_Extensions := omit
             }
+
+			/**
+			 * @desc
+			 */
+			template(value) CSGMembershipInfo m_CSGMembershipInfo
+			(in template (value) CSGMembershipStatus p_cSGMembershipStatus := member,
+			 in template (value) CSG_Id p_cSGId := '010101010101010101010101010'B) := {
+				cSGMembershipStatus := p_cSGMembershipStatus,
+				cSG_Id := p_cSGId,
+				cellAccessMode := omit,
+				pLMNidentity := omit,
+				iE_Extensions := omit
+			}
 
             /**
              * @desc
