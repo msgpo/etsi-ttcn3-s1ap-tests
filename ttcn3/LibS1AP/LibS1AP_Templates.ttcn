@@ -1405,6 +1405,14 @@ module LibS1AP_Templates {
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
                     } // End of template mw_UeContextModificationConfirmIEs
 
+                    template (present) RecordOf_ProtocolIE mw_UeContextModificationConfirmIEsCSG(
+                                                                               template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                               template (present) ENB_UE_S1AP_ID p_eNB_value := ?
+                    ) := {
+                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                        mw_cSGMembershipInfo_IE
+                    } // End of template mw_UeContextModificationConfirmIEsCSG
                     
                     /**
                      * @desc Receive template for mw_UeContextSuspendRequest message
@@ -4542,6 +4550,16 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := {ENB_StatusTransfer_TransparentContainer := p_value}
             } // End of template mw_eNBStatusTransferTransparentContainer_IE
+
+            template (value) ProtocolIE mw_cSGMembershipInfo_IE(
+                                                   in template (present) CSGMembershipInfo p_value:=?,
+                                                   in template (present) ProtocolIE.criticality p_criticality := reject
+            ) := {
+                id := S1AP_Constants.id_CSGMembershipInfo,
+                criticality := p_criticality,
+                value_ := {CSGMembershipInfo := p_value}
+            } // End of template mw_cSGMembershipInfoIE
+
             
         } // End of group Receive_IEs
         
@@ -4885,6 +4903,19 @@ module LibS1AP_Templates {
 				pLMNidentity := omit,
 				iE_Extensions := omit
 			}
+
+            /**
+             * @desc
+             */
+            template(present) CSGMembershipInfo mw_CSGMembershipInfo
+            (in template (present) CSGMembershipStatus p_cSGMembershipStatus := ?,
+             in template (present) CSG_Id p_cSGId := ?) := {
+                cSGMembershipStatus := p_cSGMembershipStatus,
+                cSG_Id := p_cSGId,
+                cellAccessMode := *,
+                pLMNidentity := *,
+                iE_Extensions := omit
+            }
 
             /**
              * @desc

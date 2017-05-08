@@ -4436,7 +4436,7 @@ module S1AP_TCFunctions {
 					m_CSGMembershipInfo
 					));
                     
-				f_recv_Ue_Context_Modification_Confirm(mw_UeContextModificationConfirmIEs);                
+				f_recv_Ue_Context_Modification_Confirm(mw_UeContextModificationConfirmIEsCSG);                
                 
 				// Postamble
 				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
