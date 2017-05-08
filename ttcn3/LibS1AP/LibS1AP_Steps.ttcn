@@ -834,6 +834,17 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_UeRadioCapabilityMatchResponse(p_value))
         } // End of f_recv_UeRadioCapabilityMatchResponse
+
+		/**
+		* @desc Receive S1AP Message UE RADIO_CAPABILITY_MATCH_REQUEST
+		* @param p_value Receive template for UE_RADIO_CAPABILITY_MATCH_REQUEST
+		* @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.11 UE_RADIO_CAPABILITY_MATCH_REQUEST
+		*/
+		function f_recv_UeRadioCapabilityMatchRequest(
+										template (present) RecordOf_ProtocolIE p_value := ?
+		) runs on S1APComponent {
+			f_recv_S1AP_initiatingMessage(mw_UeRadioCapabilityMatchRequest(p_value))
+		} // End of f_recv_UeRadioCapabilityMatchRequest
         
     } // End of group receivePDU
     
