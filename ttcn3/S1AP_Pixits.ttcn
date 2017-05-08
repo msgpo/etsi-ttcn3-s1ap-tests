@@ -11,8 +11,8 @@
  */
 module S1AP_Pixits {
     
-    // LibCommon
-//    import from LibCommon_BasicTypesAndValues all;
+    // LibS1AP
+    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
     
     group S1AP_Port_and_addresses {
         
@@ -95,7 +95,12 @@ module S1AP_Pixits {
         * @see ETSI 
         */
         modulepar integer PX_VA := 1;
-
+        
+        /**
+         * @desc Variant for Criticality values
+         */
+        modulepar Criticality PX_VA_CRITICALITY := reject;
+        
         /** 
         * @desc    integer for timer TS1RELOCOverall, 
         * @see ETSI  TS 136 413, chapter 9.5

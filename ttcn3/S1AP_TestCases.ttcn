@@ -1912,6 +1912,487 @@ module S1AP_TestCases {
          */
         group Unknown_unforseen_errorneous_group {
             
+            /**
+             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message contains different types of received 
+             *       criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE and 
+             *       Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
+             *         with Criticality set to value from the Table 4
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *             containing a UE_Security_Capabilities
+             *                 containing an Encription_Algorithms
+             *                     indicating not supported algoithm
+             *                 containing an Integrity_Protection_Algorithms
+             *             containing a Security_Key
+             *         sends an ERROR_INDICATION
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.4.1¶8
+             */
+            testcase TC_S1AP_ENB_ERR_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_01
+            
+            /**
+             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message contains different types of received 
+             *       criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE and 
+             *       Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
+             *         with Criticality set to value from the Table 4
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an Unknown_ID
+             *                 containing Criticality
+             *                     indicating Reject or Ignore and Notify Sender
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *             containing a UE_Security_Capabilities
+             *                 containing an Encription_Algorithms
+             *                     indicating not supported algoithm
+             *                 containing an Integrity_Protection_Algorithms
+             *             containing a Security_Key
+             *         sends an an INITIAL_CONTEXT_SETUP_FAILURE
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Cause
+             *                 indicating appropriate Protocol Cause
+             *             containing a Criticality_Diagnostics
+             *                 containing an Information Element Criticality_Diagnostics
+             *                     containing an IE_Criticality
+             *                     containing an IE_ID
+             *                     containing an IE_Type_of_Error.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_02
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.4.2¶3(1st dashed line) and 13
+             */
+            testcase TC_S1AP_ENB_ERR_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_02
+            
+            /**
+             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message contains different types of received 
+             *       criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE and 
+             *       Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
+             *         with Criticality set to value from the Table 4
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an Unknown_ID
+             *                 containing Criticality
+             *                     indicating Reject or Ignore and Notify Sender
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *             containing a UE_Security_Capabilities
+             *                 containing an Encription_Algorithms
+             *                     indicating not supported algoithm
+             *                 containing an Integrity_Protection_Algorithms
+             *             containing a Security_Key
+             *         sends an ERROR_INDICATION
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality
+             *                 containing an Information Element Criticality_Diagnostics
+             *                     containing an IE_Criticality
+             *                     containing an IE_ID
+             *                     containing an IE_Type_of_Error.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_03
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.4.2¶4(2nd dashed line) and 14
+             */
+            testcase TC_S1AP_ENB_ERR_03() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_03()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_03
+            
+            /**
+             * @desc Verify that the IUT rejects the procedure if message not contains mandatory IEs/IE groups and 
+             *       include Information Element Criticality Diagnostics IE in the Criticality Diagnostics IE for each 
+             *       reported IEs/IE groups within response message for this procedure.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
+             *         with Criticality set to value from the Table 4
+             *             containing an MME UE_S1AP_ID
+             *             not containing an eNB_UE_S1AP_ID
+             *             containing an Unknown_ID
+             *                 containing Criticality
+             *                     indicating Reject or Ignore and Notify Sender
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *             containing a UE_Security_Capabilities
+             *                 containing an Encription_Algorithms
+             *                     indicating not supported algoithm
+             *                 containing an Integrity_Protection_Algorithms
+             *             containing a Security_Key
+             *         sends an ERROR_INDICATION
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality
+             *                 containing an Information Element Criticality_Diagnostics
+             *                     containing an IE_Criticality
+             *                     containing an IE_ID
+             *                     containing an IE_Type_of_Error.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_04
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.5¶3(1st dashed line) and 13
+             */
+            testcase TC_S1AP_ENB_ERR_04() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_04()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_04
+            
+            /**
+             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message not contains mandatory IEs/IE groups and 
+             *       include Procedure Code IE, Triggering Message IE and Procedure Criticality IE and Information Element Criticality Diagnostics IE 
+             *       in the Criticality Diagnostics IE for each reported IEs/IE groups within ERROR_INDICATION.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an E-RAB_SETUP_REQUEST,
+             *             containing an MME UE_S1AP_ID
+             *             not containing an eNB_UE_S1AP_ID
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                         containing QCI
+             *                             indicating value 5
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *         sends an ERROR_INDICATION
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality
+             *                 containing an Information Element Criticality_Diagnostics
+             *                     containing an IE_Criticality
+             *                     containing an IE_ID
+             *                     containing an IE_Type_of_Error.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_05
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.5¶4(2nd dashed line) and 14
+             */
+            testcase TC_S1AP_ENB_ERR_05() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_05()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_05
+            
+            /**
+             * @desc Verify that the IUT rejects the procedure if message contains too many occurrances of the same IEs/IE groups with 
+             *       response message for this procedure and report the cause value ‘Abstract Syntax Error(Falsely Constructed Message)’.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID(same IE as already present)
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *             containing a UE_Security_Capabilities
+             *                 containing an Encription_Algorithms
+             *                     indicating not supported algoithm
+             *                 containing an Integrity_Protection_Algorithms
+             *             containing a Security_Key
+             *         sends an ERROR_INDICATION
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality
+             *                 containing an Information Element Criticality_Diagnostics
+             *                     containing an IE_Criticality
+             *                     containing an IE_ID
+             *                     containing an IE_Type_of_Error.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_06
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.6¶2(1st dashed line)
+             */
+            testcase TC_S1AP_ENB_ERR_06() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_06()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_06
+            
+            /**
+             * @desc Verify that the IUT terminate the procedure that does not have message to report unsuccessful outcome and message contains 
+             *       too many occurrances of the same IEs/IE groups and initiate Error Indication Procedure with cause value 
+             *       ‘Abstract Syntax Error(Falsely Constructed Message)’.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an E-RAB_SETUP_REQUEST,
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID(same IE as already present)
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                         containing QCI
+             *                             indicating value 5
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *         sends an ERROR_INDICATION
+             *             containing a Cause
+             *                 indicating ‘Abstract Syntax Error(Falsely Constructed Message)’.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_07
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.5¶3(2nd dashed line)
+             */
+            testcase TC_S1AP_ENB_ERR_07() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_07()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_07
+            
+            /**
+             * @desc Verify that the IUT initiate an Error Indication procedure with inclusion of only the previousy received AP ID from the peer node 
+             *       and appropriate cause value in case if AP ID has been stored previously for another UE-associated logical connection for same 
+             *       peer node.
+             * <pre>
+             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of an E-RAB_SETUP_REQUEST,
+             *             containing an MME UE_S1AP_ID
+             *                 indicating already used AP ID
+             *             containing an eNB_UE_S1AP_ID
+             *                 indicating already used AP ID
+             *             containing a UE_Aggregate_Maximum_Bit_Rate
+             *             containing an E-RAB_to_be_Setup_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing an E-RAB_Level_QoS_Parameters
+             *                         containing QCI
+             *                             indicating value 5
+             *                     containing a Transport_Layer_Address
+             *                     containing a GTP-TEID
+             *                     containing a NAS-PDU
+             *         sends an ERROR_INDICATION
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Cause
+             *                 indicating ‘Unknown or already allocated eNB UE S1AP ID’.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_ENB_ERR_08
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.5¶3(2nd dashed line)
+             */
+            testcase TC_S1AP_ENB_ERR_08() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_enb; 
+                
+                // Test control
+                if (not (PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_eNB_IUT and PICS_S1AP_eNB_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_eNB_Up(v_s1ap_enb);
+                
+                // Start
+                v_s1ap_enb.start(f_TC_S1AP_ENB_ERR_08()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_ENB_ERR_08
+            
         } // End of group Unknown_unforseen_errorneous_group
         
     } // End of group eNB_Role

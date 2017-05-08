@@ -17,6 +17,7 @@ module LibS1AP_Steps {
     import from LibCommon_BasicTypesAndValues all;
     
     // LibS1AP
+    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     import from S1AP_IEs language "ASN.1:1997" all;
     
@@ -259,9 +260,14 @@ module LibS1AP_Steps {
          * @param p_value Receive template for InitialContext_SetupRequest IEs
          */
         function f_recv_InitialContext_SetupRequest(
-                                           template (present) RecordOf_ProtocolIE p_value := ?
+                                                    template (present) RecordOf_ProtocolIE p_value := ?,
+                                                    template (present) Criticality p_criticality := reject
         ) runs on S1APComponent {
-            f_recv_S1AP_successfulOutcome(mw_InitialContextSetupRequest(p_value))
+            f_recv_S1AP_successfulOutcome(
+                mw_InitialContextSetupRequest(
+                    p_value,
+                    p_criticality
+            ))
         } // End of f_recv_InitialContext_SetupRequest
         
         /**
@@ -959,9 +965,15 @@ module LibS1AP_Steps {
          * @desc Send S1AP Message InitialContext_SetupRequest
          * @param p_value Send template with IE for InitialContext_SetupRequest
          */
-        function f_send_InitialContext_SetupRequest(in template (value) RecordOf_ProtocolIE p_value
+        function f_send_InitialContext_SetupRequest(
+                                                    in template (value) RecordOf_ProtocolIE p_value,
+                                                    in template (value) Criticality p_criticality := reject
         ) runs on S1APComponent {
-            f_send_S1AP_initiatingMessage(m_InitialContextSetupRequest(p_value))
+            f_send_S1AP_initiatingMessage(
+                m_InitialContextSetupRequest(
+                     p_value,
+                     p_criticality
+            ))
         } // End of function f_send_InitialContext_SetupRequest
         
         /**
@@ -1211,7 +1223,16 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_UeRadioCapabilityMatchRequest(p_value))
         } // End of f_send_UE_Radio_Capability_Match_Request
-
+        
+        /**
+         * @desc Send S1AP Message ERROR INDICATION
+         * @param p_value Send template with IE for ERROR INDICATION
+         */
+        function f_send_Error_Indication(
+                                         in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            // TODO f_send_S1AP_initiatingMessage(m_error_Indication(p_value))
+        } // End of function f_send_Error_Indication
         
     } // End of group sendPDU
     

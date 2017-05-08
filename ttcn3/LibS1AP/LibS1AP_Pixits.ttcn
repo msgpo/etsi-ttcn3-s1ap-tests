@@ -16,6 +16,7 @@ module LibS1AP_Pixits {
     
     // LibS1AP
     import from S1AP_IEs language "ASN.1:1997" all;
+    import from S1AP_CommonDataTypes language "ASN.1:1997" all;
     
     /**
      * @desc Define the network transportation layer
@@ -215,6 +216,17 @@ module LibS1AP_Pixits {
      * @see ETSI TS 136 413 Clause 9.2.3.22 CN Domain
      */
     modulepar CNDomain PX_CNDOMAIN := ps;
+    
+    /** @desc Indicates a not supported algorithm.
+     * @see ETSI TS 136 413 Clause 9.2.1.40 UE Security Capabilities
+     */
+    modulepar EncryptionAlgorithms PX_UNSUPPORTED_ENCRYPTION_ALGORITHM := '1111111111111111'B;
+    
+    modulepar ProcedureCode PX_PROCEURE_CODE := 0;
+    
+    modulepar TriggeringMessage PX_TRIGGERING_CODE := initiating_message;
+    
+    modulepar Criticality PX_CRITICALITY := reject;
     
 } // End of module LibS1AP_Pixits
 

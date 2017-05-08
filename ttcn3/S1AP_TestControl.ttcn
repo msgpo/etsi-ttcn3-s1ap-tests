@@ -79,6 +79,15 @@ module S1AP_TestControl {
             // ETSI TS 103 497-2 Clause 5.2.2.1.17  LPPa transport group
             execute(TC_S1AP_eNB_LPP_01());
             execute(TC_S1AP_eNB_LPP_02());
+            // ETSI TS 103 497-2 Clause 5.2.2.1.18   Unknown, Unforseen and Erroneous Protocol Data group 
+            execute(TC_S1AP_ENB_ERR_01());
+            execute(TC_S1AP_ENB_ERR_02());
+            execute(TC_S1AP_ENB_ERR_03());
+            execute(TC_S1AP_ENB_ERR_04());
+            execute(TC_S1AP_ENB_ERR_05());
+            execute(TC_S1AP_ENB_ERR_06());
+            execute(TC_S1AP_ENB_ERR_07());
+            execute(TC_S1AP_ENB_ERR_08());
         }
         if (PICS_S1AP_MME_IUT) {
             // ETSI TS 103 497-2 Clause 5.2.2.2.2    E-RAB management group
