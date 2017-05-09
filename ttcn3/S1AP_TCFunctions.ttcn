@@ -4257,7 +4257,7 @@ module S1AP_TCFunctions {
                 f_recv_E_RABModifiedRequest(mw_E_RABModifiedReqIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
-                    mw_E_RABToBeModifiedList({?}) //TODO refine expectation
+                    mw_E_RABToBeModifiedList({mw_E_RABToBeModifiedItemBearerSUReq(?,mw_e_RABlevelQoSParameters(5),?)})
                 ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
