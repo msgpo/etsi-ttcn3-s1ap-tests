@@ -870,7 +870,7 @@ module LibS1AP_Steps {
         function f_recv_Ue_Context_Resume_Failure(
                                         template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
-            f_recv_S1AP_initiatingMessage(mw_UeContextResumeFailure(p_value))
+            f_recv_S1AP_successfulOutcome(mw_UeContextResumeFailure(p_value))
         } // End of f_recv_Ue_Context_Resume_Failure
         
         /**
@@ -941,7 +941,8 @@ module LibS1AP_Steps {
          * @param p_initiatingMessage Send value template for InitiatingMessage message
          */
         function f_send_S1AP_initiatingMessage(
-                                               in template (value) InitiatingMessage p_initiatingMessage
+                                               in template (value) InitiatingMessage p_initiatingMessage,
+                                               in template (value) Criticality p_criticality := reject
         ) runs on S1APComponent {
             f_send_S1AP_PDU( {initiatingMessage := p_initiatingMessage})
         } // End of function f_send_S1AP_initiatingMessage
@@ -1233,17 +1234,6 @@ module LibS1AP_Steps {
         } // End of f_send_UE_Context_Suspend_Request
         
         /**
-        * @desc Send S1AP Message UE Context Resume Request
-        * @param p_value Receive template for UE CONTEXT RESUME REQUEST
-        * @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.17 UE CONTEXT SUSPEND REQUEST
-        */
-        function f_send_UE_Context_Resume_Request(
-                                        template (value) RecordOf_ProtocolIE p_value
-        ) runs on S1APComponent {
-            f_send_S1AP_initiatingMessage(m_UeContextResumeRequest(p_value))
-        } // End of f_send_UE_Context_Resume_Request
-        
-        /**
         * @desc Send S1AP Message UE Context Modification Request
         * @param p_value Send template for UE CONTEXT MODIFICATION REQUEST
         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.8 UE CONTEXT MODIFICATION COMMAND
@@ -1266,6 +1256,22 @@ module LibS1AP_Steps {
 			f_send_S1AP_initiatingMessage(m_UeContextModificationIndication(p_value))
 		} // End of f_send_UE_Context_Modification_Request
 
+       /**
+        * @desc Send S1AP Message UE Context Resume Request
+        * @param p_value Send template for UE CONTEXT RESUME REQUEST
+        * @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.17 UE CONTEXT RESUME REQUEST
+        */
+        function f_send_Ue_Context_Resume_Request(
+                                                  in template (value) RecordOf_ProtocolIE p_value,
+                                                  in template (value) Criticality p_criticality := reject
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(
+                m_UeContextResumeRequest(
+                    p_value, 
+                    p_criticality
+                )
+            )
+        } // End of f_send_UE_Context_Modification_Request
 
         /**
         * @desc Send S1AP Message UE Radio Capability Match Request
@@ -1277,16 +1283,6 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_UeRadioCapabilityMatchRequest(p_value))
         } // End of f_send_UE_Radio_Capability_Match_Request
-        
-        /**
-         * @desc Send S1AP Message ERROR INDICATION
-         * @param p_value Send template with IE for ERROR INDICATION
-         */
-        function f_send_Error_Indication(
-                                         in template (value) RecordOf_ProtocolIE p_value
-        ) runs on S1APComponent {
-            // TODO f_send_S1AP_initiatingMessage(m_error_Indication(p_value))
-        } // End of function f_send_Error_Indication
         
     } // End of group sendPDU
     
@@ -1342,7 +1338,7 @@ module LibS1AP_Steps {
                 {
                     m_E_RABItem(
                         c_E_RAB_ID_A,
-                        m_cause_ran(user_inactivity) // FIXME To be checked
+                        m_cause_ran(user_inactivity) 
                     )
                 }
             ));

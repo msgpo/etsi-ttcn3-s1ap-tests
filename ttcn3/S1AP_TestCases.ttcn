@@ -34,7 +34,7 @@ module S1AP_TestCases {
              *       due to E-RAB management procedure and send E-RAB_SETUP_RESPONSE with successfully established E-RABs 
              *       included in the E-RAB_Setup_List IE.
              * <pre>
-             * Pics Selection: PICS A.3/1.1
+             * Pics Selection: A.3/1.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an E-RAB_SETUP_REQUEST
@@ -89,7 +89,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT after receiving an E-RAB_SETUP_REQUEST with failed E-RAB sends an E-RAB_SETUP_RESPONSE 
              *       with E-RAB_Failed_to_Setup_List.
              * <pre>
-             * Pics Selection: PICS A.3/1.1
+             * Pics Selection: A.3/1.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an E-RAB_SETUP_REQUEST
@@ -622,7 +622,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an INITIAL_UE_MESSAGE to indicate the initiation of a NAS Transport procedure.
              * <pre>
-             * Pics Selection: PICS A.3/5.1
+             * Pics Selection: A.3/5.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate the initiation of a NAS Transport procedure
@@ -667,7 +667,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an UPLINK_NAS_TRANSPORT to indicate an ongoing NAS Transport procedure.
              * <pre>
-             * Pics Selection: PICS A.3/5.3
+             * Pics Selection: A.3/5.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an ongoing NAS Transport procedure
@@ -713,7 +713,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a NAS_NON_DELIVERY_INDICATION to indicate the eNB was unable to ensure that the message has been received by the UE.
              * <pre>
-             * Pics Selection: PICS A.3/5.4
+             * Pics Selection: A.3/5.4
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a UE has not received a INITIAL_UE_MESSAGE
@@ -762,7 +762,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can successfully process all mandatory IEs in a RESET and sends a RESET_ACKNOWLEDGE due to a Reset procedure initiated from the MME.
              * <pre>
-             * Pics Selection: PICS A.3/6.1.2
+             * Pics Selection: A.3/6.1.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a RESET
@@ -804,7 +804,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an RESET due to a Reset procedure initiated from the E-UTRAN.
              * <pre>
-             * Pics Selection: PICS A.3/6.1.2
+             * Pics Selection: A.3/6.1.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a Reset procedure initiated from the E-UTRAN
@@ -845,7 +845,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can successfully manage Reset procedure in case of Abnormal Condition at the E-UTRAN.
              * <pre>
-             * Pics Selection: PICS A.3/6.1.1
+             * Pics Selection: A.3/6.1.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a RESET
@@ -887,7 +887,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an ERROR_INDICATION due to an Error Indication procedure.
              * <pre>
-             * Pics Selection: PICS A.3/6.2.2
+             * Pics Selection: A.3/6.2.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an Error Indication procedure
@@ -925,7 +925,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a S1_SETUP_REQUEST to indicate a S1 Setup procedure.
              * <pre>
-             * Pics Selection: PICS A.3/6.3
+             * Pics Selection: A.3/6.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a S1 Setup procedure
@@ -965,7 +965,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an ENB_CONFIGURATION_UPDATE to indicate an eNB Configuration Update procedure.
              * <pre>
-             * Pics Selection: PICS A.3/6.4
+             * Pics Selection: A.3/6.4
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an eNB Configuration Update procedure
@@ -1005,7 +1005,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT can successfully process all mandatory IEs in an MME_CONFIGURATION_UPDATE and 
              *       sends an MME_CONFIGURATION_UPDATE_ACKNOWLEDGE due to an MME Configuration Update procedure.
              * <pre>
-             * Pics Selection: PICS A.3/6.5
+             * Pics Selection: A.3/6.5
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an MME_CONFIGURATION_UPDATE
@@ -1044,7 +1044,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT can successfully process all mandatory IEs in an MME_CONFIGURATION_UPDATE and 
              *       sends an MME CONFIGURATION UPDATE_FAILURE due to an invalid MME Configuration Update procedure.
              * <pre>
-             * Pics Selection: PICS A.3/6.5
+             * Pics Selection: A.3/6.5
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an MME_CONFIGURATION_UPDATE
@@ -1092,7 +1092,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a DOWNLINK_S1_CDMA2000_TUNNELLING.
              * <pre>
-             * Pics Selection: PICS A.3/7.2
+             * Pics Selection: A.3/7.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a CDMA2000 to be forwarded
@@ -1141,7 +1141,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a UE_CAPABILITY_INFO_INDICATION to indicate capability-related information update.
              * <pre>
-             * Pics Selection: PICS A.3/8
+             * Pics Selection: A.3/8
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a capability-related information update
@@ -1188,7 +1188,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can successfully send a TRACE_FAILURE_INDICATION on TRACE_START.
              * <pre>
-             * Pics Selection: PICS A.3/9.1 and A.3/9.2
+             * Pics Selection: A.3/9.1 and A.3/9.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a TRACE_START
@@ -1239,7 +1239,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can successfully send a TRACE_FAILURE_INDICATION on DEACTIVATE_TRACE.
              * <pre>
-             * Pics Selection: PICS A.3/9.1 and A.3/9.2
+             * Pics Selection: A.3/9.1 and A.3/9.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a DEACTIVATE_TRACE
@@ -1284,7 +1284,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a CELL_TRAFFIC_TRACE when the conditions required for tracing are met.
              * <pre>
-             * Pics Selection: PICS A.3/9.4
+             * Pics Selection: A.3/9.4
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate the conditions required for tracing are met
@@ -1335,7 +1335,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Directly and sends a LOCATION_REPORT.
              * <pre>
-             * Pics Selection: PICS A.3/10.1 and A.3/10.3
+             * Pics Selection: A.3/10.1 and A.3/10.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a LOCATION_REPORTING_CONTROL
@@ -1389,7 +1389,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Change of service cell and sends a LOCATION_REPORT.
              * <pre>
-             * Pics Selection: PICS A.3/10.1 and A.3/10.3
+             * Pics Selection: A.3/10.1 and A.3/10.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a LOCATION_REPORTING_CONTROL
@@ -1444,7 +1444,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can process all mandatory IEs in a LOCATION_REPORTING_CONTROL containing Event Type IE indicating Stop change of service cell and sends a LOCATION_REPORT.
              * <pre>
-             * Pics Selection: PICS A.3/10.1 and A.3/10.3
+             * Pics Selection: A.3/10.1 and A.3/10.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a LOCATION_REPORTING_CONTROL
@@ -1499,7 +1499,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a LOCATION REPORT_FAILURE_INDICATION.
              * <pre>
-             * Pics Selection: PICS A.3/10.1 and A.3/10.3
+             * Pics Selection: A.3/10.1 and A.3/10.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a LOCATION_REPORTING_CONTROL
@@ -1552,7 +1552,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can successfully process all mandatory IEs in a WRITE-REPLACE_WARNING_REQUEST received and sends a WRITE-REPLACE_WARNING_RESPONSE.
              * <pre>
-             * Pics Selection: PICS A.3/11.1
+             * Pics Selection: A.3/11.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an WRITE-REPLACE_WARNING_REQUEST
@@ -1593,7 +1593,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can successfully process all mandatory IEs in an KILL_REQUEST received and sends a KILL_RESPONSE.
              * <pre>
-             * Pics Selection: PICS A.3/11.2
+             * Pics Selection: A.3/11.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of a KILL_REQUEST
@@ -1633,7 +1633,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a PWS_RESTART_INDICATION to indicate a PWS Restart Indication procedure.
              * <pre>
-             * Pics Selection: PICS A.3/11.3
+             * Pics Selection: A.3/11.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a PWS Restart Indication procedure
@@ -1676,7 +1676,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a PWS_FAILURE_INDICATION to indicate PWS Failure Indication procedure.
              * <pre>
-             * Pics Selection: PICS A.3/11.4
+             * Pics Selection: A.3/11.4
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a PWS Failure Indication procedure
@@ -1723,7 +1723,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an eNB_DIRECT_INFORMATION_TRANSFER to indicate an eNB Direct Information Transfer procedure.
              * <pre>
-             * Pics Selection: PICS A.4/12
+             * Pics Selection: A.4/12
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an eNB direct information Transfer procedure,
@@ -1772,7 +1772,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an eNB_CONFIGURATION_TRANSFER to indicate an eNB Configuration Transfer procedure.
              * <pre>
-             * Pics Selection: PICS A.4/14
+             * Pics Selection: A.4/14
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an eNB Configuration Transfer procedure,
@@ -1824,7 +1824,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT can send a UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
              *       using a UE associated signalling.
              * <pre>
-             * Pics Selection: PICS A.3/16.2
+             * Pics Selection: A.3/16.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a LPPa Transport procedure using a UE associated signalling,
@@ -1866,7 +1866,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT can send a UPLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
              *       using a Non-UE associated signalling.
              * <pre>
-             * Pics Selection: PICS A.3/16.4
+             * Pics Selection: A.3/16.4
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a LPPa Transport procedure using a UE associated signalling,
@@ -1917,7 +1917,7 @@ module S1AP_TestCases {
              *       criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE and 
              *       Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.4/2.8 and A.4/6.2.2 and A.4/17.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
@@ -1971,11 +1971,11 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_ENB_ERR_01
             
             /**
-             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message contains different types of received 
-             *       criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE and 
-             *       Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
+             * @desc Verify that the IUT rejects the procedure if message contains not comprehended IEs/IE groups marked with 
+             *       ‘Reject IE’ or ‘Ignore IE and Notify Sender’ and include Information Element Criticality Diagnostics IE in 
+             *       the Criticality Diagnostics IE for each reported IEs/IE groups within response message for this procedure.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.4/2.8 and NOT A.4/6.2.2 and A.4/17
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
@@ -2041,7 +2041,7 @@ module S1AP_TestCases {
              *       criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE and 
              *       Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.3/2.1 and A.3/6.2.2 and A.3/17.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
@@ -2106,7 +2106,7 @@ module S1AP_TestCases {
              *       include Information Element Criticality Diagnostics IE in the Criticality Diagnostics IE for each 
              *       reported IEs/IE groups within response message for this procedure.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.3/2.1 and A.3/6.2.2 and A.3/17.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
@@ -2171,7 +2171,7 @@ module S1AP_TestCases {
              *       include Procedure Code IE, Triggering Message IE and Procedure Criticality IE and Information Element Criticality Diagnostics IE 
              *       in the Criticality Diagnostics IE for each reported IEs/IE groups within ERROR_INDICATION.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.3/2.1 and A.3/6.2.2 and A.3/17.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an E-RAB_SETUP_REQUEST,
@@ -2228,7 +2228,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT rejects the procedure if message contains too many occurrances of the same IEs/IE groups with 
              *       response message for this procedure and report the cause value ‘Abstract Syntax Error(Falsely Constructed Message)’.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.3/2.1 and A.3/6.2.2 and A.3/17.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an INITIAL_CONTEXT_SETUP_REQUEST,
@@ -2290,7 +2290,7 @@ module S1AP_TestCases {
              *       too many occurrances of the same IEs/IE groups and initiate Error Indication Procedure with cause value 
              *       ‘Abstract Syntax Error(Falsely Constructed Message)’.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.3/2.1 and A.3/6.2.2 and A.3/17.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an E-RAB_SETUP_REQUEST,
@@ -2343,7 +2343,7 @@ module S1AP_TestCases {
              *       and appropriate cause value in case if AP ID has been stored previously for another UE-associated logical connection for same 
              *       peer node.
              * <pre>
-             * Pics Selection: PICS A.3/2.1 and A.3/6.2.2 and A.3/17.2
+             * Pics Selection: A.3/2.1 and A.3/6.2.2 and A.3/17.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         on receipt of an E-RAB_SETUP_REQUEST,
@@ -2408,7 +2408,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an E-RAB_SETUP_REQUEST with at least one E-RAB IE to indicate an E-RAB Setup procedure.
              * <pre>
-             * Pics Selection: PICS A.4/1.1
+             * Pics Selection: A.4/1.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an E-RAB Setup procedure,
@@ -2453,6 +2453,7 @@ module S1AP_TestCases {
         } // End of group ERAB_management_group
 
         group Context_Management_group {
+            
             testcase TC_S1AP_MME_CMP_01() runs on S1AP system TestAdapter { 
                // Local variables
                var S1AP v_s1ap_mme; 
@@ -3098,7 +3099,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a DOWNLINK_S1_CDMA2000_TUNNELLING.
              * <pre>
-             * Pics Selection: PICS A.3/7.1
+             * Pics Selection: A.3/7.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a CDMA2000 signalling event
@@ -3336,7 +3337,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a WRITE-REPLACE_WARNING_REQUEST to indicate a Warning Message Transmission procedure.
              * <pre>
-             * Pics Selection: PICS A.4/11.1
+             * Pics Selection: A.4/11.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a Warning Message Transmission procedure
@@ -3376,7 +3377,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send a KILL_REQUEST to cancel an already ongoing broadcast of a Warning Message Transmission procedure.
              * <pre>
-             * Pics Selection: PICS A.4/11.2
+             * Pics Selection: A.4/11.2
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a cancellation of an ongoing Warning Message Transmission procedure
@@ -3422,7 +3423,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an MME_DIRECT_INFORMATION_TRANSFER to indicate an MME Configuration Transfer procedure.
              * <pre>
-             * Pics Selection: PICS A.4/13
+             * Pics Selection: A.4/13
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an MME Direct Information Transfer procedure,
@@ -3471,7 +3472,7 @@ module S1AP_TestCases {
             /**
              * @desc Verify that the IUT can send an MME_CONFIGURATION_TRANSFER to indicate an MME Configuration Transfer procedure.
              * <pre>
-             * Pics Selection: PICS A.4/15
+             * Pics Selection: A.4/15
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate an MME Configuration Transfer procedure,
@@ -3520,7 +3521,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT can send a DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
              *       using a UE associated signalling.
              * <pre>
-             * Pics Selection: PICS A.4/16.1
+             * Pics Selection: A.4/16.1
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a LPPa Transport procedure using a UE associated signalling,
@@ -3562,7 +3563,7 @@ module S1AP_TestCases {
              * @desc Verify that the IUT can send a DOWNLINK_UE_ASSOCIATED_LPPA_TRANSPORT to indicate a LPPa Transport procedure 
              *       using a non-UE associated signalling.
              * <pre>
-             * Pics Selection: PICS A.3/16.3
+             * Pics Selection: A.3/16.3
              * Configuration: CF_S1-MME
              *     Ensure that the IUT
              *         to indicate a LPPa Transport procedure using a UE associated signalling,
@@ -3608,8 +3609,171 @@ module S1AP_TestCases {
          */
         group Unknown_unforseen_errorneous_group {
             
+            /**
+             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message contains different types 
+             *       of received criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE 
+             *       and Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
+             * <pre>
+             * Pics Selection: A.4/2.8 and A.4/6.2.2 and A.4/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of a UE_CONTEXT_RESUME_REQUEST,
+             *         with Criticality set to value from the Table 5
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an E-RAB_Failed_to_Resume_List
+             *                 containing an E-RAB_Failed_to_Resume_Item 1
+             *                     containing an E-RAB_ID
+             *                     containing a Cause
+             *                         indicating an appropriate value
+             *         sends an ERROR_INDICATION
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_ERR_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.4.1¶8
+             */
+            testcase TC_S1AP_MME_ERR_01() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not (PICS_S1AP_MME_IUT and PICS_S1AP_MME_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT and PICS_S1AP_MME_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_ERR_01()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_ERR_01
+            
+            /**
+             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message contains different types 
+             *       of received criticality information of the Procedure Code IE and include Procedure Code IE, Triggering Message IE 
+             *       and Procedure Criticality IE in the Criticality Diagnostics IE within ERROR_INDICATION.
+             * <pre>
+             * Pics Selection: A.4/2.8 and A.4/6.2.2 and A.4/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of a UE_CONTEXT_RESUME_REQUEST,
+             *         with Criticality set to value from the Table 5
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an Unknown_ID
+             *                 containing Criticality
+             *                     indicating Reject or Ignore and Notify Sender
+             *             containing an E-RAB_Failed_to_Resume_List
+             *                 containing an E-RAB_Failed_to_Resume_Item 1
+             *                     containing an E-RAB_ID
+             *                     containing a Cause
+             *                         indicating an appropriate value
+             *         sends an UE_CONTEXT_RESUME_FAILURE
+             *             containing an MME_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Cause
+             *                 indicating appropriate Protocol Cause
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_ERR_02
+             * @reference ETSI TS 136 413 V13.4.0 Clause 10.3.4.2¶3(1st dashed line) and 13
+             */
+            testcase TC_S1AP_MME_ERR_02() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not (PICS_S1AP_MME_IUT and PICS_S1AP_MME_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT and PICS_S1AP_MME_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_ERR_02()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_ERR_02
+            
+            /**
+             * @desc Verify that the IUT rejects the procedure using Error Indication Procedure if message contains not comprehended 
+             *       IEs/IE groups marked with ‘Reject IE’ or ‘Ignore IE and Notify Sender’ and include Procedure Code IE, 
+             *       Triggering Message IE and Procedure Criticality IE and Information Element Criticality Diagnostics IE in the 
+             *       Criticality Diagnostics IE for each reported IEs/IE groups within ERROR_INDICATION.
+             * <pre>
+             * Pics Selection: A.4/2.8 and A.4/6.2.2 and A.4/17.2
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         on receipt of a E-RAB_MODIFICATION_INDICATION,
+             *             containing an MME UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an Unknown_ID
+             *                 containing Criticality
+             *                     indicating Reject or Ignore and Notify Sender
+             *             containing an E-RAB_to_be_Modified_List
+             *                 containing an E-RAB_to_be_Setup Item 1
+             *                     containing an E-RAB_ID
+             *                     containing a Cause
+             *                         indicating an appropriate value
+             *         sends an ERROR_INDICATION
+             *             containing a Criticality_Diagnostics
+             *                 containing a Procedure_Code
+             *                 containing a Triggering_Message
+             *                 containing a Procedure_Criticality
+             *                 containing an Information Element Criticality_Diagnostics
+             *                     containing an IE_Criticality
+             *                     containing an IE_ID
+             *                     containing an IE_Type_of_Error.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TP_S1AP_MME_ERR_03
+             * @reference ETSI TS 136 413 V13.4.0 10.3.4.2¶4(2nd dashed line) and 14
+             */
+            testcase TC_S1AP_MME_ERR_03() runs on S1AP system TestAdapter { 
+                // Local variables
+                var S1AP v_s1ap_mme; 
+                
+                // Test control
+                if (not (PICS_S1AP_MME_IUT and PICS_S1AP_MME_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE)) {
+                    log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT and PICS_S1AP_MME_INITIATION_ERROR_IND_ABSTRACT_SYNTAX_PROCEDURE' shall be set to true for executing the TC. ***"); 
+                    stop;
+                }
+                
+                // Test component configuration
+                f_cf_S1AP_MME_Up(v_s1ap_mme);
+                
+                // Start
+                v_s1ap_mme.start(f_TC_S1AP_MME_ERR_03()); 
+                
+                // synchronize PTC on 1 sychronization points
+                f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+                
+                f_cf_Down();
+                
+            } // End of testcase TC_S1AP_MME_ERR_03
+            
         } // End of group Unknown_unforseen_errorneous_group
-        
         
     } // End of group MME_Role
     

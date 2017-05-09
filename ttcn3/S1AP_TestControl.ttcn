@@ -131,6 +131,10 @@ module S1AP_TestControl {
             // ETSI TS 103 497-2 Clause 5.2.2.2.17  LPPa transport group
             execute(TC_S1AP_MME_LPP_01());
             execute(TC_S1AP_MME_LPP_02());
+            // ETSI TS 103 497-2 Clause 5.2.2.2.18   Unknown, Unforseen and Erroneous Protocol Data group 
+            execute(TC_S1AP_MME_ERR_01());
+            execute(TC_S1AP_MME_ERR_02());
+            execute(TC_S1AP_MME_ERR_03());
         }
         
     } // End of 'Control' statement
