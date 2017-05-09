@@ -31,6 +31,11 @@ module LibS1AP_TypesAndValues {
     type record of E_RABToBeModifiedItemBearerModReq RecordOf_E_RABToBeModifiedItemBearerModReq;
     
     /**
+     * @desc List of E-RABToBeModifiedItemBearerModInd IEs
+     */
+    type record of E_RABToBeModifiedItemBearerModInd RecordOf_E_RABToBeModifiedItemBearerModInd;
+    
+    /**
      * @desc List of E-RABSetupItemBearerSURes IEs
      */
     type record of E_RABSetupItemBearerSURes RecordOf_E_RABSetupItemBearerSURes;
@@ -54,6 +59,11 @@ module LibS1AP_TypesAndValues {
      * @desc List of E-RAB IEs
      */
     type record of E_RABItem RecordOf_E_RABItem;
+    
+    /**
+     * @desc List of E-RABFailedToResumeItemResumeReq IEs
+     */
+    type record of E_RABFailedToResumeItemResumeReq RecordOf_E_RABFailedToResumeItemResumeReq;
     
     /**
      * @desc List of E-RABs Subject to Forwarding

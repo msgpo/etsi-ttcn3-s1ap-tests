@@ -226,7 +226,7 @@ module LibS1AP_Pixits {
     
     modulepar TriggeringMessage PX_TRIGGERING_CODE := initiating_message;
     
-    modulepar Criticality PX_CRITICALITY := reject;
+    modulepar Criticality PX_CRITICALITY := ignore;
     
 } // End of module LibS1AP_Pixits
 

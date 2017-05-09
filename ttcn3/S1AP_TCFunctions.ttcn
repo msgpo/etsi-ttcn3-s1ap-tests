@@ -4361,7 +4361,7 @@ module S1AP_TCFunctions {
                                 
                 // Preamble
                 f_S1AP_mme_init();
-                                
+                
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -4565,18 +4565,20 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
                 // Test body
-                
+
                 f_send_Ue_Context_Resume_Request(
                     m_UeContextResumeRequestIEs_RABFailedToResumeItem(
-                        vc_MME_UE_ID,
+                    vc_MME_UE_ID,
                         vc_eNB_UE_ID,
-                        m_E_RABFailedToResumeItemResumeReq(
-                            c_E_RAB_ID_A,
-                            m_cause_ran(user_inactivity)
-                        )
+                        {
+                            m_E_RABFailedToResumeItemResumeReq(
+                                c_E_RAB_ID_A,
+                                m_cause_ran(user_inactivity)
+                            )
+                        }
                     )
                 ); 
-                                    
+                    
                 f_recv_Ue_Context_Resume_Failure(mw_UeContextResumeFailureIEs);                
                 
                 // Postamble
@@ -4587,7 +4589,7 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_eNB_CMP_10 
-
+            
             /**
              * @desc Testcase function for TC_S1AP_mME_CMP_11
              */
@@ -5768,10 +5770,12 @@ module S1AP_TCFunctions {
                     m_UeContextResumeRequestIEs_RABFailedToResumeItem(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
-                        m_E_RABFailedToResumeItemResumeReq(
-                            c_E_RAB_ID_A,
-                            m_cause_ran(user_inactivity)
-                        )
+                        { 
+                            m_E_RABFailedToResumeItemResumeReq(
+                                c_E_RAB_ID_A,
+                                m_cause_ran(user_inactivity)
+                            )
+                        }
                     ),
                     PX_VA_CRITICALITY
                 ); 
@@ -5818,12 +5822,13 @@ module S1AP_TCFunctions {
                     m_UeContextResumeRequestIEs_Unknown_ID(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
-                        m_E_RABFailedToResumeItemResumeReq(
-                            c_E_RAB_ID_A,
-                            m_cause_ran(user_inactivity)
-                        )
-                    )
-                ); 
+                        { 
+                            m_E_RABFailedToResumeItemResumeReq(
+                                c_E_RAB_ID_A,
+                                m_cause_ran(user_inactivity)
+                            )
+                        }
+                )); 
                 // 2. sends an UE_CONTEXT_RESUME_FAILURE
                 f_recv_Ue_Context_Resume_Failure(
                     mw_UeContextResumeFailureIEs(
@@ -5831,9 +5836,9 @@ module S1AP_TCFunctions {
                         vc_eNB_UE_ID,
                         mw_cause_protocol(unspecified),
                         mw_criticalityDiagnostics(
-                            PX_PROCEURE_CODE,
-                            PX_TRIGGERING_CODE,
-                            PX_CRITICALITY,
+                            ?,
+                            ?,
+                            ?,
                             { 
                                 mw_criticalityDiagnostics_IE_Item(
                                     reject, 
@@ -5869,15 +5874,18 @@ module S1AP_TCFunctions {
                 
                 // Test body
                 // 1. on receipt of a E-RAB_MODIFICATION_INDICATION
-                // TODO
-//                f_send_Ue_Context_Resume_Request(
-//                    m_UeContextResumeRequestIEs(
-//                        vc_MME_UE_ID,
-//                        vc_eNB_UE_ID,
-//                        m_E_RABFailedToResumeItemResumeReq(
-//                            c_E_RAB_ID_A,
-//                            m_cause_ran(user_inactivity)
-//                ))); 
+                f_send_E_RABModifiedInd(
+                    m_E_RABModifiedIndIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        {
+                            m_E_RABToBeModifiedItemBearerModInd(
+                                c_E_RAB_ID_A,
+                                -,
+                                -
+                            )
+                        }
+                )); 
                 // 2. sends an ERROR_INDICATION
                 f_recv_Error_Indication(
                     mw_error_IndicationIEs(
@@ -5907,6 +5915,61 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_MME_ERR_03
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_ERR_04
+             */
+            function f_TC_S1AP_MME_ERR_04() runs on S1APComponent { 
+                // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. on receipt of a UE_CONTEXT_RESUME_REQUEST
+                f_send_Ue_Context_Resume_Request(
+                    m_UeContextResumeRequestIEs_no_eNB(
+                        vc_MME_UE_ID,
+                        { 
+                            m_E_RABFailedToResumeItemResumeReq(
+                                c_E_RAB_ID_A,
+                                m_cause_ran(user_inactivity)
+                            )
+                        }
+                )); 
+                // 2. sends an UE_CONTEXT_RESUME_FAILURE
+                f_recv_Ue_Context_Resume_Failure(
+                    mw_UeContextResumeFailureIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        mw_cause_protocol(unspecified),
+                        mw_criticalityDiagnostics(
+                            ?,
+                            ?,
+                            ?,
+                            { 
+                                mw_criticalityDiagnostics_IE_Item(
+                                    reject, 
+                                    -, 
+                                    missing
+                                ) 
+                            }
+                        )
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_ERR_04
             
         } // End of group Unknown_unforseen_errorneous_group
         

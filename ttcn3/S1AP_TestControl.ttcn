@@ -144,6 +144,7 @@ module S1AP_TestControl {
             execute(TC_S1AP_MME_ERR_01());
             execute(TC_S1AP_MME_ERR_02());
             execute(TC_S1AP_MME_ERR_03());
+            execute(TC_S1AP_MME_ERR_04());
         }
         
     } // End of 'Control' statement

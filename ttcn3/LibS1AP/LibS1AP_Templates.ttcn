@@ -275,28 +275,17 @@ module LibS1AP_Templates {
                             m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
                         } // End of template m_E_RABSetupReqIEs
     
-                    }// End of group ERABSetup
+                    } // End of group ERABSetup
 
-                    group ERABModify {
-
-                       /**
-                         * @desc Send template for InitiatingMessage message with E-RABRelease payload
-                         * @param p_value           The procedure code value
-                         */
-                        template (value) InitiatingMessage m_E_RABReleaseRequest(
-                                                                               in template (value) RecordOf_ProtocolIE p_value) := {
-                            procedureCode := id_E_RABRelease,
-                            criticality := reject,
-                            value_ := {RecordOf_ProtocolIE := valueof(p_value)}
-                        } // End of template m_E_RABRleaseRequest        
-
+                    group ERABModifyRequest { 
+                        
                        /**
                          * @desc Send template for InitiatingMessage message with E-RABModify payload
                          * @param p_value           The procedure code value
                          */
                         template (value) InitiatingMessage m_E_RABModifiedRequest(
                                                                                in template (value) RecordOf_ProtocolIE p_value) := {
-                            procedureCode := id_E_RABSetup,
+                            procedureCode := id_E_RABModify,
                             criticality := reject,
                             value_ := {RecordOf_ProtocolIE := valueof(p_value)}
                         } // End of template m_E_RABModifiedRequest        
@@ -310,10 +299,46 @@ module LibS1AP_Templates {
                             m_eNB_UE_S1AP_ID(p_eNB_value),
                             m_E_RABToBeModifiedList(p_RecordOf_E_RABToBeModifiedItem_value)
                         } // End of template m_E_RABSetupReqIEs
-            
-                    }
-
+                        
+                    } // End of group ERABModifyRequest
+                    
+                    group ERABModifyInd {
+                        
+                       /**
+                         * @desc Send template for InitiatingMessage message with E-RABModifyInd payload
+                         * @param p_value           The procedure code value
+                         */
+                        template (value) InitiatingMessage m_E_RABModifiedInd(
+                                                                              in template (value) RecordOf_ProtocolIE p_value) := {
+                            procedureCode := id_E_RABModificationIndication,
+                            criticality := reject,
+                            value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                        } // End of template m_E_RABModifiedInd
+                        
+                        template (value) RecordOf_ProtocolIE m_E_RABModifiedIndIEs(
+                                                                                   in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                   in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                                   in template (value) RecordOf_E_RABToBeModifiedItemBearerModInd p_RecordOf_E_RABToBeModifiedItemBearerModInd_value
+                        ) := {
+                            m_MME_UE_S1AP_ID(p_MME_value),
+                            m_eNB_UE_S1AP_ID(p_eNB_value),
+                            m_E_RABToBeModifiedItemBearerModIndList(p_RecordOf_E_RABToBeModifiedItemBearerModInd_value)
+                        } // End of template m_E_RABModifiedIndIEs
+                        
+                    } // End of group ERABModifyInd
+                    
                     group ERABRelease {
+
+                       /**
+                         * @desc Send template for InitiatingMessage message with E-RABRelease payload
+                         * @param p_value           The procedure code value
+                         */
+                        template (value) InitiatingMessage m_E_RABReleaseRequest(
+                                                                               in template (value) RecordOf_ProtocolIE p_value) := {
+                            procedureCode := id_E_RABRelease,
+                            criticality := reject,
+                            value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                        } // End of template m_E_RABRleaseRequest        
 
                         template (value) RecordOf_ProtocolIE m_E_RABReleaseReqIEs(
                                     in template (value) MME_UE_S1AP_ID p_MME_value,
@@ -502,17 +527,33 @@ module LibS1AP_Templates {
                                                                                      in template (value) MME_UE_S1AP_ID p_MME_value,
                                                                                      in template (value) ENB_UE_S1AP_ID p_eNB_value
                     ) := {
-                        mw_MME_UE_S1AP_ID(p_MME_value, ignore),
-                        mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
+                        m_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        m_eNB_UE_S1AP_ID(p_eNB_value, ignore)
                     } // End of template m_UeContextResumeRequestIEs 
                     
                     template (value) RecordOf_ProtocolIE m_UeContextResumeRequestIEs_RABFailedToResumeItem(
                                                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
                                                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
-                                                                                                           in template (value) E_RABFailedToResumeItemResumeReq p_E_RABFailedToResumeItemResumeReq
+                                                                                                           in template (value) RecordOf_E_RABFailedToResumeItemResumeReq p_RecordOf_E_RABFailedToResumeItemResumeReq_value
                     ) modifies m_UeContextResumeRequestIEs := {
-                        m_E_RABFailedToResumeListResumeReq_IE(p_E_RABFailedToResumeItemResumeReq)
+                        m_E_RABFailedToResumeItemResumeReqList(p_RecordOf_E_RABFailedToResumeItemResumeReq_value)
                     } // End of template m_UeContextResumeRequestIEs_RABFailedToResumeItem 
+                    
+                    template (value) RecordOf_ProtocolIE m_UeContextResumeRequestIEs_Unknown_ID(
+                                                                                                in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                                in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                                                in template (value) RecordOf_E_RABFailedToResumeItemResumeReq p_RecordOf_E_RABFailedToResumeItemResumeReq_value
+                    ) modifies m_UeContextResumeRequestIEs_RABFailedToResumeItem := {
+                        m_Unknown_ID_IE(-, reject)
+                    } // End of template m_UeContextResumeRequestIEs_Unknown_ID 
+                    
+                    template (value) RecordOf_ProtocolIE m_UeContextResumeRequestIEs_no_eNB(
+                                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                            in template (value) RecordOf_E_RABFailedToResumeItemResumeReq p_RecordOf_E_RABFailedToResumeItemResumeReq_value
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value, ignore),
+                        m_E_RABFailedToResumeItemResumeReqList(p_RecordOf_E_RABFailedToResumeItemResumeReq_value)
+                    } // End of template m_UeContextResumeRequestIEs_no_eNB 
                     
                     /**
                      * @desc Send template for InitiatingMessage message with m_UeContextModificationRequest payload
@@ -608,14 +649,6 @@ module LibS1AP_Templates {
                         m_eNB_UE_S1AP_ID(p_eNB_value),
                         m_UE_Radio_capability_IE(p_UeRadioCapabilities)
                     } // End of template m_ContextModificationReqIEsSecCap
-                    
-                    template (value) RecordOf_ProtocolIE m_UeContextResumeRequestIEs_Unknown_ID(
-                                                                                                in template (value) MME_UE_S1AP_ID p_MME_value,
-                                                                                                in template (value) ENB_UE_S1AP_ID p_eNB_value,
-                                                                                                in template (value) E_RABFailedToResumeItemResumeReq p_E_RABFailedToResumeItemResumeReq
-                    ) modifies m_UeContextResumeRequestIEs := {
-                        m_Unknown_ID_IE(-, reject)
-                    } // End of template m_UeContextResumeRequestIEs_Unknown_ID 
                     
                 }// End of group Context_management_group
                 
@@ -1677,7 +1710,7 @@ module LibS1AP_Templates {
                         mw_MME_UE_S1AP_ID(p_MME_value, ignore),
                         mw_eNB_UE_S1AP_ID(p_eNB_value, ignore)
                     } // End of template mw_UeRadioCapabilityMatchRequestIEs
-
+                    
                     /**
                      * @desc Receive template for mw_ConnectionEstablishmentIndication message
                      * @param p_procedureCode   Expected procedure code. Default: ?
@@ -3707,14 +3740,36 @@ module LibS1AP_Templates {
                  * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
                  */
                 template (value) ProtocolIE m_E_RABToBeModifiedList(
-                                                                 in template (value) RecordOf_E_RABToBeModifiedItemBearerModReq p_value := { m_E_RABToBeModifiedItemBearerSUReq }
+                                                                    in template (value) RecordOf_E_RABToBeModifiedItemBearerModReq p_value := { m_E_RABToBeModifiedItemBearerSUReq }
                 ) := {
                     id := S1AP_Constants.id_E_RABToBeModifiedItemBearerModReq,
                     criticality := reject,
                     value_ := { RecordOf_E_RABToBeModifiedItemBearerModReq := valueof(p_value) }
                 } // End of template m_E_RABToBeSetupList
                 
+                /**
+                 * @desc Send template for E-RABToBeModifiedItemBearerModInd protocol IE
+                 * @param p_value  Protocol IE value
+                 */
+                template (value) ProtocolIE m_E_RABToBeModifiedItemBearerModIndList(
+                                                                                    in template (value) RecordOf_E_RABToBeModifiedItemBearerModInd p_value
+                ) := {
+                    id := S1AP_Constants.id_E_RABToBeModifiedItemBearerModInd,
+                    criticality := reject,
+                    value_ := { RecordOf_E_RABToBeModifiedItemBearerModInd := valueof(p_value) }
+                } // End of template m_E_RABToBeModifiedItemBearerModIndList
                 
+                /**
+                 * @desc Send template for E-RABFailedToResumeItemResumeReq protocol IE
+                 * @param p_value  Protocol IE value
+                 */
+                template (value) ProtocolIE m_E_RABFailedToResumeItemResumeReqList(
+                                                                                   in template (value) RecordOf_E_RABFailedToResumeItemResumeReq p_value
+                ) := {
+                    id := S1AP_Constants.id_E_RABFailedToResumeItemResumeReq,
+                    criticality := reject,
+                    value_ := { RecordOf_E_RABFailedToResumeItemResumeReq := valueof(p_value) }
+                } // End of template m_E_RABFailedToResumeItemResumeReqList
                 
             } // End of group E_RAB_IEsend
             
@@ -3767,7 +3822,7 @@ module LibS1AP_Templates {
                 } // End of template m_target_ToSource_TransparentContainer_IE
             
                 
-            }//end group Handover_group {
+            } // End of group Handover_group
             
             /**
              * @desc Management group
@@ -5666,6 +5721,17 @@ module LibS1AP_Templates {
                     cause           := p_cause,
                     iE_Extensions   := omit
                 } // End of template m_E_RABFailedToResumeItemResumeReq
+                
+                template (value) E_RABToBeModifiedItemBearerModInd m_E_RABToBeModifiedItemBearerModInd(
+                                                                                                       in template (value) E_RAB_ID p_e_RAB_ID,
+                                                                                                       in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
+                                                                                                       in template (value) GTP_TEID p_dL_GTP_TEID := '00000000'O
+                ) := {
+                    e_RAB_ID                := p_e_RAB_ID,
+                    transportLayerAddress   := p_transportLayerAddress,
+                    dL_GTP_TEID             := p_dL_GTP_TEID,
+                    iE_Extensions           := omit
+                } // End of template m_E_RABToBeModifiedItemBearerModInd
                 
             } // End of group Unknown_unforseen_errorneous_group
             
