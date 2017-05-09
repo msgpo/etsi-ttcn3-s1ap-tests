@@ -1211,6 +1211,17 @@ module LibS1AP_Steps {
         } // End of f_send_UE_Context_Suspend_Request
         
         /**
+        * @desc Send S1AP Message UE Context Resume Request
+        * @param p_value Receive template for UE CONTEXT RESUME REQUEST
+        * @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.17 UE CONTEXT SUSPEND REQUEST
+        */
+        function f_send_UE_Context_Resume_Request(
+                                        template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_UeContextResumeRequest(p_value))
+        } // End of f_send_UE_Context_Resume_Request
+        
+        /**
         * @desc Send S1AP Message UE Context Modification Request
         * @param p_value Send template for UE CONTEXT MODIFICATION REQUEST
         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.8 UE CONTEXT MODIFICATION COMMAND

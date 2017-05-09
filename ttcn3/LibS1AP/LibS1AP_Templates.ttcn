@@ -459,6 +459,25 @@ module LibS1AP_Templates {
                     } // End of template m_UeContextSuspendRequestIEs
 
                     /**
+                     * @desc Send template for InitiatingMessage message with UEContextResumeRequest payload
+                     * @param p_value           Expected procedure code
+                     */
+                    template (value) InitiatingMessage m_UeContextResumeRequest(
+                                                                           in template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_UEContextResume,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                    } // End of template m_UeContextResumeRequest                    
+
+                    template (value) RecordOf_ProtocolIE m_UeContextResumeRequestIEs(
+                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value)
+                    } // End of template m_UeContextResumeRequestIEs
+                    
+                    /**
                      * @desc Send template for InitiatingMessage message with m_UeContextModificationRequest payload
                      * @param p_value           Expected procedure code
                      */
