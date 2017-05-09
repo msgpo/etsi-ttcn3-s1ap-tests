@@ -4896,10 +4896,11 @@ module LibS1AP_Templates {
 			 */
 			template(value) CSGMembershipInfo m_CSGMembershipInfo
 			(in template (value) CSGMembershipStatus p_cSGMembershipStatus := member,
-			 in template (value) CSG_Id p_cSGId := '010101010101010101010101010'B) := {
+			 in template (value) CSG_Id p_cSGId := '010101010101010101010101010'B,
+			 in template (omit) CellAccessMode p_cellAccessMode:= omit) := {
 				cSGMembershipStatus := p_cSGMembershipStatus,
 				cSG_Id := p_cSGId,
-				cellAccessMode := omit,
+				cellAccessMode := p_cellAccessMode,
 				pLMNidentity := omit,
 				iE_Extensions := omit
 			}
