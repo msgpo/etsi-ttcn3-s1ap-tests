@@ -4554,6 +4554,7 @@ module S1AP_TCFunctions {
             function f_TC_S1AP_mME_CMP_10() runs on S1APComponent { 
                 // Local variables
                 var template(value) Cause v_cause;
+                const E_RAB_ID c_E_RAB_ID_A := 0;
                                 
                 // Preamble
                 f_S1AP_mme_init();

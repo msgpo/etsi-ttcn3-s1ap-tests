@@ -95,6 +95,15 @@ module S1AP_TestControl {
             // ETSI TS 103 497-2 Clause 5.2.2.2.3    Context management group
             execute(TC_S1AP_MME_CMP_01());
             execute(TC_S1AP_MME_CMP_02());
+            execute(TC_S1AP_MME_CMP_03());
+            execute(TC_S1AP_MME_CMP_04());
+            execute(TC_S1AP_MME_CMP_05());
+            execute(TC_S1AP_MME_CMP_06());            
+            execute(TC_S1AP_MME_CMP_07());
+            execute(TC_S1AP_MME_CMP_08());
+            execute(TC_S1AP_MME_CMP_09());
+            execute(TC_S1AP_MME_CMP_10());
+            execute(TC_S1AP_MME_CMP_11());
             // ETSI TS 103 497-2 Clause 5.2.2.2.5   Paging group
             execute(TC_S1AP_MME_PAG_01());
             // ETSI TS 103 497-2 Clause 5.2.2.2.6    NAS transport group
