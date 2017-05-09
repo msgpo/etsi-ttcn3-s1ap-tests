@@ -4220,7 +4220,7 @@ module S1AP_TCFunctions {
                 f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
-                    mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?)
+                    {mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?)}
                 ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
