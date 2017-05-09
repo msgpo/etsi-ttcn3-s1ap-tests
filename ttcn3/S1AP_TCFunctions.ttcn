@@ -4361,9 +4361,7 @@ module S1AP_TCFunctions {
                                 
                 // Preamble
                 f_S1AP_mme_init();
-                
-                f_rABSetupRequest();
-                
+                                
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -4598,9 +4596,7 @@ module S1AP_TCFunctions {
                                 
                 // Preamble
                 f_S1AP_mme_init();
-                
-                f_rABSetupRequest();
-                
+                                
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
