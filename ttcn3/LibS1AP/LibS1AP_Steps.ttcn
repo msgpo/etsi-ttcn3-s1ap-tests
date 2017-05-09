@@ -903,6 +903,17 @@ module LibS1AP_Steps {
 		) runs on S1APComponent {
 			f_recv_S1AP_initiatingMessage(mw_UeRadioCapabilityMatchRequest(p_value))
 		} // End of f_recv_UeRadioCapabilityMatchRequest
+
+        /**
+        * @desc Receive S1AP Message Connection Establishment Indication
+        * @param p_value Receive template for Connection Establishment Indication
+        * @see ETSI TS 136 413 V13.4.0 Clause 9.1.4.20 Connection Establishment Indication
+        */
+        function f_recv_Connection_Establishment_Indication(
+                                        template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_ConnectionEstablishmentIndication(p_value))
+        } // End of f_recv_Connection_Establishment_Indication
         
     } // End of group receivePDU
     
