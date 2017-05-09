@@ -4215,11 +4215,11 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
                 
-                f_recv_E_RABSetupRequest(superset (all from mw_E_RABSetupReqIEs(
+                f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
-                    ?
-                )));
+                    mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?)
+                ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
