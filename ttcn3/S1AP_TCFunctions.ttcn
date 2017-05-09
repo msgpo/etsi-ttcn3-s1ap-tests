@@ -4507,7 +4507,7 @@ module S1AP_TCFunctions {
                     vc_eNB_UE_ID
                     ));
                     
-                f_recv_Ue_Context_Modification_Confirm(mw_UeContextModificationConfirmIEsCSG);                
+                f_recv_Ue_Context_Suspend_Response(mw_UeContextSuspendResponseIEs);                
                 
                 // Postamble
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
