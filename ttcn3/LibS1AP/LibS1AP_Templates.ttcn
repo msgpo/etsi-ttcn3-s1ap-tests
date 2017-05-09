@@ -325,6 +325,30 @@ module LibS1AP_Templates {
                             m_E_RABToBeModifiedItemBearerModIndList(p_RecordOf_E_RABToBeModifiedItemBearerModInd_value)
                         } // End of template m_E_RABModifiedIndIEs
                         
+                        template (value) RecordOf_ProtocolIE m_E_RABModifiedIndIEs_Unknown_ID(
+                                                                                              in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                              in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                                              in template (value) RecordOf_E_RABToBeModifiedItemBearerModInd p_RecordOf_E_RABToBeModifiedItemBearerModInd_value
+                        ) modifies m_E_RABModifiedIndIEs := {
+                            m_Unknown_ID_IE
+                        } // End of template m_E_RABModifiedIndIEs_Unknown_ID
+                        
+                        template (value) RecordOf_ProtocolIE m_E_RABModifiedIndIEs_duplicate_eNB(
+                                                                                              in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                              in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                                              in template (value) RecordOf_E_RABToBeModifiedItemBearerModInd p_RecordOf_E_RABToBeModifiedItemBearerModInd_value
+                        ) modifies m_E_RABModifiedIndIEs := {
+                            m_eNB_UE_S1AP_ID(p_eNB_value)
+                        } // End of template m_E_RABModifiedIndIEs_duplicate_eNB
+                        
+                        template (value) RecordOf_ProtocolIE m_E_RABModifiedIndIEs_no_eNB(
+                                                                                          in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                          in template (value) RecordOf_E_RABToBeModifiedItemBearerModInd p_RecordOf_E_RABToBeModifiedItemBearerModInd_value
+                        ) := {
+                            m_MME_UE_S1AP_ID(p_MME_value),
+                            m_E_RABToBeModifiedItemBearerModIndList(p_RecordOf_E_RABToBeModifiedItemBearerModInd_value)
+                        } // End of template m_E_RABModifiedIndIEs_no_eNB
+                        
                     } // End of group ERABModifyInd
                     
                     group ERABRelease {
@@ -546,6 +570,14 @@ module LibS1AP_Templates {
                     ) modifies m_UeContextResumeRequestIEs_RABFailedToResumeItem := {
                         m_Unknown_ID_IE(-, reject)
                     } // End of template m_UeContextResumeRequestIEs_Unknown_ID 
+                    
+                    template (value) RecordOf_ProtocolIE m_UeContextResumeRequestIEs_duplicate_ENB(
+                                                                                                in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                                in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                                                in template (value) RecordOf_E_RABFailedToResumeItemResumeReq p_RecordOf_E_RABFailedToResumeItemResumeReq_value
+                    ) modifies m_UeContextResumeRequestIEs_RABFailedToResumeItem := {
+                        m_eNB_UE_S1AP_ID(p_eNB_value, ignore)
+                    } // End of template m_UeContextResumeRequestIEs_duplicate_ENB 
                     
                     template (value) RecordOf_ProtocolIE m_UeContextResumeRequestIEs_no_eNB(
                                                                                             in template (value) MME_UE_S1AP_ID p_MME_value,

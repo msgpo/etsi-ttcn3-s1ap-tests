@@ -4218,7 +4218,7 @@ module S1AP_TCFunctions {
                 f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
-                    mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?)
+                    {mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?)}
                 ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
@@ -5875,7 +5875,7 @@ module S1AP_TCFunctions {
                 // Test body
                 // 1. on receipt of a E-RAB_MODIFICATION_INDICATION
                 f_send_E_RABModifiedInd(
-                    m_E_RABModifiedIndIEs(
+                    m_E_RABModifiedIndIEs_Unknown_ID(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         {
@@ -5970,6 +5970,159 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_MME_ERR_04
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_ERR_05
+             */
+            function f_TC_S1AP_MME_ERR_05() runs on S1APComponent { 
+                // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. on receipt of a E-RAB_MODIFICATION_INDICATION
+                f_send_E_RABModifiedInd(
+                    m_E_RABModifiedIndIEs_no_eNB(
+                        vc_MME_UE_ID,
+                        {
+                            m_E_RABToBeModifiedItemBearerModInd(
+                                c_E_RAB_ID_A,
+                                -,
+                                -
+                            )
+                        }
+                )); 
+                // 2. sends an ERROR_INDICATION
+                f_recv_Error_Indication(
+                    mw_error_IndicationIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        mw_criticalityDiagnostics_IE(
+                            mw_criticalityDiagnostics(
+                                PX_PROCEURE_CODE,
+                                PX_TRIGGERING_CODE,
+                                PX_CRITICALITY,
+                                { 
+                                    mw_criticalityDiagnostics_IE_Item(
+                                        reject, 
+                                        -, 
+                                        missing
+                                    ) 
+                                }
+                            )
+                        )
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_ERR_05
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_ERR_06
+             */
+            function f_TC_S1AP_MME_ERR_06() runs on S1APComponent { 
+                // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. on receipt of a UE_CONTEXT_RESUME_REQUEST
+                f_send_Ue_Context_Resume_Request(
+                    m_UeContextResumeRequestIEs_duplicate_ENB(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        { 
+                            m_E_RABFailedToResumeItemResumeReq(
+                                c_E_RAB_ID_A,
+                                m_cause_ran(user_inactivity)
+                            )
+                        }
+                )); 
+                // 2. sends an UE_CONTEXT_RESUME_FAILURE
+                f_recv_Ue_Context_Resume_Failure(
+                    mw_UeContextResumeFailureIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        mw_cause_protocol(abstract_syntax_error_falsely_constructed_message),
+                        mw_criticalityDiagnostics(
+                            ?,
+                            ?,
+                            ?
+                        )
+                ));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_ERR_06
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_ERR_07
+             */
+            function f_TC_S1AP_MME_ERR_07() runs on S1APComponent { 
+                // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // 1. on receipt of a E-RAB_MODIFICATION_INDICATION
+                f_send_E_RABModifiedInd(
+                    m_E_RABModifiedIndIEs_duplicate_eNB(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        {
+                            m_E_RABToBeModifiedItemBearerModInd(
+                                c_E_RAB_ID_A,
+                                -,
+                                -
+                            )
+                        }
+                )); 
+                // 2. sends an ERROR_INDICATION
+                f_recv_Error_Indication(
+                    mw_error_IndicationIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        mw_cause_IE(
+                            mw_cause_protocol(
+                                abstract_syntax_error_falsely_constructed_message
+                ))));
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                // Postamble
+                f_rABSetupRelease();
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_ERR_07
             
         } // End of group Unknown_unforseen_errorneous_group
         
