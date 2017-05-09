@@ -2499,7 +2499,214 @@ module S1AP_TestCases {
                f_cf_Down();
                
             } // End of testcase TC_S1AP_MME_CMP_02
-
+            
+            testcase TC_S1AP_MME_CMP_03() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_03());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_03
+            
+            testcase TC_S1AP_MME_CMP_04() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_04());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_04
+            
+            testcase TC_S1AP_MME_CMP_05() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_05());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_05
+            
+            testcase TC_S1AP_MME_CMP_06() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_06());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_06
+            
+            testcase TC_S1AP_MME_CMP_07() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_07());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_07
+            
+            testcase TC_S1AP_MME_CMP_08() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_08());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_08
+            
+            testcase TC_S1AP_MME_CMP_09() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_09());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_09
+            
+            testcase TC_S1AP_MME_CMP_10() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_10());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_10
+            
+            testcase TC_S1AP_MME_CMP_11() runs on S1AP system TestAdapter { 
+               // Local variables
+               var S1AP v_s1ap_mme; 
+               
+               // Test control
+               if (not PICS_S1AP_MME_IUT) {
+                   log("*** " & __SCOPE__ & ": ERROR: 'PICS_S1AP_MME_IUT' shall be set to true for executing the TC. ***"); 
+                   stop;
+               }
+               
+               // Test component configuration
+               f_cf_S1AP_MME_Up(v_s1ap_mme);
+               
+               // Start
+               v_s1ap_mme.start(f_TC_S1AP_mME_CMP_11());
+               
+               // synchronize PTC on 1 sychronization points
+               f_serverSyncNClientsAndStop(1, {c_prDone, c_tbDone, c_poDone});
+               
+               f_cf_Down();
+               
+            } // End of testcase TC_S1AP_MME_CMP_11
+            
         } // End of group Context_Management_group
         
         /**
