@@ -183,6 +183,16 @@ module LibS1AP_Steps {
          } // End of f_recv_E_RABModifiedResponse
         
         /**
+          * @desc Receive S1AP Message E_RABModifiedRequest
+          * @param p_value Receive template for E_RABModifiedRequest IEs
+          */
+         function f_recv_E_RABModifiedRequest(
+                                            template (present) RecordOf_ProtocolIE p_value := ?
+         ) runs on S1APComponent {
+             f_recv_S1AP_successfulOutcome(mw_E_RABModifiedRequest(p_value))
+         } // End of f_recv_E_RABModifiedRequest
+        
+        /**
          * @desc Receive S1AP Message Handover Required
          * @param p_value Receive template for Handover Required IEs
          */
