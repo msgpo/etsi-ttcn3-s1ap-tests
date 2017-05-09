@@ -192,6 +192,15 @@ module LibS1AP_Steps {
         } // End of function f_recv_HandoverRequired
         
         /**
+         * @desc Receive S1AP Message Handover Command
+         * @param p_value Receive template for Handover Command IEs
+         */
+        function f_recv_HandoverCommand(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_HandoverCommand(p_value))
+        } // End of function f_recv_HandoverRequired
+        
+        /**
          * @desc Receive S1AP Message Handover Cancel
          * @param p_value Receive template for Handover Cancel IEs
          */
@@ -1010,6 +1019,15 @@ module LibS1AP_Steps {
         } // End of function f_send_InitialContext_SetupRequest
         
         /**
+         * @desc Send S1AP Message f_send_HandoverRequired
+         * @param p_value Send template with IE for HandoverRequest
+         */
+        function f_send_HandoverRequired(in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_HandoverRequired(p_value))
+        } // End of function f_send_HandoverRequest
+          
+        /**
          * @desc Send S1AP Message f_send_HandoverRequest
          * @param p_value Send template with IE for HandoverRequest
          */
@@ -1541,6 +1559,18 @@ module LibS1AP_Steps {
         
         group mmeRole {
             
+            /**
+             * @desc Trigger a Handover preparation procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Handover_preparation_procedure() return boolean;
+            
+            /**
+             * @desc Trigger a Handover notification procedure
+             * @return true on success, false otherwise
+             */
+            external function fx_MME_Handover_notification_procedure() return boolean;
+                        
             /**
              * @desc Trigger a PAGING event
              * @return true on success, false otherwise

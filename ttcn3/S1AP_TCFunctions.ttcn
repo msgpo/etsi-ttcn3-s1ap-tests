@@ -4591,6 +4591,54 @@ module S1AP_TCFunctions {
          * @see ETSI DTS/INT-00135-2 Clause 5.2.2.2.4  Handover signalling group
          */
         group Handover_signalling_group {
+            /**
+             * @desc Testcase function for TC_S1AP_MME_HAS_01
+             */
+            function f_TC_S1AP_MME_HAS_01() runs on S1APComponent { 
+                // Local variables
+                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
+                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                //f_rABSetup...;
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // sends a HANDOVER_REQUIRED
+                f_send_HandoverRequired(
+                    m_HandoverRequiredIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        intralte,
+                        m_cause_ran(unspecified),
+                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                                                       m_ENB_ID_macro),
+                                       m_TAI('000001'O,
+                                             '0001'O)),
+                        c_source_ToTarget_TransparentContainer
+                ));
+                 
+                f_recv_HandoverCommand(
+                    mw_HandoverCommandIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        intralte,//handover_Type
+                        c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+                ));
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+                
+                // Postamble
+                //f_rABSetupRelease...;
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_HAS_01
             
         } // End of group Handover_signalling_group
         

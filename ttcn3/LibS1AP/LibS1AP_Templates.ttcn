@@ -43,7 +43,7 @@ module LibS1AP_Templates {
                     criticality := reject,
                     value_ := p_value
                 }
-            } // End of template m_initiatingMessage
+            } // End of template m_HandoverPreparation
             
         } // End of group g_S1AP_PDU
         
@@ -58,12 +58,39 @@ module LibS1AP_Templates {
                 group HandoverPreparation { 
                     
                     /**
+                     * @desc Receive template for InitiatingMessage message with Handover Required payload
+                     * @param p_value           The procedure code value
+                     */
+                    template (value) InitiatingMessage m_HandoverRequired(
+                                                                           template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_HandoverPreparation,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_HandoverRequired
+                    
+                    template (value) RecordOf_ProtocolIE m_HandoverRequiredIEs(
+                        in template (value) MME_UE_S1AP_ID p_MME_value,
+                        in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                        in template (value) HandoverType p_handoverType,
+                        in template (value) Cause p_cause,
+                        in template (value) TargetID p_targetId_value,
+                        in template (value) Source_ToTarget_TransparentContainer p_Source_ToTarget_TransparentContainer_value
+                       ) := {
+                            m_MME_UE_S1AP_ID(p_MME_value),
+                            m_eNB_UE_S1AP_ID(p_eNB_value),
+                            m_handoverType_IE(p_handoverType),
+                            m_cause_IE(p_cause),
+                            m_targetID_IE(p_targetId_value),
+                            m_source_ToTarget_TransparentContainer_IE(p_Source_ToTarget_TransparentContainer_value)
+                       } // End of template mw_HandoverCommandIEs
+                       
+                    /**
                      * @desc Receive template for SuccessfulOutcome message with Handover Command payload
                      * @param p_value           The procedure code value
                      */
                     template (value) SuccessfulOutcome m_HandoverCommand(
                                                                            template (value) RecordOf_ProtocolIE p_value) := {
-                        procedureCode := id_HandoverCancel,
+                        procedureCode := id_HandoverPreparation,
                         criticality := reject,
                         value_ := {RecordOf_ProtocolIE := p_value}
                     } // End of template m_HandoverCommand
@@ -914,6 +941,29 @@ module LibS1AP_Templates {
                 }// End of group HandoverPreparation
                 
                 group HandoverPreparation{
+                     
+                     /**
+                     * @desc Receive template for SuccessfulOutcome message with Handover Command payload
+                     * @param p_value           The procedure code value
+                     */
+                    template (present) SuccessfulOutcome mw_HandoverCommand(
+                                                                           template (present) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_HandoverPreparation,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_HandoverCommand
+                    
+                    template (present) RecordOf_ProtocolIE mw_HandoverCommandIEs(
+                        template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                        template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                        template (present) HandoverType p_HandoverType_value := ?,
+                        template (present) Target_ToSource_TransparentContainer p_Target_ToSource_TransparentContainer_value := ?
+                       ) := {
+                            mw_MME_UE_S1AP_ID(p_MME_value),
+                            mw_eNB_UE_S1AP_ID(p_eNB_value),
+                            mw_handoverType_IE(p_HandoverType_value),
+                            mw_target_ToSource_TransparentContainer_IE(p_Target_ToSource_TransparentContainer_value)
+                       } // End of template mw_HandoverRequiredIEs
                     
                 }// End of group HandoverPreparation
                     
@@ -3301,6 +3351,84 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := {Cause := valueof(p_cause)}
             } // End of template m_cause_IE
+            
+            /**
+             * @desc Send template for TargetID protocol IE
+             * @param p_cause  Expected Cause value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.8 TargetID
+             */
+            template (value) ProtocolIE m_targetID_IE(
+                                                   in template (value) TargetID p_target,
+                                                   in template (value) ProtocolIE.criticality p_criticality := reject
+            ) := {
+                id := S1AP_Constants.id_TargetID,
+                criticality := p_criticality,
+                value_ := {TargetID := valueof(p_target)}
+            } // End of template m_targetID_IE
+            
+            template (value) TargetID m_TargeteNB_ID (
+                in template (value) Global_ENB_ID p_global_ENB_ID,  
+                in template (value) TAI p_selected_TAI
+            ) := {
+                targeteNB_ID :={
+                    global_ENB_ID := p_global_ENB_ID,
+                    selected_TAI := p_selected_TAI,
+                    iE_Extensions := omit
+                 }
+            }
+            
+            template (value) Global_ENB_ID m_Global_ENB_ID(
+                in template (value) PLMNidentity p_PLMNidentity,  
+                in template (value) ENB_ID p_ENB_ID
+            ) := {
+                pLMNidentity := p_PLMNidentity,
+                eNB_ID := p_ENB_ID,
+                iE_Extensions := omit
+            }
+            
+            template  ENB_ID m_ENB_ID_macro:={
+                macroENB_ID :='00000000000000000001'B
+            }
+            
+            template  ENB_ID m_ENB_ID_home:={
+                homeENB_ID :='0000000000000000000000000001'B
+            }
+            
+            template (value) TAI m_TAI (
+                in template (value) PLMNidentity p_PLMNidentity,  
+                in template (value) TAC p_TAC
+            ) :={
+                pLMNidentity := p_PLMNidentity,
+                tAC := p_TAC,
+                iE_Extensions := omit
+            }
+            
+            template (value) TargetID m_TargetRNC_ID (
+                in template (value) LAI p_lAI,  
+                in template (value) RNC_ID p_rNC_ID
+            ) := {
+                targetRNC_ID :={
+                     lAI := p_lAI,
+                     rAC:= omit,
+                     rNC_ID := p_rNC_ID,
+                     extendedRNC_ID := omit,
+                     iE_Extensions := omit
+                 }
+            }
+            
+            template (value) TargetID m_Target_CGI (
+                in template (value) PLMNidentity p_pLMNidentity,  
+                in template (value) LAC p_lAC,
+                in template (value) CI p_cI
+            ) := {
+                cGI :={
+                     pLMNidentity := p_pLMNidentity,
+                     lAC := p_lAC,
+                     cI := p_cI,
+                     rAC := omit,
+                     iE_Extensions := omit
+                 }
+            }
 
             /**
              * @desc Send template for UE aggregate maxmum bitrate IE
