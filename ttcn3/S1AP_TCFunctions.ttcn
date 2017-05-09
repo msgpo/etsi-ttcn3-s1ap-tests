@@ -4483,6 +4483,41 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_eNB_CMP_07  
+
+
+            /**
+             * @desc Testcase function for TC_S1AP_mME_CMP_08
+             */
+            function f_TC_S1AP_mME_CMP_08() runs on S1APComponent { 
+                // Local variables
+                var template(value) Cause v_cause;
+                                
+                // Preamble
+                f_S1AP_mme_init();
+                
+                f_rABSetupRequest();
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+
+                f_send_UE_Context_Suspend_Request(m_UeContextSuspendRequestIEs(
+                    vc_MME_UE_ID,
+                    vc_eNB_UE_ID
+                    ));
+                    
+                f_recv_Ue_Context_Modification_Confirm(mw_UeContextModificationConfirmIEsCSG);                
+                
+                // Postamble
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_eNB_CMP_08
+              
             
         } // End of group Context_management_group
 
