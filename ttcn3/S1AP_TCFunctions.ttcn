@@ -4566,12 +4566,18 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
                 // Test body
-
-                f_send_Ue_Context_Resume_Request(m_UeContextResumeRequestIEs(
-                    vc_MME_UE_ID,
-                    vc_eNB_UE_ID
-                    ));
-                    
+                
+                f_send_Ue_Context_Resume_Request(
+                    m_UeContextResumeRequestIEs_RABFailedToResumeItem(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        m_E_RABFailedToResumeItemResumeReq(
+                            c_E_RAB_ID_A,
+                            m_cause_ran(user_inactivity)
+                        )
+                    )
+                ); 
+                                    
                 f_recv_Ue_Context_Resume_Failure(mw_UeContextResumeFailureIEs);                
                 
                 // Postamble
