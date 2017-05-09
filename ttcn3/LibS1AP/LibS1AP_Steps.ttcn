@@ -996,6 +996,15 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_E_RABSetupRequest(p_value))
         } // End of function f_send_E_RABSetupRequest
+
+        /**
+         * @desc Send S1AP Message E-RAB_SetupResponse
+         * @param p_value Send template with IE for E-RAB_SetupResponse
+         */
+        function f_send_E_RABSetupResponse(in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_E_RABSetupResponse(p_value))
+        } // End of function f_send_E_RABSetupResponse
         
         /**
          * @desc Send S1AP Message E-RAB_ReleaseRequest
