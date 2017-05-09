@@ -4009,7 +4009,7 @@ module S1AP_TCFunctions {
                 // Test body
                 // 1. on receipt of an INITIAL_CONTEXT_SETUP_REQUEST
                 f_send_E_RABSetupRequest(
-                    m_E_RABSetupReqIEs_noENB(
+                    m_E_RABSetupReqIEs_no_eNB(
                         vc_MME_UE_ID,
                         {
                             m_E_RABToBeSetupItemBearerSUReq (
@@ -4062,7 +4062,7 @@ module S1AP_TCFunctions {
                 // Test body
                 // 1. on receipt of an INITIAL_CONTEXT_SETUP_REQUEST
                 f_send_InitialContext_SetupRequest(
-                    m_InitialContextSetupReqIEs_duplicate_ENB(
+                    m_InitialContextSetupReqIEs_duplicate_eNB(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         m_UEAggregateMaximumBitrate(1,1),

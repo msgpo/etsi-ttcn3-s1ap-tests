@@ -266,7 +266,8 @@ module LibS1AP_Steps {
         
         /**
          * @desc Receive S1AP Message InitialContext_SetupRequest
-         * @param p_value Receive template for InitialContext_SetupRequest IEs
+         * @param p_value           Receive template for InitialContext_SetupRequest IEs
+         * @param p_criticality     Expected criticality value. Default: reject
          */
         function f_recv_InitialContext_SetupRequest(
                                                     template (present) RecordOf_ProtocolIE p_value := ?,
