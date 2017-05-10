@@ -173,6 +173,16 @@ module LibS1AP_Steps {
          ) runs on S1APComponent {
              f_recv_S1AP_successfulOutcome(mw_E_RABReleaseCommand(p_value))
          } // End of f_recv_E_RABReleaseCommand
+
+        /**
+          * @desc Receive S1AP Message E_RABModificationConfirm
+          * @param p_value Receive template for E_RABModificationConfirm IEs
+          */
+         function f_recv_E_RABModificationConfirm(
+                                            template (present) RecordOf_ProtocolIE p_value := ?
+         ) runs on S1APComponent {
+             f_recv_S1AP_successfulOutcome(mw_E_RABModificationConfirm(p_value))
+         } // End of f_recv_E_RABModificationConfirm
         
         /**
          * @desc Receive S1AP Message Handover Required

@@ -4273,7 +4273,7 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                          
                 // Test body
-                action("trigger an E-RAB Modify request");
+                action("trigger an E-RAB Release request");
               
                 f_recv_E_RABReleaseCommand(mw_E_RABReleaseCmdIEs(
                     vc_MME_UE_ID,
@@ -4291,6 +4291,39 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_MME_RAB_03
+
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_RAB_04
+             */
+            function f_TC_S1AP_MME_RAB_04() runs on S1APComponent { 
+                // Local variables
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_rABSetupRequest();
+                                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                         
+                // Test body
+//                action("trigger an E-RAB Modify request");
+              
+                f_recv_E_RABModificationConfirm(mw_E_RABModificationConfirmIEs(
+                    vc_MME_UE_ID,
+                    vc_eNB_UE_ID,
+                    {mw_E_RABItem}
+                ));
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+
+                // Postamble                                
+
+                f_postamble_S1AP_MME();
+                
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_RAB_04
             
         } // End of group ERAB_management_group
 

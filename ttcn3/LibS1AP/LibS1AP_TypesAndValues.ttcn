@@ -41,8 +41,13 @@ module LibS1AP_TypesAndValues {
     type record of E_RABSetupItemBearerSURes RecordOf_E_RABSetupItemBearerSURes;
  
      /**
-     * @desc List of E-RABModifyItemBearerModRes IEs
+     * @desc List of E-RABModifyItemBearerModConf IEs
      */
+    type record of E_RABModifyItemBearerModConf RecordOf_E_RABModifyItemBearerModConf;
+
+    /**
+    * @desc List of E-RABModifyItemBearerModRes IEs
+    */
     type record of E_RABModifyItemBearerModRes RecordOf_E_RABModifyItemBearerModRes;
  
     /**
