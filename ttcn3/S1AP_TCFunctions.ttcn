@@ -4478,7 +4478,7 @@ module S1AP_TCFunctions {
                          
                 // Test body
                 f_send_E_RABModifiedInd(
-                   m_E_RABModifiedIndIEs(
+                  m_E_RABModifiedIndIEs_CSG(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         {
@@ -4487,13 +4487,15 @@ module S1AP_TCFunctions {
                                 -,
                                 -
                             )
-                        }
+                        },
+                        m_CSGMembershipInfo
                 )); 
                               
-                f_recv_E_RABModificationConfirm(mw_E_RABModificationConfirmIEs(
+                f_recv_E_RABModificationConfirm(mw_E_RABModificationConfirmIEsCSG(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
-                    {mw_E_RABItem}
+                    {mw_E_RABItem},
+                    mw_CSGMembershipInfo
                 ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 

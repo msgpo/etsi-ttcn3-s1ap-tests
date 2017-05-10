@@ -342,6 +342,15 @@ module LibS1AP_Templates {
                             m_MME_UE_S1AP_ID(p_MME_value),
                             m_E_RABToBeModifiedItemBearerModIndList(p_RecordOf_E_RABToBeModifiedItemBearerModInd_value)
                         } // End of template m_E_RABModifiedIndIEs_no_eNB
+
+                        template (value) RecordOf_ProtocolIE m_E_RABModifiedIndIEs_CSG(
+                                                                                              in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                              in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                                              in template (value) RecordOf_E_RABToBeModifiedItemBearerModInd p_RecordOf_E_RABToBeModifiedItemBearerModInd_value,
+                                                                                              in template (value) CSGMembershipInfo p_cSGMembershipInfo_value                                                                         
+                        ) modifies m_E_RABModifiedIndIEs := {
+                            m_cSGMembershipInfo_IE(p_cSGMembershipInfo_value)
+                        } // End of template m_E_RABModifiedIndIEs_CSG
                         
                     } // End of group ERABModifyInd
                     
@@ -1438,6 +1447,17 @@ module LibS1AP_Templates {
                         } // End of template mw_E_RABModificationConfirmIEs
 
 
+                        template (present) RecordOf_ProtocolIE mw_E_RABModificationConfirmIEsCSG(
+                                                                                   template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                                   template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                                   template (present) RecordOf_E_RABItem p_RecordOf_E_RABModifyListItem_value := {?},
+                                                                                   template (present) CSGMembershipInfo p_CSGMembershipInfo:=?
+                        ) := { 
+                            mw_MME_UE_S1AP_ID(p_MME_value, ignore),
+                            mw_eNB_UE_S1AP_ID(p_eNB_value, ignore),
+                            mw_E_RABModifyList(p_RecordOf_E_RABModifyListItem_value),
+                            mw_cSGMembershipInfo_IE(p_CSGMembershipInfo)
+                        } // End of template mw_E_RABModificationConfirmIEs
                     }
                 
                 }
