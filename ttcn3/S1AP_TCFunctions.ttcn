@@ -4297,6 +4297,7 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_RAB_04() runs on S1APComponent { 
                 // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -4306,8 +4307,19 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                          
                 // Test body
-//                action("trigger an E-RAB Modify request");
-              
+                f_send_E_RABModifiedInd(
+                   m_E_RABModifiedIndIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        {
+                            m_E_RABToBeModifiedItemBearerModInd(
+                                c_E_RAB_ID_A,
+                                -,
+                                -
+                            )
+                        }
+                )); 
+                              
                 f_recv_E_RABModificationConfirm(mw_E_RABModificationConfirmIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
