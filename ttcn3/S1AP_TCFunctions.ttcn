@@ -181,7 +181,7 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_RAB_04() runs on S1APComponent { 
                 // Local variables
-                const QCI c_qci_id := 1; // TODO
+                const QCI c_qci_id := 1; 
                 
                 // Preamble
                 f_S1AP_enb_init();
@@ -226,7 +226,7 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_RAB_05() runs on S1APComponent { 
                 // Local variables
-                const QCI c_qci_id := 1; // TODO
+                const QCI c_qci_id := 1;
     
                 // Preamble
                 f_S1AP_enb_init();
@@ -533,7 +533,7 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_RAB_11 () runs on S1APComponent { 
                 // Local variables
-                const QCI c_qci_id := 1; // TODO
+                const QCI c_qci_id := 1; 
                 const E_RAB_ID c_E_RAB_ID_A := 0;
                 const NAS_PDU c_nAS_PDU := '0000'O;
                 
@@ -636,7 +636,7 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_RAB_13  () runs on S1APComponent {
                 // Local variables
-                const QCI c_qci_id := 99; // TODO unknown QCI Id 
+                const QCI c_qci_id := 99; // Unknown QCI Id 
                 const E_RAB_ID c_E_RAB_ID_A := 0;
                 const NAS_PDU c_nAS_PDU := '0000'O;
                 
@@ -701,7 +701,6 @@ module S1AP_TCFunctions {
                         m_E_RABItem(
                             c_E_RAB_ID_A,
                             {
-                                // TODO
                                 radioNetwork :=not_supported_QCI_value
                             }
                         )
@@ -748,7 +747,6 @@ module S1AP_TCFunctions {
                         m_E_RABItem(
                             c_E_RAB_ID_A,
                             {
-                                // TODO
                                 radioNetwork :=not_supported_QCI_value
                             }
                         )
@@ -795,7 +793,6 @@ module S1AP_TCFunctions {
                         m_E_RABItem(
                             c_E_RAB_ID_A,
                             {
-                                // TODO 
                                 radioNetwork :=not_supported_QCI_value
                             }
                         )
@@ -930,14 +927,12 @@ module S1AP_TCFunctions {
                         m_E_RABItem(
                             c_E_RAB_ID_A,
                             {
-                                // TODO 
                                 radioNetwork :=not_supported_QCI_value
                             }
                         ),
                         m_E_RABItem(
                             c_E_RAB_ID_A,
                             {
-                                // TODO 
                                 radioNetwork :=not_supported_QCI_value
                             }
                         )
@@ -982,7 +977,6 @@ module S1AP_TCFunctions {
                         m_E_RABItem(
                             c_E_RAB_ID_A,
                             {
-                                // TODO 
                                 radioNetwork :=not_supported_QCI_value
                             }
                         )
@@ -2552,9 +2546,8 @@ module S1AP_TCFunctions {
                                 PX_PLMN_IDENTITY, 
                                 PX_CELL_ID
                             ),
-                            mw_cause_ran(
-                                - // TODO To be refined
-                    )));
+                            mw_cause_ran
+                    ));
                 }
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
@@ -2590,9 +2583,8 @@ module S1AP_TCFunctions {
                             PX_PLMN_IDENTITY, 
                             PX_CELL_ID
                         ),
-                        mw_cause_ran(
-                            - // TODO To be refined 
-                )));
+                        mw_cause_ran
+                ));
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -2652,7 +2644,7 @@ module S1AP_TCFunctions {
                             vc_eNB_UE_ID,
                             -,
                             mw_cause_ran(
-                                unspecified // TODO Check the value to be used
+                                unspecified // Check the value to be used
                             )
                     ));
                 }
@@ -2689,7 +2681,7 @@ module S1AP_TCFunctions {
                 f_send_Reset(
                     m_resetIEs(
                         m_cause_nas(
-                            unspecified // TODO Check the value to be used
+                            unspecified // Check the value to be used
                         ),
                         m_resetType_all
                 ));
@@ -2733,7 +2725,7 @@ module S1AP_TCFunctions {
                     f_recv_Reset(
                         mw_resetIEs(
                             mw_cause_nas(
-                                unspecified // TODO Check the value to be used
+                                unspecified // Check the value to be used
                             ),
                             m_resetType_all
                     ));
@@ -2762,7 +2754,7 @@ module S1AP_TCFunctions {
                 f_send_Reset(
                     m_resetIEs(
                         m_cause_nas(
-                            unspecified // TODO Check the value to be used
+                            unspecified // Check the value to be used
                         ),
                         m_resetType_partOfS1_Interface(
                             {
@@ -3092,8 +3084,7 @@ module S1AP_TCFunctions {
                     f_recv_eNB_UE_Capability_Info_Indication(
                         mw_uE_Capability_Info_IndicationIEs(
                             vc_MME_UE_ID,
-                            vc_eNB_UE_ID,
-                            - // TODO To be refined
+                            vc_eNB_UE_ID
                     ));
                     f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 }
@@ -3142,8 +3133,7 @@ module S1AP_TCFunctions {
                     mw_trace_Failure_IndicationIEs(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
-                        PX_EUTRAN_TRACE_ID,
-                        - // TODO To be refined
+                        PX_EUTRAN_TRACE_ID
                 ));
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
@@ -3182,8 +3172,7 @@ module S1AP_TCFunctions {
                     mw_trace_Failure_IndicationIEs(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
-                        PX_EUTRAN_TRACE_ID,
-                        - // TODO To be refined
+                        PX_EUTRAN_TRACE_ID
                 ));
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
@@ -3217,8 +3206,7 @@ module S1AP_TCFunctions {
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         PX_EUTRAN_TRACE_ID,
-                        mw_eUTRAN_CGI,
-                        - // TODO To be refined
+                        mw_eUTRAN_CGI
                 ));
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
@@ -3418,7 +3406,7 @@ module S1AP_TCFunctions {
                     mw_location_Report_Failure_IndicationIEs(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
-                        ? // TODO To be refined: what kind of cause :-(
+                        ?
                 ));
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
@@ -4220,7 +4208,7 @@ module S1AP_TCFunctions {
                 f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
-                    {mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?)}
+                    { mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?) }
                 ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
@@ -4746,8 +4734,7 @@ module S1AP_TCFunctions {
                             mw_uEPagingID_iMSI(
                                 PX_IMSI
                             ),
-                            PX_CNDOMAIN,
-                            - // TODO To be refined
+                            PX_CNDOMAIN
                     ));
                     f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 }
@@ -4868,7 +4855,7 @@ module S1AP_TCFunctions {
                     f_recv_Reset(
                         mw_resetIEs(
                             mw_cause_nas(
-                                unspecified // TODO Check the value to be used
+                                unspecified // Check the value to be used
                             ),
                             m_resetType_all
                     ));
@@ -4897,7 +4884,7 @@ module S1AP_TCFunctions {
                 f_send_Reset(
                     m_resetIEs(
                         m_cause_nas(
-                            unspecified // TODO Check the value to be used
+                            unspecified // Check the value to be used
                         ),
                         m_resetType_all
                 ));
@@ -4935,7 +4922,7 @@ module S1AP_TCFunctions {
                 f_send_Reset(
                     m_resetIEs(
                         m_cause_nas(
-                            unspecified // TODO Check the value to be used
+                            unspecified // Check the value to be used
                         ),
                         m_resetType_all
                 ));
@@ -5314,7 +5301,7 @@ module S1AP_TCFunctions {
                             vc_MME_UE_ID,
                             vc_eNB_UE_ID,
                             {
-                                mw_eRABDataForwardingItem // TODO To be refined
+                                mw_eRABDataForwardingItem
                             },
                             PX_CDMA200_PDU,
                             PX_CDMA200_RAT_TYPE

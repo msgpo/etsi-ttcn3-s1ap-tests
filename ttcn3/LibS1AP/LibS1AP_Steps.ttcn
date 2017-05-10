@@ -31,34 +31,6 @@ module LibS1AP_Steps {
      */
     group commonFunctions {
     
-        /**
-         * @desc  Indicate if the provided value is greather or equal to 0
-         * @return true if value of p_int greater than 0
-         * @param p_int - integer value
-         */
-        function f_gtZero( // FIXME: Not used to be removed
-                          in integer p_int
-        ) return boolean {
-            if (p_int > 0){
-                return true;
-            }
-            else{
-                return false;
-            }
-        } // End of function f_gtZero
-        
-        /**
-         * @desc  Increment the provided value by one
-         * @return incremented value of p_int 0
-         * @param p_int - integer value
-         */
-        function f_inc( // FIXME: Not used to be removed
-                       inout UInt32 p_int
-        ) return UInt32 {
-            p_int := p_int + 1;
-            return p_int;
-        } // End of function f_inc
-        
     } // End of group commonFunctions
     
     /**
@@ -77,13 +49,13 @@ module LibS1AP_Steps {
             vc_recvS1AP_PDU := p_PDU;
             
             if (ischosen(p_PDU.initiatingMessage)) {
-                //TODO...
+                // Nothing to do
             }
             if (ischosen(p_PDU.successfulOutcome)) {
-                //TODO...
+                // Nothing to do
             }
             if (ischosen(p_PDU.unsuccessfulOutcome)) {
-                 //TODO...
+                 // Nothing to do
             }
         } // End of function f_S1APPDU_Get
         
@@ -738,14 +710,14 @@ module LibS1AP_Steps {
         
         /**
         * @desc Receive S1AP Message HANDOVER_REQUIRED
-        * @param p_value Receive template for UPLINK_NON_UE_ASSOCIATED_LPPA_TRANSPORT IEs
+        * @param p_value Receive template for HandoverRequired IEs
         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.5.1 HANDOVER_REQUIRED
         */
         function f_recv_Handover_Required(
-                                        template (present) RecordOf_ProtocolIE p_value := ?
+                                          template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
-            // TODO
-        } // End of f_recv_Uplink_Non_UE_Associated_Lppa_Transport
+            f_recv_HandoverCommand(p_value);
+        } // End of f_recv_Handover_Required
         
         /**
         * @desc Receive S1AP Message UE Context Release Request
@@ -942,15 +914,12 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             
             if (ischosen(p_PDU.initiatingMessage)) {
-                //TODO...
                 vc_sendS1AP_PDU:=valueof(p_PDU);
             }
             if (ischosen(p_PDU.successfulOutcome)) {
-                //TODO...
                 vc_sendS1AP_PDU:=valueof(p_PDU);
             }
             if (ischosen(p_PDU.unsuccessfulOutcome)) {
-                 //TODO...
                  vc_sendS1AP_PDU:=valueof(p_PDU);
             }
             
@@ -1416,7 +1385,32 @@ module LibS1AP_Steps {
          * @desc Initiate an Handover procedure
          */
         function f_initiate_handover() runs on S1APComponent {
-            // TODO 
+            // Local variables
+            const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
+            
+            f_send_HandoverRequest(
+                m_HandoverReqIEs(
+                    vc_MME_UE_ID,
+                    intralte,                               // Handover Type
+                    m_cause_ran(
+                        successful_handover
+                    ),                                      // Cause
+                    m_UEAggregateMaximumBitrate(1,1),       // UE Aggregate_Max_Bit_Rate
+                    {
+                        m_E_RABToBeSetupItemHOReq (
+                            -,
+                            -,
+                            -,
+                            m_e_RABlevelQoSParameters (5)
+                        )
+                    },                                      // E_RabsToBeSetupList
+                    c_source_ToTarget_TransparentContainer, // SourceToTargetTransparentContainer
+                    m_UESecurityCapabilities(
+                        '0101010101010101'B,
+                        '0101010101010101'B
+                    ),                                      // UeSecurityCapabilities
+                    m_securityContext                       // SecurityContext
+            ));
         } // End of function f_initiate_handover
         
         /**
@@ -1714,7 +1708,7 @@ module LibS1AP_Steps {
              */
             function f_preambleS1AP_MME()
             runs on S1APComponent {
-                //TODO:...        
+                // Nothing to do
             } // End of function f_preambleS1AP_MME
             
             /**
@@ -1723,7 +1717,7 @@ module LibS1AP_Steps {
              */
             function f_preambleS1AP_eNB()
             runs on S1APComponent {
-                //TODO:...        
+                // Nothing to do
             } // End of function f_preambleS1AP_eNB
             
         } // End of group preamble_S1AP
@@ -1740,7 +1734,7 @@ module LibS1AP_Steps {
              */
             function f_postambleS1AP_MME()
             runs on S1APComponent {
-                // TODO:...
+                // Nothing to do
             } // End of function f_postambleS1AP_MME
             
             /**
@@ -1749,7 +1743,7 @@ module LibS1AP_Steps {
              */
             function f_postambleS1AP_eNB()
             runs on S1APComponent {
-                // TODO:...
+                // Nothing to do
             } // End of function f_postambleS1AP_eNB
             
         } // End of group postamble_S1AP
@@ -1870,7 +1864,7 @@ module LibS1AP_Steps {
                     stop;
                 }
             }
-            // TODO:...
+            // Note: possible unscollicited messages should be filtered
         } // End of altstep a_defaultS1AP_MME
         
         altstep a_defaultS1AP_eNB()
@@ -1884,7 +1878,7 @@ module LibS1AP_Steps {
                     stop;
                 }
             }
-            // TODO:...
+            // Note: possible unscollicited messages should be filtered
         } // End of altstep a_defaultS1AP_eNB
         
     } // End of group defaultsTestStep

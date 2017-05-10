@@ -274,7 +274,7 @@ module LibS1AP_Templates {
                             m_UE_aggregate_maximum_bitrate_IE(p_uEAggregateMaximumBitrate),
                             m_E_RABToBeSetupList(p_RecordOf_E_RABToBeSetupItem_value)
                         } // End of template m_E_RABSetupReqIEs
-
+    
                         /**
                          * @desc Send template for InitiatingMessage message with E-RABSetup response payload
                          * @param p_value           The procedure code value
@@ -441,6 +441,15 @@ module LibS1AP_Templates {
                         m_securityKey_IE(p_SecurityKey)
                     } // End of templaunknown_IDunknown_IDte m_InitialContextSetupReqIEs
                     
+                    /**
+                     * @desc Send template for InitialContextSetupReq message, with no eNB ID
+                     * @param p_eNB_value                               The eNB UE S1AP ID value.
+                     * @param p_MME_value                               The MME UE S1AP ID value.
+                     * @param p_uEAggregateMaximumBitrate               The UE Aggregate Maximum Bit rate value.
+                     * @param p_RecordOf_E_RABToBeSetupItemCtxt_value   The list og E-RAB To Be Setup Item Ctxt values.
+                     * @param @param p_uESecurityCapabilities           The UE Security Capabilities value.
+                     * @param p_SecurityKey                             The security key value.
+                     */
                     template (value) RecordOf_ProtocolIE m_InitialContextSetupReqIEs_noENB(
                                                                                            in template (value) MME_UE_S1AP_ID p_MME_value,
                                                                                            in template (value) UEAggregateMaximumBitrate p_uEAggregateMaximumBitrate,
@@ -473,8 +482,17 @@ module LibS1AP_Templates {
                                                                                                    in template (value) SecurityKey p_SecurityKey
                     ) modifies m_InitialContextSetupReqIEs := {
                         m_eNB_UE_S1AP_ID(p_eNB_value)
-                    } // End of templaunknown_IDunknown_IDte m_InitialContextSetupReqIEs_duplicate_ENB
+                    } // End of template m_InitialContextSetupReqIEs_duplicate_eNB
                     
+                    /**
+                     * @desc Send template for InitialContextSetupReq message, with some unknown IE
+                     * @param p_eNB_value                               The eNB UE S1AP ID value.
+                     * @param p_MME_value                               The MME UE S1AP ID value.
+                     * @param p_uEAggregateMaximumBitrate               The UE Aggregate Maximum Bit rate value.
+                     * @param p_RecordOf_E_RABToBeSetupItemCtxt_value   The list og E-RAB To Be Setup Item Ctxt values.
+                     * @param @param p_uESecurityCapabilities           The UE Security Capabilities value.
+                     * @param p_SecurityKey                             The security key value.
+                     */
                     template (value) RecordOf_ProtocolIE m_InitialContextSetupReqIEs_unknown_ID(
                                                                                                 in template (value) MME_UE_S1AP_ID p_MME_value,
                                                                                                 in template (value) ENB_UE_S1AP_ID p_eNB_value,
@@ -488,7 +506,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with UeContextReleaseRequest payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_UeContextReleaseRequest(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -510,7 +528,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Send template for InitiatingMessage message with UEContextRelease payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_UeContextReleaseCommand(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -537,7 +555,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with UEContextReleaseComplete payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_UeContextReleaseComplete(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -557,7 +575,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with UEContextSuspendRequest payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_UeContextSuspendRequest(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -576,7 +594,8 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Send template for InitiatingMessage message with UEContextResumeRequest payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
+                     * @param p_criticality     The Criticality value. defaulf: reject
                      */
                     template (value) InitiatingMessage m_UeContextResumeRequest(
                                                                                 in template (value) RecordOf_ProtocolIE p_value,
@@ -629,7 +648,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with m_UeContextModificationRequest payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_UeContextModificationRequest(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -674,7 +693,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Send template for InitiatingMessage message with m_UeContextModificationIndication payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_UeContextModificationIndication(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -703,7 +722,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with m_UeRadioCapabilityMatchRequest payload
-                     * @param p_value           Expected procedure code
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_UeRadioCapabilityMatchRequest(
                                                                            in template (value) RecordOf_ProtocolIE p_value) := {
@@ -809,7 +828,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with ENB CONFIGURATION UPDATE ACKNOWLEDGE payload
-                     * @param p_value           Expected protocol information elements.
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) SuccessfulOutcome m_eNB_Configuration_Update_Acknowledge(
                                                                                               in template (value) RecordOf_ProtocolIE p_value
@@ -828,7 +847,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with MME CONFIGURATION UPDATE payload
-                     * @param p_value           Expected protocol information elements.
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) InitiatingMessage m_mME_Configuration_Update(
                                                                                   in template (value) RecordOf_ProtocolIE p_value
@@ -851,7 +870,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with MME CONFIGURATION UPDATE ACKNOWLEDGE payload
-                     * @param p_value           Expected protocol information elements.
+                     * @param p_value           The protocol information elements.
                      */
                     template (value) SuccessfulOutcome m_mME_Configuration_Update_Acknowledge(
                                                                                               in template (value) RecordOf_ProtocolIE p_value
@@ -963,7 +982,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with KILL REQUEST payload
-                     * @param p_value           The procedure code value
+                     * @param p_value           The protocol information elements
                      */
                     template (value) InitiatingMessage m_kill_Request(
                                                                       in template (value) RecordOf_ProtocolIE p_value) := {
@@ -987,7 +1006,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Send template for InitiatingMessage message with KILL REQUEST payload
-                     * @param p_value           The procedure code value
+                     * @param p_value           The protocol information elements
                      */
                     template (value) InitiatingMessage m_kill_Response(
                                                                       in template (value) RecordOf_ProtocolIE p_value) := {
@@ -1226,7 +1245,8 @@ module LibS1AP_Templates {
                         
                         /**
                          * @desc Receive template for SuccessfulOutcome/R-RAB_Setup message
-                         * @param p_value   The expected protocol information elements. Default: ?
+                         * @param p_procedureCode   Expected procedure code. Default: ?
+                         * @param p_value           Expected procedure code. Default: ?
                          */
                         template (present) SuccessfulOutcome mw_E_RABModifiedResponse(
                                                                                    template (present) RecordOf_ProtocolIE p_value := ?
@@ -1397,6 +1417,12 @@ module LibS1AP_Templates {
                         mw_E_RABFailedToSetupList(p_E_RABItem_value)
                     } // End of template mw_InitialContextSetupResIEs
                     
+                    /**
+                     * @desc Receive template for InitialContextSetupFailure message
+                     * @param p_MME_value   The expected MME UE S1AP ID value. Default: ?
+                     * @param p_eNB_value   The expected eNB UE S1AP ID value. Default: ?
+                     * @param p_cause       The expected cause value. Default: ?
+                     */
                     template (present) RecordOf_ProtocolIE mw_InitialContextSetupFailureIEs(
                                                                                             template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                             template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
@@ -1407,6 +1433,13 @@ module LibS1AP_Templates {
                         mw_cause_IE(p_cause)
                     } // End of template mw_InitialContextSetupResIEs
                     
+                    /**
+                     * @desc Receive template for InitialContextSetupFailure message with Criticaly Diagnostic IE
+                     * @param p_MME_value           The expected MME UE S1AP ID value. Default: ?
+                     * @param p_eNB_value           The expected eNB UE S1AP ID value. Default: ?
+                     * @param p_cause               The expected cause value. Default: ?
+                     * @param p_criticalyDiagnostic The expected criticaly diagnostic value. Default: ?
+                     */
                     template (present) RecordOf_ProtocolIE mw_InitialContextSetupFailureIEs_CriticalyDiagnostic(
                                                                                                                 template (present) MME_UE_S1AP_ID p_MME_value := ?,
                                                                                                                 template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
@@ -1421,8 +1454,8 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for InitialContextSetup message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
+                     * @param p_criticality     The expected criticality value. Default: reject
                      */
                     template (present) SuccessfulOutcome mw_InitialContextSetupRequest(
                                                                                        template (present) RecordOf_ProtocolIE p_value := ?,
@@ -1452,8 +1485,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Receive template for UeContextReleaseRequest message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextReleaseRequest(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1477,8 +1509,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Receive template for UeContextReleaseCommand message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextReleaseCommand(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1507,8 +1538,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Receive template for UeContextReleaseComplete message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextReleaseComplete(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1531,8 +1561,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeContextModificationResponse message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextModificationResponse(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1552,8 +1581,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeContextModificationFailure message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextModificationFailure(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1577,8 +1605,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeContextModificationRequest message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextModificationRequest(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1601,8 +1628,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeContextModificationIndication message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextModificationIndication(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1623,8 +1649,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Receive template for mw_UeContextModificationConfirm message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextModificationConfirm(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1653,8 +1678,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeContextSuspendRequest message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextSuspendRequest(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1674,8 +1698,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Receive template for mw_UeContextResumeRequest message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextSuspendResponse(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1695,8 +1718,7 @@ module LibS1AP_Templates {
 
                     /**
                      * @desc Receive template for mw_UeContextResumeFailure message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextResumeRequest(
                                                                                    template (present) RecordOf_ProtocolIE p_value := ?
@@ -1720,8 +1742,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeContextResumeResponse message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextResumeResponse(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1741,7 +1762,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeContextResumeFailure message
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeContextResumeFailure(
                                                                                    template (present) RecordOf_ProtocolIE p_value := ?
@@ -1765,8 +1786,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeRadioCapabilityMatchResponse message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeRadioCapabilityMatchResponse(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1789,8 +1809,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_UeRadioCapabilityMatchRequest message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_UeRadioCapabilityMatchRequest(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -1810,8 +1829,7 @@ module LibS1AP_Templates {
                     
                     /**
                      * @desc Receive template for mw_ConnectionEstablishmentIndication message
-                     * @param p_procedureCode   Expected procedure code. Default: ?
-                     * @param p_value           Expected procedure code. Default: ?
+                     * @param p_value           The expected protocol information elements. Default: ?
                      */
                     template (present) SuccessfulOutcome mw_ConnectionEstablishmentIndication(
                                                                                template (present) RecordOf_ProtocolIE p_value := ?
@@ -2200,8 +2218,6 @@ module LibS1AP_Templates {
                     } // End of template mw_kill_ResponseIEs
                     
                 }// End of group Warning_Message_Transmission_receive
-                
-                //TODO: Other....
                 
             } // End of group receiveClass1
             
@@ -3831,7 +3847,7 @@ module LibS1AP_Templates {
                     criticality := reject,
                     value_ := { RecordOf_E_RABToBeSetupItemHOReq := valueof(p_value) }
                 } // End of template m_E_RABToBeSetupListHOReq
-
+                
                 /**
                  * @desc Send template for E-RABSetupListBearerSURes protocol IE
                  * @param p_value  Protocol IE value. Default: m_E_RABToBeSetupItemBearerSUReq
@@ -5211,7 +5227,7 @@ module LibS1AP_Templates {
                  gTP_TEID                        := ?,
                  iE_Extensions                   := *
             } // End of template mw_E_RABSetupItemBearerSURes
-
+            
             /**
              * @desc 
              * @param p_e_RAB_ID
@@ -5826,6 +5842,10 @@ module LibS1AP_Templates {
                 
             } // End of group nasRelated_IEs
             
+            /**
+             * @desc NAS Related IEs group
+             * @see ETSI TS 136 413 V13.4.0 Clause 10 Handling of Unknown, Unforeseen and Erroneous Protocol Data
+             */
             group Unknown_unforseen_errorneous_group {
                 
                 /**

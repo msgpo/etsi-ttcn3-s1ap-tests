@@ -67,7 +67,7 @@ module LibS1AP_Interface {
             var S1AP_PDU vc_recvS1AP_PDUDefault ; //global variable defined to save Dimeter message received within default altstep
             
             // Init of values at component started
-            // TODO: generation of following MME and ENB UE IDs can be done randomly in init
+            // Note: generation of following MME and ENB UE IDs can be done randomly in init
             var MME_UE_S1AP_ID vc_MME_UE_ID         := 10;
             var ENB_UE_S1AP_ID vc_eNB_UE_ID         := 11;
             

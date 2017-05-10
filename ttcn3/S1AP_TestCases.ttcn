@@ -2397,7 +2397,7 @@ module S1AP_TestCases {
         
     } // End of group eNB_Role
     
-    group MME_Role { // TODO Review all preamble action: E-RAB Setup is exchanged for MME role, shall not be f_rABSetupRequest
+    group MME_Role { 
         
         /**
          * @desc E-RAB management group
