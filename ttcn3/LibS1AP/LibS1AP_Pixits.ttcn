@@ -222,11 +222,32 @@ module LibS1AP_Pixits {
      */
     modulepar EncryptionAlgorithms PX_UNSUPPORTED_ENCRYPTION_ALGORITHM := '1111111111111111'B;
     
+    /** @desc Indicates the procedure value.
+     * @see ETSI TS 136 413 Clause 9.2.1.21 Criticality Diagnostics
+     */
     modulepar ProcedureCode PX_PROCEURE_CODE := 0;
     
+    /** @desc Indicates triggering message value
+     * @see ETSI TS 136 413 Clause 9.2.1.21 Criticality Diagnostics
+     */
     modulepar TriggeringMessage PX_TRIGGERING_CODE := initiating_message;
     
+    /** @desc Indicates a the criticality
+     * @see ETSI TS 136 413 Clause 9.2.1.21 Criticality Diagnostics
+     */
     modulepar Criticality PX_CRITICALITY := ignore;
+    
+    /** @desc Indicates the transport layer address.
+     */
+    modulepar TransportLayerAddress PX_TPORT_LAYER_ADDR := '1'B;
+    
+    /** @desc Indicates an unacceptable transport layer address.
+     */
+    modulepar TransportLayerAddress PX_INVALID_TPORT_LAYER_ADDR := '0'B;
+    
+    /** @desc Indicates the Downlink GTP TEID.
+     */
+    modulepar GTP_TEID PX_DL_GTP_TEID := '00000000'O;
     
 } // End of module LibS1AP_Pixits
 

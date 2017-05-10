@@ -23,6 +23,7 @@ module LibS1AP_Templates {
     import from S1AP_PDU_Descriptions language "ASN.1:1997" all;
     
     import from LibS1AP_TypesAndValues all;
+    import from LibS1AP_Pixits all;
     
     group g_S1AP {
         
@@ -6197,10 +6198,10 @@ module LibS1AP_Templates {
                     iE_Extensions   := omit
                 } // End of template m_E_RABFailedToResumeItemResumeReq
                 
-                template (value) E_RABToBeModifiedItemBearerModInd m_E_RABToBeModifiedItemBearerModInd( //TODO default values
+                template (value) E_RABToBeModifiedItemBearerModInd m_E_RABToBeModifiedItemBearerModInd( 
                                                                                                        in template (value) E_RAB_ID p_e_RAB_ID,
-                                                                                                       in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
-                                                                                                       in template (value) GTP_TEID p_dL_GTP_TEID := '00000000'O
+                                                                                                       in template (value) TransportLayerAddress p_transportLayerAddress := PX_TPORT_LAYER_ADDR,
+                                                                                                       in template (value) GTP_TEID p_dL_GTP_TEID := PX_DL_GTP_TEID
                 ) := {
                     e_RAB_ID                := p_e_RAB_ID,
                     transportLayerAddress   := p_transportLayerAddress,

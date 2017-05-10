@@ -23,6 +23,7 @@ module S1AP_TCFunctions {
     import from LibS1AP_Templates all;
     import from LibS1AP_Interface all;
     import from LibS1AP_Steps all;
+    import from LibS1AP_Pixits all;
 
     // S1AP_Ats
     import from S1AP_Steps all;
@@ -983,7 +984,6 @@ module S1AP_TCFunctions {
                     }
                 ));
 
-				// TODO
                 f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
@@ -1000,9 +1000,9 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
 
-			} // End of function f_TC_S1AP_eNB_RAB_20
-			
-			/**
+            } // End of function f_TC_S1AP_eNB_RAB_20
+            
+            /**
              * @desc Testcase function for TC_S1AP_eNB_RAB_21
              */
             function f_TC_S1AP_eNB_RAB_21  () runs on S1APComponent {
@@ -4394,7 +4394,7 @@ module S1AP_TCFunctions {
                         {
                             m_E_RABToBeModifiedItemBearerModInd(
                                 c_E_RAB_ID_A,
-                                '0'B, // TODO PIXIT for unacceptatable value
+                                PX_INVALID_TPORT_LAYER_ADDR,
                                 -
                             )
                         }
@@ -4707,16 +4707,16 @@ module S1AP_TCFunctions {
                     m_CSGMembershipInfo
                     ));
                     
-				f_recv_Ue_Context_Modification_Confirm(mw_UeContextModificationConfirmIEsCSG);                
+                f_recv_Ue_Context_Modification_Confirm(mw_UeContextModificationConfirmIEsCSG);                
                 
-				// Postamble
-				f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+                // Postamble
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 
-				f_postamble_S1AP_MME();
-				f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
-				log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                f_postamble_S1AP_MME();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
-			} // End of function f_TC_S1AP_eNB_CMP_06  
+            } // End of function f_TC_S1AP_eNB_CMP_06  
 
 
             /**
