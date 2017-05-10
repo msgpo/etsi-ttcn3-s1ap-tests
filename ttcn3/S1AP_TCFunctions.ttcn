@@ -4508,6 +4508,54 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_MME_RAB_07
+
+            /**
+             * @desc Testcase function for TC_S1AP_eNB_RAB_10
+             */
+            function f_TC_S1AP_MME_RAB_10() runs on S1APComponent { 
+                // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                f_rABSetupRequest();
+                                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                         
+                // Test body
+                f_send_E_RABModifiedInd(
+                  m_E_RABModifiedIndIEs_CSG(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        {
+                            m_E_RABToBeModifiedItemBearerModInd(
+                                c_E_RAB_ID_A,
+                                -,
+                                -
+                            )
+                        },
+                        m_CSGMembershipInfo(-,-,omit)
+                )); 
+                              
+                f_recv_E_RABModificationConfirm(mw_E_RABModificationConfirmIEs(
+                    vc_MME_UE_ID,
+                    vc_eNB_UE_ID,
+                    {mw_E_RABItem(-,?)}
+                ));
+                
+                f_recv_InitialContext_SetupRequest((mw_UeContextReleaseCommandIEs_MME, mw_UeContextReleaseCommandIEs_ENB));                                
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
+
+                // Postamble                                
+
+                f_postamble_S1AP_MME();
+                
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_RAB_10
             
         } // End of group ERAB_management_group
 
