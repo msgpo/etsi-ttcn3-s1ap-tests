@@ -6197,7 +6197,7 @@ module LibS1AP_Templates {
                     iE_Extensions   := omit
                 } // End of template m_E_RABFailedToResumeItemResumeReq
                 
-                template (value) E_RABToBeModifiedItemBearerModInd m_E_RABToBeModifiedItemBearerModInd(
+                template (value) E_RABToBeModifiedItemBearerModInd m_E_RABToBeModifiedItemBearerModInd( //TODO default values
                                                                                                        in template (value) E_RAB_ID p_e_RAB_ID,
                                                                                                        in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
                                                                                                        in template (value) GTP_TEID p_dL_GTP_TEID := '00000000'O
