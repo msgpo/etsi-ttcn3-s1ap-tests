@@ -5155,7 +5155,7 @@ module LibS1AP_Templates {
              * @desc 
              */
             template(present) E_RABToBeModifiedItemBearerModReq mw_E_RABToBeModifiedItemBearerSUReq(
-                                                                                                E_RAB_ID p_e_RAB_ID := 0,
+                                                                                                template (present) E_RAB_ID p_e_RAB_ID := 0,
                                                                                                 template (present) E_RABLevelQoSParameters p_e_RABlevelQoSParameters := ?,
                                                                                                 template (present) NAS_PDU p_nAS_PDU := '0000'O,
                                                                                                 template (omit) E_RABToBeModifiedItemBearerModReq.iE_Extensions p_iE_Extensions := omit
