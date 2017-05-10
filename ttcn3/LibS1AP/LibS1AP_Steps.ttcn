@@ -137,22 +137,35 @@ module LibS1AP_Steps {
         /**
           * @desc Receive S1AP Message E_RABReleaseResponse
           * @param p_value Receive template for E_RABReleaseResponse IEs
-          */
-         function f_recv_E_RABReleaseResponse(
-                                            template (present) RecordOf_ProtocolIE p_value := ?
-         ) runs on S1APComponent {
-             f_recv_S1AP_successfulOutcome(mw_E_RABReleaseResponse(p_value))
-         } // End of f_recv_E_RABReleaseResponse
+         */
+        function f_recv_E_RABReleaseResponse(
+                                           template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_E_RABReleaseResponseIE(p_value))
+        } // End of f_recv_E_RABReleaseResponse
         
         /**
-          * @desc Receive S1AP Message E_RABModifiedResponse
-          * @param p_value Receive template for E_RABModifiedResponse IEs
-          */
-         function f_recv_E_RABModifiedResponse(
+         * @desc Receive S1AP Message E_RABModifiedResponse
+         * @param p_value Receive template for E_RABModifiedResponse IEs
+         */
+        function f_recv_E_RABModifiedResponse(
                                             template (present) RecordOf_ProtocolIE p_value := ?
-         ) runs on S1APComponent {
+        ) runs on S1APComponent {
              f_recv_S1AP_successfulOutcome(mw_E_RABModifiedResponse(p_value))
-         } // End of f_recv_E_RABModifiedResponse
+        } // End of f_recv_E_RABModifiedResponse
+         
+        function f_recv_E_RABReleaseIndication( 
+            template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_E_RABReleaseIndication_IE(p_value))
+        }
+        
+        function f_recv_E_RABModificationIndication( 
+            template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_E_RABModificationIndication_IE(p_value))
+        }
+                 
         
         /**
           * @desc Receive S1AP Message E_RABModifiedRequest
@@ -1721,7 +1734,14 @@ module LibS1AP_Steps {
                                                                   in boolean p_associated_signalling_mode
             ) return boolean;
             
+            /**
+             * @desc Trigger a E-RAB Release procedure
+             * @param TODO
+             * @return true on success, false otherwise
+             */
 			external function fx_eNB_erab_Release_indication_procedure( in boolean p_param) return boolean;
+            
+            external function fx_eNB_erab_modification_indication_procedure ( in boolean p_param) return boolean;
             
         } // End of group mmeRole
         

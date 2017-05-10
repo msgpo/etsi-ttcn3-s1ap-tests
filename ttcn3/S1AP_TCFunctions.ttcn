@@ -14,7 +14,7 @@ module S1AP_TCFunctions {
     // LibCommon
     import from LibCommon_Sync all;
     import from LibCommon_VerdictControl all;
-    import from LibCommon_Time {function f_sleepIgnoreDef};
+    import from LibCommon_Time {function f_sleepIgnoreDef;}
 
     // LibS1AP
     import from S1AP_IEs language "ASN.1:1997" all;
@@ -852,7 +852,7 @@ module S1AP_TCFunctions {
                 if (fx_eNB_erab_Release_indication_procedure(false) == false) {
                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
-                    f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
+                    f_recv_E_RABReleaseIndication(mw_E_RABReleaseIndicationIEs(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         {
@@ -888,7 +888,7 @@ module S1AP_TCFunctions {
                 if (fx_eNB_erab_Release_indication_procedure(false) == false) {
                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
-                    f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
+                    f_recv_E_RABReleaseIndication(mw_E_RABReleaseIndicationIEs(
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         {
@@ -983,7 +983,7 @@ module S1AP_TCFunctions {
                     }
                 ));
 
-
+				// TODO
                 f_recv_E_RABReleaseResponse(mw_E_RABReleaseResIEs(
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
@@ -1000,9 +1000,44 @@ module S1AP_TCFunctions {
                 f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
 
-            } // End of function f_TC_S1AP_eNB_RAB_20
-            
-            
+			} // End of function f_TC_S1AP_eNB_RAB_20
+			
+			/**
+             * @desc Testcase function for TC_S1AP_eNB_RAB_21
+             */
+            function f_TC_S1AP_eNB_RAB_21  () runs on S1APComponent {
+                // Local variables
+                const E_RAB_ID c_E_RAB_ID_A := 0;
+                
+                // Preamble
+                f_S1AP_enb_init();
+                f_rABSetupRequest();
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+
+                // 1. to indicate a LPPa Transport procedure using a UE associated signalling
+                if (fx_eNB_erab_modification_indication_procedure(false) == false) {
+                   f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
+                } else {
+                    f_recv_E_RABModificationIndication(mw_E_RABModificationIndicationIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        {
+                            mw_E_RABToBeModifiedItemBearerModInd(
+                                -
+                            )
+                        }
+                    ));
+                    f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+                }
+
+
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict());
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+
+            } // End of function f_TC_S1AP_eNB_RAB_21
+
         } // End of group ERAB_management_group
         
         /**
