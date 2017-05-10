@@ -183,6 +183,15 @@ module LibS1AP_Steps {
         } // End of function f_recv_HandoverRequired
         
         /**
+          * @desc Receive S1AP Message Handover Request
+          * @param p_value Receive template for Handover Request IEs
+          */
+         function f_recv_HandoverRequest(in template (present) RecordOf_ProtocolIE p_value :=?
+         ) runs on S1APComponent {
+             f_recv_S1AP_initiatingMessage(mw_HandoverRequest(p_value))
+         } // End of function f_recv_HandoverRequest
+                
+        /**
          * @desc Receive S1AP Message Handover Cancel
          * @param p_value Receive template for Handover Cancel IEs
          */
