@@ -213,6 +213,15 @@ module LibS1AP_Steps {
         function f_recv_HandoverCommand(in template (present) RecordOf_ProtocolIE p_value :=?
         ) runs on S1APComponent {
             f_recv_S1AP_successfulOutcome(mw_HandoverCommand(p_value))
+        } // End of function f_recv_HandoverCommand
+        
+        /**
+         * @desc Receive S1AP Message Handover Preparation Failure
+         * @param p_value Receive template for Handover Preparation Failure IEs
+         */
+        function f_recv_HandoverPreparationFailure(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_unsuccessfulOutcome(mw_HandoverPreparationFailure(p_value))
         } // End of function f_recv_HandoverRequired
         
         /**
@@ -268,6 +277,24 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_PathSwitchRequest(p_value))
         } // End of function f_recv_PathSwitchRequest
+        
+        /**
+         * @desc Receive S1AP Message Path Switch Request Acknowledge
+         * @param p_value Receive template for Path Switch Request Acknowledge IEs
+         */
+        function f_recv_PathSwitchRequestAck(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_PathSwitchRequestAck(p_value))
+        } // End of function f_recv_PathSwitchRequestAck
+
+        /**
+         * @desc Receive S1AP Message Path Switch Request Failure
+         * @param p_value Receive template for Path Switch Request Failure IEs
+         */
+        function f_recv_PathSwitchRequestFailure(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_unsuccessfulOutcome(mw_PathSwitchRequestFailure(p_value))
+        } 
         
         /**
          * @desc Receive S1AP Message eNB Status Transfer
@@ -1106,6 +1133,16 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_successfulOutcome(m_HandoverCommand(p_value))
         } // End of function f_send_HandoverCommand
+        
+        /**
+         * @desc Send S1AP Message Path Switch Request
+         * @param p_value Send template with IE for Path Switch Request
+         */
+        function f_send_PathSwitchRequest(
+                                          in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_PathSwitchRequest(p_value))
+        } // End of function f_send_PathSwitchRequestAcknowledge
         
         /**
          * @desc Send S1AP Message Path Switch Request Acknowledge
