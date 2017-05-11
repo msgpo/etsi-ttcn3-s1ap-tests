@@ -1,7 +1,7 @@
 /**
  *    @author   ETSI / STF519
- *    @version  $URL:$
- *              $Id:$
+ *    @version  $URL$
+ *              $Id$
  *    @desc     This module provides ATS specific steps used by the test cases for S1AP test.
  *    @copyright   ETSI Copyright Notification
  *                 No part may be reproduced except as authorized by written permission.
@@ -22,6 +22,7 @@ module S1AP_Steps {
         
         /**
          * @desc    This is a test step that init global variables
+         *          This procedure will be use when the Test System acts as MME (SUT is eNB)
          */
         function f_S1AP_mme_init()
         runs on S1APComponent {
@@ -32,15 +33,16 @@ module S1AP_Steps {
             // Base LibS1AP init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
-            vc_ETS_address := PX_S1AP_MME_ETS_IPADDR;
-            vc_ETS_port    := PX_S1AP_MME_ETS_PORT;
-            vc_SUT_address := PX_S1AP_MME_SUT_IPADDR;
-            vc_SUT_port    := PX_S1AP_MME_SUT_PORT;
+            vc_ETS_address := PX_S1AP_ETS_IPADDR;
+            vc_ETS_port    := PX_S1AP_ETS_PORT;
+            vc_SUT_address := PX_S1AP_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_SUT_PORT;
             
         } // End of function f_S1AP_init
         
         /**
          * @desc    This is a test step that init global variables
+         *          This procedure will be use when the Test System acts as eNB (SUT is MME)
          */
         function f_S1AP_enb_init()
         runs on S1APComponent {
@@ -51,10 +53,10 @@ module S1AP_Steps {
             // Base LibS1AP init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
-            vc_ETS_address := PX_S1AP_eNB_ETS_IPADDR;
-            vc_ETS_port    := PX_S1AP_eNB_ETS_PORT;
-            vc_SUT_address := PX_S1AP_eNB_SUT_IPADDR;
-            vc_SUT_port    := PX_S1AP_eNB_SUT_PORT;
+            vc_ETS_address := PX_S1AP_ETS_IPADDR;
+            vc_ETS_port    := PX_S1AP_ETS_PORT;
+            vc_SUT_address := PX_S1AP_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_SUT_PORT;
             
         } // End of function f_S1AP_enb_init
         
@@ -70,10 +72,10 @@ module S1AP_Steps {
             // Base LibS1AP init function if there will be any base initialisation
             f_S1AP_Init_Component();
             
-            vc_ETS_address := PX_S1AP_eNB_ETS_IPADDR2;
-            vc_ETS_port    := PX_S1AP_eNB_ETS_PORT2;
-            vc_SUT_address := PX_S1AP_eNB_SUT_IPADDR;
-            vc_SUT_port    := PX_S1AP_eNB_SUT_PORT;
+            vc_ETS_address := PX_S1AP_ETS_IPADDR2;
+            vc_ETS_port    := PX_S1AP_ETS_PORT2;
+            vc_SUT_address := PX_S1AP_SUT_IPADDR;
+            vc_SUT_port    := PX_S1AP_SUT_PORT;
             
         } // End of function f_S1AP_enb_init2
         
