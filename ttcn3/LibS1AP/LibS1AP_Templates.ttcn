@@ -1523,13 +1523,14 @@ module LibS1AP_Templates {
                           
 
                         template (present) E_RABToBeModifiedItemBearerModInd mw_E_RABToBeModifiedItemBearerModInd(
-                             in E_RAB_ID p_e_RAB_ID := 0,
+                             in template (value) E_RAB_ID p_e_RAB_ID := 0,
                              in template (value) TransportLayerAddress p_transportLayerAddress := '0'B,
                              in template (value) GTP_TEID p_dL_GTP_TEID := '00000000'O
                         ) := {
-                            e_RAB_ID := p_e_RAB_ID,
+                            e_RAB_ID              := p_e_RAB_ID,
                             transportLayerAddress := p_transportLayerAddress,
-                            dL_GTP_TEID := p_dL_GTP_TEID
+                            dL_GTP_TEID           := p_dL_GTP_TEID,
+                            iE_Extensions         := *
                         } 
                         
                                                 
@@ -6625,7 +6626,8 @@ module LibS1AP_Templates {
                 ) := {
                     targeteNB_ID    := p_target_eNB_ID,
                     sourceeNB_ID    := p_source_eNB_ID,
-                    sONInformation  := p_sONInformation
+                    sONInformation  := p_sONInformation,
+                    iE_Extensions   := *
                 } // End of template mw_sON_Configuration_Transfer
                 
                 /**
