@@ -157,13 +157,13 @@ module LibS1AP_Steps {
         function f_recv_E_RABReleaseIndication( 
             template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
-            f_recv_S1AP_successfulOutcome(mw_E_RABReleaseIndication_IE(p_value))
+            f_recv_S1AP_successfulOutcome(mw_E_RABReleaseIndication(p_value))
         }
         
         function f_recv_E_RABModificationIndication( 
             template (present) RecordOf_ProtocolIE p_value := ?
         ) runs on S1APComponent {
-            f_recv_S1AP_successfulOutcome(mw_E_RABModificationIndication_IE(p_value))
+            f_recv_S1AP_successfulOutcome(mw_E_RABModificationIndication(p_value))
         }
                  
         
