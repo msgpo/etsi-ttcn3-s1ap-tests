@@ -5763,6 +5763,187 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
                 
             } // End of function f_TC_S1AP_MME_HAS_13
+
+            /**
+             * @desc Testcase function for TC_S1AP_MME_HAS_14
+             */
+            function f_TC_S1AP_MME_HAS_14() runs on S1APComponent { 
+                // Local variables
+                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
+                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                //f_rABSetup...;
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // sends a HANDOVER_REQUIRED
+                f_send_PathSwitchRequest(
+                    m_PathSwitchRequestIEs(
+                    vc_eNB_UE_ID,
+                    {m_E_RABToBeSwitchedDLItem(1,-,-,-)},
+                    vc_MME_UE_ID,
+                    m_eUTRAN_CGI('000001'O, //plmn id
+                                 '0000000000000000000000000001'B ),//ci
+                    m_TAI('000001'O,'0001'O),
+                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B)
+                ));
+                 
+                f_recv_PathSwitchRequestFailure(
+                    mw_PathSwitchRequestFailureIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        -//cause
+                ));
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+                
+                // Postamble
+                //f_rABSetupRelease...;
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_HAS_14
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_HAS_15
+             */
+            function f_TC_S1AP_MME_HAS_15() runs on S1APComponent { 
+                // Local variables
+                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
+                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                //f_rABSetup...;
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // sends a HANDOVER_REQUIRED
+                f_send_HandoverRequired(
+                    m_HandoverRequiredIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        intralte,
+                        m_cause_ran(unspecified),
+                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                                                       m_ENB_ID_macro),
+                                       m_TAI('000001'O,
+                                             '0001'O)),
+                        c_source_ToTarget_TransparentContainer
+                ));
+                 
+                f_recv_HandoverCommand(
+                    mw_HandoverCommandIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        intralte,//handover_Type
+                        c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+                ));
+                
+                f_send_HandoverCancel(
+                    m_HandoverCancelIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        m_cause_ran(unspecified)
+                ));
+                
+                f_recv_HandoverCancelAck(
+                    mw_HandoverCancelAckIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID
+                ));
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+                
+                // Postamble
+                //f_rABSetupRelease...;
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_HAS_15
+            
+            /**
+             * @desc Testcase function for TC_S1AP_MME_HAS_16
+             */
+            function f_TC_S1AP_MME_HAS_16() runs on S1APComponent { 
+                // Local variables
+                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
+                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
+                
+                // Preamble
+                f_S1AP_mme_init();
+                // Preamble action: E-RAB Setup is exchanged.
+                //f_rABSetup...;
+                
+                f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
+                
+                // Test body
+                // sends a HANDOVER_REQUIRED
+                f_send_HandoverRequired(
+                    m_HandoverRequiredIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        intralte,
+                        m_cause_ran(unspecified),
+                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                                                       m_ENB_ID_macro),
+                                       m_TAI('000001'O,
+                                             '0001'O)),
+                        c_source_ToTarget_TransparentContainer
+                ));
+                 
+//                f_recv_HandoverCommand(
+//                    mw_HandoverCommandIEs(
+//                        vc_MME_UE_ID,
+//                        vc_eNB_UE_ID,
+//                        intralte,//handover_Type
+//                        c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+//                ));
+                
+                f_send_eNB_Status_Transfer(
+                    m_eNB_Status_TransferIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        m_eNBStatusTransferTransparentContainer(
+                          {{id:=89,//S1AP_Constants.id_Bearers_SubjectToStatusTransfer_Item,
+                            criticality:=ignore,
+                            value_:= {Bearers_SubjectToStatusTransfer_Item := valueof(
+                                                 m_Bearers_SubjectToStatusTransfer_Item(1,
+                                                                       m_COUNTvalue(0,0),
+                                                                       m_COUNTvalue(0,0)))}
+                           }
+                          }
+                        )
+                ));
+                
+                f_recv_Mme_Status_Transfer(
+                    mw_Mme_Status_TransferIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        -
+                ));
+                
+                f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
+                
+                // Postamble
+                //f_rABSetupRelease...;
+                f_postamble_S1AP_eNB();
+                f_selfOrClientSyncAndVerdict(c_poDone, f_getVerdict()); 
+                log("*** " & __SCOPE__ & ": INFO: Postamble done. ***");
+                
+            } // End of function f_TC_S1AP_MME_HAS_16
+            
         } // End of group Handover_signalling_group
         
         /**

@@ -231,9 +231,30 @@ module LibS1AP_Templates {
                 }// End of group HandoverResourceAllocation
                 
                 group HandoverCancelation{
-                    
+
                     /**
-                     * @desc Receive template for SuccessfulOutcome message with Handover Cancel Acknowledge payload
+                     * @desc Send template for InitiatingMessage message with Handover Cancel payload
+                     * @param p_value           The protocol information elements.
+                     */
+                    template (value) InitiatingMessage m_HandoverCancel(
+                                                                           template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_HandoverCancel,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_HandoverCancel
+                    
+                    template (value) RecordOf_ProtocolIE m_HandoverCancelIEs(
+                        in template (value) MME_UE_S1AP_ID p_MME_value,
+                        in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                        in template (value) Cause p_cause_value
+                       ) := {
+                            m_MME_UE_S1AP_ID(p_MME_value),
+                            m_eNB_UE_S1AP_ID(p_eNB_value),
+                            m_cause_IE(p_cause_value)
+                       } // End of template m_HandoverCancelIEs
+                       
+                    /**
+                     * @desc Send template for SuccessfulOutcome message with Handover Cancel Acknowledge payload
                      * @param p_value           The protocol information elements.
                      */
                     template (value) SuccessfulOutcome m_HandoverCancelAck(
@@ -250,6 +271,27 @@ module LibS1AP_Templates {
                             m_MME_UE_S1AP_ID(p_MME_value),
                             m_eNB_UE_S1AP_ID(p_eNB_value)
                        } // End of template m_HandoverCancelAckIEs
+                    
+                    /**
+                     * @desc Send template for InitiatingMessage message with eNB_Status_Transfer payload
+                     * @param p_value           The protocol information elements.
+                     */
+                    template (value) InitiatingMessage m_eNB_Status_Transfer(
+                                                                           template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_eNBStatusTransfer,
+                        criticality := ignore,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_eNB_Status_Transfer
+
+                    template (value) RecordOf_ProtocolIE m_eNB_Status_TransferIEs(
+                        in template (value) MME_UE_S1AP_ID p_MME_value,
+                        in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                        in template (value) ENB_StatusTransfer_TransparentContainer p_enb_stc_value
+                       ) := {
+                            m_MME_UE_S1AP_ID(p_MME_value),
+                            m_eNB_UE_S1AP_ID(p_eNB_value),
+                            m_eNBStatusTransferTransparentContainer_IE(p_enb_stc_value)
+                       } // End of template m_eNB_Status_TransferIEs
                        
                 }// End of group HandoverCancelation
                 
@@ -1305,7 +1347,48 @@ module LibS1AP_Templates {
                             mw_eNB_UE_S1AP_ID(p_eNB_value),
                             mw_cause_IE(p_Cause_value)
                        } // End of template mw_HandoverCancelIEs
-                       
+
+                    /**
+                     * @desc Receive template for SuccessfulOutcome message with Handover Cancel Acknowledge payload
+                     * @param p_value           The expected protocol information elements. Default: ?
+                     */
+                    template (present) SuccessfulOutcome mw_HandoverCancelAck(
+                                                                           template (present) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_HandoverCancel,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_HandoverCancelAck
+                    
+                    template (present) RecordOf_ProtocolIE mw_HandoverCancelAckIEs(
+                        template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                        template (present) ENB_UE_S1AP_ID p_eNB_value := ?
+                       ) := {
+                            mw_MME_UE_S1AP_ID(p_MME_value),
+                            mw_eNB_UE_S1AP_ID(p_eNB_value)
+                       } // End of template mw_HandoverCancelAckIEs
+                         
+
+                    /**
+                     * @desc Receive template for InitiatingMessage message with Mme_Status_Transfer payload
+                     * @param p_value           The expected protocol information elements. Default: ?
+                     */
+                    template (present) InitiatingMessage mw_Mme_Status_Transfer(
+                                                                           template (present) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_MMEStatusTransfer,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template mw_HandoverCancel
+                    
+                    template (present) RecordOf_ProtocolIE mw_Mme_Status_TransferIEs(
+                        template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                        template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                        template (present) ENB_StatusTransfer_TransparentContainer p_enb_stc_value := ?
+                       ) := {
+                            mw_MME_UE_S1AP_ID(p_MME_value),
+                            mw_eNB_UE_S1AP_ID(p_eNB_value),
+                            mw_eNBStatusTransferTransparentContainer_IE(p_enb_stc_value)
+                       } // End of template mw_Mme_Status_TransferIEs    
+                         
                 }// End of group HandoverCancelation
                     
                 group PathSwitchRequest{
@@ -4004,7 +4087,64 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := {NASSecurityParameterstoE_UTRAN := valueof(p_value)}
             } // End of template m_nasSecurityParametersToEutran_IE
+            
+            /**
+             * @desc receive template for eNBStatusTransferTransparentContainer IE
+             * @param p_value  eNBStatusTransferTransparentContainer value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.31 eNBStatusTransferTransparentContainer
+             */
+            template (value) ProtocolIE m_eNBStatusTransferTransparentContainer_IE(
+                                                   in template (value) ENB_StatusTransfer_TransparentContainer p_value,
+                                                   in template (value) ProtocolIE.criticality p_criticality := reject
+            ) := {
+                id := S1AP_Constants.id_eNB_StatusTransfer_TransparentContainer,
+                criticality := p_criticality,
+                value_ := {ENB_StatusTransfer_TransparentContainer := valueof(p_value)}
+            } // End of template m_eNBStatusTransferTransparentContainer_IE
 
+            /**
+             * @desc 
+             */
+            template (value) ENB_StatusTransfer_TransparentContainer m_eNBStatusTransferTransparentContainer (
+                in template (value) Bearers_SubjectToStatusTransferList p_bearers_SubjectToStatusTransferList):= {
+              bearers_SubjectToStatusTransferList := p_bearers_SubjectToStatusTransferList,
+              iE_Extensions := omit
+            }
+//            /**
+//             * @desc 
+//             */
+//            template (value) Bearers_SubjectToStatusTransfer_ItemIEs m_Bearers_SubjectToStatusTransfer_ItemIEs (
+//                in template (value) Bearers_SubjectToStatusTransfer_Item p_bearers_SubjectToStatusTransfer,
+//                in template (value) ProtocolIE.criticality p_criticality := ignore
+//            
+//            ):= {
+//                id := S1AP_Constants.id_Bearers_SubjectToStatusTransfer_Item,
+//                criticality := p_criticality,
+//                value_ := {Bearers_SubjectToStatusTransfer_Item := valueof(p_bearers_SubjectToStatusTransfer)}
+//            }
+            
+            template (value) Bearers_SubjectToStatusTransfer_Item m_Bearers_SubjectToStatusTransfer_Item(
+                in template (value) E_RAB_ID p_e_RAB_ID,
+                in template (value) COUNTvalue p_uL_COUNTvalue,
+                in template (value) COUNTvalue p_dL_COUNTvalue
+            ):= {
+                e_RAB_ID:= p_e_RAB_ID,
+                uL_COUNTvalue:=p_uL_COUNTvalue,
+                dL_COUNTvalue:=p_dL_COUNTvalue,
+                //ReceiveStatusofULPDCPSDUs
+                receiveStatusofULPDCPSDUs := omit,
+                iE_Extensions := omit
+            }
+             
+            template (value) COUNTvalue m_COUNTvalue(
+                in template (value) PDCP_SN p_PDCP_SN_value,
+                in template (value) HFN p_HFN_value
+            ):={
+                pDCP_SN := valueof(p_PDCP_SN_value),
+                hFN := valueof(p_HFN_value),
+                iE_Extensions := omit
+            }
+            
             /**
              * @desc Send template for correlation ID IE
              * @param p_value  UESecurityCapabilities value

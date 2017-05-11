@@ -241,6 +241,27 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_recv_S1AP_initiatingMessage(mw_HandoverCancel(p_value))
         } // End of function f_recv_HandoverCancel
+       
+        /**
+         * @desc Receive S1AP Message Handover CancelAcknowledge
+         * @param p_value Receive template for Handover Cancel Acknowledge IEs
+         */
+        function f_recv_HandoverCancelAck(in template (present) RecordOf_ProtocolIE p_value :=?
+        ) runs on S1APComponent {
+            f_recv_S1AP_successfulOutcome(mw_HandoverCancelAck(p_value))
+        } // End of function f_recv_HandoverCancelAck
+        
+        /**
+         * @desc Receive S1AP Message MME STATUS TRANSFER
+         * @param p_value Receive template for MME_STATUS_TRANSFER IEs
+         * @see ETSI TS 136 413 V13.4.0 Clause 9.1.5.14 MME STATUS TRANSFER
+         */
+        function f_recv_Mme_Status_Transfer(
+                                                   template (present) RecordOf_ProtocolIE p_value := ?
+        ) runs on S1APComponent {
+            f_recv_S1AP_initiatingMessage(mw_Mme_Status_Transfer(p_value))
+        } // End of f_recv_Mme_Status_Transfer
+        
         
         /**
          * @desc Receive S1AP Message Handover Notify
@@ -1115,6 +1136,15 @@ module LibS1AP_Steps {
         } // End of function f_send_HandoverRequest
         
         /**
+         * @desc Send S1AP Message f_send_HandoverCancel
+         * @param p_value Send template with IE for HandoverCancel
+         */
+        function f_send_HandoverCancel(in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_HandoverCancel(p_value))
+        } // End of function f_send_HandoverCancel
+        
+        /**
          * @desc Send S1AP Message Handover Cancel Acknowledge
          * @param p_value Send template with IE for Handover Cancel Acknowledge
          */
@@ -1123,6 +1153,16 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_successfulOutcome(m_HandoverCancelAck(p_value))
         } // End of function f_send_HandoverCancelAcknowledge
+
+        /**
+         * @desc Send S1AP Message ENB STATUS TRANSFER
+         * @param p_value Send template with IE for ENB STATUS TRANSFER 
+         */
+        function f_send_eNB_Status_Transfer(
+                                                 in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_initiatingMessage(m_eNB_Status_Transfer(p_value))
+        } // End of function f_send_eNB_Status_Transfer
         
         /**
          * @desc Send S1AP Message Handover Command
