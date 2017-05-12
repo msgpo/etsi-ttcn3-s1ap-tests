@@ -1482,7 +1482,8 @@ module LibS1AP_Steps {
                 vc_eNB_UE_ID,
                 m_UEAggregateMaximumBitrate(1,1),
                 p_RecordOf_E_RABToBeSetupItemCtxt_value,
-                m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                         PX_INTEGRITY_PROTECTION_ALGORITHM),
                 m_securityKey
             ));
 
@@ -1550,8 +1551,8 @@ module LibS1AP_Steps {
                     },                                      // E_RabsToBeSetupList
                     c_source_ToTarget_TransparentContainer, // SourceToTargetTransparentContainer
                     m_UESecurityCapabilities(
-                        '0101010101010101'B,
-                        '0101010101010101'B
+                        PX_ENCRYPTION_ALGORITHM,
+                        PX_INTEGRITY_PROTECTION_ALGORITHM
                     ),                                      // UeSecurityCapabilities
                     m_securityContext                       // SecurityContext
             ));

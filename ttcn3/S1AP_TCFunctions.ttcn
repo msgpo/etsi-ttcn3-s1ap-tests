@@ -1068,7 +1068,8 @@ module S1AP_TCFunctions {
                         (5),
                         -
                     )},
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM),
                     m_securityKey
                 ));
 
@@ -1125,7 +1126,8 @@ module S1AP_TCFunctions {
                                 c_gTP_TEID
                             )
                         },
-                        m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                        m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                                 PX_INTEGRITY_PROTECTION_ALGORITHM),
                         m_securityKey
                 ));
 
@@ -1182,7 +1184,8 @@ module S1AP_TCFunctions {
                         c_transportLayerAddress,
                         c_gTP_TEID
                     )},
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM),
                     m_securityKey
                 ));
 
@@ -1241,7 +1244,8 @@ module S1AP_TCFunctions {
                         c_transportLayerAddress,
                         c_gTP_TEID
                     )},
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM),
                     m_securityKey
                 ));
 
@@ -1284,7 +1288,6 @@ module S1AP_TCFunctions {
                 const TransportLayerAddress c_transportLayerAddress := '0'B;
                 const GTP_TEID c_gTP_TEID := '00000000'O;
                 const NAS_PDU c_nAS_PDU := '0000'O;
-                const EncryptionAlgorithms c_notSupportedEncryptionAlgorithms := '0000000000000000'B;
                 // Preamble
                 f_S1AP_enb_init();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
@@ -1302,7 +1305,8 @@ module S1AP_TCFunctions {
                         c_transportLayerAddress,
                         c_gTP_TEID
                     )},
-                    m_UESecurityCapabilities(c_notSupportedEncryptionAlgorithms,'0101010101010101'B),
+                    m_UESecurityCapabilities(PX_UNSUPPORTED_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM),
                     m_securityKey
                 ));
 
@@ -1349,7 +1353,8 @@ module S1AP_TCFunctions {
                         c_transportLayerAddress,
                         c_gTP_TEID
                     )},
-                    m_UESecurityCapabilities('0101010101010101'B, c_notSupportedIntegrityProtectionAlgorithms),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                             c_notSupportedIntegrityProtectionAlgorithms),
                     m_securityKey
                 ));
 
@@ -1395,7 +1400,8 @@ module S1AP_TCFunctions {
                         c_transportLayerAddress,
                         c_gTP_TEID
                     )},
-                    m_UESecurityCapabilities('0101010101010101'B, '0101010101010101'B),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM),
                     m_securityKey
                 ));
 
@@ -1453,7 +1459,8 @@ module S1AP_TCFunctions {
                          }
                         }
                     )},
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM),
                     m_securityKey
                 ));
 
@@ -1621,7 +1628,8 @@ module S1AP_TCFunctions {
                         (5),
                         -
                     )},
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM),
                     m_securityKey
                 ));
 
@@ -1740,7 +1748,8 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     cs_fallback_required,
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B)
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
 
                 f_recv_UE_Context_Modification_Failure(mw_UeContextModificationFailureIEs(
@@ -1894,7 +1903,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_HAS_01() runs on S1APComponent { 
                 // Local variables
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_enb_init();
@@ -1927,7 +1935,7 @@ module S1AP_TCFunctions {
                             vc_MME_UE_ID,
                             vc_eNB_UE_ID,
                             intralte,//handover_Type
-                            c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+                            PX_TARGET_TO_SOURCE_TANSPARENT_CONTAINER//TargetToSourceTransparentContainer
                     ));
                 }
                 
@@ -2181,7 +2189,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_HAS_06() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_enb_init();
@@ -2204,8 +2211,9 @@ module S1AP_TCFunctions {
                                        m_e_RABlevelQoSParameters
                                        (5)
                                    )},//E_RabsToBeSetupList
-                                   c_source_ToTarget_TransparentContainer,//SourceToTargetTransparentContainer
-                                   m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),//UeSecurityCapabilities
+                                   PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,//SourceToTargetTransparentContainer
+                                   m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                                            PX_INTEGRITY_PROTECTION_ALGORITHM),//UeSecurityCapabilities
                                    m_securityContext//SecurityContext
                                ));
 
@@ -2231,7 +2239,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_HAS_07() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
                 const NASSecurityParameterstoE_UTRAN c_nASSecurityParameterstoE_UTRAN := '000000000000'O;
                 
                 // Preamble
@@ -2255,8 +2262,9 @@ module S1AP_TCFunctions {
                                        m_e_RABlevelQoSParameters
                                        (5)
                                    )},//E_RabsToBeSetupList
-                                   c_source_ToTarget_TransparentContainer,//SourceToTargetTransparentContainer
-                                   m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),//UeSecurityCapabilities
+                                   PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,//SourceToTargetTransparentContainer
+                                   m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                                            PX_INTEGRITY_PROTECTION_ALGORITHM),//UeSecurityCapabilities
                                    m_securityContext,//SecurityContext
                                    c_nASSecurityParameterstoE_UTRAN//NASSecurityParameterstoE_UTRAN//for coding see TS 124 301 clause 9.9.2.7
                                ));
@@ -2283,7 +2291,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_HAS_08() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
                 const NASSecurityParameterstoE_UTRAN c_nASSecurityParameterstoE_UTRAN := '000000000000'O;
                 // Preamble
                 f_S1AP_enb_init();
@@ -2306,8 +2313,9 @@ module S1AP_TCFunctions {
                                        m_e_RABlevelQoSParameters
                                        (5)
                                    )},//E_RabsToBeSetupList
-                                   c_source_ToTarget_TransparentContainer,//SourceToTargetTransparentContainer
-                                   m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),//UeSecurityCapabilities
+                                   PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,//SourceToTargetTransparentContainer
+                                   m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                                            PX_INTEGRITY_PROTECTION_ALGORITHM),//UeSecurityCapabilities
                                    m_securityContext,//SecurityContext
                                    c_nASSecurityParameterstoE_UTRAN//NASSecurityParameterstoE_UTRAN//for coding see TS 124 301 clause 9.9.2.7
                                ));
@@ -2334,7 +2342,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_HAS_09() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_enb_init();
@@ -2357,8 +2364,9 @@ module S1AP_TCFunctions {
                                        m_e_RABlevelQoSParameters
                                        (5)
                                    )},//E_RabsToBeSetupList
-                                   c_source_ToTarget_TransparentContainer,//SourceToTargetTransparentContainer
-                                   m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),//UeSecurityCapabilities
+                                   PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,//SourceToTargetTransparentContainer
+                                   m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM, 
+                                                            PX_INTEGRITY_PROTECTION_ALGORITHM),//UeSecurityCapabilities
                                    m_securityContext,//SecurityContext
                                    member//CSG_MembershipStatus
                                ));
@@ -2530,7 +2538,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_eNB_HAS_13() runs on S1APComponent { 
                 // Local variables
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_enb_init();
@@ -2561,7 +2568,7 @@ module S1AP_TCFunctions {
                             vc_MME_UE_ID,
                             vc_eNB_UE_ID,
                             intralte,//handover_Type
-                            c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+                            PX_TARGET_TO_SOURCE_TANSPARENT_CONTAINER//TargetToSourceTransparentContainer
                     ));
 
                     action("Await eNB_STATUS_TRANSFER MESSAGE.");
@@ -2974,7 +2981,7 @@ module S1AP_TCFunctions {
                                     { PX_MME_CODE }
                                 )
                             }, 
-                            PX_RELATIVE_MME_CAPAVCITY
+                            PX_RELATIVE_MME_CAPACITY
                     ));
                 }
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
@@ -3886,7 +3893,7 @@ module S1AP_TCFunctions {
                         )},
                         m_UESecurityCapabilities(
                             PX_UNSUPPORTED_ENCRYPTION_ALGORITHM,
-                            '0101010101010101'B
+                            PX_INTEGRITY_PROTECTION_ALGORITHM
                         ),
                         m_securityKey
                     ),
@@ -3942,7 +3949,7 @@ module S1AP_TCFunctions {
                         )},
                         m_UESecurityCapabilities(
                             PX_UNSUPPORTED_ENCRYPTION_ALGORITHM,
-                            '0101010101010101'B
+                            PX_INTEGRITY_PROTECTION_ALGORITHM
                         ),
                         m_securityKey
                     )
@@ -3995,7 +4002,7 @@ module S1AP_TCFunctions {
                         )},
                         m_UESecurityCapabilities(
                             PX_UNSUPPORTED_ENCRYPTION_ALGORITHM,
-                            '0101010101010101'B
+                            PX_INTEGRITY_PROTECTION_ALGORITHM
                         ),
                         m_securityKey
                     )
@@ -4056,7 +4063,7 @@ module S1AP_TCFunctions {
                         )},
                         m_UESecurityCapabilities(
                             PX_UNSUPPORTED_ENCRYPTION_ALGORITHM,
-                            '0101010101010101'B
+                            PX_INTEGRITY_PROTECTION_ALGORITHM
                         ),
                         m_securityKey
                     )
@@ -4162,7 +4169,7 @@ module S1AP_TCFunctions {
                         )},
                         m_UESecurityCapabilities(
                             PX_UNSUPPORTED_ENCRYPTION_ALGORITHM,
-                            '0101010101010101'B
+                            PX_INTEGRITY_PROTECTION_ALGORITHM
                         ),
                         m_securityKey
                     )
@@ -4599,7 +4606,6 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                          
                 // Test body
-                
                 f_send_E_RABModifiedInd(
                     m_E_RABModifiedIndIEs(
                         vc_MME_UE_ID,
@@ -5151,8 +5157,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_01() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5170,11 +5174,11 @@ module S1AP_TCFunctions {
                         vc_eNB_UE_ID,
                         intralte,
                         m_cause_ran(unspecified),
-                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                        m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
-                                       m_TAI('000001'O,
-                                             '0001'O)),
-                        c_source_ToTarget_TransparentContainer
+                                       m_TAI(PX_PLMN_IDENTITY,
+                                             PX_TAC)),
+                        PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER
                 ));
                  
                 f_recv_HandoverCommand(
@@ -5182,7 +5186,7 @@ module S1AP_TCFunctions {
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         intralte,//handover_Type
-                        c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+                        PX_TARGET_TO_SOURCE_TANSPARENT_CONTAINER//TargetToSourceTransparentContainer
                 ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
@@ -5299,8 +5303,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_04_ENB1() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5318,12 +5320,12 @@ module S1AP_TCFunctions {
                         vc_eNB_UE_ID,
                         intralte,
                         m_cause_ran(unspecified),
-                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                        m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
-                                       m_TAI('000001'O,
-                                             '0001'O)),
-                        c_source_ToTarget_TransparentContainer,
-                        '000000000000000000000000001'B,
+                                       m_TAI(PX_PLMN_IDENTITY,
+                                             PX_TAC)),
+                        PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,
+                        PX_CSG_ID,
                         hybrid
                 ));
                  
@@ -5332,7 +5334,7 @@ module S1AP_TCFunctions {
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         intralte,//handover_Type
-                        c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+                        PX_TARGET_TO_SOURCE_TANSPARENT_CONTAINER//TargetToSourceTransparentContainer
                 ));
                 
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict());
@@ -5350,8 +5352,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_04_ENB2() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5603,8 +5603,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_09() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5622,12 +5620,12 @@ module S1AP_TCFunctions {
                         vc_eNB_UE_ID,
                         intralte,
                         m_cause_ran(unspecified),
-                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                        m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
-                                       m_TAI('000001'O,
-                                             '0001'O)),
-                        c_source_ToTarget_TransparentContainer,
-                        '000000000000000000000000001'B
+                                       m_TAI(PX_PLMN_IDENTITY,
+                                             PX_TAC)),
+                        PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,
+                        PX_CSG_ID
                 ));
                  
                 f_recv_HandoverPreparationFailure(
@@ -5691,8 +5689,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_11() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5709,10 +5705,12 @@ module S1AP_TCFunctions {
                     vc_eNB_UE_ID,
                     {m_E_RABToBeSwitchedDLItem(1,-,-,-)},
                     vc_MME_UE_ID,
-                    m_eUTRAN_CGI('000001'O, //plmn id
-                                 '0000000000000000000000000001'B ),//ci
-                    m_TAI('000001'O,'0001'O),
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B)
+                    m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
+                                 PX_CELL_ID ),//cell id
+                    m_TAI(PX_PLMN_IDENTITY,
+                          PX_TAC),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
                  
                 f_recv_PathSwitchRequestAck(
@@ -5737,8 +5735,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_12() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5755,10 +5751,12 @@ module S1AP_TCFunctions {
                     vc_eNB_UE_ID,
                     {m_E_RABToBeSwitchedDLItem(1,-,-,-)},
                     vc_MME_UE_ID,
-                    m_eUTRAN_CGI('000001'O, //plmn id
-                                 '0000000000000000000000000001'B ),//ci
-                    m_TAI('000001'O,'0001'O),
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B)
+                    m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
+                                 PX_CELL_ID ),//cell id
+                    m_TAI(PX_PLMN_IDENTITY,
+                          PX_TAC),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
                  
                 f_recv_PathSwitchRequestFailure(
@@ -5783,8 +5781,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_13() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5803,10 +5799,12 @@ module S1AP_TCFunctions {
                          m_E_RABToBeSwitchedDLItem(1,-,-,-)
                     },
                     vc_MME_UE_ID,
-                    m_eUTRAN_CGI('000001'O, //plmn id
-                                 '0000000000000000000000000001'B ),//ci
-                    m_TAI('000001'O,'0001'O),
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B)
+                    m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
+                                 PX_CELL_ID ),//cell id
+                    m_TAI(PX_PLMN_IDENTITY,
+                          PX_TAC),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
                  
                 f_recv_PathSwitchRequestFailure(
@@ -5831,8 +5829,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_14() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5849,10 +5845,12 @@ module S1AP_TCFunctions {
                     vc_eNB_UE_ID,
                     {m_E_RABToBeSwitchedDLItem(1,-,-,-)},
                     vc_MME_UE_ID,
-                    m_eUTRAN_CGI('000001'O, //plmn id
-                                 '0000000000000000000000000001'B ),//ci
-                    m_TAI('000001'O,'0001'O),
-                    m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B)
+                    m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
+                                 PX_CELL_ID ),//cell id
+                    m_TAI(PX_PLMN_IDENTITY,
+                          PX_TAC),
+                    m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
+                                             PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
                  
                 f_recv_PathSwitchRequestFailure(
@@ -5877,8 +5875,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_15() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5896,11 +5892,11 @@ module S1AP_TCFunctions {
                         vc_eNB_UE_ID,
                         intralte,
                         m_cause_ran(unspecified),
-                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                        m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
-                                       m_TAI('000001'O,
-                                             '0001'O)),
-                        c_source_ToTarget_TransparentContainer
+                                       m_TAI(PX_PLMN_IDENTITY,
+                                             PX_TAC)),
+                        PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER
                 ));
                  
                 f_recv_HandoverCommand(
@@ -5908,7 +5904,7 @@ module S1AP_TCFunctions {
                         vc_MME_UE_ID,
                         vc_eNB_UE_ID,
                         intralte,//handover_Type
-                        c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
+                        PX_TARGET_TO_SOURCE_TANSPARENT_CONTAINER//TargetToSourceTransparentContainer
                 ));
                 
                 f_send_HandoverCancel(
@@ -5939,8 +5935,6 @@ module S1AP_TCFunctions {
              */
             function f_TC_S1AP_MME_HAS_16() runs on S1APComponent { 
                 // Local variables
-                const Source_ToTarget_TransparentContainer c_source_ToTarget_TransparentContainer := '12121212'O;
-                const Target_ToSource_TransparentContainer c_target_ToSource_TransparentContainer := '12121212'O;
                 
                 // Preamble
                 f_S1AP_mme_init();
@@ -5958,20 +5952,20 @@ module S1AP_TCFunctions {
                         vc_eNB_UE_ID,
                         intralte,
                         m_cause_ran(unspecified),
-                        m_TargeteNB_ID(m_Global_ENB_ID('000001'O,
+                        m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
-                                       m_TAI('000001'O,
-                                             '0001'O)),
-                        c_source_ToTarget_TransparentContainer
+                                       m_TAI(PX_PLMN_IDENTITY,
+                                             PX_TAC)),
+                        PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER
                 ));
                  
-//                f_recv_HandoverCommand(
-//                    mw_HandoverCommandIEs(
-//                        vc_MME_UE_ID,
-//                        vc_eNB_UE_ID,
-//                        intralte,//handover_Type
-//                        c_target_ToSource_TransparentContainer//TargetToSourceTransparentContainer
-//                ));
+                f_recv_HandoverCommand(
+                    mw_HandoverCommandIEs(
+                        vc_MME_UE_ID,
+                        vc_eNB_UE_ID,
+                        intralte,//handover_Type
+                        PX_TARGET_TO_SOURCE_TANSPARENT_CONTAINER//TargetToSourceTransparentContainer
+                ));
                 
                 f_send_eNB_Status_Transfer(
                     m_eNB_Status_TransferIEs(
@@ -6329,7 +6323,7 @@ module S1AP_TCFunctions {
                                 { PX_MME_CODE }
                             )
                         }, 
-                        PX_RELATIVE_MME_CAPAVCITY
+                        PX_RELATIVE_MME_CAPACITY
                 ));
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 

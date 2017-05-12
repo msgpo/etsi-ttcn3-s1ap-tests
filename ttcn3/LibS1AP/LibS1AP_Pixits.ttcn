@@ -109,7 +109,7 @@ module LibS1AP_Pixits {
      * @desc The relative processing capacity of an MME with respect to the other MMEs in the pool in order to load-balance MMEs within a pool defined in TS 23.401.
      * @see ETSI TS 136 413 Clause 9.2.3.17 Relative MME Capacity
      */
-    modulepar RelativeMMECapacity PX_RELATIVE_MME_CAPAVCITY := 128;
+    modulepar RelativeMMECapacity PX_RELATIVE_MME_CAPACITY := 128;
     
     /** 
      * @desc The Message Identifier IE identifies a warning message.
@@ -200,7 +200,7 @@ module LibS1AP_Pixits {
     /** @desc The identifier of the Closed Subscriber Group, as defined in TS 23.003.
      * @see ETSI TS 136 413 Clause 9.2.1.62 CSG Id
      */
-    modulepar Bit27 PX_CGS_ID := '000000000000000000000000000'B;
+    modulepar Bit27 PX_CSG_ID := '000000000000000000000000000'B;
     
     /** @desc The UE Identity Index value IE is used by the eNB to calculate the Paging Frame TS 36.304.
      * @see ETSI TS 136 413 Clause 9.2.3.10 UE Identity Index value
@@ -221,6 +221,16 @@ module LibS1AP_Pixits {
      * @see ETSI TS 136 413 Clause 9.2.1.40 UE Security Capabilities
      */
     modulepar EncryptionAlgorithms PX_UNSUPPORTED_ENCRYPTION_ALGORITHM := '1111111111111111'B;
+    
+    /** @desc Indicates a supported encription algorithm.
+     * @see ETSI TS 136 413 Clause 9.2.1.40 UE Security Capabilities
+     */
+    modulepar EncryptionAlgorithms PX_ENCRYPTION_ALGORITHM := '0101010101010101'B;
+    
+    /** @desc Indicates a supported integrity protection algorithm.
+     * @see ETSI TS 136 413 Clause 9.2.1.40 UE Security Capabilities
+     */
+    modulepar IntegrityProtectionAlgorithms PX_INTEGRITY_PROTECTION_ALGORITHM := '0101010101010101'B;
     
     /** @desc Indicates the procedure value.
      * @see ETSI TS 136 413 Clause 9.2.1.21 Criticality Diagnostics
@@ -248,6 +258,16 @@ module LibS1AP_Pixits {
     /** @desc Indicates the Downlink GTP TEID.
      */
     modulepar GTP_TEID PX_DL_GTP_TEID := '00000000'O;
+    
+    /** @desc Indicates the source_ToTarget_TransparentContainer value.
+     *  @see ETSI TS 136 413 Clause 9.2.1.56 Source to Target Transparent Container
+     */
+    modulepar Source_ToTarget_TransparentContainer PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER := '12121212'O;
+    
+    /** @desc Indicates the target_ToSource_TransparentContainer value.
+     *  @see ETSI TS 136 413 Clause 9.2.1.57 Target to Source Transparent Container
+     */
+    modulepar Target_ToSource_TransparentContainer PX_TARGET_TO_SOURCE_TANSPARENT_CONTAINER := '12121212'O;
     
 } // End of module LibS1AP_Pixits
 

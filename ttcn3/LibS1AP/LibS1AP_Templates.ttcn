@@ -5922,13 +5922,6 @@ module LibS1AP_Templates {
                 gTP_TEID := p_gTP_TEID,
                 nAS_PDU := p_nAS_PDU,
                 iE_Extensions := p_iE_Extensions
-                
-//              {{
-//
-//                  id := S1AP_Constants.id_Correlation_ID,
-//                  criticality := ignore,
-//                  extensionValue := {Correlation_ID := '01020304'O}
-//                            }}
             } // End of template m_E_RABToBeSetupItemBearerSUReq
             
             /**
