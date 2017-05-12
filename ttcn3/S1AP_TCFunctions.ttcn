@@ -4503,7 +4503,7 @@ module S1AP_TCFunctions {
                         {
                             m_E_RABToBeModifiedItemBearerModInd(
                                 c_E_RAB_ID_A,
-                                '0'B, // TODO PIXIT for unacceptatable value
+                                PX_INVALID_TPORT_LAYER_ADDR,
                                 -
                             )
                         }
