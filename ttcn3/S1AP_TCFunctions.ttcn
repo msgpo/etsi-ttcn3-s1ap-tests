@@ -1973,7 +1973,7 @@ module S1AP_TCFunctions {
                             ltetoutran,//handover_Type
                             -,//Cause
                             -,//TargetId
-                            -//TODO Check if SourceRNCToTargetRNCTransparentContainer with UE History Information is present
+                            -// Value will be checked during validation if SourceRNCToTargetRNCTransparentContainer with UE History Information is present
                     ));
                     f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 }
@@ -2013,7 +2013,7 @@ module S1AP_TCFunctions {
                             ltetogeran,//handover_Type
                             -,//Cause
                             -,//TargetId
-                            -//TODO Check if SourceBSSToTargetBSSTransparentContainer
+                            -// value will be checked during validation if SourceBSSToTargetBSSTransparentContainer is present
                     ));
                     f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 }
