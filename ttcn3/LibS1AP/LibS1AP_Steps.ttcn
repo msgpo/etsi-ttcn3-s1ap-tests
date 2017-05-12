@@ -1134,6 +1134,15 @@ module LibS1AP_Steps {
         ) runs on S1APComponent {
             f_send_S1AP_initiatingMessage(m_HandoverRequest(p_value))
         } // End of function f_send_HandoverRequest
+
+        /**
+         * @desc Send S1AP Message f_send_HandoverRequestAcknowledge
+         * @param p_value Send template with IE for HandoverRequestAcknowledge
+         */
+        function f_send_HandoverRequestAcknowledge(in template (value) RecordOf_ProtocolIE p_value
+        ) runs on S1APComponent {
+            f_send_S1AP_successfulOutcome(m_HandoverRequestAcknowledge(p_value))
+        } // End of function f_send_HandoverRequestAcknowledge
         
         /**
          * @desc Send S1AP Message f_send_HandoverCancel
@@ -1839,12 +1848,12 @@ module LibS1AP_Steps {
             
             /**
              * @desc Trigger a E-RAB Release procedure
-             * @param TODO
+             * @param
              * @return true on success, false otherwise
              */
-			external function fx_eNB_erab_Release_indication_procedure( in boolean p_param) return boolean;
+			external function fx_eNB_erab_Release_indication_procedure() return boolean;
             
-            external function fx_eNB_erab_modification_indication_procedure ( in boolean p_param) return boolean;
+            external function fx_eNB_erab_modification_indication_procedure () return boolean;
             
         } // End of group mmeRole
         

@@ -849,7 +849,7 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
                 // 1. to indicate a LPPa Transport procedure using a UE associated signalling
-                if (fx_eNB_erab_Release_indication_procedure(false) == false) {
+                if (fx_eNB_erab_Release_indication_procedure() == false) {
                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     f_recv_E_RABReleaseIndication(mw_E_RABReleaseIndicationIEs(
@@ -885,7 +885,7 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
                 // 1. to indicate a LPPa Transport procedure using a UE associated signalling
-                if (fx_eNB_erab_Release_indication_procedure(false) == false) {
+                if (fx_eNB_erab_Release_indication_procedure() == false) {
                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     f_recv_E_RABReleaseIndication(mw_E_RABReleaseIndicationIEs(
@@ -1015,7 +1015,7 @@ module S1AP_TCFunctions {
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
                 // 1. to indicate a LPPa Transport procedure using a UE associated signalling
-                if (fx_eNB_erab_modification_indication_procedure(false) == false) {
+                if (fx_eNB_erab_modification_indication_procedure() == false) {
                    f_selfOrClientSyncAndVerdict(c_tbDone, e_error); 
                 } else {
                     f_recv_E_RABModificationIndication(mw_E_RABModificationIndicationIEs(

@@ -227,6 +227,29 @@ module LibS1AP_Templates {
                         m_cSGMembershipStatus_IE(p_cSGMembershipStatu_value)
                     } // End of template m_HandoverReqIEs_cSGMembershipStatus
                     
+                    /**
+                     * @desc Send template for SuccessfulOutcome message with Handover Request Acknowledge payload
+                     * @param p_value           The protocol information elements.
+                     */
+                    template (value) SuccessfulOutcome m_HandoverRequestAcknowledge(
+                                                                           in template (value) RecordOf_ProtocolIE p_value) := {
+                        procedureCode := id_HandoverResourceAllocation,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := valueof(p_value)}
+                    } // End of template m_HandoverRequestAcknowledge
+    
+                    template (value) RecordOf_ProtocolIE m_HandoverReqAckIEs(
+                            in template (value) MME_UE_S1AP_ID p_MME_value,
+                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                            in template (value) E_RABAdmittedList p_E_RABAdmittedList,
+                            in template (value) Target_ToSource_TransparentContainer p_target_ToSource_TransparentContainer
+                            
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_E_RABTAdmitedItemIEs(p_E_RABAdmittedList),
+                        m_target_ToSource_TransparentContainer_IE(p_target_ToSource_TransparentContainer)
+                    } // End of template m_HandoverReqIEs
                     
                 }// End of group HandoverResourceAllocation
                 
@@ -4358,6 +4381,18 @@ module LibS1AP_Templates {
                     criticality := reject,
                     value_ := { RecordOf_E_RABToBeSetupItemHOReq := valueof(p_value) }
                 } // End of template m_E_RABToBeSetupListHOReq
+                
+                /**
+                 * @desc Send template for E_RABTAdmitedItemIEs protocol IE
+                 * @param p_value  Protocol IE value. Default: E_RABTAdmitedItem
+                 */
+                template (value) ProtocolIE m_E_RABTAdmitedItemIEs(
+                                                                 in template (value) E_RABAdmittedList p_value
+                ) := {
+                    id := S1AP_Constants.id_E_RABAdmittedList,
+                    criticality := reject,
+                    value_ := { E_RABAdmittedList := valueof(p_value) }
+                } // End of template m_E_RABTAdmitedItemIEs
                 
                 /**
                  * @desc Send template for E-RABToBeSwitchedDLList protocol IE
