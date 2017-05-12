@@ -619,6 +619,26 @@ module S1AP_TestCases {
          */
         group Handover_signalling_group {
             
+            /**
+             * @desc Verify that the IUT is able to send a HANDOVER_REQUIRED request containing Handover Type IE with IntraLTE to indicate handover preparation procedure.
+             * <pre>
+             * Pics Selection: A.3/3.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a handover preparation procedure
+             *         sends a HANDOVER_REQUIRED
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Handover_Type
+             *                 indicating IntraLTE
+             *             containing a Cause
+             *             containing a Target ID
+             *             containing a Source_to_Target_Transparent_Container.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TC_S1AP_eNB_HAS_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.4.1.2¶2 and 9.1.5.1
+             */
             testcase TC_S1AP_eNB_HAS_01() runs on S1AP system TestAdapter { 
                 // Local variables
                 var S1AP v_s1ap_enb; 
@@ -642,6 +662,28 @@ module S1AP_TestCases {
                 
             } // End of testcase TC_S1AP_eNB_HAS_01
             
+            /**
+             * @desc Verify that the IUT is able to send a HANDOVER_REQUIRED request containing Handover Type IE with LTEtoUTRAN to indicate handover preparation procedure.
+             * <pre>
+             * Pics Selection: A.3/3.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a handover preparation procedure
+             *         sends a HANDOVER_REQUIRED
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Handover_Type
+             *                 indicating LTEtoUTRAN
+             *             containing a Cause
+             *             containing a Target ID
+             *             containing a Source_to_Target_Transparent_Container
+             *                 containing a Source RNC_to_Target RNC_Transparent_Container
+             *                     indicating a UE History Information.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TC_S1AP_eNB_HAS_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.4.1.2¶3 and 9.1.5.1, Clause 9.2.1.28
+             */
             testcase TC_S1AP_eNB_HAS_02() runs on S1AP system TestAdapter { 
                 // Local variables
                 var S1AP v_s1ap_enb; 
@@ -665,6 +707,27 @@ module S1AP_TestCases {
                 
             } // End of testcase TC_S1AP_eNB_HAS_02
             
+            /**
+             * @desc Verify that the IUT is able to send a HANDOVER_REQUIRED request containing Handover Type IE with LTEtoGERAN to indicate handover preparation procedure.
+             * <pre>
+             * Pics Selection: A.3/3.1
+             * Configuration: CF_S1-MME
+             *     Ensure that the IUT
+             *         to indicate a handover preparation procedure
+             *         sends a HANDOVER_REQUIRED
+             *             containing an eNB_UE_S1AP_ID
+             *             containing an eNB_UE_S1AP_ID
+             *             containing a Handover_Type
+             *                 indicating LTEtoGERAN
+             *             containing a Cause
+             *             containing a Target ID
+             *             containing a Source_to_Target_Transparent_Container
+             *                 containing a Source BSS_to_Target BSS_Transparent_Container.
+             * </pre>
+             * 
+             * @see       ETSI TS 103 497-2 TC_S1AP_eNB_HAS_01
+             * @reference ETSI TS 136 413 V13.4.0 Clause 8.4.1.2¶3, and 9.1.5.1 and Clause 11.3.79
+             */
             testcase TC_S1AP_eNB_HAS_03() runs on S1AP system TestAdapter { 
                 // Local variables
                 var S1AP v_s1ap_enb; 

@@ -1454,7 +1454,7 @@ module LibS1AP_Steps {
                      )
                  }
             ));
-            f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs_FailedToSetupList(
+            f_recv_E_RABSetupResponse(mw_E_RABSetupResIEs_FailedToSetupList_E_RABSetupItemBearerSURes(
                 vc_MME_UE_ID,
                 vc_eNB_UE_ID,
                 {
