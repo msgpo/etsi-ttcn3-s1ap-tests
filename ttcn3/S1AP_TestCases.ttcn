@@ -612,7 +612,7 @@ module S1AP_TestCases {
             } // End of testcase TC_S1AP_eNB_CMP_19
             
         } // End of group Context_Management_group
-                    
+        
         /**
          * @desc NAS transport group
          * @see ETSI TS 103 497-2 Clause 5.2.2.1.6   NAS transport group
