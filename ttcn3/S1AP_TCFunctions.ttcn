@@ -23,7 +23,6 @@ module S1AP_TCFunctions {
     import from LibS1AP_Templates all;
     import from LibS1AP_Interface all;
     import from LibS1AP_Steps all;
-    import from LibS1AP_Pixits all;
 
     // S1AP_Ats
     import from S1AP_Steps all;
