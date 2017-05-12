@@ -1470,6 +1470,31 @@ module LibS1AP_Steps {
                 }
             ));
         } // End of function f_rABSetupRequest
+
+        /**
+         * @desc Setup an initial Context E-RAB Setup procedure
+         */
+        function f_rABInitialContextSetup(
+                     in template (value) RecordOf_E_RABToBeSetupItemCtxtSUReq p_RecordOf_E_RABToBeSetupItemCtxt_value
+                ) runs on S1APComponent {
+            f_send_InitialContext_SetupRequest(m_InitialContextSetupReqIEs(
+                vc_MME_UE_ID,
+                vc_eNB_UE_ID,
+                m_UEAggregateMaximumBitrate(1,1),
+                p_RecordOf_E_RABToBeSetupItemCtxt_value,
+                m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
+                m_securityKey
+            ));
+
+            f_recv_InitialContext_SetupResponse(mw_InitialContextSetupResIEs(
+                vc_MME_UE_ID,
+                vc_eNB_UE_ID,
+                {
+                    mw_E_RABSetupItemBearerSURes
+                }
+            ));
+        } // End of function f_rABInitialContextSetup
+
         
         /**
          * @desc Setup a full E-RAB Release procedure
