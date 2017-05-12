@@ -1215,6 +1215,16 @@ module LibS1AP_Templates {
                            mw_nasSecurityParametersToEutran_IE(p_nasSecurityParametersToEutran_value)
                     } // End of template mw_HandoverCommandIEs_NASSecurity
                     
+                    template (present) RecordOf_ProtocolIE mw_HandoverCommandIEs_ERABSubj2FwList(
+                        template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                        template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                        template (present) HandoverType p_HandoverType_value := ?,
+                        template (present) Target_ToSource_TransparentContainer p_Target_ToSource_TransparentContainer_value := ?,
+                        template (present) E_RABSubjecttoDataForwardingList p_E_RABSubjecttoDataForwardingList_value := ?
+                       ) modifies mw_HandoverCommandIEs:= {
+                           mw_E_RABSubjecttoDataForwardingList_IE(p_E_RABSubjecttoDataForwardingList_value)
+                    } // End of template mw_HandoverCommandIEs_ERABSubj2FwList
+
                     template (present) RecordOf_ProtocolIE mw_HandoverCommandIEs_T2STransCont2nd_NASSecurity(
                         template (present) MME_UE_S1AP_ID p_MME_value := ?,
                         template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
@@ -5796,6 +5806,14 @@ module LibS1AP_Templates {
                 criticality := reject,
                 value_ := { RecordOf_E_RABToBeModifiedItemBearerModInd := p_value}
             }
+            
+            template (present) ProtocolIE mw_E_RABSubjecttoDataForwardingList_IE(
+                template (present) E_RABSubjecttoDataForwardingList p_value := ?
+	        ) := {
+	            id := S1AP_Constants.id_E_RABSubjecttoDataForwardingList,
+	            criticality := reject,
+	            value_ := { E_RABSubjecttoDataForwardingList := p_value}
+	        }
             
             /**
              * @desc Receive template for SuccessfulOutcome/R-RAB_Setup message

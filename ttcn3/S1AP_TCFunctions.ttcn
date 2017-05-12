@@ -357,7 +357,17 @@ module S1AP_TCFunctions {
                         c_transportLayerAddress,
                         c_gTP_TEID,
                         c_nAS_PDU,
-                        {m_correlationID_IE('01020304'O), m_SIPTO_correlationID_IE('01020304'O)} // iE_Extensions
+                        //{m_correlationID_IE('01020304'O), m_SIPTO_correlationID_IE('01020304'O)} // iE_Extensions
+                        // Following code replaces upper commented line - IEs are extensionList type.
+                        {{id := 156,//S1AP_Constants.id_Correlation_ID,
+                          criticality := ignore,
+                          extensionValue := {Correlation_ID := '01020304'O}
+                         },
+                         {id := 183,// S1AP_Constants.id_SIPTO_Correlation_ID,
+                          criticality := ignore,
+                          extensionValue := {Correlation_ID := '01020304'O}
+                         }
+                        }
                     )}
                 ));
                 
@@ -1424,14 +1434,24 @@ module S1AP_TCFunctions {
                     vc_MME_UE_ID,
                     vc_eNB_UE_ID,
                     m_UEAggregateMaximumBitrate(1,1),
-                    {m_E_RABToBeSetupItemBearerSUReq (
+                    {m_E_RABToBeSetupItemCtxtSUReq(
                         c_E_RAB_ID_A,
                         m_e_RABlevelQoSParameters
                         (1),
                         c_transportLayerAddress,
                         c_gTP_TEID,
                         c_nAS_PDU,
-                        {m_correlationID_IE('01020304'O), m_SIPTO_correlationID_IE('01020304'O)} // iE_Extensions
+                        //{m_correlationID_IE('01020304'O), m_SIPTO_correlationID_IE('01020304'O)} // iE_Extensions
+                        // Following code replaces upper commented line - IEs are extensionList type. 
+                        {{id := 156,//S1AP_Constants.id_Correlation_ID,
+                          criticality := ignore,
+                          extensionValue := {Correlation_ID := '01020304'O}
+                         },
+                         {id := 183,// S1AP_Constants.id_SIPTO_Correlation_ID,
+                          criticality := ignore,
+                          extensionValue := {Correlation_ID := '01020304'O}
+                         }
+                        }
                     )},
                     m_UESecurityCapabilities('0101010101010101'B,'0101010101010101'B),
                     m_securityKey
@@ -2041,8 +2061,50 @@ module S1AP_TCFunctions {
                         )}
                     ));
                     
-                    //TODO check case1 and case2 option
-                    
+                    if (PX_VA==1)//cASE 1
+                    {
+                        f_recv_HandoverCancel(
+                            mw_HandoverCancelIEs(
+                                vc_MME_UE_ID,
+                                vc_eNB_UE_ID,
+                                ?
+                        ));
+                        
+                        f_recv_E_RABModifiedResponse(mw_E_RABModifiedResIEs(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            {
+                                mw_E_RABModifyItemBearerModRes(
+                                    c_E_RAB_ID_A
+                                )
+                            }
+                        ));
+                    } 
+                    else
+                    if (PX_VA==2)//cASE 2
+                    {
+                        f_recv_E_RABModifiedResponse(mw_E_RABModifiedResIEs_FailedToModifyList(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            {
+                                mw_E_RABItem(
+                                    c_E_RAB_ID_A,
+                                    {
+                                        radioNetwork := (s1_intra_system_handover_triggered,
+                                                     s1_inter_system_handover_triggered)
+                                    }
+                                )
+                            }
+                        ));
+
+                        f_recv_HandoverCommand(mw_HandoverCommandIEs_ERABSubj2FwList(
+                            vc_MME_UE_ID,
+                            vc_eNB_UE_ID,
+                            intralte,
+                            ?,
+                            ?
+                        ));
+                    }
                     
                     f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
                 }
@@ -2783,11 +2845,23 @@ module S1AP_TCFunctions {
                         ),
                         m_resetType_partOfS1_Interface(
                             {
-                                m_uE_associatedLogicalS1_ConnectionItemResAck_IE(
+                                /*m_uE_associatedLogicalS1_ConnectionItemResAck_IE(
                                     m_uE_associatedLogicalS1_ConnectionItem(
                                         0,
                                         0
-                                ))
+                                )),*/
+                         // Following code replaces upper commented line due to validation check error
+                         //expression at [0].criticality is not of type 'enumerated 
+                         // Type_824701419588_UE_associatedLogicalS1_ConnectionListRes_3 {
+                         //  reject(0),
+                         //  ignore(1),
+                         //  notify(2)
+                         //}'
+                                {
+                                    id := 91,//S1AP_Constants.id_UE_associatedLogicalS1_ConnectionItem,
+                                    criticality := reject,
+                                    value_ := { UE_associatedLogicalS1_ConnectionItem := valueof(m_uE_associatedLogicalS1_ConnectionItem(0,0))}
+                                }
                             }
                         )
                 ));
