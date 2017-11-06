@@ -2633,7 +2633,7 @@ module S1AP_TCFunctions {
                             -,
                             mw_TAI(
                                 PX_PLMN_IDENTITY, 
-                                PX_TAC
+                                PX_TACode
                             ),
                             mw_eUTRAN_CGI(
                                 PX_PLMN_IDENTITY, 
@@ -2670,7 +2670,7 @@ module S1AP_TCFunctions {
                         -,
                         mw_TAI(
                             PX_PLMN_IDENTITY, 
-                            PX_TAC
+                            PX_TACode
                         ),
                         mw_eUTRAN_CGI(
                             PX_PLMN_IDENTITY, 
@@ -2698,7 +2698,7 @@ module S1AP_TCFunctions {
                             ),
                             mw_TAI(
                                 PX_PLMN_IDENTITY, 
-                                PX_TAC
+                                PX_TACode
                     )));
                 }
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
@@ -2962,7 +2962,7 @@ module S1AP_TCFunctions {
                             ),
                             {
                                 mw_supportedTAs_Item(
-                                    PX_TAC,
+                                    PX_TACode,
                                     {
                                         PX_PLMN_IDENTITY
                                     } 
@@ -3017,7 +3017,7 @@ module S1AP_TCFunctions {
                             ),
                             {
                                 mw_supportedTAs_Item(
-                                    PX_TAC,
+                                    PX_TACode,
                                     {
                                         PX_PLMN_IDENTITY
                                     } 
@@ -3365,7 +3365,7 @@ module S1AP_TCFunctions {
                         ),
                         mw_TAI(
                             PX_PLMN_IDENTITY, 
-                            PX_TAC
+                            PX_TACode
                         ),
                         mw_request_Type(
                             direct,
@@ -3416,7 +3416,7 @@ module S1AP_TCFunctions {
                         ),
                         mw_TAI(
                             PX_PLMN_IDENTITY, 
-                            PX_TAC
+                            PX_TACode
                         ),
                         mw_request_Type(
                             change_of_serve_cell,
@@ -3467,7 +3467,7 @@ module S1AP_TCFunctions {
                         ),
                         mw_TAI(
                             PX_PLMN_IDENTITY, 
-                            PX_TAC
+                            PX_TACode
                         ),
                         mw_request_Type(
                             stop_change_of_serve_cell,
@@ -3629,7 +3629,7 @@ module S1AP_TCFunctions {
                             { 
                                 mw_TAI(
                                     PX_PLMN_IDENTITY, 
-                                    PX_TAC
+                                    PX_TACode
                                 ) 
                             },
                             { PX_EMERGENCY_AREA_ID }
@@ -5176,7 +5176,7 @@ module S1AP_TCFunctions {
                         m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
                                        m_TAI(PX_PLMN_IDENTITY,
-                                             PX_TAC)),
+                                             PX_TACode)),
                         PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER
                 ));
                  
@@ -5322,7 +5322,7 @@ module S1AP_TCFunctions {
                         m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
                                        m_TAI(PX_PLMN_IDENTITY,
-                                             PX_TAC)),
+                                             PX_TACode)),
                         PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,
                         PX_CSG_ID,
                         hybrid
@@ -5622,7 +5622,7 @@ module S1AP_TCFunctions {
                         m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
                                        m_TAI(PX_PLMN_IDENTITY,
-                                             PX_TAC)),
+                                             PX_TACode)),
                         PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER,
                         PX_CSG_ID
                 ));
@@ -5707,7 +5707,7 @@ module S1AP_TCFunctions {
                     m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
                                  PX_CELL_ID ),//cell id
                     m_TAI(PX_PLMN_IDENTITY,
-                          PX_TAC),
+                          PX_TACode),
                     m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
                                              PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
@@ -5753,7 +5753,7 @@ module S1AP_TCFunctions {
                     m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
                                  PX_CELL_ID ),//cell id
                     m_TAI(PX_PLMN_IDENTITY,
-                          PX_TAC),
+                          PX_TACode),
                     m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
                                              PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
@@ -5801,7 +5801,7 @@ module S1AP_TCFunctions {
                     m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
                                  PX_CELL_ID ),//cell id
                     m_TAI(PX_PLMN_IDENTITY,
-                          PX_TAC),
+                          PX_TACode),
                     m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
                                              PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
@@ -5847,7 +5847,7 @@ module S1AP_TCFunctions {
                     m_eUTRAN_CGI(PX_PLMN_IDENTITY,//plmn id
                                  PX_CELL_ID ),//cell id
                     m_TAI(PX_PLMN_IDENTITY,
-                          PX_TAC),
+                          PX_TACode),
                     m_UESecurityCapabilities(PX_ENCRYPTION_ALGORITHM,
                                              PX_INTEGRITY_PROTECTION_ALGORITHM)
                 ));
@@ -5894,7 +5894,7 @@ module S1AP_TCFunctions {
                         m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
                                        m_TAI(PX_PLMN_IDENTITY,
-                                             PX_TAC)),
+                                             PX_TACode)),
                         PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER
                 ));
                  
@@ -5954,7 +5954,7 @@ module S1AP_TCFunctions {
                         m_TargeteNB_ID(m_Global_ENB_ID(PX_PLMN_IDENTITY,//'000001'O,
                                                        m_ENB_ID_macro),
                                        m_TAI(PX_PLMN_IDENTITY,
-                                             PX_TAC)),
+                                             PX_TACode)),
                         PX_SOURCE_TO_TARGET_TANSPARENT_CONTAINER
                 ));
                  
@@ -6305,7 +6305,7 @@ module S1AP_TCFunctions {
                         ),
                         {
                             m_supportedTAs_Item(
-                                PX_TAC,
+                                PX_TACode,
                                 {
                                     PX_PLMN_IDENTITY
                                 } 
@@ -6353,7 +6353,7 @@ module S1AP_TCFunctions {
                         ),
                         {
                             m_supportedTAs_Item(
-                                PX_TAC,
+                                PX_TACode,
                                 {
                                     PX_PLMN_IDENTITY,
                                     PX_PLMN_IDENTITY_UNKNOWN
@@ -6396,7 +6396,7 @@ module S1AP_TCFunctions {
                         ),
                         {
                             m_supportedTAs_Item(
-                                PX_TAC,
+                                PX_TACode,
                                 {
                                     PX_PLMN_IDENTITY
                                 } 
@@ -6435,7 +6435,7 @@ module S1AP_TCFunctions {
                         ),
                         {
                             m_supportedTAs_Item(
-                                PX_TAC,
+                                PX_TACode,
                                 {
                                     PX_PLMN_IDENTITY_UNKNOWN
                                 } 
@@ -6481,7 +6481,7 @@ module S1AP_TCFunctions {
                             ),
                             {
                                 mw_supportedTAs_Item(
-                                    PX_TAC,
+                                    PX_TACode,
                                     {
                                         PX_PLMN_IDENTITY
                                     } 
