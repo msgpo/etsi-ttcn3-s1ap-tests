@@ -1893,15 +1893,6 @@ module LibS1AP_Steps {
              * @desc 
              * @verdict 
              */
-            function f_postambleS1AP_MME()
-            runs on S1APComponent {
-                // Nothing to do
-            } // End of function f_postambleS1AP_MME
-            
-            /**
-             * @desc 
-             * @verdict 
-             */
             function f_postambleS1AP_eNB()
             runs on S1APComponent {
                 // Nothing to do

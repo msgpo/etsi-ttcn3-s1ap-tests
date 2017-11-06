@@ -2958,6 +2958,18 @@ module LibS1AP_Templates {
                      * @desc Receive template for InitiatingMessage message with UPLINK_NAS_TRANSPORT payload
                      * @param p_value           Expected protocol information elements. Default: ?
                      */
+                    template (value) InitiatingMessage m_uplink_nAS_Transport(
+                                                                              in template (value) RecordOf_ProtocolIE p_value
+                    ) := {
+                        procedureCode := id_uplinkNASTransport,
+                        criticality := reject,
+                        value_ := {RecordOf_ProtocolIE := p_value}
+                    } // End of template m_uplink_nAS_Transport
+                    
+                    /**
+                     * @desc Receive template for InitiatingMessage message with UPLINK_NAS_TRANSPORT payload
+                     * @param p_value           Expected protocol information elements. Default: ?
+                     */
                     template (present) InitiatingMessage mw_uplink_nAS_Transport(
                                                                                    template (present) RecordOf_ProtocolIE p_value := ?
                     ) := {
@@ -2965,6 +2977,26 @@ module LibS1AP_Templates {
                         criticality := reject,
                         value_ := {RecordOf_ProtocolIE := p_value}
                     } // End of template mw_uplink_nAS_Transport
+                    
+                    /**
+                     * @desc Receive template for UPLINK_NAS_TRANSPORT message
+                     * @param p_MME_value   The expected MME UE S1AP ID value. Default: ?
+                     * @param p_eNB_value   The expected eNB UE S1AP ID value. Default: ?
+                     * @param p_nasPdu      The expected NAS-PDU value. Default: ?
+                     */
+                    template (value) RecordOf_ProtocolIE m_uplink_nAS_TransportIEs(
+                                                                                   in template (value) MME_UE_S1AP_ID p_MME_value,
+                                                                                   in template (value) ENB_UE_S1AP_ID p_eNB_value,
+                                                                                   in template (value) octetstring p_nasPdu,
+                                                                                   in template (value) EUTRAN_CGI p_eUTRAN_CGI,
+                                                                                   in template (value) TAI p_tAI
+                    ) := {
+                        m_MME_UE_S1AP_ID(p_MME_value),
+                        m_eNB_UE_S1AP_ID(p_eNB_value),
+                        m_nAS_Pdu_IE(p_nasPdu),
+                        m_eUTRAN_CGI_IE(p_eUTRAN_CGI),
+                        m_tAI_IE(p_tAI)
+                    } // End of template m_uplink_nAS_TransportIEs
                     
                     /**
                      * @desc Receive template for UPLINK_NAS_TRANSPORT message
@@ -4088,6 +4120,19 @@ module LibS1AP_Templates {
                 value_ := {UESecurityCapabilities := valueof(p_value)}
             } // End of template m_UE_securityCapabilities_IE
 
+            /**
+             * @desc Send template for NAS-PDU
+             * @param p_nasPDU The expected NAS-PDU value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.3.5 NAS-PDU
+             */
+            template (value) ProtocolIE m_nAS_Pdu_IE(
+                                                     in template (value) octetstring p_nasPDU
+            ) := {
+                id := S1AP_Constants.id_NAS_PDU,
+                criticality := reject,
+                value_ := {octetstring := p_nasPDU}
+            } // End of template m_nAS_Pdu_IE
+            
             /**
              * @desc Send template for security key IE
              * @param p_value  SecurityKey value
