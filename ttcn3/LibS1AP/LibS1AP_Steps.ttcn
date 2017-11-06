@@ -1908,6 +1908,15 @@ module LibS1AP_Steps {
                 // Nothing to do
             } // End of function f_postambleS1AP_eNB
             
+            /**
+             * @desc 
+             * @verdict 
+             */
+            function f_postambleS1AP_MME()
+            runs on S1APComponent {
+                // Nothing to do
+            } // End of function f_postambleS1AP_MME
+            
         } // End of group postamble_S1AP
         
     } // End of group postambles

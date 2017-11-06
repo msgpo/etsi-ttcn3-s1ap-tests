@@ -92,7 +92,7 @@ module LibS1AP_Pixits {
      * @desc The TAC is used to uniquely identify a Tracking Area Code.
      * @see ETSI TS 136 413 Clause 9.2.3.7 TAC
      */
-    modulepar TAC PX_TAC := '0000'O;
+    modulepar TAC PX_TACode := '0000'O;
     
     /** 
      * @desc The MME Group ID.
