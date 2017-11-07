@@ -1460,7 +1460,7 @@ module LibS1AP_Steps {
         /**
          * @desc Setup a full E-RAB Setup procedure
          */
-        function f_rABSetupRequest() runs on S1APComponent {
+        function f_rABSetupRequest_recvResponse() runs on S1APComponent {
             f_send_E_RABSetupRequest(m_E_RABSetupReqIEs(
                 vc_MME_UE_ID,
                 vc_eNB_UE_ID,
@@ -1488,7 +1488,25 @@ module LibS1AP_Steps {
                     )
                 }
             ));
-        } // End of function f_rABSetupRequest
+        } // End of function f_rABSetupRequest_recvResponse
+        
+        /**
+         * @desc Setup a full E-RAB Setup procedure
+         */
+        function f_rABSetupRequest_sendResponse() runs on S1APComponent {
+            
+            f_recv_E_RABSetupRequest(mw_E_RABSetupReqIEs(
+                vc_MME_UE_ID,
+                vc_eNB_UE_ID,
+                { mw_E_RABToBeSetupItemBearerSUReq(?,?,?,?,?) }
+            ));
+                             
+            f_send_E_RABSetupResponse(m_E_RABSetupResIEs(
+                vc_MME_UE_ID,
+                vc_eNB_UE_ID,
+                {m_E_RABSetupItemBearerSURes}
+            ));
+        } // End of function f_rABSetupRequest_sendResponse
 
         /**
          * @desc Setup an initial Context E-RAB Setup procedure

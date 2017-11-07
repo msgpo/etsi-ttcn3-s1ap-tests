@@ -400,7 +400,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -439,7 +439,7 @@ module S1AP_TCFunctions {
                 const NAS_PDU c_nAS_PDU := '0000'O;
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -484,7 +484,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -542,7 +542,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
     
@@ -586,7 +586,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -644,7 +644,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -690,7 +690,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -734,7 +734,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -782,7 +782,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -844,7 +844,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -880,7 +880,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -1010,7 +1010,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_enb_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict());
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
 
@@ -1494,7 +1494,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1533,7 +1533,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1579,7 +1579,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1665,7 +1665,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 
-                f_rABSetupRequest();                
+                f_rABSetupRequest_recvResponse();                
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1700,7 +1700,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 
-                f_rABSetupRequest();                
+                f_rABSetupRequest_recvResponse();                
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1737,7 +1737,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 
-                f_rABSetupRequest();                
+                f_rABSetupRequest_recvResponse();                
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1906,7 +1906,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1955,7 +1955,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -1995,7 +1995,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2037,7 +2037,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2133,7 +2133,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2192,7 +2192,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2243,7 +2243,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2294,7 +2294,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2345,7 +2345,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2395,7 +2395,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 // And UE is not exchanged
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2434,7 +2434,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 // And UE is not exchanged
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2482,7 +2482,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2541,7 +2541,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -2617,7 +2617,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -2661,7 +2661,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 // And a NAS procedure is initiated
                 fx_eNB_Initiate_NAS_transport_procedure();
                 f_recv_Initial_UE_Message(
@@ -2720,7 +2720,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 // And UE is not exchanged
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -3130,7 +3130,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -3176,7 +3176,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -3219,7 +3219,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_initiate_handover();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -3259,7 +3259,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_initiate_traceStart();
                 f_initiate_handover();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
@@ -3299,7 +3299,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -3341,7 +3341,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -3390,7 +3390,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -3441,7 +3441,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -3492,7 +3492,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_initiate_handover();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -3798,7 +3798,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -3832,7 +3832,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -4247,7 +4247,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_enb_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_recvResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -4339,7 +4339,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4372,7 +4372,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4406,7 +4406,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4451,7 +4451,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4496,7 +4496,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4541,7 +4541,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4719,7 +4719,7 @@ module S1AP_TCFunctions {
                 
                 // Preamble
                 f_S1AP_mme_init();
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4821,7 +4821,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4860,7 +4860,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4915,7 +4915,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4945,7 +4945,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -4980,7 +4980,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -5017,7 +5017,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -5051,7 +5051,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -5086,7 +5086,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -6016,7 +6016,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -6062,7 +6062,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -6098,7 +6098,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged, and a NAS procedure is initiated.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -6584,7 +6584,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -6641,7 +6641,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -6679,7 +6679,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 fx_MME_Trace_Start_procedure();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -6724,7 +6724,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -6762,7 +6762,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged, and a handover procedure is initiated.
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_initiate_handover();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
@@ -7008,7 +7008,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7042,7 +7042,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7085,7 +7085,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7137,7 +7137,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7193,7 +7193,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7251,7 +7251,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7306,7 +7306,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7363,7 +7363,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
@@ -7412,7 +7412,7 @@ module S1AP_TCFunctions {
                 // Preamble
                 f_S1AP_mme_init();
                 // Preamble action: E-RAB Setup is exchanged
-                f_rABSetupRequest();
+                f_rABSetupRequest_sendResponse();
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
                 
