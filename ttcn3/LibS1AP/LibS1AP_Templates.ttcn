@@ -2780,13 +2780,13 @@ module LibS1AP_Templates {
                                                                                     template (value) octetstring p_nasPdu,
                                                                                     template (value) TAI p_tAI,
                                                                                     template (value) EUTRAN_CGI p_eUTRAN_CGI,
-                                                                                    template (value) Cause p_cause
+                                                                                    template (value) RRC_Establishment_Cause p_rrcCause
                     ) := {
                         m_eNB_UE_S1AP_ID(p_eNB_value),
                         m_nAS_Pdu_IE(p_nasPdu),
                         m_tAI_IE(p_tAI),
                         m_eUTRAN_CGI_IE(p_eUTRAN_CGI),
-                        m_cause_IE(p_cause)
+                        m_rrcEstablishmentCause_IE(p_rrcCause)
                     } // End of template m_initial_uE_MessageIEs
                     
                     /**
@@ -3002,13 +3002,13 @@ module LibS1AP_Templates {
                                                                                     template (present) octetstring p_nasPdu := ?,
                                                                                     template (present) TAI p_tAI := ?,
                                                                                     template (present) EUTRAN_CGI p_eUTRAN_CGI := ?,
-                                                                                    template (present) Cause p_cause := ?
+                                                                                    template (present) RRC_Establishment_Cause p_rrcCause := ?
                     ) := {
                         mw_eNB_UE_S1AP_ID(p_eNB_value),
                         mw_nAS_Pdu_IE(p_nasPdu),
                         mw_tAI_IE(p_tAI),
                         mw_eUTRAN_CGI_IE(p_eUTRAN_CGI),
-                        mw_cause_IE(p_cause)
+                        mw_rrcEstablishmentCause_IE(p_rrcCause)
                     } // End of template mw_initial_uE_MessageIEs
                     
                     /**
@@ -4391,6 +4391,20 @@ module LibS1AP_Templates {
                 criticality := p_criticality,
                 value_ := {CSGMembershipInfo := valueof(p_value)}
             } // End of template m_cSGMembershipInfoIE
+            
+            /**
+             * @desc Send template for RRC_Establishment_Cause protocol IE
+             * @param p_cause  Expected Cause value
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.3a RRC Establishment Cause
+             */
+            template (value) ProtocolIE m_rrcEstablishmentCause_IE(
+                                                   in template (value) RRC_Establishment_Cause p_rrcCause,
+                                                   in template (value) ProtocolIE.criticality p_criticality := ignore
+            ) := {
+                id := S1AP_Constants.id_RRC_Establishment_Cause,
+                criticality := p_criticality,
+                value_ := {RRC_Establishment_Cause := valueof(p_rrcCause)}
+            } // End of template m_rrcEstablishmentCause_IE
             
             
             group E_RAB_IEsend {
@@ -5986,6 +6000,20 @@ module LibS1AP_Templates {
                 criticality := reject,
                 value_ := {RecordOf_ProtocolIE := p_value}
             } // End of template mw_E_RABSetupResponse
+            
+            /**
+             * @desc Receive template for RRC_Establishment_Cause protocol IE
+             * @param p_cause  Expected Cause value. Default: ?
+             * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.3a RRC Establishment Cause
+             */
+            template (present) ProtocolIE mw_rrcEstablishmentCause_IE(
+                                                   in template (present) RRC_Establishment_Cause p_rrcCause,
+                                                   in template (present) ProtocolIE.criticality p_criticality := ignore
+            ) := {
+                id := S1AP_Constants.id_RRC_Establishment_Cause,
+                criticality := p_criticality,
+                value_ := {RRC_Establishment_Cause := p_rrcCause}
+            } // End of template mw_rrcEstablishmentCause_IE
             
                                     
         } // End of group Receive_IEs

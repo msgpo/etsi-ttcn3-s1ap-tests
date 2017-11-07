@@ -2639,7 +2639,7 @@ module S1AP_TCFunctions {
                                 PX_PLMN_IDENTITY, 
                                 PX_CELL_ID
                             ),
-                            mw_cause_ran
+                            ?
                     ));
                 }
                 f_selfOrClientSyncAndVerdict(c_tbDone, f_getVerdict()); 
@@ -2676,7 +2676,7 @@ module S1AP_TCFunctions {
                             PX_PLMN_IDENTITY, 
                             PX_CELL_ID
                         ),
-                        mw_cause_ran
+                        ?
                 ));
                 f_selfOrClientSyncAndVerdict(c_prDone, f_getVerdict()); 
                 log("*** " & __SCOPE__ & ": INFO: Preamble done. ***");
