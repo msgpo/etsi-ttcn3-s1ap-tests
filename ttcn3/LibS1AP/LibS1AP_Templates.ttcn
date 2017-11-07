@@ -543,7 +543,7 @@ module LibS1AP_Templates {
                         m_E_RABToBeSetupListCtxt(p_RecordOf_E_RABToBeSetupItemCtxt_value),
                         m_UE_securityCapabilities_IE(p_uESecurityCapabilities),
                         m_securityKey_IE(p_SecurityKey)
-                    } // End of templaunknown_IDunknown_IDte m_InitialContextSetupReqIEs
+                    } // End of template m_InitialContextSetupReqIEs
                     
                     /**
                      * @desc Send template for InitialContextSetupReq message, with no eNB ID
@@ -606,7 +606,7 @@ module LibS1AP_Templates {
                                                                                                 in template (value) SecurityKey p_SecurityKey
                     ) modifies m_InitialContextSetupReqIEs := {
                         m_Unknown_ID_IE
-                    } // End of template m_InitialContextSetupReqIEs
+                    } // End of template m_InitialContextSetupReqIEs_unknown_ID
                     
                     /**
                      * @desc Send template for InitiatingMessage message with UeContextReleaseRequest payload
@@ -1843,6 +1843,18 @@ module LibS1AP_Templates {
                         mw_UE_securityCapabilities_IE(p_UESecurityCapabilities),                       
                         mw_securityKey_IE(p_SecurityKey)
                     } // End of template mw_InitialContextSetupRequestIEs
+
+                    template (present) RecordOf_ProtocolIE mw_InitialContextSetupRequestIEs_nas(
+                                                                                                template (present) MME_UE_S1AP_ID p_MME_value := ?,
+                                                                                                template (present) ENB_UE_S1AP_ID p_eNB_value := ?,
+                                                                                                template (present) UEAggregateMaximumBitrate p_UEAggregateMaximumBitrate := ?,
+                                                                                                template (present) RecordOf_E_RABToBeSetupItemCtxtSUReq p_RecordOf_E_RABSetupItemCtxt_value := ?,
+                                                                                                template (present) UESecurityCapabilities p_UESecurityCapabilities := ?,
+                                                                                                template (present) SecurityKey p_SecurityKey := ?,
+                                                                                                template (present) octetstring p_nasPDU := ?
+                    ) modifies mw_InitialContextSetupRequestIEs := {
+                        mw_nAS_Pdu_IE(p_nasPDU)
+                    } // End of template mw_InitialContextSetupRequestIEs_nas
 
                     /**
                      * @desc Receive template for UeContextReleaseRequest message
