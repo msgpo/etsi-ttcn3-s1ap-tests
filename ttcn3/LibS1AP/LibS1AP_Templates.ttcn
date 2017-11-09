@@ -332,12 +332,12 @@ module LibS1AP_Templates {
                     } // End of template m_PathSwitchRequest
 
                     template (value) RecordOf_ProtocolIE m_PathSwitchRequestIEs(
-	                    in template (value) ENB_UE_S1AP_ID p_eNB_value,
-		                in template (value) RecordOf_E_RABToBeSwitchedDLItem p_RecordOf_E_RABToBeSwitchedDLItem_value,
-		                in template (value) MME_UE_S1AP_ID p_MME_value,
-		                in template (value) EUTRAN_CGI p_eUtranCgi,
-		                in template (value) TAI p_tai,
-		                in template (value) UESecurityCapabilities p_UESecurityCapabilities
+	                                                                            in template (value) ENB_UE_S1AP_ID p_eNB_value,
+		                                                                        in template (value) RecordOf_E_RABToBeSwitchedDLItem p_RecordOf_E_RABToBeSwitchedDLItem_value,
+		                                                                        in template (value) MME_UE_S1AP_ID p_MME_value,
+		                                                                        in template (value) EUTRAN_CGI p_eUtranCgi,
+		                                                                        in template (value) TAI p_tai,
+		                                                                        in template (value) UESecurityCapabilities p_UESecurityCapabilities
                     ) := {
                         m_eNB_UE_S1AP_ID(p_eNB_value),
                         m_E_RABToBeSwitchedDLList(p_RecordOf_E_RABToBeSwitchedDLItem_value),
@@ -4409,7 +4409,7 @@ module LibS1AP_Templates {
             
             group E_RAB_IEsend {
                 template (value) ProtocolIE m_E_RABReleaseList(
-                                                                        template (present) RecordOf_E_RABItem p_value := { ? }
+                                                               template (value) RecordOf_E_RABItem p_value
                 ) := {
                     id := S1AP_Constants.id_E_RABToBeReleasedList,
                     criticality := ignore,
@@ -5929,17 +5929,17 @@ module LibS1AP_Templates {
              * @see ETSI TS 136 413 V13.4.0 Clause 9.2.1.41 Security Key
              */
             template (present) ProtocolIE mw_eNBStatusTransferTransparentContainer_IE(
-                                                   in template (present) ENB_StatusTransfer_TransparentContainer p_value:=?,
-                                                   in template (present) ProtocolIE.criticality p_criticality := reject
+                                                                                      template (present) ENB_StatusTransfer_TransparentContainer p_value := ?,
+                                                                                      template (present) ProtocolIE.criticality p_criticality := reject
             ) := {
                 id := S1AP_Constants.id_eNB_StatusTransfer_TransparentContainer,
                 criticality := p_criticality,
                 value_ := {ENB_StatusTransfer_TransparentContainer := p_value}
             } // End of template mw_eNBStatusTransferTransparentContainer_IE
             
-            template (value) ProtocolIE mw_cSGMembershipInfo_IE(
-                                                   in template (present) CSGMembershipInfo p_value:=?,
-                                                   in template (present) ProtocolIE.criticality p_criticality := reject
+            template (present) ProtocolIE mw_cSGMembershipInfo_IE(
+                                                                  template (present) CSGMembershipInfo p_value := ?,
+                                                                  template (present) ProtocolIE.criticality p_criticality := reject
             ) := {
                 id := S1AP_Constants.id_CSGMembershipInfo,
                 criticality := p_criticality,
